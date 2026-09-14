@@ -34,10 +34,9 @@ import urllib.request
 
 API_BASE = os.environ.get("PEXELS_API_BASE", "https://api.pexels.com")
 PER_PAGE_MAX = 80
-PHOTO_PATH_SEARCH = "/v1/search"
-PHOTO_PATH_CURATED = "/v1/curated"
-VIDEO_PATH_SEARCH = "/videos/search"
-VIDEO_PATH_CURATED = "/videos/curated"
+PHOTO_PATHS = {"search": ["/v1/search"], "curated": ["/v1/curated"]}
+VIDEO_PATHS = {"search": ["/v1/videos/search", "/videos/search"],
+               "curated": ["/v1/videos/popular", "/videos/popular"]}
 USER_AGENT = "PexelsDownloader/1.0 (Python; +https://www.pexels.com/api/)"
 
 PHOTO_VARIANTS = [
@@ -97,8 +96,9 @@ def safe_filename(name: str) -> str:
 # ----------------------------------------------------------------------------
 
 def api_get(url: str, api_key: str, limiter: RateLimiter,
-            attempts: int = 5, timeout: int = 30) -> dict:
-    """طلب GET مع إعادة محاولات ذكية (429/5xx) وتراجع أُسّي."""
+            attempts: int = 5, timeout: int = 30,
+            not_found_ok: bool = False) -> dict | None:
+    """طلب GET مع إعادة محاولات ذكية (429/5xx) وتراجع أُسّي. يعيد None عند 404 إذا not_found_ok."""
     headers = {
         "Authorization": api_key,
         "User-Agent": USER_AGENT,
@@ -123,6 +123,8 @@ def api_get(url: str, api_key: str, limiter: RateLimiter,
                     f"  احصل على مفتاح مجاني من https://www.pexels.com/api/ وتأكد من صحته."
                 ) from exc
             if exc.code == 404:
+                if not_found_ok:
+                    return None
                 raise ApiError(f"المسار غير موجود (HTTP 404): {url}") from exc
             retry_after = exc.headers.get("Retry-After") if exc.headers else None
             wait_s = float(retry_after) if (retry_after or "").isdigit() else 2.0 * (2 ** (attempt - 1))
@@ -162,16 +164,28 @@ def build_params(args: argparse.Namespace, kind: str, page: int) -> dict:
 
 def iter_pages(args: argparse.Namespace, api_key: str, kind: str, limiter: RateLimiter):
     """يولّد عناصر النتائج صفحةً صفحة حتى نهايتها."""
-    curated = args.curated
-    path = (PHOTO_PATH_CURATED if curated else PHOTO_PATH_SEARCH) if kind == "photos" \
-        else (VIDEO_PATH_CURATED if curated else VIDEO_PATH_SEARCH)
+    mode = "curated" if args.curated else "search"
+    candidates = (PHOTO_PATHS if kind == "photos" else VIDEO_PATHS)[mode]
     items_key = "photos" if kind == "photos" else "videos"
+    path: str | None = None
     page = 1
     total_seen = 0
     total_reported = None
     while True:
-        url = f"{API_BASE}{path}?{urllib.parse.urlencode(build_params(args, kind, page))}"
-        data = api_get(url, api_key, limiter)
+        params = urllib.parse.urlencode(build_params(args, kind, page))
+        if path is None:
+            # جرّب المسارات بالترتيب (الجديد ثم القديم) عند أول صفحة فقط
+            data = None
+            for candidate in candidates:
+                data = api_get(f"{API_BASE}{candidate}?{params}", api_key,
+                               limiter, not_found_ok=True)
+                if data is not None:
+                    path = candidate
+                    break
+            if data is None:
+                raise ApiError(f"لا توجد نقطة نهاية صالحة ({kind}/{mode}).")
+        else:
+            data = api_get(f"{API_BASE}{path}?{params}", api_key, limiter)
         if total_reported is None:
             total_reported = data.get("total_results") or 0
             if total_reported == 0:

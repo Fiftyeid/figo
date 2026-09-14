@@ -107,3 +107,21 @@ python3 tests/mock_pexels_server.py 8765 &
 export PEXELS_API_BASE=http://127.0.0.1:8765
 python3 pexels_downloader.py --api-key TESTKEY --query nature --per-page 2 --type all
 ```
+
+## 🎬 سكربت ثانٍ: تنزيل فيديوهات محددة بالمعرّف
+
+`download_stock_videos.py` ينزّل قائمة فيديوهات محددة (بالـ ID) إلى مجلد `stock_scenes`:
+
+```bash
+export PEXELS_API_KEY="مفتاحك"
+python3 download_stock_videos.py
+```
+
+- لا يحتاج `requests` — يستخدمها إن وُجدت، وإلا يعمل بالمكتبة القياسية.
+- يعتمد المسار الجديد `/v1/videos/videos/:id` ويتراجع تلقائيًا للمسار القديم عند 404.
+- ينزّل بأعلى دقة MP4 أفقية متاحة، مع ملف `CREDITS.txt` لإسناد المصورين (متطلب الترخيص).
+
+> ملاحظة: توثيق Pexels الحديث يقول إن نقاط نهاية الفيديو انتقلت إلى
+> `https://api.pexels.com/v1/videos/` والمسار القديم `https://api.pexels.com/videos/`
+> سيُلغى مستقبلًا — كلا السكربتين يدعمان المسارين.
+
