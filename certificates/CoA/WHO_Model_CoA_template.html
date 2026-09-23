@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WHO Model Certificate of Analysis — Printable Template</title>
+<style>
+  :root { --line: #8fa8bf; --ink: #1a2a3a; --accent: #0b4f6c; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    background: #eef2f5;
+    margin: 0;
+    padding: 24px 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .sheet {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 14mm 14mm 18mm;
+    box-shadow: 0 2px 14px rgba(0,0,0,.12);
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { box-shadow: none; width: auto; margin: 0; padding: 10mm 12mm; }
+    .no-print { display: none !important; }
+    @page { size: A4; margin: 0; }
+  }
+  .no-print {
+    max-width: 210mm; margin: 0 auto 14px; background: #fff8e6;
+    border: 1px solid #e0c36a; border-radius: 6px; padding: 10px 14px; font-size: 12.5px;
+  }
+  header.coa-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 3px solid var(--accent); padding-bottom: 10px; margin-bottom: 6px;
+  }
+  .logo-box {
+    width: 34mm; height: 18mm; border: 1.5px dashed var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: #7b93a7; font-size: 10.5px; text-align: center;
+  }
+  .doc-title { text-align: center; flex: 1; }
+  .doc-title h1 { margin: 0; font-size: 21px; letter-spacing: .5px; color: var(--accent); }
+  .doc-title .sub { font-size: 11px; color: #5b7183; }
+  .pagebox { font-size: 10.5px; color: #5b7183; text-align: right; }
+  .banner {
+    text-align: center; font-style: italic; color: #5b7183;
+    font-size: 11px; margin: 8px 0 14px;
+  }
+  fieldset { border: 1px solid var(--line); border-radius: 4px; margin: 0 0 12px; padding: 10px 12px; }
+  legend { font-weight: 700; color: var(--accent); padding: 0 6px; font-size: 12.5px; }
+  .row { display: flex; gap: 10px; margin: 7px 0; }
+  .row > div { flex: 1; }
+  label { display: block; font-size: 10.5px; color: #52707f; margin-bottom: 2px; }
+  .fill {
+    border-bottom: 1px solid var(--line); min-height: 18px; padding: 1px 4px 2px;
+    font-family: inherit; font-size: 12.5px;
+  }
+  table.tests { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  table.tests th, table.tests td { border: 1px solid var(--line); padding: 7px 8px; font-size: 12px; }
+  table.tests th { background: #eaf1f6; color: var(--accent); text-align: left; }
+  table.tests td { height: 26px; }
+  .notes { font-size: 10.5px; color: #52707f; margin-top: 8px; }
+  .sign-grid { display: flex; gap: 14px; margin-top: 6px; }
+  .sign-grid > div { flex: 1; }
+  .stamp {
+    margin-top: 16px; display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .stamp-box {
+    width: 46mm; height: 24mm; border: 1.5px dashed var(--line); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #7b93a7; font-size: 10.5px; text-align: center;
+  }
+  .conclusion { border: 1.5px solid var(--accent); background: #f2f8fb; padding: 10px 12px; border-radius: 4px; }
+  .source-note { margin-top: 18px; font-size: 10px; color: #8aa0b0; border-top: 1px solid #d5e0e8; padding-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="no-print">
+    <b>WHO Model Certificate of Analysis</b> — نموذج شهادة التحليل الرسمي من منظمة الصحة العالمية (TRS 1010, Annex 4, Appendix 1).
+    اطبع النموذج أو افتح الملف وعدّل البيانات مباشرة ثم احفظه/اطبعه كـ PDF (Ctrl+P → Save as PDF).
+  </div>
+
+  <div class="sheet">
+    <header class="coa-head">
+      <div class="logo-box">Logo of the issuing<br>laboratory / company</div>
+      <div class="doc-title">
+        <h1>CERTIFICATE OF ANALYSIS</h1>
+        <div class="sub">Model conforming to WHO Technical Report Series No. 1010, Annex 4<br>
+        For starting materials and finished pharmaceutical products</div>
+      </div>
+      <div class="pagebox">
+        Identification no. of the CoA:<br><span class="fill" style="display:inline-block;width:34mm"></span><br><br>
+        Page <b>X</b> of <b>Y</b>
+      </div>
+    </header>
+
+    <p class="banner">This model is intended to serve as an example and not to be prescriptive.</p>
+
+    <fieldset>
+      <legend>1 · Issuing laboratory &amp; customer</legend>
+      <div class="row">
+        <div style="flex:1.6">
+          <label>Name and address of the laboratory issuing the CoA</label>
+          <div class="fill"></div>
+        </div>
+        <div>
+          <label>Identification no. of the CoA</label>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Name, address and contact person representing the originator of the request for analysis</label>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Registration no. of the sample</label><div class="fill"></div></div>
+        <div><label>Date received</label><div class="fill"></div></div>
+        <div><label>Quantity received</label><div class="fill"></div></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Product / sample identification</legend>
+      <div class="row">
+        <div>
+          <label>Name of the product (INN, brand name, etc.)</label>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Dosage form, strength, package size (if applicable)</label>
+          <div class="fill"></div>
+        </div>
+        <div>
+          <label>Type and material of the primary packaging</label>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Batch number</label><div class="fill"></div></div>
+        <div><label>Date of manufacture (if available)</label><div class="fill"></div></div>
+        <div><label>Expiry date / retest date</label><div class="fill"></div></div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Name and address of the original manufacturer</label>
+          <div class="fill"></div>
+        </div>
+        <div style="max-width:60mm">
+          <label>Phone</label><div class="fill"></div>
+          <label style="margin-top:6px">Email</label><div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Name and address of the repacker and/or trader (if applicable)</label>
+          <div class="fill"></div>
+        </div>
+        <div style="max-width:60mm">
+          <label>Phone</label><div class="fill"></div>
+          <label style="margin-top:6px">Email</label><div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Specifications for testing</label><div class="fill"></div></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Analysis</legend>
+      <table class="tests">
+        <thead>
+          <tr>
+            <th style="width:24%">Test</th>
+            <th style="width:20%">Method reference ¹</th>
+            <th style="width:19%">Acceptance criteria</th>
+            <th style="width:19%">Result ²·³</th>
+            <th style="width:18%">Compliance statement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="notes">
+        ¹ Reference to a pharmacopoeia or technique. &nbsp;
+        ² Results should be reported in numerical form, where applicable, with units of measurement. &nbsp;
+        ³ Results of tests performed by subcontractors should be identified as such.
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div><label>Additional information, if requested by the customer</label><div class="fill"></div></div>
+      </div>
+      <div class="row">
+        <div><label>Comments</label><div class="fill"></div></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="conclusion">
+      <legend>4 · Conclusion &amp; approval</legend>
+      <div class="row">
+        <div>
+          <label><b>Conclusion on compliance of the sample with the specifications</b></label>
+          <div class="fill" style="min-height:34px"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Name of the head of laboratory or person authorized to approve the certificate</label>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>Phone</label><div class="fill"></div></div>
+        <div><label>Email</label><div class="fill"></div></div>
+      </div>
+      <div class="stamp">
+        <div style="flex:1">
+          <label>Signature</label>
+          <div class="fill" style="min-height:22px"></div>
+          <label style="margin-top:6px">Date</label>
+          <div class="fill" style="max-width:50mm"></div>
+        </div>
+        <div class="stamp-box">Stamp / Seal of the<br>issuing laboratory</div>
+      </div>
+    </fieldset>
+
+    <div class="source-note">
+      Template rebuilt from: WHO Technical Report Series No. 1010 (2018), Annex 4, Appendix 1 —
+      “Model certificate of analysis for starting materials and finished pharmaceutical products”.
+      Original: https://www.who.int/docs/default-source/medicines/norms-and-standards/guidelines/quality-control/trs1010-annex4-who-model-certificate-analysis.pdf
+    </div>
+  </div>
+</body>
+</html>
