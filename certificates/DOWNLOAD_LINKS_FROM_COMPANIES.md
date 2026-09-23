@@ -51,7 +51,7 @@
 
 ### 7) HVMN / Nootrobox (مكملات غذائية — Open Source)
 - **12 شهادة CoA حقيقية كاملة بترخيص MIT:** <https://github.com/Nootrobox/COAs>
-- ✅ 3 منها منسوخة جوه الريبو ده: `certificates/CoA/examples_from_companies/HVMN/`
+- ✅ **الـ12 كلهم منسوخين جوه الريبو ده:** `certificates/CoA/examples_from_companies/HVMN/` — افتحهم من غير إنترنت
 
 ### 📧 شركات بتطلع الشهادة بالطلب (مش منشورة أونلاين)
 - **Terumo Medical:** <https://www.terumotmp.com/customer-support.html> (نموذج طلب شهادة منتج)

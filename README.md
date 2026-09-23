@@ -16,9 +16,14 @@
 | **للواحدة ولا للتشغيلة؟** | لكل تشغيلة (Batch) | لكل شحنة | للمنتج الواحد (بكل تركيزه وشكله الصيدلاني) |
 
 > 🆕 **عايز روابط تحميل شهادات حقيقية من مواقع الشركات؟**
-> افتح [`certificates/DOWNLOAD_LINKS_FROM_COMPANIES.md`](certificates/DOWNLOAD_LINKS_FROM_COMPANIES.md) —
-> فيه أدوات الشهادات الرسمية لـ BD و Cardinal Health و Thermo Fisher و Sigma-Aldrich/Merck و Medline
+> افتح [`certificates/download_portal.html`](certificates/download_portal.html) — بوابة تحميل قابلة للضغط
+> فيها كل الشهادات المنشورة على مواقع الشركات (Thermo Fisher / Cardinal Health / Medline / UPS...) —
+> تفتحها في متصفحك وتضغط وتحمل فورًا. النسخة النصية في
+> [`certificates/DOWNLOAD_LINKS_FROM_COMPANIES.md`](certificates/DOWNLOAD_LINKS_FROM_COMPANIES.md)
+> وفيها أدوات BD و Cardinal Health و Thermo Fisher و Sigma-Aldrich/Merck و Medline
 > + روابط PDF مباشرة لشهادات حقيقية + كل روابط FDA/WHO للـCoPP.
+> ✅ **جاهزة بدون إنترنت:** 12 شهادة CoA حقيقية من شركة HVMN في
+> `certificates/CoA/examples_from_companies/HVMN/`
 
 ---
 
