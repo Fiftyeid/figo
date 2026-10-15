@@ -7,7 +7,7 @@ Narration timing:
 Each section in timeline.json carries a char->time map so storyboard anchors
 (sub-strings of the section text) can be converted to absolute times.
 """
-import json, os, re, subprocess, bisect
+import json, os, re, math, subprocess, bisect
 import numpy as np
 import imageio_ffmpeg
 
@@ -242,12 +242,14 @@ def main():
             pieces_here.append(("AUDIO", cur0, t_end))
             abs_start = t_cursor
             title_at = None
+            after_gap = []    # abs. time where the voice resumes after the title sting
             shift_list = []   # (l0, l1, shift)
             for p in pieces_here:
                 if p[0] == "GAP":
                     title_at = t_cursor
                     out_audio.append(np.zeros(int(p[1] * SR), np.float32))
                     t_cursor += p[1]
+                    after_gap.append(t_cursor)
                     continue
                 _, l0, l1 = p
                 seg = x[int(l0 * SR): int(l1 * SR)].copy()
@@ -273,11 +275,22 @@ def main():
                 lt = char_to_time(pts, cw, a + c)
                 cmap.append([c, round(local_to_abs(lt), 3)])
             cmap.append([len(stext), round(abs_end, 3)])
+            # exact point right after each split: the sampled map must not interpolate across the title gap
+            for (cs, _, _), tg in zip(splits, after_gap):
+                cmap = [q for q in cmap if not (q[0] > cs and q[1] < tg)]
+                cmap.append([cs + 1, round(tg, 3)])
+                cmap.sort()
             timeline["sections"].append(dict(id=sec["id"], index=sidx, start=round(abs_start, 3),
                                              end=round(abs_end, 3), text=stext, cmap=cmap,
                                              title_at=round(title_at, 3) if title_at else None))
             # gap after section
             gap = GAP_SECTION
+            if sidx == 0 and os.environ.get("ALIGN_TO"):
+                # re-cut intro: pad the gap (< 1 frame) so every later section moves by a whole number
+                # of frames vs. an earlier timeline -> the rest of the earlier render can be reused as is
+                old_next = json.load(open(os.environ["ALIGN_TO"]))["sections"][1]["start"]
+                d = (old_next - (t_cursor + gap)) * 25
+                gap += (d - math.floor(d)) / 25
             out_audio.append(np.zeros(int(gap * SR), np.float32))
             t_cursor += gap
     out_audio.append(np.zeros(int(1.5 * SR), np.float32))

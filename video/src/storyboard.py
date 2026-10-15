@@ -34,36 +34,26 @@ SB = {}
 
 # ------------------------------------------------------------------ INTRO
 SB["intro"] = [
+    # cold open: three teasers in the first ~14 s, then the question, then the title sting
     dict(type="image", image="intro_mars_desert", zoom_in=True,
          overlays=[dict(kind="chip", text="اسمها جاي من كوكب؟!", color=GOLD, x=960, y=930, size=60, t=A("كوكب"))]),
-    dict(type="meaning", at=A("ومحافظة تانية"), bg="map:EG-FYM", word="البحر", word_size=200,
-         meaning="محافظة اسمها معناه «البحر»", note="ومفيهاش أي شط على البحر!", ts=[A("ومحافظة تانية"), A("اسمها معناه"), A("وهي أصلًا")]),
+    dict(type="meaning", at=A("وتانية"), bg="map:EG-FYM", word="البحر", word_size=200,
+         meaning="محافظة اسمها معناه «البحر»", note="ومفيهاش أي شط على البحر!", ts=[A("وتانية"), A("اسمها معناه"), A("وهي ملهاش")]),
     dict(type="ledger", at=A("وتالتة"), bg="ottoman_ledger", header="دفاتر المساحة — من حوالي ٥٠٠ سنة",
          old="اسم قديم", new="اسم جديد", caption="اسم جاي من غلطة في الدفاتر؟!",
          ts=[A("وتالتة", off=0.3), A("غلطة"), A("دفاتر المساحة", off=0.4)]),
-    dict(type="map", at=A("مصر فيها سبعة وعشرين"), frame_=(30.8, 26.9, 19.5), sweep=True, sweep_t0=0.1, sweep_dur=2.4,
+    dict(type="map", at=A("سبعة وعشرين محافظة"), frame_=(30.8, 26.9, 19.5), sweep=True, sweep_t0=0.1, sweep_dur=2.4,
          overlays=[dict(kind="text", text="٢٧ محافظة", size=120, color=GOLD, x=330, y=200, t=A("سبعة وعشرين", off=0.2))]),
-    dict(type="map", at=A("رايح المنوفية"), codes=["EG-MNF"], frame_=(30.9, 28.6, 12.5),
-         overlays=[dict(kind="chip", text="المنوفية", color=GOLD, x=1500, y=240, size=58, t=A("رايح المنوفية"))]),
-    dict(type="map", at=A("راجع من أسيوط"), codes=["EG-AST"], frame_=(30.9, 28.6, 12.5),
-         overlays=[dict(kind="chip", text="أسيوط", color=GOLD, x=1500, y=240, size=58, t=A("راجع من أسيوط"))]),
-    dict(type="map", at=A("مصيّف في مطروح"), codes=["EG-MT"], frame_=(30.9, 28.6, 12.5),
-         overlays=[dict(kind="chip", text="مطروح", color=GOLD, x=1500, y=240, size=58, t=A("مصيّف في مطروح"))]),
     dict(type="fact", at=A("بس عمرك سألت نفسك"), bg="map:", text="؟", big_size=420,
          caption="الأسامي دي جت منين؟", ts=[A("بس عمرك"), A("الأسامي دي")]),
     dict(type="title", at="TITLE", bg="gradient", text="ليه محافظات مصر اتسمّت بالأسماء دي؟", sub="٢٧ محافظة .. ٢٧ حكاية"),
-    dict(type="image", at=A("الحقيقة"), image="intro_layers", zoom_in=False,
-         overlays=[dict(kind="chip", text="مصري قديم", color=(233, 185, 73), x=1560, y=170, size=50, t=A("أسامي مصرية قديمة")),
-                   dict(kind="chip", text="قبطي", color=(93, 173, 226), x=1180, y=170, size=50, t=A("نطقها القبط")),
-                   dict(kind="chip", text="يوناني", color=(186, 160, 255), x=840, y=170, size=50, t=A("وغيّر فيها اليونان")),
-                   dict(kind="chip", text="عربي", color=(52, 195, 143), x=500, y=170, size=50, t=A("العرب ظبطوها"))]),
-    dict(type="list", at=A("وأسامي تانية جاية من حكام"), bg="map:", heading="منين جت الأسامي؟",
-         items=["لغات قديمة: مصري وقبطي ويوناني", "حكام وملوك", "الجغرافيا ومكانها على الخريطة"],
-         ts=[A("وأسامي تانية", off=-0.2), A("حكام وملوك"), A("الجغرافيا")]),
-    dict(type="map", at=A("والنهارده هنلف"), frame_=(30.8, 26.9, 19.5), gov_labels=True, gov_label_size=22,
+    dict(type="map", at=A("النهارده هنلف"), frame_=(30.8, 26.9, 19.5), gov_labels=True, gov_label_size=22,
          skip_labels=("EG-KB", "EG-MNF", "EG-GH", "EG-PTS", "EG-DT", "EG-IS", "EG-KFS", "EG-C", "EG-LX"),
-         gov_labels_t=A("والنهارده هنلف", off=0.3), gov_label_step=0.09,
-         overlays=[dict(kind="text", text="يلا بينا!", size=100, color=GOLD, x=1600, y=180, t=A("فخليك معانا"))]),
+         gov_labels_t=A("النهارده هنلف", off=0.3), gov_label_step=0.09,
+         overlays=[dict(kind="text", text="٢٧ حكاية", size=100, color=GOLD, x=1600, y=180, t=A("ونعرف حكاية"))]),
+    # open loop, paid off in the outro (Helwan + 6th of October, 2008 -> 2011)
+    dict(type="fact", at=A("وخليك معانا"), bg="map:", top="في آخر الفيديو", text="محافظتين", big_size=240,
+         caption="اتولدوا… واتلغوا في ٣ سنين بس!", ts=[A("محافظتين"), A("تلات سنين")]),
 ]
 
 # ------------------------------------------------------------------ CAIRO

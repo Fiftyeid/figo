@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Procedural, original background score + sound effects, then final audio mix.
-  - pad: Andalusian cadence Dm - C - Bb - A (D harmonic-minor colour)
-  - plucked "oud-like" arpeggios (Karplus-Strong)
-  - soft darbuka-style "maqsum" rhythm (dum / tek)
+Background score + sound effects, then the final audio mix.
+  - score: original, synthesised from scratch in score.py (style = STYLE below, see score.STYLES)
   - SFX: whooshes on section changes, soft pops on card elements, riser + impact for the title
 Output: build/music.wav, build/sfx.wav, build/final_audio.m4a
+
+    python3 music.py [style]       full mix (default STYLE)
+    python3 music.py audition      first ~37 s mixed with every style -> build/audition/<style>.wav
 """
 import os, json, math, subprocess
 import numpy as np
@@ -16,26 +17,12 @@ from common import BUILD
 from storyboard import build_shots
 from shots import SHOT_TYPES
 
+import score
+
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 SR = 48000
-BPM = 88.0
-BEAT = 60.0 / BPM
-BAR = 4 * BEAT
+STYLE = "doc"
 rng = np.random.default_rng(2026)
-
-
-def midi(n):
-    return 440.0 * 2 ** ((n - 69) / 12.0)
-
-
-# chord tones (MIDI) – D3=50
-CHORDS = [
-    ("Dm", [50, 53, 57, 62]),
-    ("C", [48, 52, 55, 60]),
-    ("Bb", [46, 50, 53, 58]),
-    ("A", [45, 49, 52, 57]),
-]
-SCALE = [62, 64, 65, 67, 69, 70, 73, 74, 76, 77]   # D harmonic minor (upper)
 
 
 def lowpass(x, fc, order=2):
@@ -46,160 +33,6 @@ def lowpass(x, fc, order=2):
 def bandpass(x, f1, f2, order=2):
     b, a = signal.butter(order, [f1 / (SR / 2), f2 / (SR / 2)], "band")
     return signal.lfilter(b, a, x)
-
-
-def saw(freq, n, phase0=0.0):
-    t = np.arange(n) / SR
-    ph = (freq * t + phase0) % 1.0
-    return 2 * ph - 1
-
-
-def pad_track(dur):
-    n = int(dur * SR)
-    out = np.zeros(n, np.float32)
-    seg = 2 * BAR
-    k = 0
-    t0 = 0.0
-    while t0 < dur:
-        name, notes = CHORDS[k % 4]
-        L = int((seg + 1.6) * SR)
-        x = np.zeros(L, np.float32)
-        for m in notes:
-            f = midi(m)
-            for det in (-0.08, 0.0, 0.07):
-                x += saw(f * 2 ** (det / 12), L, rng.random()).astype(np.float32) * 0.18
-        x = lowpass(x, 900).astype(np.float32)
-        env = np.ones(L, np.float32)
-        a, r = int(0.9 * SR), int(1.6 * SR)
-        env[:a] = np.linspace(0, 1, a) ** 1.5
-        env[-r:] = np.linspace(1, 0, r) ** 1.5
-        x *= env
-        i0 = int(t0 * SR)
-        i1 = min(n, i0 + L)
-        out[i0:i1] += x[: i1 - i0]
-        t0 += seg
-        k += 1
-    return out
-
-
-def ks_pluck(freq, dur=1.6, bright=0.5):
-    n = int(dur * SR)
-    N = max(2, int(SR / freq))
-    y = np.zeros(n + N + 2, np.float32)
-    burst = rng.uniform(-1, 1, N).astype(np.float32)
-    burst = lowpass(burst, 1500 + 3500 * bright).astype(np.float32)
-    y[:N] = burst
-    decay = 0.996
-    y[N] = decay * 0.5 * (y[0] + y[N - 1])
-    b = N + 1
-    while b < len(y):
-        e = min(len(y), b + N)
-        y[b:e] = decay * 0.5 * (y[b - N:e - N] + y[b - N - 1:e - N - 1])
-        b = e
-    y = y[:n]
-    y *= np.exp(-np.arange(n) / (SR * 0.9))
-    return y / (np.abs(y).max() + 1e-6)
-
-
-_pl = {}
-
-
-def pluck(m):
-    if m not in _pl:
-        _pl[m] = ks_pluck(midi(m), bright=0.45)
-    return _pl[m]
-
-
-def add(out, x, t, gain):
-    i0 = int(t * SR)
-    if i0 >= len(out) or i0 < 0:
-        return
-    i1 = min(len(out), i0 + len(x))
-    out[i0:i1] += x[: i1 - i0] * gain
-
-
-def pluck_track(dur, start=0.0):
-    n = int(dur * SR)
-    out = np.zeros(n, np.float32)
-    seg = 2 * BAR
-    t = start
-    step = BEAT / 2
-    k = 0
-    while t < dur:
-        bar_i = int((t) / seg)
-        name, notes = CHORDS[bar_i % 4]
-        pos = int(round((t % seg) / step))
-        tones = [m + 12 for m in notes]
-        # arpeggio pattern with rests; occasional scale ornament
-        pat = [0, None, 1, 2, None, 1, 3, None, 2, None, 1, 2, None, 3, 2, None]
-        p = pat[pos % 16]
-        if p is not None and rng.random() > 0.12:
-            m = tones[p % len(tones)]
-            if rng.random() < 0.12:
-                m = int(rng.choice(SCALE))
-            vel = 0.55 + 0.25 * rng.random()
-            add(out, pluck(m), t + rng.normal(0, 0.006), vel)
-        t += step
-        k += 1
-    return lowpass(out, 5000).astype(np.float32)
-
-
-def bass_track(dur):
-    n = int(dur * SR)
-    out = np.zeros(n, np.float32)
-    seg = 2 * BAR
-    t = 0.0
-    while t < dur:
-        name, notes = CHORDS[int(t / seg) % 4]
-        f = midi(notes[0] - 12)
-        L = int(2 * BEAT * SR)
-        tt = np.arange(L) / SR
-        x = (np.sin(2 * np.pi * f * tt) + 0.3 * np.sin(4 * np.pi * f * tt)) * np.exp(-tt / 0.9)
-        x[: int(0.01 * SR)] *= np.linspace(0, 1, int(0.01 * SR))
-        add(out, x.astype(np.float32), t, 0.9)
-        t += 2 * BEAT
-    return out
-
-
-def dum():
-    L = int(0.45 * SR)
-    t = np.arange(L) / SR
-    f = 95 * np.exp(-t / 0.08) + 55
-    ph = 2 * np.pi * np.cumsum(f) / SR
-    x = np.sin(ph) * np.exp(-t / 0.16)
-    x += 0.15 * lowpass(rng.uniform(-1, 1, L), 900) * np.exp(-t / 0.03)
-    return (x / np.abs(x).max()).astype(np.float32)
-
-
-def tek():
-    L = int(0.12 * SR)
-    t = np.arange(L) / SR
-    x = bandpass(rng.uniform(-1, 1, L), 2200, 6500) * np.exp(-t / 0.025)
-    x += 0.4 * np.sin(2 * np.pi * 1800 * t) * np.exp(-t / 0.01)
-    return (x / np.abs(x).max()).astype(np.float32)
-
-
-def perc_track(dur, on_ranges):
-    n = int(dur * SR)
-    out = np.zeros(n, np.float32)
-    D, T = dum(), tek()
-    pat = ["D", "T", None, "T", "D", None, "T", None]   # maqsum (8ths)
-    step = BEAT / 2
-    t = 0.0
-    k = 0
-    while t < dur:
-        on = any(a <= t < b for a, b in on_ranges)
-        if on:
-            p = pat[k % 8]
-            if p == "D":
-                add(out, D, t, 0.9)
-            elif p == "T":
-                add(out, T, t + rng.normal(0, 0.004), 0.35 + 0.15 * rng.random())
-            if k % 32 == 31 and rng.random() < 0.6:   # small fill
-                add(out, T, t + step / 2, 0.25)
-        t += step
-        k += 1
-    return out
 
 
 # ------------------------------------------------------------------ SFX
@@ -277,44 +110,9 @@ def card_times(spec):
     return [x for x in ts if st <= x < en - 0.1]
 
 
-def main():
-    specs, tl = build_shots()
-    dur = tl["duration"]
+def make_sfx(specs, tl, n):
     secs = {s["id"]: s for s in tl["sections"]}
     title_at = secs["intro"]["title_at"]
-
-    print("music...")
-    pad = pad_track(dur + 3)
-    pl = pluck_track(dur + 3)
-    bs = bass_track(dur + 3)
-    # percussion: off during intro hook, on afterwards with breathing gaps every ~2 min
-    on = []
-    t = title_at
-    while t < dur - 6:
-        on.append((t, min(t + 100, dur - 6)))
-        t += 116
-    pc = perc_track(dur + 3, on)
-    n = int((dur + 3) * SR)
-    music = (0.30 * pad[:n] + 0.22 * pl[:n] + 0.30 * bs[:n] + 0.20 * pc[:n]).astype(np.float32)
-    del pad, pl, bs, pc
-    # arrangement envelope: softer under the hook, swell at title and outro
-    tt = (np.arange(n) / SR).astype(np.float32)
-    env = np.ones(n, np.float32) * 0.85
-    env[tt < title_at] = 0.7
-    sw = (tt >= title_at - 0.2) & (tt < title_at + 3.4)
-    env[sw] = 1.35
-    from scipy.ndimage import uniform_filter1d
-    env = uniform_filter1d(env, size=int(SR * 0.4), mode="nearest").astype(np.float32)
-    fade = np.clip((dur + 0.5 - tt) / 4.0, 0, 1)
-    fin = np.clip(tt / 1.5, 0, 1)
-    music = music * env * fade * fin
-    music = music / (np.abs(music).max() + 1e-6) * 0.6
-    # stereo: tiny delay on right for width
-    d = int(0.012 * SR)
-    musR = np.concatenate([np.zeros(d, np.float32), music[:-d]])
-    write_wav(os.path.join(BUILD, "music.wav"), np.stack([music, musR], 1).reshape(-1), ch=2)
-
-    print("sfx...")
     sfx = np.zeros((n, 2), np.float32)
     W_ = whoosh()
     P_ = pop()
@@ -337,35 +135,73 @@ def main():
                 i0 = int(tt_ * SR)
                 if 0 <= i0 < n - len(P_):
                     sfx[i0:i0 + len(P_), :] += P_[:, None] * 0.16
-    R = riser()
-    i0 = int((title_at - len(R) / SR + 0.05) * SR)
-    sfx[i0:i0 + len(R), :] += R[:, None] * 0.35
-    I = impact()
-    i0 = int((title_at + 0.05) * SR)
-    sfx[i0:i0 + len(I), :] += I[:, None] * 0.8
-    # small impact on the final title card
-    last_title = [s for s in specs if s["type"] == "title"][-1]["start"]
-    i0 = int((last_title + 0.05) * SR)
-    sfx[i0:i0 + len(I), :] += I[:, None] * 0.45
-    write_wav(os.path.join(BUILD, "sfx.wav"), sfx.reshape(-1), ch=2)
 
-    print("mix...")
+    def put(x, t, g):
+        i0 = int(t * SR)
+        if 0 <= i0 < n:
+            k = min(len(x), n - i0)
+            sfx[i0:i0 + k, :] += x[:k, None] * g
+    R = riser()
+    put(R, title_at - len(R) / SR + 0.05, 0.35)
+    I = impact()
+    put(I, title_at + 0.05, 0.8)
+    last_title = [s for s in specs if s["type"] == "title"][-1]["start"]   # small impact on the final card
+    put(I, last_title + 0.05, 0.45)
+    return sfx
+
+
+MIX = (
+    "[0:a]aresample=48000,pan=stereo|c0=c0|c1=c0,highpass=f=70,"
+    "acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2,asplit=2[v][vsc];"
+    "[1:a]volume=0.55[m];"
+    "[m][vsc]sidechaincompress=threshold=0.03:ratio=8:attack=40:release=450:makeup=1[md];"
+    "[2:a]volume=0.9[s];"
+    "[v][md][s]amix=inputs=3:duration=first:normalize=0,"
+    "loudnorm=I=-14:TP=-1.5:LRA=11[out]"
+)
+
+
+def mix(narr, music, sfx, out, t1=None, codec=("-c:a", "aac", "-b:a", "128k")):
+    cut = ["-t", f"{t1:.3f}"] if t1 else []
+    subprocess.run([FF, "-y", "-v", "error", *cut, "-i", narr, *cut, "-i", music, *cut, "-i", sfx,
+                    "-filter_complex", MIX, "-map", "[out]", "-ar", "48000", *codec, out], check=True)
+
+
+def main(style=STYLE):
+    specs, tl = build_shots()
+    dur = tl["duration"]
+    n = int((dur + 3) * SR)
+    print(f"music ({style})...", flush=True)
+    music = score.render(style, tl)[:n]
+    write_wav(os.path.join(BUILD, "music.wav"), music.reshape(-1), ch=2)
+    del music
+    print("sfx...", flush=True)
+    write_wav(os.path.join(BUILD, "sfx.wav"), make_sfx(specs, tl, n).reshape(-1), ch=2)
+    print("mix...", flush=True)
     out = os.path.join(BUILD, "final_audio.m4a")
-    flt = (
-        "[0:a]aresample=48000,pan=stereo|c0=c0|c1=c0,highpass=f=70,"
-        "acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2,asplit=2[v][vsc];"
-        "[1:a]volume=0.55[m];"
-        "[m][vsc]sidechaincompress=threshold=0.03:ratio=8:attack=40:release=450:makeup=1[md];"
-        "[2:a]volume=0.9[s];"
-        "[v][md][s]amix=inputs=3:duration=first:normalize=0,"
-        "loudnorm=I=-14:TP=-1.5:LRA=11[out]"
-    )
-    subprocess.run([FF, "-y", "-v", "error", "-i", os.path.join(BUILD, "narration.wav"),
-                    "-i", os.path.join(BUILD, "music.wav"), "-i", os.path.join(BUILD, "sfx.wav"),
-                    "-filter_complex", flt, "-map", "[out]", "-ar", "48000", "-c:a", "aac", "-b:a", "128k", out],
-                   check=True)
+    mix(os.path.join(BUILD, "narration.wav"), os.path.join(BUILD, "music.wav"), os.path.join(BUILD, "sfx.wav"), out)
     print("audio ready:", out)
 
 
+def audition(t1=37.0):
+    specs, tl = build_shots()
+    d = os.path.join(BUILD, "audition")
+    os.makedirs(d, exist_ok=True)
+    n = int(t1 * SR)
+    sfx_p = os.path.join(d, "sfx.wav")
+    write_wav(sfx_p, make_sfx(specs, tl, n).reshape(-1), ch=2)
+    for st in score.STYLES:
+        m = score.render(st, tl, t1=t1)
+        mp = os.path.join(d, f"music_{st}.wav")
+        write_wav(mp, m.reshape(-1), ch=2)
+        mix(os.path.join(BUILD, "narration.wav"), mp, sfx_p, os.path.join(d, f"{st}.wav"), t1=t1,
+            codec=("-c:a", "pcm_s16le"))
+        print("audition:", st, flush=True)
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "audition":
+        audition()
+    else:
+        main(sys.argv[1] if len(sys.argv) > 1 else STYLE)

@@ -1,19 +1,21 @@
-# ليه محافظات مصر اتسمّت بالأسماء دي؟ — فيديو كامل (13:57)
+# ليه محافظات مصر اتسمّت بالأسماء دي؟ — فيديو كامل (13:32)
 
 فيديو يوتيوب تعليمي بنفس فكرة وأسلوب فيديو «أسئلة نص الليل» عن أصل أسماء محافظات مصر،
 لكن **بسكريبت تعليق صوتي جديد ١٠٠٪** (مكتوب من الصفر ومراجَع على مصادر)، وبصريات أصلية.
 
 | الملف | الوصف |
 |---|---|
-| `output/egypt_governorates_names.mp4` | الفيديو النهائي — 1920×1080، 25 فريم، 13:57 دقيقة، صوت AAC بمستوى يوتيوب (‎-14 LUFS) |
+| `output/egypt_governorates_names.mp4` | الفيديو النهائي — 1920×1080، 25 فريم، 13:32 دقيقة، صوت AAC بمستوى يوتيوب (‎-14 LUFS) |
 | `output/thumbnail.jpg` | صورة مصغّرة 1280×720 |
-| `output/subtitles_ar.srt` | ترجمة عربية متزامنة (218 سطر) — ارفعها على يوتيوب كـ Subtitles |
+| `output/subtitles_ar.srt` | ترجمة عربية متزامنة (213 سطر) — ارفعها على يوتيوب كـ Subtitles |
 | `output/youtube_description_ar.md` | عنوان + وصف + **فصول الفيديو (Chapters)** جاهزة للنسخ |
 | `script/script_ar.md` | سكريبت التعليق الصوتي كامل بالتوقيتات |
 | `output/shorts_ar.md` | **٨ مقاطع Shorts / Reels** (1080×1920): لينكات التحميل + عنوان ووصف وهاشتاجات لكل مقطع + نصايح النشر |
 
 ## محتوى الفيديو
-مقدمة (Hook) ← تتر العنوان ← ٢٧ محافظة بالترتيب الجغرافي (القاهرة … سيناء) ← خاتمة ومعلومة أخيرة ← طلب اللايك والاشتراك.
+هوك سريع (٣ معلومات صادمة في أول ١٤ ثانية + سؤال «الأسامي دي جت منين؟») ← تتر العنوان (٠:٢١) ← وعد ولغز مفتوح للآخر
+(«محافظتين اتولدوا واتلغوا في ٣ سنين») ← ٢٧ محافظة بالترتيب الجغرافي، من القاهرة (٠:٣٥) لسيناء ← خاتمة بتحل اللغز
+← طلب اللايك والاشتراك.
 كل محافظة ليها: خريطة بتتنوّر عليها المحافظة + عاصمتها، وكروت متحركة لرحلة الاسم
 (مصري قديم ← قبطي ← يوناني ← عربي)، وكروت «الحكاية الشعبية ✗ / الأصل ✓»، وصور تاريخية مرسومة.
 فوق الشاشة شارة «رقم المحافظة / ٢٧» وشريط تقدّم من ٢٧ خانة.
@@ -30,6 +32,7 @@ cd src
 python3 shorts.py plan                # نقط القطع ومدة كل مقطع
 python3 shorts.py preview luxor 3 10  # صور معاينة -> build/shorts/
 python3 shorts.py all                 # المقاطع -> build/shorts/NN_<id>.mp4  (محتاج build/ من ./build.sh)
+python3 shorts.py audio all           # بعد موسيقى جديدة: يغيّر الصوت بس ويسيب الصورة زي ما هي
 ```
 محافظة جديدة = سطر في `SHORTS` جوه `src/shorts.py` + سؤال افتتاحي بصوت الراوي في `assets/audio/shorts/hook_<id>.opus`.
 
@@ -38,7 +41,11 @@ python3 shorts.py all                 # المقاطع -> build/shorts/NN_<id>.m
 - **الصور المرسومة (19):** مولّدة بالذكاء الاصطناعي خصيصًا للفيديو (`assets/images`).
 - **الخرائط:** بيانات Natural Earth (ملكية عامة)، وحدود مصر الجنوبية على خط ٢٢ (حلايب وشلاتين داخل مصر).
 - **الخطوط:** Cairo / Lalezar / Tajawal / Amiri — Google Fonts (رخصة OFL).
-- **الموسيقى والمؤثرات:** مؤلفة برمجيًا بالكامل (`src/music.py`) — تقاسيم «عود» وإيقاع مقسوم وبادات — بدون أي حقوق ملكية لطرف تالت.
+- **الموسيقى:** مؤلفة ومولّدة برمجيًا من الصفر (`src/score.py`) — بدون أي عينات أو حقوق ملكية لطرف تالت.
+  الأسلوب المعتمد «وثائقي سينمائي»: بيانو ناعم ووتريات ووتريات غليظة، بتتغيّر كل حوالي دقيقة ونص على حدود المحافظات،
+  وبتنزل تحت الصوت أوتوماتيك (ducking). فيه كمان أسلوبين جاهزين: `mystery` (غموض وفضول) و`oriental` (ناي وقانون بدون إيقاع):
+  `python3 src/music.py mystery` يبني الصوت بيهم، و`python3 src/music.py audition` يعمل معاينة لأول ٣٧ ثانية بالتلاتة.
+- **المؤثرات:** whoosh بين المحافظات، pop للكروت، riser + impact على العنوان (`src/music.py`).
 
 ## إعادة البناء
 ```bash
@@ -47,10 +54,15 @@ pip install pillow numpy scipy shapely imageio-ffmpeg   # + libfribidi لتشك�
 ```
 عشان تعدّل السكريبت: غيّر `src/script_data.py` (النص) و`src/storyboard.py` (المشاهد والتوقيتات)،
 ولازم تولّد التعليق الصوتي من جديد للمقاطع اللي اتغيرت (`assets/audio/clip_XX.opus`).
+لو غيّرت المقدمة بس: `ALIGN_TO=../build/<timeline القديم>.json python3 timing.py` بيظبط الوقفة بعد المقدمة (أقل من فريم)
+عشان باقي الفيديو يتحرك بعدد فريمات صحيح، فتعيد رندر أول segment بس وتلزقه في الباقي من غير ما ترندر الفيديو كله.
 وبعد أي تعديل في المشاهد شغّل `python3 src/check_timing.py` — بيطلّع أي عنصر (كارت/دبوس/عنوان) هيظهر متأخر
 بعد ما المشهد يتقطع، فالمشاهد عمره ما هيشوفه.
 
 ## سجل التحديثات
+- **الإصدار ٣:** هوك جديد أقوى — المقدمة اتكتبت من جديد: ٣ معلومات صادمة في أول ١٤ ثانية، العنوان عند ٠:٢١ بدل ٠:٢٧،
+  والقاهرة بتبدأ عند ٠:٣٥ بدل ١:٠٠، ولغز مفتوح للآخر. وموسيقى خلفية جديدة بأسلوب وثائقي سينمائي (بيانو ووتريات)
+  بدل العود والإيقاع المقسوم (`src/score.py`). الفيديو بقى 13:32، والشورتس الـ٨ اتحدّث صوتها بالموسيقى الجديدة.
 - **مقاطع Shorts / Reels:** ٨ مقاطع طولية متقطّعة من الإصدار ٢ (`src/shorts.py`)، بأسئلة افتتاحية ودعوة للفيديو الكامل
   بصوت نفس الراوي، وترجمة محروقة ما بتقسمش الأسماء والسنين والعبارات المترابطة على كارتين.
 - **الإصدار ٢:** ١٠ صور مرسومة جديدة للمحافظات اللي كانت خرايط وكروت بس — ميناء القلزم (السويس)،
@@ -62,10 +74,13 @@ pip install pillow numpy scipy shapely imageio-ffmpeg   # + libfribidi لتشك�
 - **الإصدار ١:** النسخة الأولى (٩ صور مرسومة).
 
 ---
-**English summary:** a 13:57 Egyptian-Arabic explainer on the origins of Egypt's 27 governorate names, with a brand-new
+**English summary:** a 13:32 Egyptian-Arabic explainer on the origins of Egypt's 27 governorate names, with a brand-new
 voice-over script. Pipeline: TTS narration → pause-aligned timing (`timing.py`) → Pillow/raqm motion-graphics renderer
-with maps, etymology chains and Ken-Burns illustrations (`shots.py`, `storyboard.py`, `render.py`) → procedural score + SFX
-and loudness-normalised mix (`music.py`) → 2-pass H.264. `check_timing.py` lints the storyboard for elements that would
-appear after their shot is cut. v2 adds 10 illustrations (19 total) and fixes several late-appearing card items.
+with maps, etymology chains and Ken-Burns illustrations (`shots.py`, `storyboard.py`, `render.py`) → synthesised score
+(`score.py`: felt piano, string ensemble, Karplus-Strong plucks, FM bells, ney; three styles) + SFX and a ducked,
+loudness-normalised mix (`music.py`) → 2-pass H.264. `check_timing.py` lints the storyboard for elements that would
+appear after their shot is cut. v2 adds 10 illustrations (19 total) and fixes several late-appearing card items. v3 rewrites the cold open (title at
+0:21, first governorate at 0:35 instead of 1:00, open loop paid off in the outro) and replaces the oud/darbuka bed with
+a cinematic piano-and-strings score.
 `shorts.py` cuts 8 vertical 1080×1920 Shorts/Reels from the finished build (spoken hook → original narration cut at a
 pause → spoken call-to-action over the thumbnail) with burned-in, phrase-aware Arabic captions; the MP4s live on Drive.

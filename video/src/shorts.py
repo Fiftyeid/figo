@@ -12,6 +12,7 @@ burned-in Arabic captions (key words in gold) under it, all clear of the Shorts/
   python3 shorts.py plan                      -> cut points, silence check, durations
   python3 shorts.py preview <id> t1 t2 ...    -> build/shorts/prev_<id>_<t>.jpg
   python3 shorts.py <id> [<id> ...] | all     -> build/shorts/NN_<id>.mp4
+  python3 shorts.py audio [<id> ...|all]      -> new soundtrack only (after a new score), picture kept
 Needs build/: narration.wav, music.wav, sfx.wav, timeline.json, video_noaudio.mp4 (from build.sh).
 """
 import os, re, sys, json, math, subprocess
@@ -691,6 +692,28 @@ def render(sid):
     print(f"done {out}  {P['T']:.2f}s", flush=True)
 
 
+def remux_audio(sid):
+    """Rebuild only the soundtrack (e.g. after a new score) and swap it into the existing MP4 - picture untouched."""
+    sp = next(s for s in SHORTS if s["id"] == sid)
+    P = make_plan(sp)
+    out = os.path.join(OUT, f"{index_of(sid):02d}_{sid}.mp4")
+    if not os.path.exists(out):
+        return render(sid)
+    pk = subprocess.run([FF, "-v", "error", "-i", out, "-map", "0:v", "-c", "copy", "-f", "framecrc", "-"],
+                        capture_output=True, text=True).stdout
+    nf = sum(1 for l in pk.splitlines() if l and not l.startswith("#"))
+    if nf != P["n"]:
+        raise SystemExit(f"{sid}: existing video has {nf} frames, plan has {P['n']} - run a full render instead")
+    aud = os.path.join(OUT, f"_{sid}.m4a")
+    build_audio(sp, P, aud)
+    tmp = out + ".tmp.mp4"
+    subprocess.run([FF, "-y", "-v", "error", "-i", out, "-i", aud, "-map", "0:v", "-map", "1:a", "-c", "copy",
+                    "-shortest", "-movflags", "+faststart", tmp], check=True)
+    os.replace(tmp, out)
+    os.remove(aud)
+    print(f"audio {out}  {P['T']:.2f}s", flush=True)
+
+
 def preview(sid, times):
     sp = next(s for s in SHORTS if s["id"] == sid)
     os.makedirs(OUT, exist_ok=True)
@@ -722,6 +745,9 @@ if __name__ == "__main__":
         plan_all()
     elif a[0] == "preview":
         preview(a[1], [float(x) for x in a[2:]])
+    elif a[0] == "audio":
+        for sid in ([s["id"] for s in SHORTS] if a[1:] in ([], ["all"]) else a[1:]):
+            remux_audio(sid)
     else:
         ids = [s["id"] for s in SHORTS] if a[0] == "all" else a
         for sid in ids:

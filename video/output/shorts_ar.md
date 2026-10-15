@@ -13,14 +13,14 @@
 
 | # | المحافظة | المدة | العنوان المقترح | الملف |
 |---|---|---|---|---|
-| 1 | القاهرة | 1:10 | هل القاهرة اتسمّت على اسم كوكب المريخ؟ | [درايف](https://drive.google.com/file/d/1TY6JThI_M5-GrgW4UB1S3Afcp25wKskZ/view) |
-| 2 | بني سويف | 0:41 | بني سويف.. اسمها ممكن يكون جاي من غلطة في دفتر! | [درايف](https://drive.google.com/file/d/17exnQOmWKsMRmYZaCIiPkqBLVQMMZ1HI/view) |
-| 3 | سوهاج | 0:43 | «سو هاج!».. حكاية التور دي حقيقة ولا نكتة؟ | [درايف](https://drive.google.com/file/d/1RMxkMPMMii7AVVb3EegOoJuAwrwCnLw9/view) |
-| 4 | الأقصر | 0:28 | ليه الأقصر اسمها الأقصر؟ العرب افتكروا المعابد قصور! | [درايف](https://drive.google.com/file/d/1vQGDz00_e9IxcjCWxJ-lvzCrstd5sOke/view) |
-| 5 | الدقهلية | 0:48 | الدقهلية اتسمّت على بلد.. مش في الدقهلية أصلًا! | [درايف](https://drive.google.com/file/d/1pUcOcAKf7VKo3gk8jDGTqevRbmvvKiLw/view) |
-| 6 | البحر الأحمر | 0:35 | ليه البحر الأحمر اسمه «الأحمر» وهو لونه أزرق؟ | [درايف](https://drive.google.com/file/d/1-1kMHv1kQAYRFNwAHStrs5ukHT6wulwt/view) |
-| 7 | الفيوم | 0:48 | الفيوم اسمها معناه «البحر».. وهي ملهاش بحر! | [درايف](https://drive.google.com/file/d/1WIW3kdK79bnM83O_R0zPbYC3EW6vX-1G/view) |
-| 8 | الجيزة | 0:39 | الأهرامات أقدم من اسم الجيزة بأكتر من ٣٠٠٠ سنة! | [درايف](https://drive.google.com/file/d/1PPoK6eRgYlsGU55iZxptCoet9rs_5WrL/view) |
+| 1 | القاهرة | 1:10 | هل القاهرة اتسمّت على اسم كوكب المريخ؟ | [درايف](https://drive.google.com/file/d/1k6cRtPNtq0v_QvMBY6q_XwlUsxsxxEFT/view) |
+| 2 | بني سويف | 0:41 | بني سويف.. اسمها ممكن يكون جاي من غلطة في دفتر! | [درايف](https://drive.google.com/file/d/1eH4vj9f2RmR3nQsCabaznzs2xFmFvY9p/view) |
+| 3 | سوهاج | 0:43 | «سو هاج!».. حكاية التور دي حقيقة ولا نكتة؟ | [درايف](https://drive.google.com/file/d/1Z0516cNVM9hj03NYKaEF8Hvqyn4dThjl/view) |
+| 4 | الأقصر | 0:28 | ليه الأقصر اسمها الأقصر؟ العرب افتكروا المعابد قصور! | [درايف](https://drive.google.com/file/d/17XeNCcd7krjtLaiq3UcLWomq6EsJcgVj/view) |
+| 5 | الدقهلية | 0:48 | الدقهلية اتسمّت على بلد.. مش في الدقهلية أصلًا! | [درايف](https://drive.google.com/file/d/1ZqTFFR0Z8YPkkkepujN3OEWB9WHquNyc/view) |
+| 6 | البحر الأحمر | 0:35 | ليه البحر الأحمر اسمه «الأحمر» وهو لونه أزرق؟ | [درايف](https://drive.google.com/file/d/1G85U6pJsnjVFNawZCvYwp3Up7v65mRUu/view) |
+| 7 | الفيوم | 0:48 | الفيوم اسمها معناه «البحر».. وهي ملهاش بحر! | [درايف](https://drive.google.com/file/d/19yobd4cttBKQ4ODQxDX5TdmoQXwm9mgb/view) |
+| 8 | الجيزة | 0:39 | الأهرامات أقدم من اسم الجيزة بأكتر من ٣٠٠٠ سنة! | [درايف](https://drive.google.com/file/d/1BzBU9aX6_MDIfKhgCviPGJsZvLCQoVUG/view) |
 
 ---
 
