@@ -726,10 +726,14 @@ class LedgerCard(CardShot):
         self.old_im = text_image(self.old, "amiri", 120, (60, 40, 20), pad=8)
         self.new_im = text_image(self.new, "amiri", 120, (190, 30, 30), pad=8)
         self.cap_im = text_image(self.caption, "black", 52, WHITE, stroke=4, stroke_fill=INK, shadow=6) if getattr(self, "caption", None) else None
+        # optional second caption that replaces the first one at cap2_t
+        self.cap2_im = text_image(self.caption2, "black", 52, WHITE, stroke=4, stroke_fill=INK, shadow=6) \
+            if getattr(self, "caption2", None) else None
 
     def draw(self, im, t):
         ts = self.times(3, step=1.3)
-        al, s = appear(t, self.start + 0.05, 0.5)
+        # instant=True: the page is already on screen (we cut back to it after a cutaway)
+        al, s = (1.0, 1.0) if getattr(self, "instant", False) else appear(t, self.start + 0.05, 0.5)
         cx, cy = W / 2, H / 2 + 10
         paste_center(im, self.shadow, cx + 10, cy + 20, alpha=al * 0.9, scale=s)
         paste_center(im, self.paper, cx, cy, alpha=al, scale=s)
@@ -746,9 +750,17 @@ class LedgerCard(CardShot):
             d.line([(x0, oy + 8), (lerp(x0, x1, p), oy + 8 - 14 * p)], fill=(200, 20, 20, 255), width=11)
         al, s = appear(t, ts[2], 0.45)
         paste_center(im, self.new_im, ox - 10, oy - 150, alpha=al, scale=s)
+        t2 = getattr(self, "cap2_t", None) if self.cap2_im is not None else None
         if self.cap_im is not None:
             al, s = appear(t, ts[2] + 0.6)
-            paste_center(im, self.cap_im, W / 2, H - 90, alpha=al, scale=s)
+            if t2 is not None:
+                al *= fade_out(t, t2 - 0.3, 0.3)
+            if al > 0.01:
+                paste_center(im, self.cap_im, W / 2, H - 90, alpha=al, scale=s)
+        if t2 is not None:
+            al, s = appear(t, t2)
+            if al > 0.01:
+                paste_center(im, self.cap2_im, W / 2, H - 90, alpha=al, scale=s)
 
 
 class TitleCard(CardShot):

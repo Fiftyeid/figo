@@ -38,7 +38,7 @@ SB["intro"] = [
          overlays=[dict(kind="chip", text="اسمها جاي من كوكب؟!", color=GOLD, x=960, y=930, size=60, t=A("كوكب"))]),
     dict(type="meaning", at=A("ومحافظة تانية"), bg="map:EG-FYM", word="البحر", word_size=200,
          meaning="محافظة اسمها معناه «البحر»", note="ومفيهاش أي شط على البحر!", ts=[A("ومحافظة تانية"), A("اسمها معناه"), A("وهي أصلًا")]),
-    dict(type="ledger", at=A("وتالتة"), bg="gradient", header="دفاتر المساحة — من حوالي ٥٠٠ سنة",
+    dict(type="ledger", at=A("وتالتة"), bg="ottoman_ledger", header="دفاتر المساحة — من حوالي ٥٠٠ سنة",
          old="اسم قديم", new="اسم جديد", caption="اسم جاي من غلطة في الدفاتر؟!",
          ts=[A("وتالتة", off=0.3), A("غلطة"), A("دفاتر المساحة", off=0.4)]),
     dict(type="map", at=A("مصر فيها سبعة وعشرين"), frame_=(30.8, 26.9, 19.5), sweep=True, sweep_t0=0.1, sweep_dur=2.4,
@@ -68,7 +68,7 @@ SB["intro"] = [
 
 # ------------------------------------------------------------------ CAIRO
 SB["cairo"] = [
-    dict(type="map", codes=["EG-C"], title="القاهرة", pins=[cap("الفسطاط", "down", A("القاهرة"))], min_span=2.0),
+    dict(type="map", codes=["EG-C"], title="القاهرة", pins=[cap("الفسطاط", "down", A("القاهرة", off=-0.4))], min_span=2.0),
     dict(type="image", at=A("سنة تسعمية"), image="cairo_jawhar",
          overlays=[dict(kind="chip", text="٩٦٩ م", color=GOLD, x=230, y=140, size=56, t=A("سنة تسعمية")),
                    dict(kind="lower", title="جوهر الصقلي", sub="قائد جيوش الخليفة الفاطمي المعز لدين الله", t=A("جوهر"))]),
@@ -141,20 +141,24 @@ SB["ismailia"] = [
          labels=[dict(text="بحيرة التمساح", ll=(32.42, 30.62), size=40, t=A("بحيرة التمساح"))],
          pins=[cap("الإسماعيلية", "left", A("اتبنت مدينة"))]),
     dict(type="chain", at=A("واتسمت على اسم الخديوي"), bg="portsaid_1859", heading="١٨٦٣",
-         items=[("إسماعيل", "الخديوي"), ("الإسماعيلية", "المدينة")], ts=[A("الخديوي إسماعيل"), A("فبقت الإسماعيلية")]),
-    dict(type="map", at=A("ولحد النهارده"), codes=["EG-IS"], frame_=(32.27, 30.6, 1.5),
+         items=[("إسماعيل", "الخديوي"), ("الإسماعيلية", "المدينة")],
+         ts=[A("الخديوي إسماعيل"), A("فبقت الإسماعيلية", off=-0.3)]),
+    dict(type="map", at=A("ولحد النهارده", off=0.9), codes=["EG-IS"], frame_=(32.27, 30.6, 1.5),
          pins=[dict(name="الإسماعيلية", label="بيت ديليسبس", side="up", t=A("بيت ديليسبس"))]),
 ]
 
 # ------------------------------------------------------------------ SUEZ
 SB["suez"] = [
     dict(type="map", codes=["EG-SUZ"], title="السويس", pins=[cap("السويس", "left", A("السويس"))]),
-    dict(type="chain", at=A("في العصر البطلمي"), bg="map:EG-SUZ", heading="أسامي المكان عبر العصور",
-         items=[("أرسينوي", "بطلمي"), ("كليزما", ERA_RO), ("القُلزُم", ERA_AB), ("السويس", ERA_AB)],
-         ts=[A("أرسينوي"), A("كليزما"), A("القُلزُم"), A("اسمها السويس")]),
+    dict(type="image", at=A("في العصر البطلمي"), image="suez_qulzum", pan=(0.3, 0.0),
+         overlays=[dict(kind="chip", text="العصر البطلمي", color=GOLD, x=250, y=140, size=52, t=A("في العصر البطلمي", off=0.3)),
+                   dict(kind="lower", title="أرسينوي", sub="على اسم ملكة من البطالمة", t=A("أرسينوي"))]),
+    dict(type="chain", at=A("وفي العصر الروماني"), bg="suez_qulzum", heading="أسامي المكان عبر العصور",
+         items=[("أرسينوي", "بطلمي"), ("كليزما", ERA_RO), ("القُلزُم", ERA_AB)],
+         ts=[A("وفي العصر الروماني"), A("كليزما"), A("القُلزُم")]),
     dict(type="map", at=A("لدرجة إن البحر"), frame_=(34.6, 26.2, 15.0), codes=["EG-BA", "EG-SUZ"],
          labels=[dict(text="بحر القلزم", ll=(36.6, 23.6), size=64, color=(255, 210, 120), t=A("بحر القلزم", off=-0.4))]),
-    dict(type="list", at=A("وحوالين القرن"), bg="map:EG-SUZ", heading="السويس كبرت وأخدت كل حاجة",
+    dict(type="list", at=A("وحوالين القرن"), bg="suez_qulzum", heading="السويس كبرت وأخدت كل حاجة",
          items=["القرن العاشر: بلدة صغيرة اسمها السويس", "خليج السويس", "قناة السويس"],
          ts=[A("وحوالين القرن"), A("اسم الخليج"), A("القناة نفسها")]),
     dict(type="fact", at=A("طب كلمة السويس"), bg="map:EG-SUZ", text="؟", big_size=420, top="معنى «السويس»",
@@ -178,13 +182,14 @@ SB["dakahlia"] = [
          pins=[dict(name="دقهلة", label="قرية دقهلة", side="up", t=A("ودقهلة دي")),
                dict(name="دمياط", side="right", t=A("محافظة دمياط"))],
          overlays=[dict(kind="lower", title="دقهلة: مركز الزرقا - محافظة دمياط", sub="مش في الدقهلية أصلًا!", t=A("مركز الزرقا"))]),
-    dict(type="chain", at=A("الحكاية إن دقهلة"), bg="map:EG-DK", heading="إزاي الاسم فضل؟",
+    dict(type="chain", at=A("الحكاية إن دقهلة", off=0.5), bg="map:EG-DK", heading="إزاي الاسم فضل؟",
          items=[("دقهلة", "عاصمة الإقليم"), ("الدقهلية", "اسم الإقليم كله")], footer="الحدود اتغيرت والعاصمة اتنقلت .. والاسم فضل",
          ts=[A("الحكاية إن"), A("الإقليم كله")], foot_t=A("ومع الوقت")),
-    dict(type="meaning", at=A("أما عاصمتها المنصورة"), bg="map:EG-DK", word="المنصورة", meaning="يعني المنتصرة",
+    dict(type="meaning", at=A("أما عاصمتها المنصورة"), bg="mansoura_1250", word="المنصورة", meaning="يعني المنتصرة",
          note="بناها السلطان الكامل الأيوبي سنة ١٢١٩ م", ts=[A("المنصورة،"), A("يعني المنتصرة"), A("فبناها")]),
-    dict(type="fact", at=A("وبعدها بحوالي"), bg="map:EG-DK", text="١٢٥٠ م", big_size=230,
-         caption="لويس التاسع ملك فرنسا .. محبوس في المنصورة", ts=[A("وبعدها"), A("ملك فرنسا")]),
+    dict(type="image", at=A("وبعدها بحوالي"), image="mansoura_1250", pan=(-0.25, 0.0),
+         overlays=[dict(kind="chip", text="١٢٥٠ م", color=GOLD, x=230, y=140, size=56, t=A("وبعدها بحوالي", off=0.2)),
+                   dict(kind="lower", title="لويس التاسع ملك فرنسا", sub="اتأسر واتحبس في المنصورة", t=A("ملك فرنسا"))]),
 ]
 
 # ------------------------------------------------------------------ SHARQIA + GHARBIA
@@ -200,10 +205,12 @@ SB["sharqia_gharbia"] = [
          overlays=[dict(kind="chip", text="غرب فرع دمياط", color=GOLD, x=380, y=220, size=54, t=A("الناحية الغربية"))]),
     dict(type="map", at=A("وزمان كانت الغربية"), codes=["EG-GH"], codes2=["EG-KFS"], frame_=(31.0, 30.95, 2.9),
          overlays=[dict(kind="lower", title="كفر الشيخ كانت جزء من الغربية", sub="لحد ما بقت محافظة مستقلة", t=A("كفر الشيخ"))]),
-    dict(type="chain", at=A("وعاصمة الشرقية"), bg="map:EG-SHR", heading="عاصمة الشرقية",
+    dict(type="chain", at=A("وعاصمة الشرقية"), bg="delta_kafr", heading="عاصمة الشرقية",
          items=[("زقزوق", "اسم عيلة"), ("الزقازيق", "المدينة")], ts=[A("عيلة اسمها"), A("قبل ما يكبر")]),
-    dict(type="chain", at=A("أما عاصمة الغربية"), bg="map:EG-GH", heading="عاصمة الغربية",
-         items=[("طنتدا", "الاسم القديم"), ("طنطا", "النهارده")], ts=[A("طنتدا", off=-0.4), A("طنتدا", off=0.5)]),
+    # narration says «طنطا» first, then its old name -> a meaning card follows the speech order
+    dict(type="meaning", at=A("أما عاصمة الغربية"), bg="map:EG-GH", badge="عاصمة الغربية", badge_color=GOLD,
+         word="طنطا", meaning="اسمها القديم: طنتدا", note="كده كانت مكتوبة في كتب المؤرخين",
+         ts=[A("طنطا،"), A("فاسمها القديم"), A("في كتب")]),
 ]
 
 # ------------------------------------------------------------------ BEHEIRA
@@ -212,7 +219,7 @@ SB["beheira"] = [
          labels=[dict(text="بحيرة مريوط", ll=(29.93, 31.02), size=36, t=A("بحيرة مريوط")),
                  dict(text="بحيرة إدكو", ll=(30.25, 31.36), size=36, t=A("بحيرة إدكو"))],
          pins=[cap("دمنهور", "down", A("البحيرة", off=0.5))]),
-    dict(type="meaning", at=A("فالعرب سموا"), bg="map:EG-BH", word="البحيرة", meaning="أرض البحيرات والمستنقعات",
+    dict(type="meaning", at=A("فالعرب سموا", off=0.4), bg="map:EG-BH", word="البحيرة", meaning="أرض البحيرات والمستنقعات",
          ts=[A("فالعرب"), A("الإقليم كله")]),
     dict(type="chain", at=A("أما عاصمتها دمنهور"), bg="map:EG-BH", heading="دمنهور",
          items=[("دمي إن حور", ERA_AR, "= مدينة حورس"), ("دمنهور", ERA_AB)], ts=[A("دمي إن حور"), A("يعني مدينة")]),
@@ -244,11 +251,12 @@ SB["monufia"] = [
 # ------------------------------------------------------------------ KAFR EL SHEIKH
 SB["kafrelsheikh"] = [
     dict(type="map", codes=["EG-KFS"], title="كفر الشيخ", pins=[cap("كفر الشيخ", "down", A("كفر الشيخ", off=0.5))]),
-    dict(type="meaning", at=A("فكلمة كفر"), bg="map:EG-KFS", word="كفر", meaning="يعني قرية", note="كلمة أصلها آرامي",
+    dict(type="meaning", at=A("فكلمة كفر"), bg="delta_kafr", word="كفر", meaning="يعني قرية", note="كلمة أصلها آرامي",
          ts=[A("فكلمة كفر"), A("ومعناها قرية"), A("أصلها آرامي")]),
-    dict(type="quote", at=A("طب الشيخ ده مين"), bg="map:EG-KFS", top="القرن السابع الهجري", quote="الشيخ طلحة التلمساني",
-         attrib="ولي صالح جه من بلاد المغرب", ts=[A("طب الشيخ ده مين", off=0.5), A("الشيخ طلحة")]),
-    dict(type="chain", at=A("واستقر في قرية"), bg="map:EG-KFS", heading="رحلة الاسم",
+    dict(type="image", at=A("طب الشيخ ده مين"), image="delta_kafr", pan=(-0.1, -0.15),
+         overlays=[dict(kind="chip", text="القرن السابع الهجري", color=GOLD, x=300, y=140, size=50, t=A("في القرن السابع")),
+                   dict(kind="lower", title="الشيخ طلحة التلمساني", sub="ولي صالح جه من بلاد المغرب", t=A("الشيخ طلحة"))]),
+    dict(type="chain", at=A("واستقر في قرية"), bg="delta_kafr", heading="رحلة الاسم",
          items=[("دنقيون", "الاسم القديم"), ("كفر الشيخ طلحة", "حوالين الشيخ"), ("كفر الشيخ", "اختصار")],
          ts=[A("دنقيون"), A("كفر الشيخ طلحة"), A("اختصروها")]),
     dict(type="chain", at=A("والطريف إنها"), bg="map:EG-KFS", heading="وفي فترة ..",
@@ -258,32 +266,38 @@ SB["kafrelsheikh"] = [
 
 # ------------------------------------------------------------------ BENI SUEF
 SB["benisuef"] = [
-    dict(type="map", codes=["EG-BNS"], title="بني سويف", pins=[cap("بني سويف", "left", A("بني سويف", off=0.4))]),
-    dict(type="list", at=A("لو سألت أهلها"), bg="map:EG-BNS", heading="روايات شعبية",
+    dict(type="map", codes=["EG-BNS"], title="بني سويف", pins=[cap("بني سويف", "left", A("بني سويف", off=-0.2))]),
+    dict(type="list", at=A("لو سألت أهلها", off=0.5), bg="map:EG-BNS", heading="روايات شعبية",
          items=["قبيلة عربية اسمها «بني سويف»", "«بني السيوف» .. معركة بالسيوف"], colors=[CORAL, CORAL],
          ts=[A("قبيلة عربية"), A("بني السيوف")]),
     dict(type="quote", at=A("لكن المؤرخ"), bg="map:EG-BNS", top="رأي المؤرخين", quote="محمد رمزي",
          attrib="صاحب «القاموس الجغرافي للبلاد المصرية»", ts=[A("محمد رمزي"), A("القاموس")]),
-    dict(type="ledger", at=A("إن اسم البلد"), bg="gradient", header="دفاتر المساحة العثمانية — القرن ١٦",
-         old="منفسويه", new="بني سويف", caption="«استسهلوا» وكتبوها بني سويف!",
-         ts=[A("منفسويه"), A("استسهلوا", off=-0.2), A("وكتبوها")]),
-    dict(type="fact", at=A("يعني حسب الرأي"), bg="map:EG-BNS", text="!", big_size=380,
-         caption="محافظة كاملة .. اسمها من تحريف في دفاتر المساحة", ts=[A("يعني حسب"), A("محافظة كاملة")]),
+    # ledger page with the old name -> cutaway to the Ottoman surveyors -> back to the page for the rewrite
+    dict(type="ledger", at=A("إن اسم البلد"), bg="ottoman_ledger", header="دفاتر المساحة العثمانية — القرن ١٦",
+         old="منفسويه", new="بني سويف", ts=[A("منفسويه"), 9998.0, 9999.0]),
+    dict(type="image", at=A("ولما المساحين"), image="ottoman_ledger", pan=(0.2, -0.1),
+         overlays=[dict(kind="lower", title="المساحين العثمانيين", sub="بيكتبوا أسامي البلاد في دفاترهم",
+                        t=A("ولما المساحين", off=0.3))]),
+    dict(type="ledger", at=A("استسهلوا"), bg="ottoman_ledger", header="دفاتر المساحة العثمانية — القرن ١٦",
+         old="منفسويه", new="بني سويف", instant=True, caption="«استسهلوا» وكتبوها بني سويف!",
+         caption2="محافظة كاملة .. اسمها من تحريف في دفاتر المساحة", cap2_t=A("محافظة كاملة", off=-0.3),
+         ts=[A("منفسويه"), A("استسهلوا", off=0.3), A("وكتبوها", off=0.15)]),
 ]
 
 # ------------------------------------------------------------------ FAIYUM
 SB["faiyum"] = [
     dict(type="map", codes=["EG-FYM"], title="الفيوم", min_span=2.2,
          labels=[dict(text="بحيرة قارون", ll=(30.6, 29.56), size=36, t=A("الفيوم", off=0.8))]),
-    dict(type="chain", at=A("المصريين القدما"), bg="map:EG-FYM", heading="أصل الاسم",
-         items=[("با يم", ERA_AR, "= البحر"), ("فيوم", ERA_CO), ("الفيوم", ERA_AB)],
-         ts=[A("با يم"), A("نطقوها فيوم"), A("فبقت الفيوم")]),
-    dict(type="map", at=A("والمقصود بحيرة"), codes=["EG-FYM"], frame_=(30.65, 29.4, 1.35),
-         labels=[dict(text="بحيرة قارون", ll=(30.6, 29.53), size=46, color=(160, 220, 255), t=A("بحيرة قارون"))],
+    dict(type="meaning", at=A("المصريين القدما"), bg="faiyum_moeris", badge="مصري قديم", badge_color=(233, 185, 73),
+         word="با يم", meaning="يعني البحر .. أو البحيرة", ts=[A("با يم"), A("يعني البحر")]),
+    dict(type="image", at=A("والمقصود بحيرة"), image="faiyum_moeris", pan=(-0.3, 0.0),
          overlays=[dict(kind="lower", title="بحيرة موريس الضخمة", sub="فاضل منها النهارده بحيرة قارون", t=A("بحيرة موريس"))]),
+    dict(type="chain", at=A("والقبط نطقوها"), bg="faiyum_moeris", heading="أصل الاسم",
+         items=[("با يم", ERA_AR, "= البحر"), ("فيوم", ERA_CO), ("الفيوم", ERA_AB)],
+         ts=[A("والقبط نطقوها"), A("نطقوها فيوم"), A("فبقت الفيوم")]),
     dict(type="myth", at=A("وطبعًا فيه الحكاية"), bg="map:EG-FYM", myth="ألف يوم", fact="با يم = البحر",
          ts=[A("ألف يوم"), A("بس اللغة")]),
-    dict(type="meaning", at=A("والفيوم كمان"), bg="map:EG-FYM", word="سوبك", meaning="إله على هيئة تمساح",
+    dict(type="meaning", at=A("والفيوم كمان"), bg="faiyum_moeris", word="سوبك", meaning="إله على هيئة تمساح",
          note="واليونان سموا عاصمتها «مدينة التماسيح»", ts=[A("الإله سوبك"), A("هيئة تمساح"), A("مدينة التماسيح", off=-0.5)]),
 ]
 
@@ -291,8 +305,8 @@ SB["faiyum"] = [
 SB["minya"] = [
     dict(type="map", codes=["EG-MN"], title="المنيا", pins=[cap("المنيا", "left", A("للمنيا", off=0.3))]),
     dict(type="chain", at=A("أصل الاسم بيرجع"), bg="giza_pyramids", heading="أصل الاسم",
-         items=[("منعت خوفو", ERA_AR, "مرضعة خوفو"), ("موني", ERA_CO, "المسكن"), ("منية", ERA_AB), ("المنيا", ERA_AB)],
-         ts=[A("منعت خوفو"), A("موني"), A("كلمة منية"), A("كلمة منية", off=1.2)]),
+         items=[("منعت خوفو", ERA_AR, "مرضعة خوفو"), ("موني", ERA_CO, "المسكن"), ("منية", ERA_AB)],
+         ts=[A("منعت خوفو"), A("موني"), A("كلمة منية")]),
     dict(type="list", at=A("اللي هتلاقيها"), bg="map:EG-MN", heading="«منية» في أسامي بلادنا",
          items=["ميت غمر (منية غمر)", "منية النصر", "ميت أبو غالب"], ts=[A("هتلاقيها"), A("أسامي بلاد"), A("في مصر")]),
     dict(type="quote", at=A("وفي العصر العباسي"), bg="map:EG-MN", top="العصر العباسي", quote="منية ابن خصيب",
@@ -304,9 +318,14 @@ SB["minya"] = [
 # ------------------------------------------------------------------ ASYUT
 SB["asyut"] = [
     dict(type="map", codes=["EG-AST"], title="أسيوط", pins=[cap("أسيوط", "left", A("وأسيوط", off=0.4))]),
-    dict(type="chain", at=A("اسمها المصري القديم"), bg="map:EG-AST", heading="أصل الاسم",
+    dict(type="meaning", at=A("اسمها المصري القديم"), bg="caravan_desert", badge="مصري قديم", badge_color=(233, 185, 73),
+         word="ساوتي", meaning="يعني الحارس", ts=[A("ساوتي"), A("ومعناه الحارس")]),
+    dict(type="image", at=A("لأنها كانت حارسة"), image="caravan_desert", pan=(-0.25, 0.1),
+         overlays=[dict(kind="lower", title="حارسة الطريق لجنوب مصر", sub="وبداية درب القوافل لقلب أفريقيا",
+                        t=A("لأنها كانت حارسة", off=0.3))]),
+    dict(type="chain", at=A("القبط نطقوها"), bg="caravan_desert", heading="أصل الاسم",
          items=[("ساوتي", ERA_AR, "= الحارس"), ("سيوط", ERA_CO), ("أسيوط", ERA_AB)],
-         ts=[A("ساوتي"), A("نطقوها سيوط"), A("فبقت أسيوط")]),
+         ts=[A("القبط نطقوها"), A("نطقوها سيوط"), A("فبقت أسيوط")]),
     dict(type="meaning", at=A("أما اليونان"), bg="map:EG-AST", word="ليكوبوليس", word_size=170, meaning="مدينة الذئب",
          note="عشان أهلها عبدوا إله على هيئة ذئب", ts=[A("ليكوبوليس"), A("مدينة الذئب"), A("عشان أهلها")]),
 ]
@@ -314,12 +333,16 @@ SB["asyut"] = [
 # ------------------------------------------------------------------ SOHAG
 SB["sohag"] = [
     dict(type="map", codes=["EG-SHG"], title="سوهاج", pins=[cap("سوهاج", "left", A("سوهاج", off=0.5))]),
-    dict(type="myth", at=A("فأكيد سمعت"), bg="map:EG-SHG", myth="سو هاج!", fact="مجرد نكتة", fact_head="الحقيقة",
-         ts=[A("فأكيد سمعت", off=0.4), A("دي مجرد")]),
+    dict(type="image", at=A("فأكيد سمعت"), image="sohag_bull", pan=(0.0, 0.15),
+         overlays=[dict(kind="chip", text="نكتة شعبية", color=CORAL, x=250, y=140, size=48, t=A("فأكيد سمعت", off=0.3)),
+                   dict(kind="text", text="سو هاج! سو هاج!", size=112, color=GOLD, x=960, y=930, t=A("سو هاج!"))]),
+    dict(type="myth", at=A("لا يا سيدي"), bg="sohag_bull", myth="سو هاج!", fact="مجرد نكتة", fact_head="الحقيقة",
+         ts=[A("لا يا سيدي"), A("دي مجرد")]),
     dict(type="fact", at=A("الحقيقة إن أصل"), bg="map:EG-SHG", text="سوهاج = ؟", big_size=210,
          caption="أصل الكلمة لسه مش محسوم", ts=[A("الحقيقة"), A("مش محسوم")]),
     dict(type="chain", at=A("لكن المعلومة"), bg="map:EG-SHG", heading="١٩٦٠",
-         items=[("مديرية جرجا", "قبل ١٩٦٠"), ("محافظة سوهاج", "بعد ١٩٦٠")], ts=[A("مديرية جرجا"), A("خدت اسمها")]),
+         items=[("مديرية جرجا", "قبل ١٩٦٠"), ("محافظة سوهاج", "بعد ١٩٦٠")],
+         ts=[A("مديرية جرجا"), A("على اسم عاصمتها", off=0.2)]),
     dict(type="map", at=A("ولما العاصمة"), codes=["EG-SHG"], min_span=1.6,
          pins=[cap("جرجا", "right", A("ولما العاصمة")), cap("سوهاج", "left", A("لمدينة سوهاج"))],
          routes=[dict(pts=[(31.89, 26.34), (31.70, 26.55)], t=A("اتنقلت"), dur=0.9, color=GOLD, width=8, arrow=True)]),
@@ -327,10 +350,14 @@ SB["sohag"] = [
 
 # ------------------------------------------------------------------ QENA
 SB["qena"] = [
-    dict(type="map", codes=["EG-KN"], title="قنا", pins=[cap("قنا", "left", A("وقنا", off=0.4)), cap("قفط", "right", A("قفط"))]),
-    dict(type="chain", at=A("اليونان كانوا"), bg="map:EG-KN", heading="أصل الاسم",
-         items=[("كايني", ERA_GR, "= الجديدة"), ("كوني", ERA_CO), ("قنا", ERA_AB)], ts=[A("كايني"), A("كوني"), A("جه اسم قنا")]),
-    dict(type="map", at=A("وقنا فضلت"), codes=["EG-KN"], frame_=(33.5, 26.3, 3.6),
+    # the map stays up while «كايني = الجديدة» and the old neighbour «قفط» are mentioned
+    dict(type="map", codes=["EG-KN"], title="قنا",
+         pins=[cap("قنا", "left", A("وقنا", off=0.4)), cap("قفط", "right", A("قفط", off=-0.1), label="قفط .. القديمة")],
+         overlays=[dict(kind="chip", text="كايني = «الجديدة»", color=(186, 160, 255), x=330, y=140, size=52, t=A("كايني"))]),
+    dict(type="chain", at=A("والقبط نطقوها", off=0.4), bg="map:EG-KN", heading="أصل الاسم",
+         items=[("كايني", ERA_GR, "= الجديدة"), ("كوني", ERA_CO), ("قنا", ERA_AB)],
+         ts=[A("والقبط نطقوها"), A("كوني"), A("جه اسم قنا")]),
+    dict(type="map", at=A("وقنا فضلت", off=0.4), codes=["EG-KN"], frame_=(33.5, 26.3, 3.6),
          pins=[cap("قنا", "left", A("وقنا فضلت")), cap("القصير", "right", A("على القصير"))],
          routes=[dict(pts=[(32.73, 26.16), (33.1, 26.05), (33.6, 26.0), (34.0, 26.1), (34.27, 26.10)], t=A("لقوافل"),
                       dur=1.5, color=GOLD, width=7, dashed=True, label="طريق القوافل", label_dy=-60)]),
@@ -339,20 +366,29 @@ SB["qena"] = [
 # ------------------------------------------------------------------ LUXOR
 SB["luxor"] = [
     dict(type="map", codes=["EG-LX"], title="الأقصر", min_span=1.6, pins=[cap("الأقصر", "left", A("والأقصر", off=0.4))]),
-    dict(type="chain", at=A("دي كانت واست"), bg="map:EG-LX", heading="أسامي المدينة",
+    dict(type="chain", at=A("دي كانت واست"), bg="luxor_karnak", heading="أسامي المدينة",
+         items=[("واست", ERA_AR), ("طيبة", ERA_GR)], ts=[A("واست"), A("طيبة")]),
+    dict(type="image", at=A("لقوا معابد", off=-0.3), image="luxor_karnak", pan=(0.3, -0.1),
+         overlays=[dict(kind="lower", title="معابد عملاقة زي الكرنك", sub="افتكروها قصور!", t=A("لقوا معابد"))]),
+    # back to the chain: the first two names are already known, only «الأقصُر» pops in
+    dict(type="chain", at=A("وسموها"), bg="luxor_karnak", heading="أسامي المدينة",
          items=[("واست", ERA_AR), ("طيبة", ERA_GR), ("الأقصُر", ERA_AB, "= القصور")],
          ts=[A("واست"), A("طيبة"), A("وسموها الأقصُر")]),
-    dict(type="quote", at=A("ومن قبلهم"), bg="map:EG-LX", top="هوميروس", quote="«المدينة أم مية باب»",
+    dict(type="quote", at=A("ومن قبلهم"), bg="luxor_karnak", top="هوميروس", quote="«المدينة أم مية باب»",
          attrib="كده وصف طيبة الشاعر اليوناني هوميروس", ts=[A("المدينة أم"), A("الشاعر اليوناني")]),
 ]
 
 # ------------------------------------------------------------------ ASWAN
 SB["aswan"] = [
-    dict(type="map", codes=["EG-ASN"], title="أسوان", pins=[cap("أسوان", "left", A("أسوان", off=0.4))]),
-    dict(type="chain", at=A("المصريين القدما"), bg="map:EG-ASN", heading="أصل الاسم",
+    dict(type="map", codes=["EG-ASN"], title="أسوان", pins=[cap("أسوان", "left", A("أسوان"))]),
+    dict(type="meaning", at=A("المصريين القدما"), bg="aswan_market", badge="مصري قديم", badge_color=(233, 185, 73),
+         word="سونو", meaning="يعني السوق", ts=[A("سونو"), A("ومعناها السوق")]),
+    dict(type="image", at=A("لأنها كانت أكبر سوق"), image="aswan_market", pan=(0.2, 0.1),
+         overlays=[dict(kind="lower", title="أكبر سوق للتجارة", sub="بين مصر وبلاد النوبة وأفريقيا", t=A("لأنها كانت", off=0.3))]),
+    dict(type="chain", at=A("القبط قالوا"), bg="aswan_market", heading="أصل الاسم",
          items=[("سونو", ERA_AR, "= السوق"), ("سوان", ERA_CO), ("سييني", ERA_GR), ("أسوان", ERA_AB)],
-         ts=[A("سونو"), A("قالوا سوان"), A("سييني"), A("فبقت أسوان")]),
-    dict(type="meaning", at=A("ومن اسمها اليوناني"), bg="map:EG-ASN", word="السيينيت", word_size=170,
+         ts=[A("القبط قالوا"), A("قالوا سوان"), A("سييني"), A("فبقت أسوان")]),
+    dict(type="meaning", at=A("ومن اسمها اليوناني", off=0.5), bg="map:EG-ASN", word="السيينيت", word_size=170,
          meaning="صخر اسمه جاي من «سييني»", note="بيستخدمه علماء الجيولوجيا لحد النهارده",
          ts=[A("ومن اسمها اليوناني", off=0.3), A("جه اسم صخر"), A("علما الجيولوجيا")]),
 ]
@@ -360,8 +396,8 @@ SB["aswan"] = [
 # ------------------------------------------------------------------ RED SEA
 SB["redsea"] = [
     dict(type="map", codes=["EG-BA"], title="البحر الأحمر", pins=[cap("الغردقة", "left", A("محافظة البحر الأحمر"))],
-         labels=[dict(text="البحر الأحمر", ll=(36.2, 24.6), size=56, color=(255, 150, 140), t=A("اتسمت على البحر"))]),
-    dict(type="list", at=A("بس ليه البحر"), bg="map:EG-BA", heading="ليه اسمه «الأحمر»؟",
+         labels=[dict(text="البحر الأحمر", ll=(36.2, 24.6), size=56, color=(255, 150, 140), t=A("اتسمت على البحر", off=-0.4))]),
+    dict(type="list", at=A("بس ليه البحر"), bg="suez_qulzum", heading="ليه اسمه «الأحمر»؟",
          items=["طحالب بتدّي المية لون أحمر", "الجبال الحمرا اللي على شطه", "الأحمر عند شعوب قديمة = الجنوب"],
          ts=[A("أشهرها"), A("الجبال الحمرا"), A("ورأي تالت")]),
     dict(type="chain", at=A("أما عاصمتها الغردقة"), bg="map:EG-BA", heading="عاصمتها",
@@ -371,9 +407,9 @@ SB["redsea"] = [
 # ------------------------------------------------------------------ NEW VALLEY
 SB["newvalley"] = [
     dict(type="map", codes=["EG-WAD"], title="الوادي الجديد", pins=[cap("الخارجة", "right", A("الوادي الجديد", off=0.5))]),
-    dict(type="chain", at=A("المحافظة دي كان"), bg="map:EG-WAD", heading="١٩٥٨",
+    dict(type="chain", at=A("المحافظة دي كان"), bg="caravan_desert", heading="١٩٥٨",
          items=[("الصحراء الجنوبية", "الاسم القديم"), ("الوادي الجديد", "من ١٩٥٨")],
-         ts=[A("الصحراء الجنوبية"), A("لما جمال")]),
+         ts=[A("الصحراء الجنوبية"), A("لحد سنة", off=0.3)]),
     dict(type="map", at=A("لما جمال"), codes=["EG-WAD"], frame_=(29.8, 26.6, 9.0),
          routes=[dict(pts=[(28.85, 28.35), (28.0, 27.06), (28.95, 25.55), (30.55, 25.44), (30.8, 24.4)],
                       t=A("وادي جديد"), dur=2.0, color=(80, 230, 160), width=8, dashed=True, label="وادي موازي للنيل",
@@ -385,10 +421,10 @@ SB["newvalley"] = [
 
 # ------------------------------------------------------------------ MATROUH
 SB["matrouh"] = [
-    dict(type="map", codes=["EG-MT"], title="مطروح", pins=[cap("مرسى مطروح", "down", A("مطروح", off=0.4))]),
-    dict(type="chain", at=A("أيام البطالمة"), bg="map:EG-MT", heading="الاسم القديم",
+    dict(type="map", codes=["EG-MT"], title="مطروح", pins=[cap("مرسى مطروح", "down", A("مطروح"))]),
+    dict(type="chain", at=A("أيام البطالمة", off=0.4), bg="map:EG-MT", heading="الاسم القديم",
          items=[("باريتونيوم", ERA_GR), ("البارتون", ERA_AB)], ts=[A("باريتونيوم"), A("البارتون")]),
-    dict(type="chain", at=A("أشهر رواية"), bg="map:EG-MT", heading="رافع بن مطروح .. حاكم طرابلس",
+    dict(type="chain", at=A("أشهر رواية"), bg="suez_qulzum", heading="رافع بن مطروح .. حاكم طرابلس",
          items=[("مرسى ابن مطروح", "القرن ٦ هـ"), ("مرسى مطروح", "مع الوقت")],
          ts=[A("مرسى ابن مطروح"), A("بقت مرسى مطروح")]),
     dict(type="meaning", at=A("وفيه رأي أبسط"), bg="map:EG-MT", word="مطروحة", meaning="يعني منبسطة",
@@ -401,9 +437,13 @@ SB["sinai"] = [
          pins=[cap("العريش", "down", A("شمال سيناء")), cap("الطور", "left", A("وجنوب سيناء"))]),
     dict(type="meaning", at=A("أشهر رأي"), bg="gradient", word="سين", word_size=230, meaning="إله القمر",
          note="عند الشعوب السامية القديمة", ts=[A("من سين"), A("إله القمر"), A("الشعوب السامية")]),
-    dict(type="chain", at=A("أما المصريين القدما"), bg="map:EG-JS", heading="أرض الفيروز",
-         items=[("تا مفكات", ERA_AR, "= أرض الفيروز"), ("أرض الفيروز", "لحد النهارده")],
-         ts=[A("تا مفكات"), A("لحد النهارده: أرض")]),
+    dict(type="meaning", at=A("أما المصريين القدما"), bg="sinai_turquoise", badge="مصري قديم", badge_color=(233, 185, 73),
+         word="تا مفكات", meaning="يعني أرض الفيروز", ts=[A("تا مفكات"), A("يعني أرض الفيروز")]),
+    dict(type="image", at=A("بسبب مناجم"), image="sinai_turquoise", pan=(0.25, -0.1),
+         overlays=[dict(kind="lower", title="مناجم الفيروز في سيناء", sub="زي سرابيط الخادم ووادي المغارة",
+                        t=A("بسبب مناجم", off=0.3)),
+                   dict(kind="chip", text="أرض الفيروز .. لحد النهارده", color=(64, 224, 208), x=420, y=140, size=50,
+                        t=A("لحد النهارده: أرض"))]),
     dict(type="quote", at=A("والقرآن الكريم"), bg="map:EG-JS", top="في القرآن الكريم", qfont="amiri", qsize=120,
          quote="﴿طُورِ سَيْنَاءَ﴾  ﴿وَطُورِ سِينِينَ﴾", ts=[A("طور سيناء"), A("طور سيناء")]),
 ]

@@ -263,14 +263,18 @@ def card_times(spec):
     st, en = sp.pop("start"), sp.pop("end")
     sh = SHOT_TYPES[typ](st, en, **sp)
     if typ == "chain":
-        return sh.times(len(spec["items"]))
-    if typ == "list":
-        return sh.times(len(spec["items"]), step=1.2)
-    if typ == "myth":
-        return sh.times(2, step=1.5)
-    if typ == "ledger":
-        return sh.times(3, step=1.3)
-    return []
+        ts = sh.times(len(spec["items"]))
+    elif typ == "list":
+        ts = sh.times(len(spec["items"]), step=1.2)
+    elif typ == "myth":
+        ts = sh.times(2, step=1.5)
+    elif typ == "ledger":
+        ts = sh.times(3, step=1.3)
+    else:
+        ts = []
+    # only elements that actually pop in while this card is on screen
+    # (items carried over from an earlier card, or timed after the cut, stay silent)
+    return [x for x in ts if st <= x < en - 0.1]
 
 
 def main():

@@ -19,7 +19,7 @@
 
 ## المكوّنات (كلها أصلية أو مفتوحة الترخيص)
 - **التعليق الصوتي:** صوت مولّد (TTS) باللهجة المصرية — الصوت اللي اخترته في البداية.
-- **الصور المرسومة (9):** مولّدة بالذكاء الاصطناعي خصيصًا للفيديو (`assets/images`).
+- **الصور المرسومة (19):** مولّدة بالذكاء الاصطناعي خصيصًا للفيديو (`assets/images`).
 - **الخرائط:** بيانات Natural Earth (ملكية عامة)، وحدود مصر الجنوبية على خط ٢٢ (حلايب وشلاتين داخل مصر).
 - **الخطوط:** Cairo / Lalezar / Tajawal / Amiri — Google Fonts (رخصة OFL).
 - **الموسيقى والمؤثرات:** مؤلفة برمجيًا بالكامل (`src/music.py`) — تقاسيم «عود» وإيقاع مقسوم وبادات — بدون أي حقوق ملكية لطرف تالت.
@@ -31,9 +31,21 @@ pip install pillow numpy scipy shapely imageio-ffmpeg   # + libfribidi لتشك�
 ```
 عشان تعدّل السكريبت: غيّر `src/script_data.py` (النص) و`src/storyboard.py` (المشاهد والتوقيتات)،
 ولازم تولّد التعليق الصوتي من جديد للمقاطع اللي اتغيرت (`assets/audio/clip_XX.opus`).
+وبعد أي تعديل في المشاهد شغّل `python3 src/check_timing.py` — بيطلّع أي عنصر (كارت/دبوس/عنوان) هيظهر متأخر
+بعد ما المشهد يتقطع، فالمشاهد عمره ما هيشوفه.
+
+## سجل التحديثات
+- **الإصدار ٢:** ١٠ صور مرسومة جديدة للمحافظات اللي كانت خرايط وكروت بس — ميناء القلزم (السويس)،
+  لويس التاسع محبوس في المنصورة (الدقهلية)، الشيخ طلحة في القرية (كفر الشيخ)، المساحين العثمانيين بدفاترهم
+  (بني سويف + المقدمة)، بحيرة موريس ومعبد سوبك (الفيوم)، الفلاح والتور «سو هاج!» (سوهاج)، قافلة درب الأربعين
+  (أسيوط + خلفية الوادي الجديد)، العرب قدام معابد الكرنك (الأقصر)، سوق أسوان القديم، ومناجم الفيروز (سيناء).
+  ومعاها إصلاح كروت كانت آخر خانة فيها بتظهر بعد ما المشهد يتقطع (السويس، الفيوم، المنيا، سوهاج، الوادي الجديد،
+  الإسماعيلية، طنطا)، ودبابيس خرايط كانت بتظهر لأقل من ثانية.
+- **الإصدار ١:** النسخة الأولى (٩ صور مرسومة).
 
 ---
 **English summary:** a 13:57 Egyptian-Arabic explainer on the origins of Egypt's 27 governorate names, with a brand-new
 voice-over script. Pipeline: TTS narration → pause-aligned timing (`timing.py`) → Pillow/raqm motion-graphics renderer
 with maps, etymology chains and Ken-Burns illustrations (`shots.py`, `storyboard.py`, `render.py`) → procedural score + SFX
-and loudness-normalised mix (`music.py`) → 2-pass H.264.
+and loudness-normalised mix (`music.py`) → 2-pass H.264. `check_timing.py` lints the storyboard for elements that would
+appear after their shot is cut. v2 adds 10 illustrations (19 total) and fixes several late-appearing card items.
