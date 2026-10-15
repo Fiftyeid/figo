@@ -10,12 +10,28 @@
 | `output/subtitles_ar.srt` | ترجمة عربية متزامنة (218 سطر) — ارفعها على يوتيوب كـ Subtitles |
 | `output/youtube_description_ar.md` | عنوان + وصف + **فصول الفيديو (Chapters)** جاهزة للنسخ |
 | `script/script_ar.md` | سكريبت التعليق الصوتي كامل بالتوقيتات |
+| `output/shorts_ar.md` | **٨ مقاطع Shorts / Reels** (1080×1920): لينكات التحميل + عنوان ووصف وهاشتاجات لكل مقطع + نصايح النشر |
 
 ## محتوى الفيديو
 مقدمة (Hook) ← تتر العنوان ← ٢٧ محافظة بالترتيب الجغرافي (القاهرة … سيناء) ← خاتمة ومعلومة أخيرة ← طلب اللايك والاشتراك.
 كل محافظة ليها: خريطة بتتنوّر عليها المحافظة + عاصمتها، وكروت متحركة لرحلة الاسم
 (مصري قديم ← قبطي ← يوناني ← عربي)، وكروت «الحكاية الشعبية ✗ / الأصل ✓»، وصور تاريخية مرسومة.
 فوق الشاشة شارة «رقم المحافظة / ٢٧» وشريط تقدّم من ٢٧ خانة.
+
+## مقاطع Shorts / Reels
+٨ مقاطع طولية 1080×1920 (من ٢٨ ثانية لدقيقة وعشر ثواني) لنشر الفيديو على يوتيوب شورتس وإنستجرام ريلز وتيك توك وفيسبوك ريلز.
+كل مقطع حكاية محافظة واحدة: **سؤال افتتاحي بصوت الراوي** ← الحكاية من الفيديو الطويل (القطع بيبدأ عند وقفة في الكلام)
+← **«شوف الفيديو الكامل»** على الصورة المصغّرة. فوق: عنوان «ليه اسمها …؟»، وفي النص الفيديو 16:9 فوق نسخة مغبّشة منه،
+وتحت: ترجمة محروقة متزامنة بالكلمات المهمة بالدهبي، والمنطقتين اللي فوق وتحت فاضيين عشان أزرار التطبيقات.
+الملفات نفسها على درايف (مش في git عشان حجمها)، واللينكات في `output/shorts_ar.md`.
+
+```bash
+cd src
+python3 shorts.py plan                # نقط القطع ومدة كل مقطع
+python3 shorts.py preview luxor 3 10  # صور معاينة -> build/shorts/
+python3 shorts.py all                 # المقاطع -> build/shorts/NN_<id>.mp4  (محتاج build/ من ./build.sh)
+```
+محافظة جديدة = سطر في `SHORTS` جوه `src/shorts.py` + سؤال افتتاحي بصوت الراوي في `assets/audio/shorts/hook_<id>.opus`.
 
 ## المكوّنات (كلها أصلية أو مفتوحة الترخيص)
 - **التعليق الصوتي:** صوت مولّد (TTS) باللهجة المصرية — الصوت اللي اخترته في البداية.
@@ -35,6 +51,8 @@ pip install pillow numpy scipy shapely imageio-ffmpeg   # + libfribidi لتشك�
 بعد ما المشهد يتقطع، فالمشاهد عمره ما هيشوفه.
 
 ## سجل التحديثات
+- **مقاطع Shorts / Reels:** ٨ مقاطع طولية متقطّعة من الإصدار ٢ (`src/shorts.py`)، بأسئلة افتتاحية ودعوة للفيديو الكامل
+  بصوت نفس الراوي، وترجمة محروقة ما بتقسمش الأسماء والسنين والعبارات المترابطة على كارتين.
 - **الإصدار ٢:** ١٠ صور مرسومة جديدة للمحافظات اللي كانت خرايط وكروت بس — ميناء القلزم (السويس)،
   لويس التاسع محبوس في المنصورة (الدقهلية)، الشيخ طلحة في القرية (كفر الشيخ)، المساحين العثمانيين بدفاترهم
   (بني سويف + المقدمة)، بحيرة موريس ومعبد سوبك (الفيوم)، الفلاح والتور «سو هاج!» (سوهاج)، قافلة درب الأربعين
@@ -49,3 +67,5 @@ voice-over script. Pipeline: TTS narration → pause-aligned timing (`timing.py`
 with maps, etymology chains and Ken-Burns illustrations (`shots.py`, `storyboard.py`, `render.py`) → procedural score + SFX
 and loudness-normalised mix (`music.py`) → 2-pass H.264. `check_timing.py` lints the storyboard for elements that would
 appear after their shot is cut. v2 adds 10 illustrations (19 total) and fixes several late-appearing card items.
+`shorts.py` cuts 8 vertical 1080×1920 Shorts/Reels from the finished build (spoken hook → original narration cut at a
+pause → spoken call-to-action over the thumbnail) with burned-in, phrase-aware Arabic captions; the MP4s live on Drive.
