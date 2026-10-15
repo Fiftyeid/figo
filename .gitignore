@@ -1,0 +1,4 @@
+# render intermediates
+video/build/
+__pycache__/
+*.pyc
