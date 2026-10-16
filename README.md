@@ -6,5 +6,6 @@
 - الفيديو: [`video/output/egypt_governorates_names.mp4`](video/output/egypt_governorates_names.mp4)
 - الصورة المصغّرة، الترجمة، فصول يوتيوب: [`video/output/`](video/output/)
 - السكريبت: [`video/script/script_ar.md`](video/script/script_ar.md)
-- **٨ مقاطع Shorts / Reels طولية** متقطّعة من الفيديو (القاهرة، بني سويف، سوهاج، الأقصر، الدقهلية، البحر الأحمر، الفيوم، الجيزة) — العناوين والأوصاف ولينكات التحميل: [`video/output/shorts_ar.md`](video/output/shorts_ar.md)
+- **٨ مقاطع Shorts / Reels طولية** متقطّعة من الفيديو (القاهرة، بني سويف، الفيوم، البحر الأحمر، الأقصر، الجيزة، سوهاج، الدقهلية) + **غلاف لكل مقطع** ([`video/output/shorts_covers/`](video/output/shorts_covers/))
+- **خطة النشر** (الطويل الأول، المواعيد) + عنوان ووصف وتاجز وهاشتاجات وكومنت مثبّت لكل شورت **حسب معايير vidIQ**: [`video/output/shorts_ar.md`](video/output/shorts_ar.md)
 - التفاصيل وطريقة إعادة البناء: [`video/README.md`](video/README.md)

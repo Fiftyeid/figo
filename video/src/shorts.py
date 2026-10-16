@@ -4,7 +4,9 @@ Vertical Shorts / Reels (1080x1920) cut from the long video.
 
 Each short:  spoken hook question (new TTS clip, same narrator voice)
           -> the governorate's story, cut from the long video at a sentence pause
-          -> spoken call-to-action over the long video's thumbnail.
+          -> spoken call-to-action over the long video's thumbnail
+          -> a short dissolve into the Short's own cover (output/shorts_covers, from covers.py), held for
+             a few frames, so it can be picked as the thumbnail in the YouTube frame selector.
 Layout: question title on top, the 16:9 video in the middle over a blurred copy of itself,
 burned-in Arabic captions (key words in gold) under it, all clear of the Shorts/Reels UI zones
 (top bar, bottom title area, right-hand buttons).  Music/SFX/ducking/loudness = same chain as music.py.
@@ -13,7 +15,8 @@ burned-in Arabic captions (key words in gold) under it, all clear of the Shorts/
   python3 shorts.py preview <id> t1 t2 ...    -> build/shorts/prev_<id>_<t>.jpg
   python3 shorts.py <id> [<id> ...] | all     -> build/shorts/NN_<id>.mp4
   python3 shorts.py audio [<id> ...|all]      -> new soundtrack only (after a new score), picture kept
-Needs build/: narration.wav, music.wav, sfx.wav, timeline.json, video_noaudio.mp4 (from build.sh).
+Needs build/: narration.wav, music.wav, sfx.wav, timeline.json, video_noaudio.mp4 (from build.sh)
+and the covers (python3 covers.py; generated on the fly if missing).
 """
 import os, re, sys, json, math, subprocess
 import numpy as np
@@ -36,10 +39,13 @@ AUD = os.path.join(ASSETS, "audio", "shorts")
 IMG = os.path.join(ASSETS, "images")
 VIDEO = os.path.join(BUILD, "video_noaudio.mp4")
 THUMB = os.path.join(ROOT, "output", "thumbnail.jpg")
+COVERS = os.path.join(ROOT, "output", "shorts_covers")
+COVER_FADE, COVER_HOLD = 4, 8   # frames: dissolve from the CTA into the cover, then hold it (silent tail)
 SERIES = "أصل أسماء محافظات مصر"
 
 # id, timeline section, title lines, hook still, phrase where the story cut starts (None = section start),
 # hook text (= the TTS clip assets/audio/shorts/hook_<id>.opus), caption key words shown in gold
+# The list order is the recommended posting order -> output numbering NN_<id> (see output/shorts_ar.md).
 SHORTS = [
     dict(id="cairo", sec="cairo", l1="ليه اسمها", name="القاهرة", img="intro_mars_desert",
          cut="سنة تسعمية تسعة وستين",
@@ -49,30 +55,30 @@ SHORTS = [
          cut="لو سألت أهلها",
          hook="تعرف إن اسم بني سويف، ممكن يكون جاي من غلطة في دفتر؟",
          keys="بني سويف السيوف منفسويه غلطة دفتر"),
-    dict(id="sohag", sec="sohag", l1="ليه اسمها", name="سوهاج", img="sohag_bull",
-         cut=None,
-         hook="حكاية سو هاج دي.. حقيقة ولا نكتة؟",
-         keys="سوهاج سو هاج نكتة جرجا"),
-    dict(id="luxor", sec="luxor", l1="ليه اسمها", name="الأقصر", img="luxor_karnak",
-         cut="دي كانت واست",
-         hook="ليه الأقصر اسمها الأقصر؟",
-         keys="الأقصر القصور قصور واست طيبة"),
-    dict(id="dakahlia", sec="dakahlia", l1="ليه اسمها", name="الدقهلية", img="mansoura_1250",
-         cut="ودي فيها مفاجأة",
-         hook="ليه الدقهلية اسمها الدقهلية؟",
-         keys="الدقهلية دقهلة المنصورة مفاجأة"),
-    dict(id="redsea", sec="redsea", l1="ليه اسمه", name="البحر الأحمر", img="suez_qulzum",
-         cut="فيه أكتر من رأي",
-         hook="البحر الأحمر لونه أزرق.. طب ليه اسمه الأحمر؟",
-         keys="الأحمر أزرق الغردقة الغردق الجنوب"),
     dict(id="faiyum", sec="faiyum", l1="ليه اسمها", name="الفيوم", img="faiyum_moeris",
          cut="المحافظة اللي اسمها",
          hook="ليه الفيوم اسمها الفيوم؟",
          keys="الفيوم فيوم البحر با يم سوبك التماسيح"),
+    dict(id="redsea", sec="redsea", l1="ليه اسمه", name="البحر الأحمر", img="suez_qulzum",
+         cut="فيه أكتر من رأي",
+         hook="البحر الأحمر لونه أزرق.. طب ليه اسمه الأحمر؟",
+         keys="الأحمر أزرق الغردقة الغردق الجنوب"),
+    dict(id="luxor", sec="luxor", l1="ليه اسمها", name="الأقصر", img="luxor_karnak",
+         cut="دي كانت واست",
+         hook="ليه الأقصر اسمها الأقصر؟",
+         keys="الأقصر القصور قصور واست طيبة"),
     dict(id="giza", sec="giza", l1="ليه اسمها", name="الجيزة", img="giza_pyramids",
          cut="بعد ما عمرو بن العاص",
          hook="ليه الجيزة اسمها الجيزة؟",
          keys="الجيزة جاز الناحية عدى عدّى الأهرامات"),
+    dict(id="sohag", sec="sohag", l1="ليه اسمها", name="سوهاج", img="sohag_bull",
+         cut=None,
+         hook="حكاية سو هاج دي.. حقيقة ولا نكتة؟",
+         keys="سوهاج سو هاج نكتة جرجا"),
+    dict(id="dakahlia", sec="dakahlia", l1="ليه اسمها", name="الدقهلية", img="mansoura_1250",
+         cut="ودي فيها مفاجأة",
+         hook="ليه الدقهلية اسمها الدقهلية؟",
+         keys="الدقهلية دقهلة المنصورة مفاجأة"),
 ]
 CTA = "وعشان تعرف حكاية اسم كل محافظة في مصر، شوف الفيديو الكامل على القناة."
 CTA_KEYS = "الفيديو الكامل"
@@ -191,15 +197,17 @@ def make_plan(sp):
     total = ceil_f(t_cta + len(cta) / SR + 1.1)
     # first frame of the section that is free of the crossfade from the previous section
     vis_min = sec["start"] - 0.25 + 0.36
+    n = int(round(total * FPS))
+    n_out = n + COVER_FADE + COVER_HOLD
     return dict(sec=sec, c0=c0, cut_t=cut_t, onset=onset, sil=sil, n_story=n_story, ls=ls,
                 hook=hook, cta=cta, t_hook=t_hook, th=th, t_end_story=t_end_story, t_cta=t_cta,
-                T=total, n=int(round(total * FPS)), vis_min=vis_min)
+                T=total, n=n, n_out=n_out, T_out=n_out / FPS, vis_min=vis_min)
 
 
 # ------------------------------------------------------------------ audio build (same chain as music.py)
 def build_audio(sp, P, out):
     import music as M
-    n = int(round(P["T"] * SR))
+    n = int(round(P["T_out"] * SR))          # T + the silent cover frames
     narr = np.zeros(n, np.float32)
 
     def put(buf, x, t, g=1.0):
@@ -211,7 +219,7 @@ def build_audio(sp, P, out):
     put(narr, load_mono(os.path.join(BUILD, "narration.wav"), P["cut_t"], P["ls"]), P["th"])
     put(narr, P["cta"], P["t_cta"])
 
-    mus = load_stereo(os.path.join(BUILD, "music.wav"), P["cut_t"] - P["th"], P["T"])
+    mus = load_stereo(os.path.join(BUILD, "music.wav"), P["cut_t"] - P["th"], P["T_out"])
     tt = np.arange(n) / SR
     mus *= (np.clip(tt / 0.35, 0, 1) * np.clip((P["T"] - tt) / 1.6, 0, 1))[:, None].astype(np.float32)
 
@@ -666,6 +674,16 @@ def index_of(sid):
     return [s["id"] for s in SHORTS].index(sid) + 1
 
 
+def cover_image(sid):
+    p = os.path.join(COVERS, f"{index_of(sid):02d}_{sid}.jpg")
+    if not os.path.exists(p):
+        import covers
+        os.makedirs(COVERS, exist_ok=True)
+        covers.make_cover(sid).save(p, quality=92, subsampling=0, optimize=True)
+    im = Image.open(p).convert("RGB")
+    return im if im.size == (VW, VH) else im.resize((VW, VH), Image.LANCZOS)
+
+
 def render(sid):
     sp = next(s for s in SHORTS if s["id"] == sid)
     os.makedirs(OUT, exist_ok=True)
@@ -685,11 +703,17 @@ def render(sid):
         t = k / FPS
         phase = "hook" if k < f_th else "story" if k < f_th + P["n_story"] else "cta"
         sf = next(reader) if phase == "story" else None
-        enc.stdin.write(C.compose(t, sf, phase).tobytes())
+        frame = C.compose(t, sf, phase)
+        enc.stdin.write(frame.tobytes())
+    cover = cover_image(sid)
+    for j in range(COVER_FADE):
+        enc.stdin.write(Image.blend(frame, cover, ease_out_cubic((j + 1) / (COVER_FADE + 1))).tobytes())
+    for _ in range(COVER_HOLD):
+        enc.stdin.write(cover.tobytes())
     enc.stdin.close()
     enc.wait()
     os.remove(aud)
-    print(f"done {out}  {P['T']:.2f}s", flush=True)
+    print(f"done {out}  {P['T_out']:.2f}s", flush=True)
 
 
 def remux_audio(sid):
@@ -702,8 +726,8 @@ def remux_audio(sid):
     pk = subprocess.run([FF, "-v", "error", "-i", out, "-map", "0:v", "-c", "copy", "-f", "framecrc", "-"],
                         capture_output=True, text=True).stdout
     nf = sum(1 for l in pk.splitlines() if l and not l.startswith("#"))
-    if nf != P["n"]:
-        raise SystemExit(f"{sid}: existing video has {nf} frames, plan has {P['n']} - run a full render instead")
+    if nf != P["n_out"]:
+        raise SystemExit(f"{sid}: existing video has {nf} frames, plan has {P['n_out']} - run a full render instead")
     aud = os.path.join(OUT, f"_{sid}.m4a")
     build_audio(sp, P, aud)
     tmp = out + ".tmp.mp4"
@@ -711,7 +735,7 @@ def remux_audio(sid):
                     "-shortest", "-movflags", "+faststart", tmp], check=True)
     os.replace(tmp, out)
     os.remove(aud)
-    print(f"audio {out}  {P['T']:.2f}s", flush=True)
+    print(f"audio {out}  {P['T_out']:.2f}s", flush=True)
 
 
 def preview(sid, times):
@@ -735,7 +759,7 @@ def plan_all():
         P = make_plan(sp)
         sec = P["sec"]
         print(f"{sp['id']:9s} cut {P['cut_t']:7.2f} (onset {P['onset']:.2f}, silence {P['sil']:.2f}s)  "
-              f"story {P['ls']:5.2f}s  hook {len(P['hook'])/SR:4.2f}s  total {P['T']:5.2f}s  "
+              f"story {P['ls']:5.2f}s  hook {len(P['hook'])/SR:4.2f}s  total {P['T_out']:5.2f}s  "
               f"starts: «{sec['text'][P['c0']:P['c0']+28]}…»")
 
 

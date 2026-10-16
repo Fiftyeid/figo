@@ -4,6 +4,7 @@ import json, os, re
 from PIL import Image, ImageFilter, ImageDraw
 
 from common import *
+from publishing import LONG
 from script_data import SECTIONS
 from mapgen import render_view, mapdata
 
@@ -97,9 +98,10 @@ def chapters_and_description():
             title = "الخلاصة + معلومة أخيرة"
         lines.append(f"{ts_yt(max(0, s['start'] - 0.3))} {title}")
     desc = f"""# عنوان مقترح
-ليه محافظات مصر اتسمّت بالأسماء دي؟ | ٢٧ محافظة .. ٢٧ حكاية
+ليه محافظات مصر اتسمّت بالأسماء دي؟ | ٢٧ محافظة.. ٢٧ حكاية
 
 # الوصف
+""" + LONG["desc_first"] + """
 فيه محافظة في مصر بيقولوا إن اسمها جاي من كوكب، وتانية اسمها معناه «البحر» ومفيهاش بحر، وتالتة اسمها ممكن يكون جاي من غلطة في دفاتر المساحة! وفي الآخر: محافظتين اتولدوا واتلغوا في ٣ سنين بس.
 في الفيديو ده بنلف مصر كلها، محافظة محافظة، ونعرف حكاية اسم كل واحدة فيهم: من الفرعوني للقبطي لليوناني للعربي، ومن الحكام والملوك للجغرافيا والأساطير.
 
@@ -112,9 +114,11 @@ def chapters_and_description():
 - ويكيبيديا (عربي/إنجليزي): صفحات محافظات مصر
 - بيانات الخرائط: Natural Earth (ملكية عامة)
 
-## وسوم مقترحة
-#محافظات_مصر #أصل_الأسماء #تاريخ_مصر #معلومات #مصر
-"""
+## هاشتاجات (أول ٣ بيظهروا فوق العنوان)
+""" + LONG["hashtags"] + """
+
+## تاجز (Tags) — انسخها في خانة العلامات
+""" + ", ".join(LONG["tags"]) + "\n"
     open(os.path.join(OUT, "youtube_description_ar.md"), "w", encoding="utf-8").write(desc)
     return lines
 
