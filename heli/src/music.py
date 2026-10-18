@@ -32,7 +32,7 @@ def whoosh(L=0.48):
     rng = np.random.default_rng(7)
     n = int(L * SR)
     t = np.linspace(0, 1, n, dtype=np.float32)
-    env = np.sin(np.pi * t) ** 1.8
+    env = np.maximum(0.0, np.sin(np.pi * t)) ** 1.8
     w = rng.normal(0, 1, n).astype(np.float32)
     return (bandpass(w, 180, 900) * (1 - t) + bandpass(w, 500, 2600) * t) * env * 0.22
 
@@ -97,7 +97,7 @@ def heli_pass(L=12.0, bpf=19.2, pan0=-0.6, pan1=0.6):
     slap = bandpass(rng.normal(0, 1, n).astype(np.float32), 90, 650) * pulse * 0.55
     thump = np.sin(2 * np.pi * ph) * 0.28 + np.sin(4 * np.pi * ph) * 0.16
     turb = np.sin(2 * np.pi * np.cumsum(980 * dop) / SR) * 0.025
-    env = np.sin(np.pi * u) ** 1.4
+    env = np.maximum(0.0, np.sin(np.pi * u)) ** 1.4
     mono = lowpass((slap + thump + turb) * env, 1200) * 0.22
     pan = 0.5 + 0.5 * np.linspace(pan0, pan1, n, dtype=np.float32)
     return np.stack([mono * (1 - pan), mono * pan], axis=1).astype(np.float32)
