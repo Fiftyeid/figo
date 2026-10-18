@@ -9,3 +9,12 @@
 - **٨ مقاطع Shorts / Reels طولية** متقطّعة من الفيديو (القاهرة، بني سويف، الفيوم، البحر الأحمر، الأقصر، الجيزة، سوهاج، الدقهلية) + **غلاف لكل مقطع** ([`video/output/shorts_covers/`](video/output/shorts_covers/))
 - **خطة النشر** (الطويل الأول، المواعيد) + عنوان ووصف وتاجز وهاشتاجات وكومنت مثبّت لكل شورت **حسب معايير vidIQ**: [`video/output/shorts_ar.md`](video/output/shorts_ar.md)
 - التفاصيل وطريقة إعادة البناء: [`video/README.md`](video/README.md)
+
+---
+
+## 🚁 World’s Fastest Military Helicopter Explained
+فيديو يوتيوب وثائقي بالإنجليزي (13:07 دقيقة، 1080p) بنفس أسلوب مونتاج قنوات الطيران العسكري والهندسة (*IMD Aviation*, *Top Fives*, *Mustard*)، بيشرح الـ٤ إجابات المختلفة للسؤال والفيزياء اللي ورا حاجز الـ400 كم/س.
+
+- الصورة المصغّرة، الترجمة (`subtitles_en.srt`)، وبيانات النشر حسب معايير vidIQ: [`heli/output/`](heli/output/)
+- السكريبت بالتوقيتات: [`heli/script/script_en.md`](heli/script/script_en.md)
+- التفاصيل وطريقة إعادة البناء ولينك درايف: [`heli/README.md`](heli/README.md)
