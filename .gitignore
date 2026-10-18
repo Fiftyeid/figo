@@ -2,3 +2,4 @@
 video/build/
 __pycache__/
 *.pyc
+heli/build/
