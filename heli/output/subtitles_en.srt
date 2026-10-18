@@ -1,0 +1,904 @@
+1
+00:00:00,600 --> 00:00:04,573
+On the evening of August 11th, 1986, a British military
+
+2
+00:00:04,613 --> 00:00:08,804
+helicopter tore across the flat fields of Somerset, in the
+
+3
+00:00:08,844 --> 00:00:13,182
+south-west of England, at just over 400 kilometers per hour.
+
+4
+00:00:13,222 --> 00:00:16,040
+About 250 miles per hour.
+
+5
+00:00:16,080 --> 00:00:18,017
+That's not the strange part.
+
+6
+00:00:18,057 --> 00:00:20,950
+The strange part is what happened next.
+
+7
+00:00:20,990 --> 00:00:21,890
+Nothing.
+
+8
+00:00:21,890 --> 00:00:26,540
+Forty years later, no conventional helicopter has officially flown faster.
+
+9
+00:00:26,580 --> 00:00:31,420
+So what is the fastest military helicopter in the world?
+
+10
+00:00:31,460 --> 00:00:34,640
+Ask the internet, and you'll get four different answers.
+
+11
+00:00:34,680 --> 00:00:39,080
+A twin-rotor heavy lifter that first flew in 1961.
+
+12
+00:00:39,120 --> 00:00:41,668
+A Soviet gunship nicknamed the flying tank.
+
+13
+00:00:41,708 --> 00:00:44,453
+That British record-breaker.
+
+14
+00:00:44,493 --> 00:00:48,380
+And a strange new machine the US Army just picked to replace
+
+15
+00:00:48,420 --> 00:00:52,242
+the Black Hawk, which might not even count as a helicopter.
+
+16
+00:00:52,282 --> 00:00:53,790
+They can't all be right.
+
+17
+00:00:53,830 --> 00:00:54,872
+Or can they?
+
+18
+00:00:54,912 --> 00:01:00,357
+To find out, we need to understand the invisible wall that every
+
+19
+00:01:00,397 --> 00:01:06,100
+helicopter slams into, and the sixty-year race to break through it.
+
+20
+00:01:06,140 --> 00:01:09,940
+Let's start with the answer you'll find first.
+
+21
+00:01:10,610 --> 00:01:13,453
+Answer number one comes from Guinness World Records.
+
+22
+00:01:13,493 --> 00:01:18,693
+According to Guinness, the fastest military helicopter on the planet
+
+23
+00:01:18,733 --> 00:01:22,469
+is the Boeing CH-47F Chinook, with a top speed of
+
+24
+00:01:22,509 --> 00:01:26,090
+315 kilometers per hour, or 196 miles per hour.
+
+25
+00:01:26,130 --> 00:01:28,887
+At first, that sounds like a joke.
+
+26
+00:01:28,927 --> 00:01:30,970
+The Chinook is basically a flying school bus.
+
+27
+00:01:31,010 --> 00:01:35,246
+It can carry around fifty-five troops, or sling an artillery
+
+28
+00:01:35,286 --> 00:01:39,307
+piece underneath, and its basic design first flew back in
+
+29
+00:01:39,347 --> 00:01:39,704
+1961.
+
+30
+00:01:39,704 --> 00:01:48,107
+More than twelve hundred have been built, and over twenty countries still fly them.
+
+31
+00:01:48,147 --> 00:01:50,260
+So how does a flying bus keep up with attack helicopters?
+
+32
+00:01:50,300 --> 00:01:52,378
+Look at the rotors.
+
+33
+00:01:52,418 --> 00:01:56,162
+Most helicopters spend a chunk of their engine power
+
+34
+00:01:56,202 --> 00:01:59,074
+on a small tail rotor, whose only job is
+
+35
+00:01:59,114 --> 00:02:02,567
+to stop the body from spinning the opposite way.
+
+36
+00:02:02,607 --> 00:02:04,782
+The Chinook doesn't need one.
+
+37
+00:02:04,822 --> 00:02:09,029
+Its two big rotors turn in opposite directions and cancel each other
+
+38
+00:02:09,069 --> 00:02:12,214
+out, so all of that power goes into lift and speed.
+
+39
+00:02:12,254 --> 00:02:13,572
+But there's a catch.
+
+40
+00:02:13,612 --> 00:02:16,250
+Not everyone measures top speed the same way.
+
+41
+00:02:16,290 --> 00:02:21,313
+Some manufacturers quote true airspeed, some quote indicated airspeed, and some
+
+42
+00:02:21,353 --> 00:02:25,607
+quote the never-exceed speed, a limit the pilot should never cross.
+
+43
+00:02:25,647 --> 00:02:33,392
+On paper, a few helicopters beat the Chinook, depending on whose spreadsheet you read.
+
+44
+00:02:33,432 --> 00:02:35,730
+Which brings us to answer number two.
+
+45
+00:02:36,550 --> 00:02:41,650
+In the 1970s, the Soviet Union built a helicopter unlike anything in the West.
+
+46
+00:02:41,690 --> 00:02:45,996
+The Mil Mi-24, known to NATO as the Hind, was a heavily
+
+47
+00:02:46,036 --> 00:02:51,133
+armored gunship that could also carry eight soldiers in the back.
+
+48
+00:02:51,173 --> 00:02:53,939
+Its crews nicknamed it the crocodile.
+
+49
+00:02:53,979 --> 00:02:56,420
+Others called it a flying tank.
+
+50
+00:02:56,460 --> 00:02:59,100
+Tanks are not supposed to be fast.
+
+51
+00:02:59,140 --> 00:03:02,021
+But the Hind had a sleek body, retractable
+
+52
+00:03:02,061 --> 00:03:05,290
+landing gear, and two powerful turbine engines.
+
+53
+00:03:05,330 --> 00:03:11,061
+And on September 21st, 1978, the Soviets set out to prove a point.
+
+54
+00:03:11,101 --> 00:03:15,088
+They took a modified Hind, removed its stub wings to
+
+55
+00:03:15,128 --> 00:03:18,727
+cut drag, gave it the cover name A-10, and flew
+
+56
+00:03:18,767 --> 00:03:22,212
+it over a measured course near Moscow at 368.
+
+57
+00:03:22,252 --> 00:03:24,329
+4 kilometers per hour.
+
+58
+00:03:24,369 --> 00:03:26,933
+That's 229 miles per hour, and it was
+
+59
+00:03:26,973 --> 00:03:30,170
+the new absolute speed record for helicopters.
+
+60
+00:03:30,210 --> 00:03:34,025
+Its modern descendant, the Mi-35M, is still listed
+
+61
+00:03:34,065 --> 00:03:37,880
+among the fastest combat helicopters flying today.
+
+62
+00:03:37,920 --> 00:03:41,404
+And for eight years, the Soviets owned the title.
+
+63
+00:03:41,444 --> 00:03:43,760
+Then the British decided to take it back.
+
+64
+00:03:44,470 --> 00:03:47,355
+The Westland Lynx was a small, nimble helicopter
+
+65
+00:03:47,395 --> 00:03:49,731
+flown by the British Army and the Royal
+
+66
+00:03:49,771 --> 00:03:50,076
+Navy.
+
+67
+00:03:50,076 --> 00:03:54,328
+In 1986, Westland took its own company demonstrator,
+
+68
+00:03:54,368 --> 00:03:58,867
+registration G-Lynx, and turned it into a rotor-powered
+
+69
+00:03:58,907 --> 00:03:59,650
+dragster.
+
+70
+00:04:00,350 --> 00:04:04,675
+The engineers fitted uprated Rolls-Royce Gem 60 engines, cleared to
+
+71
+00:04:04,715 --> 00:04:08,779
+run at their emergency rating for about forty-five percent more
+
+72
+00:04:08,819 --> 00:04:09,210
+power.
+
+73
+00:04:09,210 --> 00:04:13,988
+They added water-methanol injection for an extra boost, reshaped the
+
+74
+00:04:14,028 --> 00:04:18,026
+exhausts to push out some bonus thrust, and borrowed tail
+
+75
+00:04:18,066 --> 00:04:22,277
+surfaces from another Westland helicopter to keep it stable.
+
+76
+00:04:22,317 --> 00:04:24,314
+But the real secret was on top.
+
+77
+00:04:24,354 --> 00:04:28,867
+G-Lynx carried experimental rotor blades called BERP blades, with strange
+
+78
+00:04:28,907 --> 00:04:32,236
+paddle-shaped tips, swept back like the wing of a jet.
+
+79
+00:04:32,276 --> 00:04:37,036
+Westland had developed them together with the UK Ministry
+
+80
+00:04:37,076 --> 00:04:41,500
+of Defence, to make rotors faster and more efficient.
+
+81
+00:04:42,210 --> 00:04:45,853
+On the evening of August 11th, test pilot Trevor Egginton
+
+82
+00:04:45,893 --> 00:04:49,084
+and flight test engineer Derek Clews lined up on a
+
+83
+00:04:49,124 --> 00:04:54,059
+fifteen-kilometer course over the Somerset Levels, near Glastonbury, and flew
+
+84
+00:04:54,099 --> 00:04:57,871
+it twice, in opposite directions, so the wind couldn't help
+
+85
+00:04:57,911 --> 00:04:58,234
+them.
+
+86
+00:04:58,234 --> 00:04:59,574
+Their average was 400.
+
+87
+00:04:59,614 --> 00:05:00,948
+87 kilometers per hour.
+
+88
+00:05:00,988 --> 00:05:04,485
+That's 249 miles per hour.
+
+89
+00:05:04,525 --> 00:05:07,665
+On one of the runs, they touched almost 413.
+
+90
+00:05:07,705 --> 00:05:11,612
+It smashed the Hind's record, and it still stands today.
+
+91
+00:05:11,652 --> 00:05:15,910
+The FAI, the body that certifies aviation records, still
+
+92
+00:05:15,950 --> 00:05:20,056
+lists it as the absolute speed record for helicopters.
+
+93
+00:05:20,096 --> 00:05:26,130
+So officially, the fastest helicopter flight ever recorded was made by a military Lynx.
+
+94
+00:05:26,170 --> 00:05:30,140
+And there's one detail that explains why nobody has beaten it.
+
+95
+00:05:30,180 --> 00:05:33,180
+At 400 kilometers per hour, the tips of
+
+96
+00:05:33,220 --> 00:05:36,219
+its rotor blades were moving at Mach 0.
+
+97
+00:05:36,259 --> 00:05:37,159
+97.
+
+98
+00:05:37,187 --> 00:05:40,190
+That's ninety-seven percent of the speed of sound.
+
+99
+00:05:40,780 --> 00:05:44,510
+To see why that matters, picture a helicopter rotor from above.
+
+100
+00:05:44,550 --> 00:05:48,837
+In a hover, every blade moves through the air at the same speed.
+
+101
+00:05:48,877 --> 00:05:52,258
+On a helicopter like the Lynx, the blade tips are
+
+102
+00:05:52,298 --> 00:05:56,587
+already doing almost 800 kilometers per hour, just spinning in
+
+103
+00:05:56,627 --> 00:05:57,046
+place.
+
+104
+00:05:57,046 --> 00:05:58,219
+Now fly forward.
+
+105
+00:05:58,259 --> 00:06:01,485
+On one side, the advancing blade swings into the
+
+106
+00:06:01,525 --> 00:06:04,683
+wind, so the helicopter's speed is added to it.
+
+107
+00:06:04,723 --> 00:06:08,005
+On the other side, the retreating blade swings away from
+
+108
+00:06:08,045 --> 00:06:10,972
+the wind, so the helicopter's speed is taken away.
+
+109
+00:06:11,012 --> 00:06:15,059
+At 400 kilometers per hour, the advancing tip is doing
+
+110
+00:06:15,099 --> 00:06:19,070
+nearly 1,200, right at the edge of the sound barrier.
+
+111
+00:06:19,110 --> 00:06:23,010
+The retreating tip is crawling along at under 400.
+
+112
+00:06:23,050 --> 00:06:26,537
+And close to the hub, something even stranger happens.
+
+113
+00:06:26,577 --> 00:06:30,331
+The air actually flows over the retreating blade backwards.
+
+114
+00:06:30,371 --> 00:06:34,890
+On G-Lynx, that reverse flow covered roughly half of the blade.
+
+115
+00:06:35,600 --> 00:06:37,389
+That creates two problems at once.
+
+116
+00:06:37,429 --> 00:06:41,157
+On the advancing side, shock waves start to form on
+
+117
+00:06:41,197 --> 00:06:45,221
+the blade tips, and drag, vibration and noise shoot up.
+
+118
+00:06:45,261 --> 00:06:48,241
+On the retreating side, the slow blade has to tilt
+
+119
+00:06:48,281 --> 00:06:50,839
+to a steeper angle to make the same lift as
+
+120
+00:06:50,879 --> 00:06:54,161
+the fast one, or the helicopter would simply roll over.
+
+121
+00:06:54,201 --> 00:06:58,054
+Tilt it too far, and the airflow tears away from the blade.
+
+122
+00:06:58,094 --> 00:07:00,390
+That's called retreating blade stall.
+
+123
+00:07:00,430 --> 00:07:05,720
+The nose pitches up, the helicopter rolls, and the pilot can lose control.
+
+124
+00:07:06,310 --> 00:07:08,270
+So why not spin the rotor faster?
+
+125
+00:07:08,310 --> 00:07:11,921
+Then the advancing tip hits the sound barrier even sooner.
+
+126
+00:07:11,961 --> 00:07:13,014
+Slow it down?
+
+127
+00:07:13,054 --> 00:07:15,370
+Then the retreating blade stalls sooner.
+
+128
+00:07:15,410 --> 00:07:17,610
+Engineers are trapped between the two.
+
+129
+00:07:17,650 --> 00:07:23,458
+That's why almost every helicopter in service tops out around 300 kilometers
+
+130
+00:07:23,498 --> 00:07:28,383
+per hour, and why G-Lynx needed exotic blades just to touch 400.
+
+131
+00:07:28,423 --> 00:07:29,766
+It's not an engine problem.
+
+132
+00:07:29,806 --> 00:07:31,950
+It's a wall.
+
+133
+00:07:32,780 --> 00:07:34,853
+So engineers asked a simple question.
+
+134
+00:07:34,893 --> 00:07:38,104
+What if the rotor didn't have to do everything?
+
+135
+00:07:38,144 --> 00:07:40,975
+A normal helicopter's rotor has three jobs at once:
+
+136
+00:07:41,015 --> 00:07:45,429
+it lifts the aircraft, pulls it forward, and steers it.
+
+137
+00:07:45,469 --> 00:07:48,490
+A compound helicopter hands some of that work to other parts.
+
+138
+00:07:48,530 --> 00:07:51,714
+Wings take over some of the lift at high speed,
+
+139
+00:07:51,754 --> 00:07:55,144
+and a propeller does the pushing, so the rotor can
+
+140
+00:07:55,184 --> 00:07:55,595
+relax.
+
+141
+00:07:55,595 --> 00:07:57,988
+The US Army tried this back in 1967, with
+
+142
+00:07:58,028 --> 00:08:01,607
+the Lockheed AH-56 Cheyenne, a futuristic gunship with stubby
+
+143
+00:08:01,647 --> 00:08:04,040
+wings and a pusher propeller in its tail.
+
+144
+00:08:04,080 --> 00:08:08,677
+It reached about 215 knots in level flight, close
+
+145
+00:08:08,717 --> 00:08:13,029
+to 400 kilometers per hour, in the late 1960s.
+
+146
+00:08:13,069 --> 00:08:17,276
+But it was expensive, complicated and late, and
+
+147
+00:08:17,316 --> 00:08:20,529
+in August 1972 the Army canceled it.
+
+148
+00:08:20,569 --> 00:08:21,734
+Remember that name.
+
+149
+00:08:21,774 --> 00:08:23,000
+It's coming back.
+
+150
+00:08:23,590 --> 00:08:27,221
+Decades later, Sikorsky came at the problem from a different angle.
+
+151
+00:08:27,261 --> 00:08:31,084
+Its X2 demonstrator had two rigid rotors stacked
+
+152
+00:08:31,124 --> 00:08:34,465
+on top of each other, spinning in opposite
+
+153
+00:08:34,505 --> 00:08:35,390
+directions.
+
+154
+00:08:35,390 --> 00:08:39,625
+That means there's always an advancing blade on both sides of the
+
+155
+00:08:39,665 --> 00:08:43,835
+aircraft, so the retreating blades don't have to carry the load.
+
+156
+00:08:43,875 --> 00:08:48,427
+At high speed, the X2 slowed its rotors to keep the tips
+
+157
+00:08:48,467 --> 00:08:53,511
+below the sound barrier, while a propeller in the tail did the
+
+158
+00:08:53,551 --> 00:08:54,207
+pushing.
+
+159
+00:08:54,207 --> 00:09:00,798
+On September 15th, 2010, it reached 250 knots in level flight.
+
+160
+00:09:00,838 --> 00:09:04,768
+That's about 463 kilometers per hour, much faster
+
+161
+00:09:04,808 --> 00:09:08,171
+than G-Lynx, but the record was never made
+
+162
+00:09:08,211 --> 00:09:08,940
+official.
+
+163
+00:09:08,940 --> 00:09:11,385
+The team still won the Collier Trophy, one
+
+164
+00:09:11,425 --> 00:09:13,930
+of the biggest prizes in American aviation.
+
+165
+00:09:13,970 --> 00:09:21,381
+Three years later, Eurocopter's X3, with short wings and two propellers, pushed
+
+166
+00:09:21,421 --> 00:09:27,605
+that unofficial mark to 255 knots, around 472 kilometers per hour.
+
+167
+00:09:27,645 --> 00:09:31,460
+Sikorsky turned the X2 idea into military prototypes.
+
+168
+00:09:31,500 --> 00:09:33,711
+First the S-97 Raider, a light scout.
+
+169
+00:09:33,751 --> 00:09:37,097
+Then, together with Boeing, the much bigger SB-1
+
+170
+00:09:37,137 --> 00:09:39,990
+Defiant, built to replace the Black Hawk.
+
+171
+00:09:40,030 --> 00:09:44,516
+In October 2021, Defiant hit 247 knots, about 457
+
+172
+00:09:44,556 --> 00:09:49,134
+kilometers per hour, in level flight, and its test
+
+173
+00:09:49,174 --> 00:09:53,290
+pilot said there was still engine power left.
+
+174
+00:09:53,330 --> 00:09:59,875
+In Europe, Airbus's Racer demonstrator has since reached 444 kilometers per hour.
+
+175
+00:09:59,915 --> 00:10:01,880
+The wall had been broken.
+
+176
+00:10:01,920 --> 00:10:05,330
+So why isn't the Army flying any of these today?
+
+177
+00:10:06,000 --> 00:10:08,816
+Because a completely different idea beat them all.
+
+178
+00:10:08,856 --> 00:10:14,200
+Instead of helping the rotor, why not turn it into a propeller?
+
+179
+00:10:14,240 --> 00:10:16,318
+That's a tiltrotor.
+
+180
+00:10:16,358 --> 00:10:20,372
+It takes off like a helicopter, then tilts its rotors
+
+181
+00:10:20,412 --> 00:10:24,884
+forward and flies like an airplane, with wings carrying the
+
+182
+00:10:24,924 --> 00:10:25,459
+weight.
+
+183
+00:10:25,459 --> 00:10:27,920
+The US Marines have flown the V-22 Osprey this way for years.
+
+184
+00:10:27,960 --> 00:10:31,676
+And in December 2017, Bell flew a new and
+
+185
+00:10:31,716 --> 00:10:36,439
+much faster tiltrotor for the Army, the V-280 Valor.
+
+186
+00:10:36,479 --> 00:10:38,970
+In testing, it reached 305 knots.
+
+187
+00:10:39,010 --> 00:10:43,589
+That's about 565 kilometers per hour, or 350 miles
+
+188
+00:10:43,629 --> 00:10:48,393
+per hour, faster than any helicopter has ever flown.
+
+189
+00:10:48,433 --> 00:10:51,612
+The production version is designed to carry fourteen
+
+190
+00:10:51,652 --> 00:10:54,151
+soldiers at more than 300 miles per hour.
+
+191
+00:10:54,191 --> 00:10:59,661
+In December 2022, the Army chose the V-280 over Sikorsky and Boeing's
+
+192
+00:10:59,701 --> 00:11:05,571
+Defiant, in what was described as its biggest helicopter decision in forty
+
+193
+00:11:05,611 --> 00:11:06,090
+years.
+
+194
+00:11:06,090 --> 00:11:11,870
+Then, in February 2024, it canceled its future scout helicopter program too,
+
+195
+00:11:11,910 --> 00:11:16,925
+the one the Raider was built for, saying drones had changed aerial
+
+196
+00:11:16,965 --> 00:11:18,073
+reconnaissance.
+
+197
+00:11:18,113 --> 00:11:22,540
+The fastest compound helicopters ever built were left without a buyer.
+
+198
+00:11:22,580 --> 00:11:28,088
+And in April 2026, the Army gave its new aircraft an official name:
+
+199
+00:11:28,128 --> 00:11:30,728
+the MV-75 Cheyenne II.
+
+200
+00:11:30,768 --> 00:11:34,547
+It honors the Cheyenne tribes, and it's a nod to
+
+201
+00:11:34,587 --> 00:11:39,084
+that canceled AH-56 Cheyenne, the Army's first big bet on
+
+202
+00:11:39,124 --> 00:11:39,601
+speed.
+
+203
+00:11:39,601 --> 00:11:44,350
+More than half a century later, the name Cheyenne gets a second chance.
+
+204
+00:11:45,020 --> 00:11:48,528
+So, what is the world's fastest military helicopter?
+
+205
+00:11:48,568 --> 00:11:51,575
+It depends on what you call a helicopter.
+
+206
+00:11:51,615 --> 00:11:57,254
+If you want the official title for a military helicopter in service,
+
+207
+00:11:57,294 --> 00:12:02,765
+Guinness says it's the CH-47F Chinook, at 315 kilometers per hour.
+
+208
+00:12:02,805 --> 00:12:07,057
+If you want the fastest helicopter flight ever certified, it's G-Lynx, at 400.
+
+209
+00:12:07,097 --> 00:12:09,730
+87, a record that's now forty years old.
+
+210
+00:12:09,770 --> 00:12:13,529
+If you count experimental compound helicopters, the X2
+
+211
+00:12:13,569 --> 00:12:17,186
+and Defiant went faster still, but never officially.
+
+212
+00:12:17,226 --> 00:12:20,769
+And if you just want the fastest machine the Army
+
+213
+00:12:20,809 --> 00:12:24,718
+will use to carry soldiers into battle, it's the MV-75
+
+214
+00:12:24,758 --> 00:12:28,520
+Cheyenne II, which isn't really a helicopter at all.
+
+215
+00:12:28,560 --> 00:12:30,874
+Every one of them is fighting the same enemy:
+
+216
+00:12:30,914 --> 00:12:34,261
+a spinning blade that can't go faster than sound on
+
+217
+00:12:34,301 --> 00:12:37,781
+one side, and can't slow down without stalling on the
+
+218
+00:12:37,821 --> 00:12:38,220
+other.
+
+219
+00:12:38,220 --> 00:12:42,790
+As for the record holder, G-Lynx is still around.
+
+220
+00:12:42,830 --> 00:12:46,760
+It sits in a helicopter museum in Weston-super-Mare, not far
+
+221
+00:12:46,800 --> 00:12:50,465
+from the course where it made history, still waiting for
+
+222
+00:12:50,505 --> 00:12:54,170
+a conventional helicopter fast enough to take its crown.
+
+223
+00:12:54,210 --> 00:12:57,888
+If you enjoyed this, subscribe for more stories
+
+224
+00:12:57,928 --> 00:13:01,052
+about the machines that push the limits.
+
+225
+00:13:01,092 --> 00:13:02,687
+And tell us in the comments:
+
+226
+00:13:02,727 --> 00:13:05,140
+which one do you think deserves the title?
+

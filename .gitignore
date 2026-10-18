@@ -3,3 +3,4 @@ video/build/
 __pycache__/
 *.pyc
 heli/build/
+heli/output/*.mp4
