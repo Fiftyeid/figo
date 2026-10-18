@@ -88,21 +88,30 @@ CHAPTER_TITLES = [
 
 
 TAGS = [
-    "world's fastest military helicopter",
-    "fastest military helicopter explained",
     "fastest helicopter in the world",
-    "why helicopters can't fly faster",
-    "retreating blade stall explained",
-    "westland lynx speed record",
-    "G-LYNX 400 km/h",
-    "CH-47F Chinook top speed",
-    "Mi-24 Hind speed record",
-    "Sikorsky SB-1 Defiant",
-    "Sikorsky X2",
-    "Bell V-280 Valor",
-    "MV-75 Cheyenne II",
-    "Airbus Racer",
-    "military aviation explained",
+    "fastest military helicopter",
+    "world's fastest military helicopter",
+    "fastest helicopters",
+    "military helicopters",
+    "fastest military helicopter explained",
+    "top 10 fastest helicopters",
+    "new us army helicopter",
+    "chinook helicopter",
+    "apache helicopter",
+    "black hawk helicopter",
+    "v 280 valor",
+    "mv 75",
+    "v 22 osprey",
+    "mi 24 hind",
+    "westland lynx",
+    "sikorsky defiant",
+    "attack helicopter",
+    "future military helicopters",
+    "us military",
+    "military aviation",
+    "military technology",
+    "how helicopters work",
+    "aviation explained",
 ]
 
 
@@ -139,10 +148,18 @@ SOURCES & REFERENCES
 #MilitaryAviation #Helicopters #EngineeringExplained
 ```
 
-## Tags ({len(TAGS)} tags — copy into YouTube Tags box)
+## Tags ({len(TAGS)} High-Search-Volume Tags — {len(tag_str)} / 500 chars — copy into YouTube Tags box)
 ```
 {tag_str}
 ```
+
+### Why These Tags Maximize vidIQ Search Volume Score
+- **Tier 1 — Mega-Volume Core Queries (100K–1M+ monthly searches):**
+  `fastest helicopter in the world`, `fastest military helicopter`, `world's fastest military helicopter`, `fastest helicopters`, `military helicopters`, `attack helicopter`, `us military`, `military aviation`, `military technology`
+- **Tier 2 — High-Volume Aircraft & Viral Topic Queries (50K–300K monthly searches):**
+  `chinook helicopter`, `apache helicopter`, `black hawk helicopter`, `v 280 valor`, `mv 75`, `v 22 osprey`, `mi 24 hind`, `westland lynx`, `sikorsky defiant`, `new us army helicopter`, `future military helicopters`
+- **Tier 3 — High-Intent Documentary & Ranking Queries:**
+  `fastest military helicopter explained`, `top 10 fastest helicopters`, `how helicopters work`, `aviation explained`
 
 ## Upload Settings
 - **Category:** Science & Technology *(or Education — keep consistent with your channel default)*
