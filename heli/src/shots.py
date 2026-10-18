@@ -367,22 +367,13 @@ class PhotoShot(Shot):
         zoom = lerp(self.z[0], self.z[1], e)
         cx = lerp(self.c0[0], self.c1[0], e)
         cy = lerp(self.c0[1], self.c1[1], e)
-        if self.shake:
-            cx += self.shake * 0.0035 * (math.sin(t * 6.3) * 0.6 + math.sin(t * 11.7 + 1.3) * 0.4)
-            cy += self.shake * 0.0035 * (math.sin(t * 7.9 + 0.7) * 0.6 + math.sin(t * 13.1 + 2.1) * 0.4)
-        im = broll_view(self.image, t, cx, cy, zoom, contrast=1.08, sat=1.06,
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.image, t_local, cx, cy, zoom, contrast=1.08, sat=1.06,
                         warmth=self.look["warmth"], teal=self.look["teal"],
                         darken=self.look["darken"], blur=self.look["blur"])
         if self.grain:
             im = add_grain(im, t, self.grain)
         im = im.convert("RGBA")
-        if self.speed:
-            sl = speed_layer()
-            off = int((t * 2600) % W)
-            if self.speed_dir > 0:
-                off = W - off
-            layer = sl.crop((off, 0, off + W, H))
-            im.alpha_composite(with_alpha(layer, self.speed))
         im.alpha_composite(vignette())
         return im
 
@@ -401,7 +392,8 @@ class TitleShot(Shot):
 
     def base(self, t):
         p = self.p(t)
-        im = broll_view(self.image, t, 0.5, 0.5, 1.02 + 0.08 * p,
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.image, t_local, 0.5, 0.5, 1.02 + 0.08 * p,
                         contrast=1.1, sat=0.9, warmth=0.0, teal=0.4, darken=0.45, blur=4).convert("RGBA")
         im.alpha_composite(vignette())
         t0 = self.start + 0.1
@@ -440,7 +432,8 @@ class AnswerShot(Shot):
 
     def base(self, t):
         p = self.p(t)
-        im = broll_view(self.image, t, 0.5, 0.5, 1.06 - 0.05 * p,
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.image, t_local, 0.5, 0.5, 1.06 - 0.05 * p,
                         contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.52, blur=3).convert("RGBA")
         im.alpha_composite(vignette())
         # scanlines
@@ -484,7 +477,8 @@ class FourShot(Shot):
         self.head = text_image(self.header, "cx", 66, WHITE, tracking=4, shadow=4) if self.header else None
 
     def base(self, t):
-        im = broll_view(self.bgk, t, 0.5, 0.5, 1.03 + 0.04 * self.p(t),
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.bgk, t_local, 0.5, 0.5, 1.03 + 0.04 * self.p(t),
                         contrast=1.1, sat=0.65, warmth=0.0, teal=0.5, darken=0.62, blur=6).convert("RGBA")
         if self.head:
             paste_center(im, self.head, W / 2, 120, ease_out_cubic((t - self.start - 0.1) / 0.4))
@@ -504,8 +498,8 @@ class FourShot(Shot):
             if a <= 0:
                 continue
             dy = (1 - a) * 60
-            v = broll_view(c["image"], t + k * 1.15, c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1],
-                           c.get("z", 1.3), out=(self.cw, self.ch)).convert("RGBA")
+            v = broll_view(c["image"], max(0.0, t - tr), c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1],
+                           c.get("z", 1.05), out=(self.cw, self.ch)).convert("RGBA")
             v.alpha_composite(self.card_shade)
             v.putalpha(self.card_mask)
             paste_at(im, v, x, y0 + dy, a)
@@ -542,12 +536,13 @@ class FactShot(Shot):
         pass
 
     def base(self, t):
+        t_local = max(0.0, t - self.start)
         if self.image is not None:
-            im = broll_view(self.image, t, 0.5, 0.5, 1.02 + 0.06 * self.p(t),
+            im = broll_view(self.image, t_local, 0.5, 0.5, 1.02 + 0.06 * self.p(t),
                             contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.58, blur=5).convert("RGBA")
             im.alpha_composite(vignette())
         else:
-            im = hud_broll_bg("lynx_record", t)
+            im = hud_broll_bg("lynx_record", t_local)
         t0 = self.start + 0.1
         if self.top:
             paste_center(im, T(self.top, "cs", 50, AMBER, tracking=8), W / 2, self.y - self.size * 0.62,
@@ -582,7 +577,8 @@ class StatsShot(Shot):
         pass
 
     def base(self, t):
-        im = broll_view(self.image, t, 0.5, 0.5, 1.03 + 0.05 * self.p(t),
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.image, t_local, 0.5, 0.5, 1.03 + 0.05 * self.p(t),
                         contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.60, blur=5).convert("RGBA")
         im.alpha_composite(vignette())
         if self.header:
@@ -623,7 +619,8 @@ class CardsShot(Shot):
         pass
 
     def base(self, t):
-        im = broll_view(self.image, t, 0.5, 0.5, 1.03 + 0.05 * self.p(t),
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.image, t_local, 0.5, 0.5, 1.03 + 0.05 * self.p(t),
                         contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.62, blur=6).convert("RGBA")
         if self.header:
             paste_center(im, T(self.header, "cx", 64, WHITE, tracking=4, shadow=4), W / 2, 170,
@@ -681,7 +678,8 @@ class ListShot(Shot):
 
     def base(self, t):
         p = self.p(t)
-        im = broll_view(self.image, t, self.c[0], self.c[1], lerp(self.z[0], self.z[1], p),
+        t_local = max(0.0, t - self.start)
+        im = broll_view(self.image, t_local, self.c[0], self.c[1], lerp(self.z[0], self.z[1], p),
                         contrast=1.08, sat=1.02, warmth=0.0, teal=0.3)
         im = add_grain(im, t, 0.04).convert("RGBA")
         im.alpha_composite(self.shade)
@@ -726,7 +724,7 @@ class SplitShot(Shot):
             if a <= 0:
                 continue
             c = side.get("c", (0.5, 0.5))
-            v = broll_view(side["image"], t + k * 0.9, c[0], c[1], side.get("z", 1.2) + 0.06 * p,
+            v = broll_view(side["image"], max(0.0, t - ta), c[0], c[1], side.get("z", 1.06) + 0.04 * p,
                            out=(W // 2 - 6, H)).convert("RGBA")
             v.alpha_composite(vignette().resize(v.size))
             x = 0 if k == 0 else W // 2 + 6
@@ -754,17 +752,19 @@ class EndShot(Shot):
         self.q = glow(text_image(self.question, "title", 96, WHITE), 14, 0.5)
 
     def base(self, t):
-        im = hud_broll_bg("v280_plane", t)
+        t_local = max(0.0, t - self.start)
+        im = hud_broll_bg("v280_plane", t_local)
         t0 = self.start + 0.1
         paste_center(im, self.q, W / 2, 230, ease_out_cubic((t - t0) / 0.4))
         x0 = (W - (4 * 400 + 3 * 36)) / 2
         for k, c in enumerate(self.cards):
-            a = ease_out_cubic((t - t0 - 0.3 - 0.15 * k) / 0.4)
+            t_card = t0 + 0.3 + 0.15 * k
+            a = ease_out_cubic((t - t_card) / 0.4)
             if a <= 0:
                 continue
             x = x0 + k * 436
-            th = broll_view(c["image"], t + k * 1.1, c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1],
-                            c.get("z", 1.25), out=(400, 240)).convert("RGBA")
+            th = broll_view(c["image"], max(0.0, t - t_card), c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1],
+                            c.get("z", 1.06), out=(400, 240)).convert("RGBA")
             th.putalpha(self.thumb_mask)
             paste_at(im, th, x, 380 + (1 - a) * 40, a)
             paste_center(im, T(c["title"], "cx", 44, WHITE), x + 200, 670, a)

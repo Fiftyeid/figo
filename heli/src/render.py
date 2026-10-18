@@ -100,13 +100,14 @@ class Renderer:
 def encode_cmd(out, crf=18, preset="veryfast"):
     return [FF, "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
             "-i", "-", "-c:v", "libx264", "-preset", preset, "-crf", str(crf), "-pix_fmt", "yuv420p",
-            "-g", str(FPS * 2), "-bf", "2", out]
+            "-g", str(FPS * 2), "-bf", "2", "-threads", "2", "-rc-lookahead", "10", out]
 
 
 def render_range(args):
     f0, f1, out, wid = args
+    tmp = out + ".tmp.mp4"
     r = Renderer()
-    p = subprocess.Popen(encode_cmd(out), stdin=subprocess.PIPE)
+    p = subprocess.Popen(encode_cmd(tmp), stdin=subprocess.PIPE)
     t_start = time.time()
     for f in range(f0, f1):
         im = r.frame(f / FPS)
@@ -116,7 +117,9 @@ def render_range(args):
             done = f - f0 + 1
             print(f"[w{wid}] frame {f} ({done}/{f1 - f0})  {done / max(el, 1e-6):.1f} fps", flush=True)
     p.stdin.close()
-    p.wait()
+    rc = p.wait()
+    if rc == 0 and os.path.exists(tmp):
+        os.replace(tmp, out)
     return out
 
 
@@ -158,14 +161,20 @@ def main():
         os.makedirs(segdir, exist_ok=True)
         jobs = [(bounds[i], bounds[i + 1], os.path.join(segdir, f"seg_{i:02d}.mp4"), i) for i in range(len(bounds) - 1)]
         if "--resume" in sys.argv:
-            def _valid_seg(p):
-                if not (os.path.exists(p) and os.path.getsize(p) > 1000):
+            import re
+            def _valid_seg(f0, f1, p):
+                if not (os.path.exists(p) and os.path.getsize(p) > 50000):
                     return False
                 pr = subprocess.run([FF, "-i", p], capture_output=True, text=True)
-                return "Duration:" in pr.stderr and "N/A" not in pr.stderr
-            jobs = [j for j in jobs if not _valid_seg(j[2])]
+                m = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.\d+)", pr.stderr)
+                if not m:
+                    return False
+                act = float(m.group(1)) * 3600 + float(m.group(2)) * 60 + float(m.group(3))
+                exp = (f1 - f0) / float(FPS)
+                return abs(act - exp) < 0.2
+            jobs = [j for j in jobs if not _valid_seg(j[0], j[1], j[2])]
         t0 = time.time()
-        with mp.get_context("fork").Pool(nw) as pool:
+        with mp.get_context("fork").Pool(nw, maxtasksperchild=1) as pool:
             for out in pool.imap_unordered(render_range, jobs):
                 print("done", out, f"{time.time() - t0:.0f}s", flush=True)
         lst = os.path.join(segdir, "list.txt")
