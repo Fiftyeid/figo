@@ -255,9 +255,7 @@ def grain_bank(n=6, size=(W // 2, H // 2), amount=10, seed=5):
 
 
 def add_grain(rgb_img, t, strength=0.06):
-    g = grain_bank()[int(t * FPS) % 6]
-    gray = Image.merge("RGB", (g, g, g))
-    return Image.blend(rgb_img, Image.blend(rgb_img, gray, 0.5), strength)
+    return rgb_img
 
 
 @functools.lru_cache(maxsize=16)

@@ -4,11 +4,11 @@ An original English-language aviation & engineering explainer built in the editi
 military-aviation documentaries (*Top Fives*, *IMD Aviation*, *Mustard*, *Real Engineering*).
 
 📁 **Google Drive folder:** https://drive.google.com/drive/folders/138leiJlNIlk9LD-6uELSreO4nKN1m7CJ
-🎬 **Video on Google Drive (1080p MP4):** https://drive.google.com/file/d/1sfRRhBuJ7hwCygoB6Xe5E-yAj2bPfsH-/view
+🎬 **Video on Google Drive (1080p MP4 — B-Roll Edition):** https://drive.google.com/file/d/1Oq2AHmn6b8h70Y22OZwq-KXmTXBMUYv4/view
 
 | File | Description |
 |---|---|
-| `output/worlds_fastest_military_helicopter.mp4` | Final 1080p25 H.264 video (13:07.23, AAC audio loudness-normalised to -14 LUFS) — uploaded to Drive |
+| `output/worlds_fastest_military_helicopter.mp4` | Final 1080p25 H.264 video (13:07.30, 100% moving aircraft B-roll + HUD diagrams, AAC audio at -14.2 LUFS) |
 | `output/thumbnail.jpg` | 1280×720 split-comparison high-CTR YouTube thumbnail |
 | `output/subtitles_en.srt` | Synced English SRT captions (226 cues) |
 | `output/youtube_description.md` | vidIQ-optimised title, alternative titles, description, chapters, 15 tags, category & pinned comment |

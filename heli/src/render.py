@@ -158,7 +158,12 @@ def main():
         os.makedirs(segdir, exist_ok=True)
         jobs = [(bounds[i], bounds[i + 1], os.path.join(segdir, f"seg_{i:02d}.mp4"), i) for i in range(len(bounds) - 1)]
         if "--resume" in sys.argv:
-            jobs = [j for j in jobs if not (os.path.exists(j[2]) and os.path.getsize(j[2]) > 1000)]
+            def _valid_seg(p):
+                if not (os.path.exists(p) and os.path.getsize(p) > 1000):
+                    return False
+                pr = subprocess.run([FF, "-i", p], capture_output=True, text=True)
+                return "Duration:" in pr.stderr and "N/A" not in pr.stderr
+            jobs = [j for j in jobs if not _valid_seg(j[2])]
         t0 = time.time()
         with mp.get_context("fork").Pool(nw) as pool:
             for out in pool.imap_unordered(render_range, jobs):

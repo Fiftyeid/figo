@@ -4,6 +4,7 @@ import math, functools
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 from common import *
+from broll import broll_view, hud_broll_bg
 
 T = functools.lru_cache(maxsize=4096)(text_image)
 
@@ -346,10 +347,10 @@ def speed_layer(seed=3):
 
 
 class PhotoShot(Shot):
-    """Ken Burns on a still: z=(zoom0, zoom1), c0/c1 = centre (fractions), handheld shake, speed lines."""
+    """Moving 25fps B-roll shot: z=(zoom0, zoom1), c0/c1 = centre (fractions), handheld shake, speed lines."""
 
     def __init__(self, start, end, image, z=(1.0, 1.1), c0=(0.5, 0.5), c1=None, shake=0.0, speed=0.0,
-                 speed_dir=-1, darken=0.0, warmth=0.0, teal=0.25, blur=0, grain=0.05, ease=False, **kw):
+                 speed_dir=-1, darken=0.0, warmth=0.0, teal=0.25, blur=0, grain=0.04, ease=False, **kw):
         super().__init__(start, end, **kw)
         self.image, self.z, self.c0, self.c1 = image, z, c0, c1 or c0
         self.shake, self.speed, self.speed_dir = shake, speed, speed_dir
@@ -358,8 +359,7 @@ class PhotoShot(Shot):
         self.ease = ease
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.08, 1.06, self.look["warmth"], self.look["teal"],
-                              self.look["darken"], self.look["blur"])
+        pass
 
     def base(self, t):
         p = self.p(t)
@@ -370,7 +370,9 @@ class PhotoShot(Shot):
         if self.shake:
             cx += self.shake * 0.0035 * (math.sin(t * 6.3) * 0.6 + math.sin(t * 11.7 + 1.3) * 0.4)
             cy += self.shake * 0.0035 * (math.sin(t * 7.9 + 0.7) * 0.6 + math.sin(t * 13.1 + 2.1) * 0.4)
-        im = view(self.src, cx, cy, zoom)
+        im = broll_view(self.image, t, cx, cy, zoom, contrast=1.08, sat=1.06,
+                        warmth=self.look["warmth"], teal=self.look["teal"],
+                        darken=self.look["darken"], blur=self.look["blur"])
         if self.grain:
             im = add_grain(im, t, self.grain)
         im = im.convert("RGBA")
@@ -392,7 +394,6 @@ class TitleShot(Shot):
         self.image, self.lines, self.sub = image, lines, sub
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.1, 0.9, 0.0, 0.4, 0.45, 5)
         self.l1 = glow(text_image(self.lines[0], "title", 150, WHITE), 18, 0.6)
         self.l2 = glow(text_image(self.lines[1], "title", 150, AMBER), 22, 0.9, color=AMBER)
         self.subi = chip(self.sub, WHITE, size=58, tracking=10, padx=34)
@@ -400,7 +401,8 @@ class TitleShot(Shot):
 
     def base(self, t):
         p = self.p(t)
-        im = view(self.src, 0.5, 0.5, 1.02 + 0.08 * p).convert("RGBA")
+        im = broll_view(self.image, t, 0.5, 0.5, 1.02 + 0.08 * p,
+                        contrast=1.1, sat=0.9, warmth=0.0, teal=0.4, darken=0.45, blur=4).convert("RGBA")
         im.alpha_composite(vignette())
         t0 = self.start + 0.1
         a1 = ease_out_cubic((t - t0) / 0.25)
@@ -431,7 +433,6 @@ class AnswerShot(Shot):
         self.image, self.n, self.label = image, n, label
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.1, 0.7, 0.0, 0.5, 0.55, 4)
         self.num = glow(text_image(str(self.n), "title", 420, AMBER), 30, 0.8, color=AMBER)
         self.ans = text_image("ANSWER", "cx", 96, WHITE, tracking=18)
         self.lab = text_image(self.label, "cs", 54, WHITE, tracking=6)
@@ -439,7 +440,8 @@ class AnswerShot(Shot):
 
     def base(self, t):
         p = self.p(t)
-        im = view(self.src, 0.5, 0.5, 1.06 - 0.05 * p).convert("RGBA")
+        im = broll_view(self.image, t, 0.5, 0.5, 1.06 - 0.05 * p,
+                        contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.52, blur=3).convert("RGBA")
         im.alpha_composite(vignette())
         # scanlines
         t0 = self.start + 0.15
@@ -464,34 +466,26 @@ class AnswerShot(Shot):
 
 # =========================================================== four answers board
 class FourShot(Shot):
-    """4 cards. cards = [dict(image, c=(cx,cy), z, title, sub, value, t)]; question=True hides until revealed."""
+    """4 cards with live moving B-roll inside each card. cards = [dict(image, c=(cx,cy), z, title, sub, value, t)]."""
 
     def __init__(self, start, end, cards, header=None, bg="hind", **kw):
         super().__init__(start, end, **kw)
         self.cards, self.header, self.bgk = cards, header, bg
 
     def prepare(self):
-        self.bg = load_photo(self.bgk, 1.18, 1.1, 0.6, 0.0, 0.5, 0.62, 8)
         self.cw, self.ch = 400, 520
-        self.imgs = []
-        for c in self.cards:
-            src = load_photo(c["image"])
-            v = view(src, c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1], c.get("z", 1.6),
-                     out=(self.cw, self.ch)).convert("RGBA")
-            g = Image.new("L", (1, self.ch))
-            for y in range(self.ch):
-                g.putpixel((0, y), int(230 * clamp((y - self.ch * 0.45) / (self.ch * 0.55)) ** 1.2))
-            shade = Image.new("RGBA", (self.cw, self.ch), (5, 8, 12, 255))
-            shade.putalpha(g.resize((self.cw, self.ch)))
-            v.alpha_composite(shade)
-            mask = Image.new("L", (self.cw, self.ch), 0)
-            ImageDraw.Draw(mask).rounded_rectangle([0, 0, self.cw - 1, self.ch - 1], 14, fill=255)
-            v.putalpha(mask)
-            self.imgs.append(v)
+        g = Image.new("L", (1, self.ch))
+        for y in range(self.ch):
+            g.putpixel((0, y), int(230 * clamp((y - self.ch * 0.45) / (self.ch * 0.55)) ** 1.2))
+        self.card_shade = Image.new("RGBA", (self.cw, self.ch), (5, 8, 12, 255))
+        self.card_shade.putalpha(g.resize((self.cw, self.ch)))
+        self.card_mask = Image.new("L", (self.cw, self.ch), 0)
+        ImageDraw.Draw(self.card_mask).rounded_rectangle([0, 0, self.cw - 1, self.ch - 1], 14, fill=255)
         self.head = text_image(self.header, "cx", 66, WHITE, tracking=4, shadow=4) if self.header else None
 
     def base(self, t):
-        im = view(self.bg, 0.5, 0.5, 1.03 + 0.04 * self.p(t)).convert("RGBA")
+        im = broll_view(self.bgk, t, 0.5, 0.5, 1.03 + 0.04 * self.p(t),
+                        contrast=1.1, sat=0.65, warmth=0.0, teal=0.5, darken=0.62, blur=6).convert("RGBA")
         if self.head:
             paste_center(im, self.head, W / 2, 120, ease_out_cubic((t - self.start - 0.1) / 0.4))
         gap = 40
@@ -510,7 +504,11 @@ class FourShot(Shot):
             if a <= 0:
                 continue
             dy = (1 - a) * 60
-            paste_at(im, self.imgs[k], x, y0 + dy, a)
+            v = broll_view(c["image"], t + k * 1.15, c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1],
+                           c.get("z", 1.3), out=(self.cw, self.ch)).convert("RGBA")
+            v.alpha_composite(self.card_shade)
+            v.putalpha(self.card_mask)
+            paste_at(im, v, x, y0 + dy, a)
             col = tuple(c.get("color", AMBER))
             badge = _chip(str(k + 1), col, 44, INK)
             paste_at(im, badge, x + 16, y0 + 16 + dy, a)
@@ -532,7 +530,7 @@ class FourShot(Shot):
 
 # =========================================================== big fact card
 class FactShot(Shot):
-    """Big text or rolling number over a darkened/blurred still (or the grid)."""
+    """Big text or rolling number over darkened/blurred moving B-roll."""
 
     def __init__(self, start, end, image=None, text=None, roll=None, size=300, color=WHITE, caption=None,
                  t_caption=None, top=None, y=500, **kw):
@@ -541,14 +539,15 @@ class FactShot(Shot):
         self.color, self.caption, self.t_caption, self.top, self.y = tuple(color), caption, t_caption, top, y
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.1, 0.7, 0.0, 0.5, 0.6, 6) if self.image else None
+        pass
 
     def base(self, t):
-        if self.src is not None:
-            im = view(self.src, 0.5, 0.5, 1.02 + 0.06 * self.p(t)).convert("RGBA")
+        if self.image is not None:
+            im = broll_view(self.image, t, 0.5, 0.5, 1.02 + 0.06 * self.p(t),
+                            contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.58, blur=5).convert("RGBA")
             im.alpha_composite(vignette())
         else:
-            im = grid_bg_cached().copy()
+            im = hud_broll_bg("lynx_record", t)
         t0 = self.start + 0.1
         if self.top:
             paste_center(im, T(self.top, "cs", 50, AMBER, tracking=8), W / 2, self.y - self.size * 0.62,
@@ -573,17 +572,18 @@ class FactShot(Shot):
 
 # =========================================================== stats grid
 class StatsShot(Shot):
-    """Up to 4 big numbers with labels, each counting up at its own time."""
+    """Up to 4 big numbers with labels, each counting up at its own time over moving B-roll."""
 
     def __init__(self, start, end, image, items, header=None, **kw):
         super().__init__(start, end, **kw)
         self.image, self.items, self.header = image, items, header
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.1, 0.7, 0.0, 0.5, 0.62, 7)
+        pass
 
     def base(self, t):
-        im = view(self.src, 0.5, 0.5, 1.03 + 0.05 * self.p(t)).convert("RGBA")
+        im = broll_view(self.image, t, 0.5, 0.5, 1.03 + 0.05 * self.p(t),
+                        contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.60, blur=5).convert("RGBA")
         im.alpha_composite(vignette())
         if self.header:
             paste_center(im, T(self.header, "cx", 62, WHITE, tracking=4, shadow=4), W / 2, 170,
@@ -613,17 +613,18 @@ class StatsShot(Shot):
 
 # =========================================================== measurement cards
 class CardsShot(Shot):
-    """Row of explainer cards: items = [dict(head, title, body, t, color)]."""
+    """Row of explainer cards over moving B-roll: items = [dict(head, title, body, t, color)]."""
 
     def __init__(self, start, end, image, items, header=None, footer=None, t_footer=None, **kw):
         super().__init__(start, end, **kw)
         self.image, self.items, self.header, self.footer, self.t_footer = image, items, header, footer, t_footer
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.1, 0.7, 0.0, 0.5, 0.65, 8)
+        pass
 
     def base(self, t):
-        im = view(self.src, 0.5, 0.5, 1.03 + 0.05 * self.p(t)).convert("RGBA")
+        im = broll_view(self.image, t, 0.5, 0.5, 1.03 + 0.05 * self.p(t),
+                        contrast=1.1, sat=0.75, warmth=0.0, teal=0.5, darken=0.62, blur=6).convert("RGBA")
         if self.header:
             paste_center(im, T(self.header, "cx", 64, WHITE, tracking=4, shadow=4), W / 2, 170,
                          ease_out_cubic((t - self.start - 0.1) / 0.4))
@@ -662,16 +663,15 @@ def _para(s, size, w):
     return paragraph_image(s, "bodym", size, (205, 212, 222), max_w=w)
 
 
-# =========================================================== checklist over a still
+# =========================================================== checklist over moving B-roll
 class ListShot(Shot):
-    """Still on the left, checklist on the right. items = [dict(text, sub, t)]."""
+    """Moving B-roll on the left, checklist on the right. items = [dict(text, sub, t)]."""
 
     def __init__(self, start, end, image, items, header="", c=(0.45, 0.5), z=(1.25, 1.35), **kw):
         super().__init__(start, end, **kw)
         self.image, self.items, self.header, self.c, self.z = image, items, header, c, z
 
     def prepare(self):
-        self.src = load_photo(self.image, 1.18, 1.08, 1.0, 0.0, 0.3, 0.0, 0)
         g = np.zeros((1, W), np.float32)
         xs = np.arange(W)
         g[0] = np.clip((xs - 700) / 500, 0, 1) * 235
@@ -681,7 +681,8 @@ class ListShot(Shot):
 
     def base(self, t):
         p = self.p(t)
-        im = view(self.src, self.c[0], self.c[1], lerp(self.z[0], self.z[1], p))
+        im = broll_view(self.image, t, self.c[0], self.c[1], lerp(self.z[0], self.z[1], p),
+                        contrast=1.08, sat=1.02, warmth=0.0, teal=0.3)
         im = add_grain(im, t, 0.04).convert("RGBA")
         im.alpha_composite(self.shade)
         im.alpha_composite(vignette())
@@ -714,21 +715,19 @@ class SplitShot(Shot):
         self.left, self.right = left, right
 
     def prepare(self):
-        self.ims = []
-        for side in (self.left, self.right):
-            src = load_photo(side["image"])
-            self.ims.append((src, side))
+        self.sides = (self.left, self.right)
 
     def base(self, t):
         p = self.p(t)
         im = Image.new("RGBA", (W, H), BG0 + (255,))
-        for k, (src, side) in enumerate(self.ims):
+        for k, side in enumerate(self.sides):
             ta = side.get("t", self.start)
             a = ease_out_cubic((t - ta) / 0.45)
             if a <= 0:
                 continue
             c = side.get("c", (0.5, 0.5))
-            v = view(src, c[0], c[1], side.get("z", 1.3) + 0.06 * p, out=(W // 2 - 6, H)).convert("RGBA")
+            v = broll_view(side["image"], t + k * 0.9, c[0], c[1], side.get("z", 1.2) + 0.06 * p,
+                           out=(W // 2 - 6, H)).convert("RGBA")
             v.alpha_composite(vignette().resize(v.size))
             x = 0 if k == 0 else W // 2 + 6
             dx = (1 - a) * (-120 if k == 0 else 120)
@@ -750,26 +749,23 @@ class EndShot(Shot):
         self.cards, self.question, self.t_sub = cards, question, t_sub
 
     def prepare(self):
-        self.bg = grid_bg_cached()
-        self.thumbs = []
-        for c in self.cards:
-            src = load_photo(c["image"])
-            v = view(src, c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1], c.get("z", 1.4), out=(400, 240))
-            v = v.convert("RGBA")
-            m = Image.new("L", v.size, 0)
-            ImageDraw.Draw(m).rounded_rectangle([0, 0, v.width - 1, v.height - 1], 12, fill=255)
-            v.putalpha(m)
-            self.thumbs.append(v)
+        self.thumb_mask = Image.new("L", (400, 240), 0)
+        ImageDraw.Draw(self.thumb_mask).rounded_rectangle([0, 0, 399, 239], 12, fill=255)
         self.q = glow(text_image(self.question, "title", 96, WHITE), 14, 0.5)
 
     def base(self, t):
-        im = self.bg.copy()
+        im = hud_broll_bg("v280_plane", t)
         t0 = self.start + 0.1
         paste_center(im, self.q, W / 2, 230, ease_out_cubic((t - t0) / 0.4))
         x0 = (W - (4 * 400 + 3 * 36)) / 2
-        for k, (th, c) in enumerate(zip(self.thumbs, self.cards)):
+        for k, c in enumerate(self.cards):
             a = ease_out_cubic((t - t0 - 0.3 - 0.15 * k) / 0.4)
+            if a <= 0:
+                continue
             x = x0 + k * 436
+            th = broll_view(c["image"], t + k * 1.1, c.get("c", (0.5, 0.5))[0], c.get("c", (0.5, 0.5))[1],
+                            c.get("z", 1.25), out=(400, 240)).convert("RGBA")
+            th.putalpha(self.thumb_mask)
             paste_at(im, th, x, 380 + (1 - a) * 40, a)
             paste_center(im, T(c["title"], "cx", 44, WHITE), x + 200, 670, a)
             paste_center(im, T(c["sub"], "cs", 34, tuple(c.get("color", AMBER)), tracking=2), x + 200, 718, a)

@@ -4,6 +4,7 @@ import math, functools
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 from common import *
+from broll import hud_broll_bg
 from shots import Shot, SS, T, dashed, curved_arrow, grid_bg_cached, _chip, _stamp, _glowed, _panel
 
 SOUND = 1225.0  # km/h, sea level
@@ -68,7 +69,7 @@ class RotorShot(Shot):
         self.cx, self.cy, self.R = 960, 585, 340
 
     def prepare(self):
-        bg = grid_bg_cached().copy()
+        bg = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         ss = SS(W, H, 2)
         cx, cy, R = self.cx, self.cy, self.R
         # fuselage (top view)
@@ -122,7 +123,8 @@ class RotorShot(Shot):
         ss.circle(cx, cy, 20, fill=(200, 210, 220, 255), outline=(60, 70, 80, 255), width=3)
 
     def base(self, t):
-        im = self.bg.copy()
+        im = hud_broll_bg("x2" if self.mode == "coax" else "lynx_record", t)
+        im.alpha_composite(self.bg)
         V = self.speed(t)
         vt = self.tip(t)
         cx, cy, R = self.cx, self.cy, self.R
@@ -257,7 +259,7 @@ class AirfoilShot(Shot):
         return out
 
     def base(self, t):
-        im = grid_bg_cached().copy()
+        im = hud_broll_bg("lynx_record" if self.mode == "shock" else "chinook", t)
         al = self.alpha(t)
         (uu_up, vv_up), (uu_lo, vv_lo) = self.surface(al)
         xp, yp, c = self.xp, self.yp, self.c
@@ -379,7 +381,7 @@ class TrapShot(Shot):
         return 930 - (u - 400) * 700 / 900
 
     def prepare(self):
-        bg = grid_bg_cached().copy()
+        bg = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         ss = SS(W, H, 2)
         X, Y = self.X, self.Y
         ss.line([(X(0), Y(400)), (X(500), Y(400))], WHITE + (220,), 3)
@@ -408,7 +410,8 @@ class TrapShot(Shot):
         return 2 * v
 
     def base(self, t):
-        im = self.bg.copy()
+        im = hud_broll_bg("lynx_record", t)
+        im.alpha_composite(self.bg)
         X, Y, ts = self.X, self.Y, self.ts
         ss = SS(W, H, 2)
         title_bar(im, "THE TRAP", t, self.start + 0.1, "WHY SPINNING FASTER OR SLOWER DOESN'T HELP")
@@ -502,7 +505,7 @@ class SpeedoShot(Shot):
         return self.x0 + (self.x1 - self.x0) * v / self.vmax
 
     def prepare(self):
-        bg = grid_bg_cached().copy()
+        bg = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         ss = SS(W, H, 2)
         ss.line([(self.x0, self.y), (self.x1, self.y)], WHITE + (230,), 4)
         for v in range(0, self.vmax + 1, 25):
@@ -517,7 +520,8 @@ class SpeedoShot(Shot):
         self.bg = bg
 
     def base(self, t):
-        im = self.bg.copy()
+        im = hud_broll_bg("v280_plane" if t > 500 else "lynx_record", t)
+        im.alpha_composite(self.bg)
         title_bar(im, self.title, t, self.start + 0.1, self.sub)
         if self.wall and t >= self.wall["t"]:
             a = ease_out_cubic((t - self.wall["t"]) / 0.4)
@@ -584,7 +588,7 @@ class RecordsShot(Shot):
         return 900 - (v - self.vlim[0]) / (self.vlim[1] - self.vlim[0]) * 640
 
     def prepare(self):
-        bg = grid_bg_cached().copy()
+        bg = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         ss = SS(W, H, 2)
         ss.line([(self.X(self.years[0]), self.Y(self.vlim[0])), (self.X(self.years[1]), self.Y(self.vlim[0]))], WHITE + (220,), 3)
         for yr in range(self.years[0], self.years[1] + 1, 10):
@@ -604,7 +608,8 @@ class RecordsShot(Shot):
         self.bg = bg
 
     def base(self, t):
-        im = self.bg.copy()
+        im = hud_broll_bg("x2" if t > 400 else "hind", t)
+        im.alpha_composite(self.bg)
         title_bar(im, self.title, t, self.start + 0.1, self.sub)
         ss = SS(W, H, 2)
         if self.wall and t >= self.wall["t"]:
@@ -700,7 +705,7 @@ class JobsShot(Shot):
         self.ts = dict(lift=t_lift, thrust=t_thrust, steer=t_steer, wing=t_wing, prop=t_prop, relax=t_relax)
 
     def base(self, t):
-        im = grid_bg_cached().copy()
+        im = hud_broll_bg("cheyenne", t)
         ts = self.ts
         cx, cy = 1010, 640
         wings = ease_out_cubic((t - ts["wing"]) / 0.6) if ts["wing"] else 0.0
@@ -764,7 +769,7 @@ class TandemShot(Shot):
                      col + (int(255 * a),), 6, 24)
 
     def base(self, t):
-        im = grid_bg_cached().copy()
+        im = hud_broll_bg("chinook", t)
         ts = self.ts
         ss = SS(W, H, 2)
         d = ImageDraw.Draw(im)
@@ -822,7 +827,7 @@ class BerpShot(Shot):
         self.ts = dict(conv=t_conv, berp=t_berp, paddle=t_paddle, swept=t_swept, mod=t_mod)
 
     def base(self, t):
-        im = grid_bg_cached().copy()
+        im = hud_broll_bg("lynx_record", t)
         ts = self.ts
         title_bar(im, "BERP ROTOR BLADE", t, self.start + 0.1, "BRITISH EXPERIMENTAL ROTOR PROGRAMME")
         ss = SS(W, H, 2)
@@ -868,20 +873,20 @@ class CourseShot(Shot):
 
     def prepare(self):
         rng = np.random.default_rng(11)
-        im = Image.new("RGBA", (W, H), (14, 22, 18, 255))
+        im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         d = ImageDraw.Draw(im)
         for _ in range(420):
             x, y = rng.uniform(-100, W), rng.uniform(-100, H)
             w, h = rng.uniform(60, 220), rng.uniform(40, 160)
             g = int(rng.uniform(26, 52))
-            col = (int(g * 0.7), g, int(g * 0.6), 255)
+            col = (int(g * 0.7), g, int(g * 0.6), 120)
             ang = rng.uniform(-0.25, 0.25)
             pts = [(x, y), (x + w, y + w * ang), (x + w - h * ang, y + h + w * ang), (x - h * ang, y + h)]
-            d.polygon(pts, fill=col, outline=(10, 16, 12, 255))
+            d.polygon(pts, fill=col, outline=(10, 16, 12, 140))
         for k in range(7):
             y = rng.uniform(80, H - 80)
             pts = [(x, y + 40 * math.sin(x / 300 + k)) for x in range(-20, W + 40, 40)]
-            d.line(pts, fill=(70, 120, 160, 160), width=3)
+            d.line(pts, fill=(70, 120, 160, 140), width=3)
         im = im.filter(ImageFilter.GaussianBlur(1.0))
         im.alpha_composite(vignette(strength=0.7))
         lab = text_image("SOMERSET LEVELS, ENGLAND", "mono", 30, WHITE, tracking=4)
@@ -896,7 +901,8 @@ class CourseShot(Shot):
         return (lerp(self.A[0], self.B[0], f), lerp(self.A[1], self.B[1], f))
 
     def base(self, t):
-        im = self.bg.copy()
+        im = hud_broll_bg("lynx_record", t)
+        im.alpha_composite(self.bg)
         ts = self.ts
         title_bar(im, "THE RECORD COURSE · 11 AUGUST 1986", t, self.start + 0.1, "15 KM · FLOWN IN BOTH DIRECTIONS")
         ss = SS(W, H, 2)
@@ -962,7 +968,7 @@ class TiltShot(Shot):
         self.t_tilt = t_tilt
 
     def base(self, t):
-        im = grid_bg_cached().copy()
+        im = hud_broll_bg("v280_plane", t)
         t0, t1 = self.t_tilt
         p = ease_in_out((t - t0) / max(0.01, t1 - t0)) if t0 else 0.0
         ang = 90 * (1 - p)   # nacelle angle: 90 = up (helicopter), 0 = forward (airplane)
