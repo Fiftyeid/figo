@@ -1,0 +1,15 @@
+{
+  "title": "bench",
+  "output": "out/_bench.mp4",
+  "narration": "narration/narration_so_far.wav",
+  "ambient": "assets/ambient_432.wav",
+  "width": 1920, "height": 1080, "fps": 24,
+  "fade_in": 2.0, "dip": 1.5, "transition": 0.9, "outro": 8.0,
+  "movements": [
+    {"title": "bench", "duration": 120, "segments": [
+      {"image": "../art/_graded/bg-01-constantinople.jpg", "duration": 40.0, "zoom": [1.0, 1.06], "pan": "left"},
+      {"image": "../art/_graded/bg-04-walls-dusk.jpg", "duration": 40.0, "zoom": [1.05, 1.0], "pan": "right"},
+      {"image": "../art/_graded/bg-10-lamps-city.jpg", "duration": 40.0, "zoom": [1.0, 1.05], "pan": "left"}
+    ]}
+  ]
+}

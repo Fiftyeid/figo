@@ -1,0 +1,42 @@
+{
+  "background": "art/bg-02-scriptorium.jpg",
+  "output": "thumbnails/thumb-ep05-plague-log.png",
+  "vignette": 0.5,
+  "blocks": [
+    {
+      "text": "A PLAGUE\nDOCTOR'S LOG",
+      "size": 104,
+      "y": 0.055,
+      "weight": 900,
+      "align": "center",
+      "stroke": 7,
+      "line_gap": 1.02,
+      "max_width": 0.94
+    },
+    {
+      "text": "London · 1665",
+      "size": 38,
+      "y": 0.395,
+      "weight": 700,
+      "align": "center",
+      "stroke": 5,
+      "color": "#f6e6c8",
+      "tracking": 0.14
+    },
+    {
+      "text": "FALL ASLEEP\nTO HISTORY",
+      "size": 88,
+      "y": 0.5,
+      "weight": 900,
+      "align": "center",
+      "stroke": 6,
+      "line_gap": 1.03,
+      "max_width": 0.88
+    }
+  ],
+  "brand": {
+    "text": "VELLUM LOGS",
+    "y": 0.94,
+    "size": 21
+  }
+}

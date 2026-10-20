@@ -1,0 +1,12 @@
+{
+  "background": "art/bg-01-constantinople.jpg",
+  "output": "thumbnails/thumb-ep01-constantinople.png",
+  "vignette": 0.40,
+  "pill": {"text": "432 Hz", "y": 0.305, "align": "center", "icon": "wave", "size": 36},
+  "blocks": [
+    {"text": "100 SLEEPY FACTS", "size": 140, "y": 0.042, "weight": 900, "align": "center", "stroke": 7, "tracking": 0.4, "max_width": 0.945},
+    {"text": "ABOUT THE", "size": 50, "y": 0.520, "weight": 700, "align": "center", "stroke": 6, "color": "#f8ecd6", "tracking": 0.10, "shadow": 0.6},
+    {"text": "FALL OF\nCONSTANTINOPLE", "size": 100, "y": 0.578, "weight": 900, "align": "center", "stroke": 7, "line_gap": 1.03, "max_width": 0.945}
+  ],
+  "brand": {"text": "VELLUM LOGS", "y": 0.940, "size": 22}
+}

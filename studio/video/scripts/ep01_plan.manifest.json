@@ -1,0 +1,1126 @@
+{
+ "title": "The Last Night of Constantinople",
+ "output": "out/EP01_The_Last_Night_of_Constantinople.mp4",
+ "narration": "narration/narration_full.wav",
+ "ambient": "assets/ambient_432.wav",
+ "loudness_cache": "narration/.loudness.json",
+ "width": 1920,
+ "height": 1080,
+ "fps": 24,
+ "fade_in": 3.0,
+ "dip": 2.5,
+ "transition": 0.9,
+ "outro": 40.0,
+ "movements": [
+  {
+   "title": "00 · Welcome & Settle",
+   "duration": 82.32,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 82.324,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c1"
+   ]
+  },
+  {
+   "title": "I · The City at Dusk",
+   "duration": 460.43,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "n1"
+   ]
+  },
+  {
+   "title": "II · The Wall",
+   "duration": 354.35,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 118.718,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 118.718,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-20-breach.jpg",
+     "duration": 118.718,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    }
+   ],
+   "narration_clips": [
+    "n2",
+    "n3",
+    "n4",
+    "n5",
+    "n6"
+   ]
+  },
+  {
+   "title": "Interlude · The Water Below",
+   "duration": 873.7,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 110.0,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "i1",
+    "i2",
+    "i3",
+    "i4",
+    "i5",
+    "i6",
+    "i7",
+    "i8"
+   ]
+  },
+  {
+   "title": "III · The Camp Outside",
+   "duration": 247.8,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 124.349,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 124.349,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "n7",
+    "n8",
+    "n9",
+    "n10"
+   ]
+  },
+  {
+   "title": "Interlude · The Names in the Stone",
+   "duration": 723.67,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 104.152,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    }
+   ],
+   "narration_clips": [
+    "i9",
+    "i10",
+    "i11",
+    "i12",
+    "i13",
+    "i14",
+    "i15"
+   ]
+  },
+  {
+   "title": "IV · The Ships in the Horn",
+   "duration": 681.13,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-19-chain.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-18-ships-overland.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-19-chain.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-18-ships-overland.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c17"
+   ]
+  },
+  {
+   "title": "V · The Guns",
+   "duration": 444.29,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 111.748,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-20-breach.jpg",
+     "duration": 111.748,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 111.748,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 111.748,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c18",
+    "c19",
+    "c20",
+    "c21"
+   ]
+  },
+  {
+   "title": "VI · The Last Liturgy",
+   "duration": 437.68,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-06-hagia-sophia.jpg",
+     "duration": 110.094,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-07-prayer-crowd.jpg",
+     "duration": 110.094,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-06-hagia-sophia.jpg",
+     "duration": 110.094,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-07-prayer-crowd.jpg",
+     "duration": 110.094,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c22",
+    "c23",
+    "c24",
+    "c25"
+   ]
+  },
+  {
+   "title": "Interlude · The Scriptorium",
+   "duration": 727.39,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 104.684,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    }
+   ],
+   "narration_clips": [
+    "i16",
+    "i17",
+    "i18",
+    "i19",
+    "i20",
+    "i21",
+    "i22"
+   ]
+  },
+  {
+   "title": "VII · The People in the Streets",
+   "duration": 441.4,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 111.024,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 111.024,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 111.024,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 111.024,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c26",
+    "c27",
+    "c28",
+    "c29"
+   ]
+  },
+  {
+   "title": "VIII · The Emperor's Last Walk",
+   "duration": 470.72,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 118.355,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-21-rooftop-dawn.jpg",
+     "duration": 118.355,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 118.355,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 118.355,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c34"
+   ]
+  },
+  {
+   "title": "Interlude · The Dogs of the City",
+   "duration": 628.2,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 105.45,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 105.45,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 105.45,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 105.45,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 105.45,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 105.45,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "i23",
+    "i24",
+    "i25",
+    "i26",
+    "i27",
+    "i28"
+   ]
+  },
+  {
+   "title": "IX · The Hours Before Dawn",
+   "duration": 407.09,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 102.446,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-14-street-night.jpg",
+     "duration": 102.446,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 102.446,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 102.446,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c35",
+    "c36",
+    "c37",
+    "c38"
+   ]
+  },
+  {
+   "title": "X · The First Light",
+   "duration": 401.71,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-21-rooftop-dawn.jpg",
+     "duration": 101.103,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-11-dawn-blacksea.jpg",
+     "duration": 101.103,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-20-breach.jpg",
+     "duration": 101.103,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-21-rooftop-dawn.jpg",
+     "duration": 101.103,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c39",
+    "c40",
+    "c41",
+    "c42"
+   ]
+  },
+  {
+   "title": "Interlude · The Road Out",
+   "duration": 643.08,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-15-harbour-night.jpg",
+     "duration": 107.93,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 107.93,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-15-harbour-night.jpg",
+     "duration": 107.93,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 107.93,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-15-harbour-night.jpg",
+     "duration": 107.93,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 107.93,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "i29",
+    "i30",
+    "i31",
+    "i32",
+    "i33",
+    "i34"
+   ]
+  },
+  {
+   "title": "XI · What Was Saved",
+   "duration": 390.96,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 98.416,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-15-harbour-night.jpg",
+     "duration": 98.416,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 98.416,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-15-harbour-night.jpg",
+     "duration": 98.416,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c43",
+    "c44",
+    "c45",
+    "c46"
+   ]
+  },
+  {
+   "title": "Interlude · The Marble Emperor",
+   "duration": 636.88,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-16-gate.jpg",
+     "duration": 106.897,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 106.897,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-16-gate.jpg",
+     "duration": 106.897,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 106.897,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-16-gate.jpg",
+     "duration": 106.897,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 106.897,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "i35",
+    "i36",
+    "i37",
+    "i38",
+    "i39",
+    "i40"
+   ]
+  },
+  {
+   "title": "XII · What the Log Remembers",
+   "duration": 308.72,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-17-ship-cabin.jpg",
+     "duration": 103.508,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-02-scriptorium.jpg",
+     "duration": 103.508,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-17-ship-cabin.jpg",
+     "duration": 103.508,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    }
+   ],
+   "narration_clips": [
+    "c47",
+    "c48",
+    "c49"
+   ]
+  },
+  {
+   "title": "Interlude · The Witness",
+   "duration": 554.23,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-17-ship-cabin.jpg",
+     "duration": 111.565,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 111.565,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-17-ship-cabin.jpg",
+     "duration": 111.565,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 111.565,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-17-ship-cabin.jpg",
+     "duration": 111.565,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "i41",
+    "i42",
+    "i43",
+    "i44",
+    "i45"
+   ]
+  },
+  {
+   "title": "XIII · Sleep",
+   "duration": 75.62,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 75.624,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c50"
+   ]
+  }
+ ]
+}

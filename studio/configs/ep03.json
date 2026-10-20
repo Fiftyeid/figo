@@ -1,0 +1,12 @@
+{
+  "background": "art/bg-03-egypt.jpg",
+  "output": "thumbnails/thumb-ep03-egypt.png",
+  "vignette": 0.38,
+  "pill": {"text": "NO ADVERTS", "y": 0.290, "align": "center", "icon": null, "size": 34},
+  "blocks": [
+    {"text": "100 SLEEPY FACTS", "size": 132, "y": 0.045, "weight": 900, "align": "center", "stroke": 7, "tracking": 0.4, "max_width": 0.945},
+    {"text": "ABOUT THE", "size": 48, "y": 0.555, "weight": 700, "align": "center", "stroke": 5, "color": "#f8ecd6", "tracking": 0.10},
+    {"text": "DAILY LIFE IN\nANCIENT EGYPT", "size": 100, "y": 0.612, "weight": 900, "align": "center", "stroke": 7, "line_gap": 1.03, "max_width": 0.945}
+  ],
+  "brand": {"text": "VELLUM LOGS", "y": 0.940, "size": 22}
+}

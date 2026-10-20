@@ -1,0 +1,77 @@
+{
+ "title": "The Last Night of Constantinople \u2014 Vellum Logs (demo)",
+ "output": "out/EP01_demo_1080p.mp4",
+ "narration": "narration/narration_full.wav",
+ "ambient": "assets/ambient_432.wav",
+ "width": 1920,
+ "height": 1080,
+ "fps": 24,
+ "transition": 0.9,
+ "fade_in": 2.0,
+ "outro": 45,
+ "segments": [
+  {
+   "image": "../art/bg-01-constantinople.jpg",
+   "duration": 74,
+   "zoom": [
+    1.0,
+    1.1
+   ],
+   "pan": "none"
+  },
+  {
+   "image": "../art/bg-06-hagia-sophia.jpg",
+   "duration": 66,
+   "zoom": [
+    1.06,
+    1.0
+   ],
+   "pan": "none"
+  },
+  {
+   "image": "../art/bg-08-moon-sea.jpg",
+   "duration": 58,
+   "zoom": [
+    1.0,
+    1.08
+   ],
+   "pan": "left"
+  },
+  {
+   "image": "../art/bg-10-lamps-city.jpg",
+   "duration": 76,
+   "zoom": [
+    1.02,
+    1.12
+   ],
+   "pan": "none"
+  },
+  {
+   "image": "../art/bg-04-walls-dusk.jpg",
+   "duration": 62,
+   "zoom": [
+    1.0,
+    1.07
+   ],
+   "pan": "right"
+  },
+  {
+   "image": "../art/bg-09-bridge.jpg",
+   "duration": 70,
+   "zoom": [
+    1.08,
+    1.0
+   ],
+   "pan": "none"
+  },
+  {
+   "image": "../art/bg-10-lamps-city.jpg",
+   "duration": 72.2,
+   "zoom": [
+    1.12,
+    1.02
+   ],
+   "pan": "right"
+  }
+ ]
+}

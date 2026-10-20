@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>خريطة المنافسة — نيش التاريخ السينمائي | Vellum Logs</title>
+<style>
+  :root{
+    --bg:#0a0b0e;
+    --panel:#11131a;
+    --panel2:#171a23;
+    --line:#242a3a;
+    --ink:#eae7de;
+    --muted:#8d94a6;
+    --gold:#d6b26a;
+    --gold2:#f2dda8;
+    --teal:#5ad1c0;
+    --red:#e3705c;
+    --shadow:0 20px 50px -20px rgba(0,0,0,.9);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Kufi Arabic","Cairo","Tajawal","Segoe UI",Tahoma,system-ui,sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(214,178,106,.10), transparent 60%),
+      radial-gradient(700px 450px at 5% 10%, rgba(90,209,192,.07), transparent 65%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 42px);
+  }
+  .wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 22px 80px}
+
+  /* ---------- header ---------- */
+  header{padding:64px 0 30px;position:relative}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12.5px;letter-spacing:.14em;color:var(--gold);
+    border:1px solid rgba(214,178,106,.32);
+    background:rgba(214,178,106,.06);
+    padding:7px 14px;border-radius:999px;margin-bottom:26px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  h1{
+    font-size:clamp(30px,5vw,54px);line-height:1.22;margin:0 0 14px;font-weight:800;letter-spacing:-.5px;
+  }
+  h1 em{font-style:normal;color:var(--gold2);position:relative}
+  h1 em::after{content:"";position:absolute;right:0;left:0;bottom:-6px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .sub{color:var(--muted);font-size:16.5px;max-width:760px;margin:0 0 26px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+  .meta b{color:var(--ink);font-weight:600}
+  .meta a{color:var(--gold);text-decoration:none;border-bottom:1px dotted rgba(214,178,106,.4)}
+  .meta a:hover{color:var(--gold2)}
+
+  /* ---------- sections ---------- */
+  section{margin:54px 0 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+  .sec-head h2{font-size:clamp(20px,2.6vw,27px);margin:0;font-weight:800;letter-spacing:-.2px}
+  .sec-head h2 span{color:var(--gold);font-size:.62em;display:inline-block;transform:translateY(-4px);margin-left:10px;letter-spacing:.12em}
+  .sec-head p{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:720px}
+
+  /* ---------- kpi ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .kpi{
+    background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:16px;padding:18px 16px;position:relative;overflow:hidden;
+  }
+  .kpi::after{content:"";position:absolute;inset:auto 0 0 0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.55}
+  .kpi .lab{font-size:12px;color:var(--muted);letter-spacing:.02em}
+  .kpi .val{font-size:clamp(21px,2.6vw,29px);font-weight:800;color:var(--gold2);margin:6px 0 2px;direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+  .kpi .hint{font-size:11.5px;color:#6e7689;line-height:1.5}
+  .kpi.accent .val{color:var(--teal)}
+
+  /* ---------- cards / chart ---------- */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+  .chart-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-inline-end:6px;transform:translateY(1px)}
+
+  #plotBox{position:relative;margin-top:8px}
+  #plot{width:100%;height:auto;display:block}
+  .axis{fill:#6e7689;font-size:11px;font-family:inherit}
+  .gridline{stroke:#202636;stroke-width:1}
+  .dot{cursor:pointer;transition:r .18s, opacity .18s}
+  .dot:hover{opacity:1!important}
+  .dlabel{fill:#c9c4b6;font-size:11px;font-weight:600;pointer-events:none}
+  #tip{
+    position:absolute;pointer-events:none;opacity:0;transition:opacity .15s;
+    background:#0d0f15;border:1px solid #2c3346;border-radius:10px;padding:10px 12px;
+    font-size:12px;line-height:1.6;min-width:170px;box-shadow:0 12px 30px rgba(0,0,0,.6);z-index:5
+  }
+  #tip b{display:block;color:var(--gold2);font-size:13px;margin-bottom:3px}
+  #tip span{color:var(--muted)}
+  #tip span b{display:inline;color:var(--ink);font-size:12px}
+
+  /* ---------- bars ---------- */
+  .bars{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+  .bar-row{display:grid;grid-template-columns:150px 1fr 92px;align-items:center;gap:12px;font-size:13px}
+  .bar-name{color:#cdc8ba;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar-track{height:9px;background:#1a1f2b;border-radius:99px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#8a6d33,var(--gold));width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+  .bar-val{color:var(--muted);direction:ltr;text-align:left;font-variant-numeric:tabular-nums;font-size:12.5px}
+
+  /* ---------- filters + table ---------- */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .chip{
+    border:1px solid var(--line);background:#12151d;color:var(--muted);
+    padding:7px 14px;border-radius:999px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.18s
+  }
+  .chip:hover{border-color:#39415a;color:var(--ink)}
+  .chip.on{background:rgba(214,178,106,.13);border-color:rgba(214,178,106,.55);color:var(--gold2)}
+  .search{
+    flex:1;min-width:180px;background:#0e1118;border:1px solid var(--line);border-radius:12px;
+    padding:9px 14px;color:var(--ink);font-family:inherit;font-size:13px;outline:none
+  }
+  .search:focus{border-color:rgba(214,178,106,.5)}
+  .search::placeholder{color:#5d6577}
+  .btn-ghost{border:1px solid var(--line);background:#12151d;color:var(--muted);border-radius:12px;padding:9px 14px;font-size:12.5px;cursor:pointer;font-family:inherit}
+  .btn-ghost:hover{color:var(--ink);border-color:#39415a}
+
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:980px}
+  thead th{
+    position:sticky;top:0;background:#141823;color:#a9b0c0;font-weight:600;font-size:11.5px;
+    letter-spacing:.04em;padding:13px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;cursor:pointer;user-select:none
+  }
+  thead th:hover{color:var(--gold2)}
+  thead th .arrow{opacity:.35;font-size:10px;margin-inline-start:4px}
+  tbody td{padding:12px;border-bottom:1px solid #1a1f2b;vertical-align:middle}
+  tbody tr.main:hover{background:#151a25}
+  tbody tr.main{cursor:pointer}
+  .ch-name{font-weight:700;color:var(--ink);white-space:nowrap}
+  .ch-handle{display:block;color:#666f82;font-size:11px;direction:ltr;text-align:right;font-weight:400;margin-top:1px}
+  .num{direction:ltr;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pos{color:var(--teal)}
+  .zero{color:#5d6577}
+  .rank{
+    display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:9px;
+    background:#1b202c;color:#9aa3b6;font-size:12px;font-weight:700;direction:ltr
+  }
+  .rank.top{background:linear-gradient(160deg,#3d3116,#2a2313);color:var(--gold2);border:1px solid rgba(214,178,106,.4)}
+  .tag{display:inline-block;font-size:10.5px;color:#9aa3b6;border:1px solid #2a3142;border-radius:99px;padding:2px 9px;white-space:nowrap}
+  .score{display:flex;align-items:center;gap:8px;min-width:96px}
+  .score .track{flex:1;height:5px;border-radius:99px;background:#1b202c;overflow:hidden}
+  .score .fill{height:100%;background:linear-gradient(90deg,#7a6130,var(--gold));border-radius:99px}
+  .score b{direction:ltr;font-size:12.5px;color:var(--gold2);min-width:26px;text-align:left}
+
+  tr.detail td{background:#0e1117;padding:0;border-bottom:1px solid #1a1f2b}
+  .detail-inner{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;padding:20px 24px}
+  .detail-inner h4{margin:0 0 8px;font-size:12px;color:var(--gold);letter-spacing:.06em}
+  .detail-inner ul{margin:0;padding-inline-start:18px;color:#c3bdae;font-size:12.8px;line-height:1.9}
+  .detail-inner li::marker{color:#6d5a2e}
+  .detail-inner p{margin:0;color:#a8a294;font-size:12.8px}
+  .detail-inner a{color:var(--gold);text-decoration:none;font-size:12px;border-bottom:1px dotted rgba(214,178,106,.4)}
+  .detail-inner a:hover{color:var(--gold2)}
+
+  /* ---------- gap ---------- */
+  .gap-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+  .compare{width:100%;border-collapse:collapse;font-size:13px}
+  .compare th,.compare td{padding:11px 10px;border-bottom:1px solid #1c2130;text-align:right}
+  .compare th{color:#8d94a6;font-weight:600;font-size:11.5px}
+  .compare td:first-child{color:#b9b3a5}
+  .compare .you{color:var(--red);direction:ltr;text-align:right}
+  .compare .bench{color:var(--teal);direction:ltr;text-align:right}
+  .compare tr:last-child td{border-bottom:0}
+
+  .callout{
+    border:1px solid rgba(227,112,92,.28);background:linear-gradient(160deg,rgba(227,112,92,.08),rgba(227,112,92,.02));
+    border-radius:14px;padding:16px 18px;font-size:13px;color:#d8cfc8
+  }
+  .callout b{color:var(--red)}
+  .callout.gold{border-color:rgba(214,178,106,.3);background:linear-gradient(160deg,rgba(214,178,106,.08),rgba(214,178,106,.02))}
+  .callout.gold b{color:var(--gold2)}
+
+  /* ---------- playbook ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .pc{background:linear-gradient(180deg,#161a24,#11141b);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .pc .ico{font-size:20px;color:var(--gold);margin-bottom:8px;direction:ltr;text-align:right}
+  .pc h3{margin:0 0 8px;font-size:15px;color:var(--gold2)}
+  .pc p{margin:0;font-size:12.8px;color:#a9a396;line-height:1.85}
+  .pc code{background:#0b0d12;border:1px solid #242a3a;border-radius:6px;padding:1px 6px;font-size:11.5px;color:var(--teal);direction:ltr;display:inline-block}
+
+  /* ---------- opportunities ---------- */
+  .opps{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .opp{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:16px 18px}
+  .opp .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+  .opp h4{margin:0;font-size:14px;color:var(--ink)}
+  .opp .proof{font-size:11px;color:var(--gold);white-space:nowrap;border:1px solid rgba(214,178,106,.28);border-radius:99px;padding:2px 9px}
+  .opp p{margin:7px 0 0;font-size:12.5px;color:#9a9486;line-height:1.8}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:64px;border-top:1px solid var(--line);padding-top:24px;font-size:12.5px;color:#6e7689}
+  footer a{color:var(--gold);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 24px;margin:12px 0 18px}
+  .disclaimer{font-size:11.5px;color:#5d6577;line-height:1.8}
+
+  .float-note{
+    margin-top:14px;font-size:11.5px;color:#666f82;display:flex;gap:8px;align-items:flex-start
+  }
+  .float-note span:first-child{color:var(--gold)}
+
+  @media (max-width:1080px){
+    .kpis{grid-template-columns:repeat(3,1fr)}
+    .gap-grid{grid-template-columns:1fr}
+    .cards{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:720px){
+    .wrap{padding:0 14px 60px}
+    header{padding:38px 0 20px}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .cards,.opps{grid-template-columns:1fr}
+    .bar-row{grid-template-columns:104px 1fr 76px}
+    .detail-inner{grid-template-columns:1fr;gap:14px}
+    .srcs{grid-template-columns:1fr}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    body::before{display:none}
+    .card,.kpi,.pc,.opp,.table-scroll{box-shadow:none;background:#fff;border-color:#ddd}
+    .kpi .val,.score b,.ch-name{color:#111}
+    thead th{background:#f2f2f2;color:#111}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow"><span class="dot"></span> تقرير منافسة · نيش التاريخ السينمائي على يوتيوب</div>
+    <h1>خريطة المنافسة: <em>14 قناة</em> تحكم نيش قناتك</h1>
+    <p class="sub">
+      تحليل بالأرقام لأقوى قنوات الوثائقيات التاريخية الإنجليزية، مرتّبة حسب كفاءة التغليف والزخم الحالي — مع
+      تشخيص الفجوة عند <b>Vellum Logs</b> وخطة تنفيذية مبنية على ما ينجح فعلاً في هذا النيش.
+    </p>
+    <div class="meta">
+      <div><b>القناة المدروسة:</b> <a href="https://www.youtube.com/@vellumlogs" target="_blank" rel="noopener">Vellum Logs</a></div>
+      <div><b>تاريخ سحب البيانات:</b> 19 أكتوبر 2026</div>
+      <div><b>المصادر:</b> Social Blade + صفحات القنوات على يوتيوب</div>
+      <div><b>عدد القنوات:</b> 14 + قناة مرجعية</div>
+    </div>
+  </header>
+
+  <!-- ============ KPIs ============ -->
+  <section id="kpiSec">
+    <div class="sec-head">
+      <div>
+        <h2>الصورة الكبيرة <span>SNAPSHOT</span></h2>
+        <p>أرقام العينة كاملة. لاحظ أن متوسط المشاهدات لكل فيديو في النيش أعلى بكثير من عدد المشتركين — هذا نيش «مكتبة»، لا نيش «ترند».</p>
+      </div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <!-- ============ SCATTER ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>الكمية ضد الكفاءة <span>POSITIONING MAP</span></h2>
+        <p>كل نقطة = قناة. المحور الأفقي: عدد الفيديوهات (لوغاريتمي). المحور الرأسي: متوسط المشاهدات لكل فيديو (لوغاريتمي). حجم الدائرة = عدد المشتركين.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="chart-tools">
+        <div class="legend">
+          <span><i style="background:var(--gold)"></i>أفضل 3 في التقييم</span>
+          <span><i style="background:var(--teal)"></i>أداء قوي</span>
+          <span><i style="background:#7b8398"></i>أداء متوسط / متراجع</span>
+          <span><i style="background:rgba(227,112,92,.85)"></i>تحذير: كمية بلا تغليف</span>
+        </div>
+      </div>
+      <div id="plotBox">
+        <svg id="plot" viewBox="0 0 960 470" role="img" aria-label="خريطة انتشار القنوات"></svg>
+        <div id="tip"></div>
+      </div>
+      <div class="float-note"><span>◈</span><span>
+        اقرأ الربع العلوي الأيسر: قنوات أنتجت فيديوهات قليلة لكنها تحقق ملايين المشاهدات لكل فيديو — وهذا هو النموذج الأقرب لـ Vellum Logs.
+      </span></div>
+    </div>
+  </section>
+
+  <!-- ============ BARS ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>كفاءة التغليف <span>VIEWS PER VIDEO</span></h2>
+        <p>متوسط المشاهدات لكل فيديو منذ إنشاء القناة. هذا الرقم يقيس جودة «العنوان + الصورة المصغرة + أول 30 ثانية» أكثر مما يقيس جودة المونتاج.</p>
+      </div>
+    </div>
+    <div class="card"><div class="bars" id="bars"></div></div>
+  </section>
+
+  <!-- ============ TABLE ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>الجدول الكامل <span>THE BENCHMARK</span></h2>
+        <p>اضغط على أي صف لعرض «ما يجب تقليده» بالتفصيل، أو على عنوان العمود لإعادة الترتيب.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="chip on" data-tier="all">كل القنوات</button>
+      <button class="chip" data-tier="mega">+ مليون</button>
+      <button class="chip" data-tier="mid">300K – 1M</button>
+      <button class="chip" data-tier="small">أقل من 300K</button>
+      <input id="search" class="search" type="search" placeholder="ابحث باسم القناة أو نوع المحتوى…">
+      <button class="btn-ghost" id="csvBtn">تصدير CSV ⤓</button>
+    </div>
+    <div class="table-scroll">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th data-k="score">#</th>
+            <th data-k="name">القناة</th>
+            <th data-k="subs">المشتركون</th>
+            <th data-k="avg">مشاهدات / فيديو</th>
+            <th data-k="views">إجمالي المشاهدات</th>
+            <th data-k="videos">عدد الفيديوهات</th>
+            <th data-k="vpm">فيديو / شهر</th>
+            <th data-k="subs30">+ مشتركين 30 يوم</th>
+            <th data-k="views30">مشاهدات 30 يوم</th>
+            <th data-k="score">التقييم</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="float-note"><span>◈</span><span>
+      الترتيب الافتراضي بالتقييم المركّب (وليس بالحجم) — اضغط على عمود «المشتركون» لترتيب القنوات حسب الحجم، أو على «مشاهدات / فيديو» لترتيب كفاءة التغليف.
+      «فيديو / شهر» = إجمالي الفيديوهات ÷ عمر القناة بالأشهر. «+ مشتركين 30 يوم» و«مشاهدات 30 يوم» من Social Blade بتاريخ 19 أكتوبر 2026.
+      وداخل تفاصيل كل قناة: «مشاهدات لكل فيديو جديد» = مشاهدات 30 يوم ÷ عدد الفيديوهات المنشورة في 30 يوم (تقديري، ويتأثر بفيديو واحد ناجح).
+    </span></div>
+  </section>
+
+  <!-- ============ GAP ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>الفجوة عندك <span>VELUM LOGS GAP</span></h2>
+        <p>أرقام قناتك كما هي معلنة اليوم مقابل متوسط/وسيط النيش. الفجوة ليست في الموضوع — أنت أصلاً تتحدث عن بيزنطة والحروب الصليبية — بل في التغليف والإيقاع.</p>
+      </div>
+    </div>
+    <div class="gap-grid">
+      <div class="card">
+        <table class="compare">
+          <thead><tr><th>المقياس</th><th>عندك (Vellum Logs)</th><th>وسيط النيش</th></tr></thead>
+          <tbody id="gapTbl"></tbody>
+        </table>
+        <div class="callout" style="margin-top:16px">
+          <b>التشخيص:</b> أفضل فيديو عندك حصل على 541 مشاهدة، بينما وسيط النيش يتجاوز
+          <b id="medianTxt">—</b> مشاهدة لكل فيديو. المشكلة ليست في اختيار المواضيع (Belisarius، الحملة الرابعة، 1453 = مواضيع مثالية)،
+          بل في أن الفيديوهات قصيرة جدًا (3–15 دقيقة) وعنوانها وصورتها المصغرة لا تعد بجواب يستحق 30 دقيقة من المشاهدة.
+        </div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <h3 style="margin:0;font-size:15px;color:var(--gold2)">٥ قرارات فورية بعد هذا التقرير</h3>
+        <div class="callout gold" style="padding:13px 15px">
+          <b style="color:var(--teal)">1. الطول:</b> ارفع المدة إلى <b style="color:var(--teal)">25–40 دقيقة</b> كحد أدنى للفيديو الأساسي.
+          كل قنوات العينة القوية تعمل في نطاق 20–60 دقيقة، وStoryline English (مرجعك) يعمل عند 35 دقيقة.
+        </div>
+        <div class="callout gold" style="padding:13px 15px">
+          <b style="color:var(--teal)">2. الإيقاع:</b> <b style="color:var(--teal)">فيديو طويل كل أسبوعين + 2 Shorts أسبوعيًا</b>.
+          قناة Fall of Civilizations تنشر 0.5 فيديو شهريًا فقط وتحقق 4.79 مليون مشاهدة لكل فيديو.
+        </div>
+        <div class="callout gold" style="padding:13px 15px">
+          <b style="color:var(--teal)">3. العنوان:</b> تخلَّص من النمط الوصفي «X: Full Documentary». استخدم وعدًا/سؤالًا: «كيف…؟»، «من الذي…؟»، «الخطأ الذي…».
+        </div>
+        <div class="callout gold" style="padding:13px 15px">
+          <b style="color:var(--teal)">4. الصورة المصغرة:</b> عنصر بشري واحد + 3 كلمات كحد أقصى + تباين لوني حاد (نار/سماء داكنة).
+        </div>
+        <div class="callout gold" style="padding:13px 15px">
+          <b style="color:var(--teal)">5. الأصالة:</b> لا تنشر قالبًا واحدًا لـ 50 فيديو. الإسكريبت والبحث والصوت يجب أن يكونوا توقيعك — وإلا فالسياسة الجديدة لعام 2025–2026 تحجب الربح.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFERENCE CHANNEL ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>القناة المرجعية <span>YOUR MODEL</span></h2>
+        <p>نموذج Storyline English — نفس البنية التي تريد بناءها: سرد هادئ طويل + تاريخ + جمهور متعلّم للإنجليزية.</p>
+      </div>
+    </div>
+    <div class="cards" style="grid-template-columns:repeat(4,1fr)">
+      <div class="pc">
+        <div class="ico">50K</div>
+        <h3>مشترك</h3>
+        <p>أعلنت القناة عبر منشور في مجتمعها وصولها إلى 50 ألف مشترك، بفلسفة واحدة: «لا ضغط، لا اختبارات — صوت هادئ وقصة حقيقية».</p>
+      </div>
+      <div class="pc">
+        <div class="ico">≈ 26K</div>
+        <h3>متوسط مشاهدة/فيديو</h3>
+        <p>آخر 6 فيديوهات: 5.5K · 18K · 29K · 45K · 32K · 28K. الأرقام تتراكم مع نمو المكتبة، لا تنفجر مرة واحدة.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">35 د</div>
+        <h3>مدة ثابتة</h3>
+        <p>كل الفيديوهات بين 25 و36 دقيقة، مع نطق بطيء واضح ونص على الشاشة — وهذا ما يرفع وقت المشاهدة.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">2–3 / أسبوع</div>
+        <h3>إيقاع النشر</h3>
+        <p>فيديو جديد تقريبًا كل 2–3 أيام، وكلها تنتهي بنفس التركيبة: <code>|| English Listening Practice ✅</code>.</p>
+      </div>
+    </div>
+    <div class="callout gold" style="margin-top:14px">
+      <b>الملاحظة الذهبية:</b> Storyline English ينجح لأنه يبيع «نتيجة» (تحسين الإنجليزية) داخل «قصة» (تاريخ).
+      Vellum Logs يجب أن يبيع «نتيجة» أخرى بجانب التاريخ: <b>الفهم السينمائي + التعلم + الراحة قبل النوم</b>.
+      قناة واحدة، وعد واحد واضح، يتكرر في كل عنوان.
+    </div>
+  </section>
+
+  <!-- ============ PLAYBOOK ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>دليل التنفيذ <span>PLAYBOOK</span></h2>
+        <p>مستخلص من أفضل ما تفعله القنوات الـ14 — قابل للتطبيق على الفيديو القادم مباشرة.</p>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="pc">
+        <div class="ico">01</div>
+        <h3>الطول والبنية</h3>
+        <p>25–40 دقيقة. مقدمة باردة 20 ثانية (سؤال/مشهد)، ثم خريطة الفيديو في 40 ثانية، ثم 5–7 فصول بمسميات
+        مثل <code>00:00 The Last Emperor</code>. الفصول ترفع الاحتفاظ وتسمح بالإعلانات الوسطية.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">02</div>
+        <h3>صيغة العنوان</h3>
+        <p><code>[فاعل] + [فعل غير متوقع] + [نتيجة]</code> أو سؤال. أمثلة: «The General Who Reconquered Rome — Then Disappeared»،
+        «Who Really Burned the Library of Alexandria?». أضف وسمًا واحدًا فقط مثل <code>| History Documentary</code>.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">03</div>
+        <h3>الصورة المصغرة</h3>
+        <p>3 عناصر: مشهد سينمائي + شخصية (ظهر/وجه جانبي) + 3 كلمات كبيرة. لون النار/الذهب مقابل أزرق داكن.
+        اختبر نسختين في أول 24 ساعة وغيّر إن كان CTR أقل من 4%.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">04</div>
+        <h3>أول 30 ثانية</h3>
+        <p>لا شعار، لا «مرحبًا بكم». ابدأ بمشهد: «In 1204, the greatest city in the world was burning…».
+        ثم وعد: «By the end of this video you'll understand why…». هذه الجملة هي التي تحدد الاحتفاظ.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">05</div>
+        <h3>الإيقاع والزخم</h3>
+        <p>فيديو طويل كل 14 يومًا + 2 Shorts أسبوعيًا مقتطعة من نفس الفيديو. الـ Shorts وظيفتها جلب مشتركين جدد،
+        والفيديو الطويل وظيفته وقت المشاهدة والربح.</p>
+      </div>
+      <div class="pc">
+        <div class="ico">06</div>
+        <h3>الوصف والكلمات</h3>
+        <p>أول سطرين = ملخص يبيع الفيديو. بعدها فصول + مصادر + 3–5 وسوم فقط.
+        استخدم <code>#HistoryDocumentary #ByzantineEmpire #AncientRome</code> — لا تحشو 30 وسمًا.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPPORTUNITIES ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>فجوات المحتوى <span>WHAT NOBODY COVERS</span></h2>
+        <p>مواضيع عليها طلب مثبت في النيش، لكن القنوات الكبيرة تغطيها بشكل سطحي أو لا تغطيها.</p>
+      </div>
+    </div>
+    <div class="opps">
+      <div class="opp">
+        <div class="top"><h4>الحياة اليومية في الإمبراطوريات</h4><span class="proof">toldinstone · 652K</span></div>
+        <p>«ماذا كان يأكل الجندي الروماني؟» — قناة كاملة بُنيت على أسئلة صغيرة يومية، ثم تحوّلت إلى فيديوهات طويلة.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>سقوط المدن (سلسلة)</h4><span class="proof">Fall of Civilizations · 1.52M</span></div>
+        <p>47 فيديو فقط، كل واحد عن سقوط حضارة. الصيغة قابلة للتكرار إلى ما لا نهاية: كل مدينة/إمبراطورية = حلقة.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>بيزنطة والشرق الأدنى</h4><span class="proof">Hikma History · 195K</span></div>
+        <p>منطقتك أنت. القنوات الكبرى تتجنب التفاصيل الثقافية واللغوية، وأنت قادر على تقديمها بدقة أكبر.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>الخرائط كوسيلة سرد</h4><span class="proof">HistoryMarche · +20K/شهر</span></div>
+        <p>خريطة واحدة متحركة تشرح حملة كاملة. أرخص من الأنيميشن الكامل وأعلى احتفاظًا من الشرائح الثابتة.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>«وثائقي للنوم»</h4><span class="proof">Storyline English · 35 د</span></div>
+        <p>سرد هادئ بلا موسيقى صاخبة، بغرض الاسترخاء. جمهور ضخم يستهلك 40 دقيقة كاملة — أفضل نيش لوقت المشاهدة.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>الوثائقيات العميقة القليلة</h4><span class="proof">The Histocrat · 617K / 71 فيديو</span></div>
+        <p>71 فيديو في 8 سنوات و782 ألف مشاهدة لكل فيديو. العمق يبني مكتبة تعمل لسنوات بدل الترند الأسبوعي.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>الأمريكتان قبل كولومبوس</h4><span class="proof">Ancient Americas · 309K</span></div>
+        <p>64 فيديو فقط و440 ألف مشاهدة/فيديو. نيش فرعي غير مشبع — مناسب للحلقات الجانبية.</p>
+      </div>
+      <div class="opp">
+        <div class="top"><h4>الصوت الأصلي والمذكرات</h4><span class="proof">Voices of the Past · 1.09M</span></div>
+        <p>قراءة نصوص تاريخية أصلية بصوت مؤدي. قيمة أرشيفية لا يستطيع الذكاء الاصطناعي تقليدها بسهولة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RISK ============ -->
+  <section>
+    <div class="sec-head">
+      <div>
+        <h2>تحذير لا يمكن تجاهله <span>POLICY RISK</span></h2>
+        <p>هذا النيش مزدحم بقنوات آلية، ويوتيوب يضيّق الخناق عليها تحديدًا.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>سياسة «المحتوى غير الأصيل»:</b> منذ يوليو 2025 غيّر يوتيوب اسم سياسة «المحتوى المتكرر» إلى
+      «المحتوى غير الأصيل»، وأصبح غير المؤهل للربح يشمل صراحةً: المحتوى المنتج بكميات كبيرة، والقوالب المتشابهة
+      بلا اختلاف، و«الشرائح المصوّرة أو النص المتدحرج» بدون سرد أو قيمة تعليمية. الذكاء الاصطناعي ليس ممنوعًا،
+      لكن <b>الإنتاج الآلي بالجملة هو الممنوع</b>. الطريقة الآمنة: بحث أصلي مكتوب بيدك، صوتك أو صوت مؤدٍّ حقيقي،
+      زاوية شخصية واضحة، ومصادر مذكورة في الوصف.
+    </div>
+    <div class="srcs" style="margin-top:14px">
+      <div>• <a href="https://support.google.com/youtube/answer/1311392?hl=en" target="_blank" rel="noopener">YouTube — سياسات تحقيق الربح (تحديث 15 يوليو 2025)</a></div>
+      <div>• <a href="https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/" target="_blank" rel="noopener">TechCrunch — يوتيوب يوضح سياساته تجاه محتوى AI المنخفض الجودة (يوليو 2026)</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div><b style="color:var(--gold2)">المصادر الرئيسية</b></div>
+    <div class="srcs" id="footSrcs"></div>
+    <div class="disclaimer">
+      الأرقام مسحوبة علنًا من Social Blade وصفحات القنوات على يوتيوب بتاريخ 19 أكتوبر 2026، وهي تقديرية وتتغير يوميًا.
+      «مشاهدات 30 يوم» و«+ مشتركين 30 يوم» مأخوذة من آخر 30 يومًا في Social Blade. التقييم المركّب (0–100) محسوب داخل هذه الصفحة:
+      40% كفاءة التغليف (مشاهدات/فيديو) + 30% الزخم (+مشتركين/30 يوم نسبةً لحجم القناة) + 30% الحجم (لوغاريتم المشتركين).
+      هذا التقرير للتحليل التعليمي ولا يمثل يوتيوب أو القنوات المذكورة.
+    </div>
+  </footer>
+</div>
+
+<script>
+/* =========================================================
+   DATA — Social Blade, 19 Oct 2026
+   ========================================================= */
+const CHANNELS = [
+  {
+    name:"Kings and Generals", handle:"@KingsandGenerals", url:"https://www.youtube.com/@KingsandGenerals",
+    subs:4210000, views:1094136486, videos:2264, created:"2016", subs30:10000, views30:17668107, up30:38,
+    type:"خرائط ومعارك", tier:"mega",
+    best:"أضخم مكتبة في النيش: 18 فيديو شهريًا تقريبًا، وخريطة متحركة لكل معركة.",
+    steal:[
+      "عناوين على شكل سؤال + وسم واحد: «How Did Brahmanism Defeat Buddhism - Ancient India DOCUMENTARY».",
+      "سلاسل مرقّمة (Pompey #1, #2 …) تجعل المشاهد يعود لإكمال الموسم.",
+      "بنية تقسيم واضحة: خريطة → أطراف الصراع → التحركات → النتيجة → الدرس."
+    ]
+  },
+  {
+    name:"Epic History", handle:"@EpicHistoryTV", url:"https://www.youtube.com/@EpicHistoryTV",
+    subs:3190000, views:444322998, videos:380, created:"2015", subs30:20000, views30:11046553, up30:11,
+    type:"سرد سينمائي", tier:"mega",
+    best:"أسرع نمو بين الكبار: +20 ألف مشترك في 30 يومًا، بأقل من 3 فيديوهات شهريًا.",
+    steal:[
+      "فيديو واحد = حملة أو شخصية كاملة، لا «حلقة تعريفية».",
+      "مونتاج صوتي درامي مع موسيقى أصلية مسجّلة خصيصًا.",
+      "صورة مصغرة بلوحة زيتية + شخصية واحدة + كلمتين."
+    ]
+  },
+  {
+    name:"Knowledgia", handle:"@Knowledgia", url:"https://www.youtube.com/@Knowledgia",
+    subs:2200000, views:448989655, videos:464, created:"2017", subs30:10000, views30:5304864, up30:5,
+    type:"أنيميشن تعليمي", tier:"mega",
+    best:"أطوال 12–20 دقيقة قابلة للتنفيذ أسبوعيًا، وواجهة خرائط بسيطة جدًا.",
+    steal:[
+      "نمط بصري موحّد يسهل التعرف على القناة من الصورة المصغرة وحدها.",
+      "سؤال في العنوان + إجابة في أول 40 ثانية.",
+      "إصدار 5 فيديوهات شهريًا بأطوال متوسطة = مكتبة سريعة النمو."
+    ]
+  },
+  {
+    name:"The People Profiles", handle:"@PeopleProfiles", url:"https://www.youtube.com/channel/UCD6TPU-PvTMvqgzC_AM7_uA",
+    subs:1680000, views:262019688, videos:436, created:"2018", subs30:10000, views30:5931355, up30:8,
+    type:"سِيَر شخصية", tier:"mega",
+    best:"نموذج «شخص واحد = فيديو 1–2 ساعة» مع 8 فيديوهات شهريًا.",
+    steal:[
+      "كل حلقة سيرة متكاملة تعمل مستقلة وتُشاهد سنوات.",
+      "مونتاج هادئ جدًا + صور أرشيفية + صوت واحد = تكلفة منخفضة وعائد تراكمي.",
+      "عناوين: «[الاسم]: [الصفة التي تلخص حياته]»."
+    ]
+  },
+  {
+    name:"Fall of Civilizations", handle:"@FallofCivilizations", url:"https://www.youtube.com/@FallofCivilizations",
+    subs:1520000, views:224961930, videos:47, created:"2019", subs30:10000, views30:2679265, up30:1,
+    type:"وثائقي سينمائي", tier:"mega",
+    best:"أعلى كفاءة تغليف في النيش: 4.79 مليون مشاهدة لكل فيديو، بـ47 فيديو فقط.",
+    steal:[
+      "فيديو واحد طويل جدًا (1–3 ساعات) كل شهرين، مع بودكاست لنفس الحلقة.",
+      "عنوان من كلمتين إلى أربع: «The Sumerians», «The Aztecs» — الاسم نفسه هو الوعد.",
+      "صورة مصغرة: لوحة فنية واحدة، بلا نص تقريبًا، بجودة سينمائية."
+    ]
+  },
+  {
+    name:"History Time", handle:"@HistoryTime", url:"https://www.youtube.com/@HistoryTime",
+    subs:1340000, views:211239905, videos:168, created:"2017", subs30:10000, views30:1406397, up30:0,
+    type:"وثائقي طويل", tier:"mega",
+    best:"وثائقي سردي 40–90 دقيقة بمعدل 1.4 فيديو شهريًا فقط.",
+    steal:[
+      "موسيقى تصويرية أصلية ترفع الإحساس بالسينما.",
+      "افتتاحية بصرية صامتة 15 ثانية قبل أي كلام.",
+      "إعادة تجميع الحلقات في «Full Documentary» لزيادة وقت المشاهدة."
+    ]
+  },
+  {
+    name:"HistoryMarche", handle:"@HistoryMarche", url:"https://www.youtube.com/@HistoryMarche",
+    subs:1340000, views:260477430, videos:378, created:"2017", subs30:20000, views30:6953799, up30:1,
+    type:"معارك وخرائط", tier:"mega",
+    best:"ثاني أعلى زخم في العينة (+1.49% شهريًا) بفيديو واحد فقط في آخر 30 يومًا.",
+    steal:[
+      "سرد المعركة كقصة: خطة → مفاجأة → نقطة تحول → خسارة.",
+      "خريطة متحركة واحدة تشرح كل شيء، دون أنيميشن مكلف.",
+      "سلسلة «Battle of …» مرقّمة تبني مكتبة قابلة للاكتشاف."
+    ]
+  },
+  {
+    name:"Voices of the Past", handle:"@VoicesOfThePast", url:"https://www.youtube.com/channel/UCqoGR_EedlhKDVuWNwYWRbg",
+    subs:1090000, views:93723482, videos:193, created:"2018", subs30:0, views30:346156, up30:1,
+    type:"قراءة نصوص أصلية", tier:"mega",
+    best:"قيمة أرشيفية: قراءة مذكرات ونصوص تاريخية أصلية بصوت مؤدٍّ.",
+    steal:[
+      "الاعتماد على النص الأصلي كمصدر لا يُقلّد.",
+      "صورة مصغرة بنص تاريخي/وثيقة + إضاءة خفيفة.",
+      "عناوين تبدو كعناوين كتب: «The Diary of a Roman Soldier»."
+    ]
+  },
+  {
+    name:"Fire of Learning", handle:"@FireofLearning", url:"https://www.youtube.com/channel/UCbyE5OvaP4GJhKvPCXxjWvw",
+    subs:903000, views:100377020, videos:135, created:"2011", subs30:2000, views30:1270775, up30:0,
+    type:"سرد تعليمي", tier:"mid",
+    best:"743 ألف مشاهدة لكل فيديو من 135 فيديو فقط — كفاءة عالية لبداية متواضعة.",
+    steal:[
+      "أطوال 30–60 دقيقة بلا استعجال.",
+      "عناوين واسعة («History of …») تلتقط البحث المباشر.",
+      "مكتبة قديمة تعمل كترافيك دائم بفضل البحث."
+    ]
+  },
+  {
+    name:"toldinstone", handle:"@toldinstone", url:"https://www.youtube.com/channel/UCqBiWcuTF8IaLH7wBqnihsQ",
+    subs:652000, views:107895310, videos:253, created:"2018", subs30:3000, views30:1881673, up30:2,
+    type:"أسئلة يومية (روما)", tier:"mid",
+    best:"بناء جمهور من أسئلة صغيرة عن الحياة اليومية الرومانية، ثم تحويلها لفيديوهات طويلة.",
+    steal:[
+      "كل فيديو يجيب سؤالًا واحدًا يفكر فيه الناس فعلاً.",
+      "Shorts مقتطعة من نفس البحث تجلب مشتركين مجانًا.",
+      "الصدق الأكاديمي (مؤرخ حقيقي) كعامل تمييز ضد المحتوى الآلي."
+    ]
+  },
+  {
+    name:"The Histocrat", handle:"@TheHistocrat", url:"https://www.youtube.com/channel/UCSwFnHpDt-lZgR_7Sqisi6A",
+    subs:617000, views:55516911, videos:71, created:"2018", subs30:1000, views30:783536, up30:1,
+    type:"وثائقي عميق", tier:"mid",
+    best:"71 فيديو في 8 سنوات و782 ألف مشاهدة/فيديو: العمق يهزم الكمية.",
+    steal:[
+      "فيديو كل 4–6 أسابيع، لكن كل واحد «حدث».",
+      "عنوان قصير غامض + صورة مصغرة بلوحة واحدة.",
+      "سرد بصوت واحد هادئ، بلا مقدمات."
+    ]
+  },
+  {
+    name:"SandRhoman History", handle:"@SandRhomanHistory", url:"https://www.youtube.com/channel/UC7pr_dQxm2Ns2KlzRSx5FZA",
+    subs:527000, views:90350914, videos:156, created:"2018", subs30:1000, views30:1124263, up30:1,
+    type:"تاريخ عسكري تحليلي", tier:"mid",
+    best:"1.12 مليون مشاهدة لكل فيديو جديد في آخر 30 يومًا، و579 ألف مشاهدة/فيديو تاريخيًا.",
+    steal:[
+      "رسوم توضيحية بسيطة (Line art) بدل الأنيميشن المكلف.",
+      "تحليل «لماذا» بدل سرد «ماذا حدث».",
+      "سلاسل مواضيعية حول حروب محددة."
+    ]
+  },
+  {
+    name:"Ancient Americas", handle:"@AncientAmericas", url:"https://www.youtube.com/channel/UCEqNbbsx0i7fhwRt0saYIcQ",
+    subs:309000, views:28167169, videos:64, created:"2019", subs30:2000, views30:752064, up30:1,
+    type:"أمريكا القديمة", tier:"mid",
+    best:"نيش فرعي غير مشبع: 64 فيديو و440 ألف مشاهدة/فيديو.",
+    steal:[
+      "التخصص الضيق يبني سلطة سريعة.",
+      "كل حلقة عن حضارة/مدينة واحدة.",
+      "فصول مفصّلة في الوصف تخدم البحث."
+    ]
+  },
+  {
+    name:"Hikma History", handle:"@HikmaHistory", url:"https://www.youtube.com/channel/UCsaViv1SDQy2FcRFHrf_Dkw",
+    subs:195000, views:24272127, videos:265, created:"2018", subs30:2000, views30:630032, up30:8,
+    type:"الشرق الأوسط والإسلامي", tier:"small",
+    best:"درس معاكس: 265 فيديو بمعدل 91.6 ألف مشاهدة/فيديو — الكمية بلا تغليف لا تعمل.",
+    steal:[
+      "موضوعات قريبة من ثقافتك ومصادرك اللغوية (ميزة تنافسية حقيقية).",
+      "لكن: 8 فيديوهات شهريًا بأطوال قصيرة لم تصنع زخمًا — لا تكرر هذا النموذج.",
+      "الفرصة: نفس المواضيع لكن بإنتاج سينمائي وعنوان أقوى."
+    ]
+  }
+];
+
+const REF = { name:"Storyline English", url:"https://www.youtube.com/@StorylineEnglishOfficial",
+  subs:50000, videos6:[5500,18000,29000,45000,32000,28000], len:"35 د", cadence:"2–3/أسبوع" };
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+const AR = n => n.toLocaleString("en-US");
+const fmt = n => n >= 1e9 ? (n/1e9).toFixed(2)+"B"
+             : n >= 1e6 ? (n/1e6).toFixed(2)+"M"
+             : n >= 1e5 ? Math.round(n/1e3)+"K"
+             : n >= 1e3 ? (n/1e3).toFixed(1)+"K" : String(Math.round(n));
+const fmt1 = n => n >= 1e6 ? (n/1e6).toFixed(2)+"M" : n >= 1e3 ? Math.round(n/1e3)+"K" : String(Math.round(n));
+const median = a => { const s=[...a].sort((x,y)=>x-y), m=Math.floor(s.length/2);
+  return s.length%2 ? s[m] : (s[m-1]+s[m])/2; };
+const minmax = (v, arr) => { const mn=Math.min(...arr), mx=Math.max(...arr); return mx===mn?0.5:(v-mn)/(mx-mn); };
+
+/* derived */
+CHANNELS.forEach(c=>{
+  c.avg = c.views / c.videos;
+  const months = (2026 + 9/12) - (parseInt(c.created) + 6/12);
+  c.vpm = c.videos / Math.max(months, 1);
+  c.momentum = c.subs30 / c.subs;
+  c.fresh = c.up30 > 0 ? c.views30 / c.up30 : null;
+});
+
+const avgArr = CHANNELS.map(c=>c.avg);
+const logSubs = CHANNELS.map(c=>Math.log10(c.subs));
+const momArr = CHANNELS.map(c=>c.momentum);
+const sub30n = CHANNELS.map(c=>c.subs30);
+
+CHANNELS.forEach(c=>{
+  c.score = Math.round(100 * (
+    0.40 * minmax(c.avg, avgArr) +
+    0.30 * minmax(c.momentum, momArr) +
+    0.30 * minmax(Math.log10(c.subs), logSubs)
+  ));
+});
+const ranked = [...CHANNELS].sort((a,b)=>b.score-a.score);
+CHANNELS.sort((a,b)=>b.score-a.score);
+
+/* =========================================================
+   KPI
+   ========================================================= */
+(function(){
+  const totalSubs = CHANNELS.reduce((s,c)=>s+c.subs,0);
+  const totalViews = CHANNELS.reduce((s,c)=>s+c.views,0);
+  const med = median(avgArr);
+  const fastest = [...CHANNELS].sort((a,b)=>b.momentum-a.momentum)[0];
+  const bestPack = [...CHANNELS].sort((a,b)=>b.avg-a.avg)[0];
+  const kpis = [
+    {lab:"قنوات في العينة", val:"14", hint:"+ قناة مرجعية (Storyline English)"},
+    {lab:"إجمالي المشتركين", val:fmt(totalSubs), hint:"مجموع العينة بالكامل"},
+    {lab:"إجمالي المشاهدات", val:fmt(totalViews), hint:"مشاهدات تاريخية تراكمية"},
+    {lab:"وسيط مشاهدة/فيديو", val:fmt(med), hint:"النصف الأعلى من القنوات أعلى من ذلك"},
+    {lab:"أسرع زخم حالي", val:(fastest.momentum*100).toFixed(2)+"%", hint:fastest.name+" — نمو شهري نسبي", accent:true},
+    {lab:"أعلى كفاءة تغليف", val:fmt(bestPack.avg), hint:bestPack.name+" — مشاهدة/فيديو", accent:true}
+  ];
+  document.getElementById("kpis").innerHTML = kpis.map(k=>`
+    <div class="kpi ${k.accent?"accent":""}">
+      <div class="lab">${k.lab}</div>
+      <div class="val">${k.val}</div>
+      <div class="hint">${k.hint}</div>
+    </div>`).join("");
+})();
+
+/* =========================================================
+   SCATTER
+   ========================================================= */
+(function(){
+  const svg = document.getElementById("plot");
+  const W=960,H=470, P={t:26,r:26,b:56,l:64};
+  const xs = CHANNELS.map(c=>Math.log10(c.videos));
+  const ys = CHANNELS.map(c=>Math.log10(c.avg));
+  const x0=Math.min(...xs)-0.12, x1=Math.max(...xs)+0.14;
+  const y0=Math.min(...ys)-0.12, y1=Math.max(...ys)+0.12;
+  const px = v => P.l + (Math.log10(v)-x0)/(x1-x0)*(W-P.l-P.r);
+  const py = v => H-P.b - (Math.log10(v)-y0)/(y1-y0)*(H-P.t-P.b);
+
+  let s = "";
+  // grid
+  const yTicks = [100000,200000,500000,1000000,2000000,5000000];
+  yTicks.forEach(v=>{
+    if(Math.log10(v)<y0||Math.log10(v)>y1) return;
+    const y=py(v);
+    s += `<line class="gridline" x1="${P.l}" y1="${y}" x2="${W-P.r}" y2="${y}"/>`;
+    s += `<text class="axis" x="${P.l-10}" y="${y+4}" text-anchor="end">${fmt(v)}</text>`;
+  });
+  const xTicks = [50,100,200,500,1000,2000];
+  xTicks.forEach(v=>{
+    if(Math.log10(v)<x0||Math.log10(v)>x1) return;
+    const x=px(v);
+    s += `<line class="gridline" x1="${x}" y1="${P.t}" x2="${x}" y2="${H-P.b}"/>`;
+    s += `<text class="axis" x="${x}" y="${H-P.b+22}" text-anchor="middle">${v}</text>`;
+  });
+  // axes labels
+  s += `<text class="axis" x="${W/2}" y="${H-8}" text-anchor="middle" style="font-size:12px;fill:#8d94a6">عدد الفيديوهات (لوغاريتمي) →</text>`;
+  s += `<text class="axis" x="18" y="${H/2}" text-anchor="middle" transform="rotate(-90 18 ${H/2})" style="font-size:12px;fill:#8d94a6">متوسط المشاهدات لكل فيديو →</text>`;
+  // median line
+  const medY = py(median(avgArr));
+  s += `<line x1="${P.l}" y1="${medY}" x2="${W-P.r}" y2="${medY}" stroke="rgba(214,178,106,.35)" stroke-dasharray="5 6"/>`;
+  s += `<text x="${W-P.r-6}" y="${medY-8}" text-anchor="end" style="font-size:10.5px;fill:#b99b5f">وسيط النيش ${fmt(median(avgArr))}</text>`;
+
+  // dots
+  CHANNELS.forEach((c,i)=>{
+    const x=px(c.videos), y=py(c.avg);
+    const r = 7 + Math.log10(c.subs)*2.6;
+    const top3 = ranked.slice(0,3).includes(c);
+    const warn = c.name==="Hikma History";
+    const color = warn ? "rgba(227,112,92,.85)" : top3 ? "#d6b26a" : (c.score>=55 ? "#5ad1c0" : "#7b8398");
+    s += `<circle class="dot" data-i="${i}" cx="${x}" cy="${y}" r="${r}"
+            fill="${color}" fill-opacity="${warn?.55:.22}" stroke="${color}" stroke-width="1.8"/>`;
+    if(top3 || c.name==="Hikma History"){
+      const anchor = x > W*0.72 ? "end" : "start";
+      const dx = anchor==="end" ? -r-8 : r+8;
+      s += `<text class="dlabel" x="${x+dx}" y="${y+4}" text-anchor="${anchor}">${c.name}</text>`;
+    }
+  });
+  svg.innerHTML = s;
+
+  const tip = document.getElementById("tip");
+  const box = document.getElementById("plotBox");
+  svg.querySelectorAll(".dot").forEach(dot=>{
+    dot.addEventListener("mouseenter", e=>{
+      const c = CHANNELS[+dot.dataset.i];
+      tip.innerHTML = `<b>${c.name}</b>
+        <span>مشتركون: <b>${fmt(c.subs)}</b></span><br>
+        <span>مشاهدات/فيديو: <b>${fmt(c.avg)}</b></span><br>
+        <span>فيديوهات: <b>${AR(c.videos)}</b></span><br>
+        <span>نمو شهري: <b>${(c.momentum*100).toFixed(2)}%</b></span>`;
+      tip.style.opacity = 1;
+    });
+    dot.addEventListener("mousemove", e=>{
+      const r = box.getBoundingClientRect();
+      let x = e.clientX - r.left + 14, y = e.clientY - r.top + 14;
+      if(x > r.width-210) x = e.clientX - r.left - 200;
+      tip.style.left = x+"px"; tip.style.top = y+"px";
+    });
+    dot.addEventListener("mouseleave", ()=> tip.style.opacity=0);
+  });
+})();
+
+/* =========================================================
+   BARS
+   ========================================================= */
+(function(){
+  const list = [...CHANNELS].sort((a,b)=>b.avg-a.avg);
+  const max = list[0].avg;
+  document.getElementById("bars").innerHTML = list.map(c=>`
+    <div class="bar-row">
+      <div class="bar-name" title="${c.name}">${c.name}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0" data-w="${(c.avg/max*100).toFixed(1)}"></div></div>
+      <div class="bar-val">${fmt(c.avg)}</div>
+    </div>`).join("");
+  requestAnimationFrame(()=>{
+    document.querySelectorAll(".bar-fill").forEach(el=>{ el.style.width = el.dataset.w+"%"; });
+  });
+})();
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+let tierFilter = "all", query = "", sortKey = "score", sortDir = -1, openRow = null;
+
+function renderTable(){
+  let rows = CHANNELS.filter(c=>{
+    const t = tierFilter==="all" || c.tier===tierFilter;
+    const q = !query || (c.name+" "+c.type+" "+c.handle).toLowerCase().includes(query.toLowerCase());
+    return t && q;
+  });
+  rows.sort((a,b)=>{
+    const A=a[sortKey], B=b[sortKey];
+    if(typeof A==="string") return A.localeCompare(B)*sortDir;
+    return (A-B)*sortDir;
+  });
+
+  document.getElementById("tbody").innerHTML = rows.map((c,idx)=>{
+    const rank = CHANNELS.indexOf(c)+1;
+    const top = rank<=3;
+    const isOpen = openRow===c.name;
+    const main = `
+      <tr class="main" data-name="${c.name}">
+        <td><span class="rank ${top?"top":""}">${rank}</span></td>
+        <td>
+          <span class="ch-name">${c.name}</span>
+          <span class="ch-handle">${c.handle}</span>
+        </td>
+        <td class="num">${fmt(c.subs)}</td>
+        <td class="num" style="color:var(--gold2);font-weight:600">${fmt(c.avg)}</td>
+        <td class="num">${fmt(c.views)}</td>
+        <td class="num">${AR(c.videos)}</td>
+        <td class="num">${c.vpm.toFixed(1)}</td>
+        <td class="num ${c.subs30>0?"pos":"zero"}">${c.subs30>0?"+"+fmt(c.subs30):"—"}</td>
+        <td class="num">${fmt(c.views30)}</td>
+        <td>
+          <div class="score">
+            <div class="track"><div class="fill" style="width:${c.score}%"></div></div>
+            <b>${c.score}</b>
+          </div>
+        </td>
+      </tr>`;
+    const detail = isOpen ? `
+      <tr class="detail"><td colspan="10">
+        <div class="detail-inner">
+          <div>
+            <h4>ما يجب تقليده</h4>
+            <ul>${c.steal.map(x=>`<li>${x}</li>`).join("")}</ul>
+          </div>
+          <div>
+            <h4>لماذا هي في هذا الترتيب</h4>
+            <p style="margin-bottom:10px">${c.best}</p>
+            <p style="color:#7d7668;font-size:12px">
+              مشاهدات/فيديو: <b style="color:#b9b3a5">${fmt(c.avg)}</b> ·
+              فيديو/شهر: <b style="color:#b9b3a5">${c.vpm.toFixed(1)}</b> ·
+              زخم: <b style="color:#b9b3a5">${(c.momentum*100).toFixed(2)}%</b><br>
+              فيديوهات آخر 30 يومًا: <b style="color:#b9b3a5">${c.up30}</b>
+              ${c.fresh?`· مشاهدات لكل فيديو جديد: <b style="color:#b9b3a5">${fmt(c.fresh)}</b>`:""}
+            </p>
+            <p style="margin-top:12px"><a href="${c.url}" target="_blank" rel="noopener">فتح القناة على يوتيوب ↗</a></p>
+          </div>
+        </div>
+      </td></tr>` : "";
+    return main + detail;
+  }).join("");
+
+  document.querySelectorAll("tr.main").forEach(tr=>{
+    tr.addEventListener("click", ()=>{
+      openRow = openRow===tr.dataset.name ? null : tr.dataset.name;
+      renderTable();
+    });
+  });
+}
+
+document.querySelectorAll(".chip").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on"); tierFilter=b.dataset.tier; renderTable();
+  });
+});
+document.getElementById("search").addEventListener("input", e=>{ query=e.target.value; renderTable(); });
+document.querySelectorAll("thead th").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const k = th.dataset.k;
+    if(k==="name"){ sortDir = sortKey==="name" ? -sortDir : 1; sortKey="name"; }
+    else { sortDir = sortKey===k ? -sortDir : -1; sortKey=k; }
+    renderTable();
+  });
+});
+renderTable();
+
+/* CSV export */
+document.getElementById("csvBtn").addEventListener("click",()=>{
+  const head = ["Channel","Handle","Subscribers","Total views","Videos","Created","Subs last 30d","Views last 30d","Avg views/video","Videos per month","Momentum %","Score","URL"];
+  const lines = [head.join(",")];
+  CHANNELS.forEach(c=>lines.push([
+    `"${c.name}"`, c.handle, c.subs, c.views, c.videos, c.created, c.subs30, c.views30,
+    Math.round(c.avg), c.vpm.toFixed(2), (c.momentum*100).toFixed(3), c.score, c.url
+  ].join(",")));
+  const blob = new Blob(["\uFEFF"+lines.join("\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "vellum-logs-niche-benchmark.csv";
+  a.click();
+});
+
+/* =========================================================
+   GAP TABLE
+   ========================================================= */
+(function(){
+  const medAvg = median(avgArr);
+  const medLen = "35–45 دقيقة";
+  const rows = [
+    ["متوسط المشاهدات لكل فيديو", "245", fmt(medAvg)],
+    ["مدة الفيديو", "3 – 15 دقيقة", medLen],
+    ["إيقاع النشر", "3 فيديوهات / 5 أشهر", "2 – 4 شهريًا"],
+    ["أفضل فيديو حتى الآن", "541 مشاهدة", "آلاف إلى ملايين"],
+    ["نوع العنوان", "وصفي (الاسم + الحدث)", "سؤال / وعد / مفارقة"],
+    ["الصورة المصغرة", "مشهد + نص", "شخصية + 3 كلمات + تباين"],
+    ["Shorts", "6 مقاطع (2–9 مشاهدات)", "مدخل ترافيك أسبوعي"]
+  ];
+  document.getElementById("gapTbl").innerHTML = rows.map(r=>`
+    <tr><td>${r[0]}</td><td class="you">${r[1]}</td><td class="bench">${r[2]}</td></tr>`).join("");
+  document.getElementById("medianTxt").textContent = fmt(medAvg);
+})();
+
+/* footer sources */
+(function(){
+  const src = [
+    ...CHANNELS.map(c=>`<div>• <a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>
+      — <a href="https://socialblade.com/youtube/handle/${c.handle.replace("@","").toLowerCase()}" target="_blank" rel="noopener">Social Blade</a></div>`),
+    `<div>• <a href="https://www.youtube.com/@StorylineEnglishOfficial" target="_blank" rel="noopener">Storyline English</a> — القناة المرجعية</div>`,
+    `<div>• <a href="https://www.youtube.com/@vellumlogs" target="_blank" rel="noopener">Vellum Logs</a> — القناة المدروسة</div>`
+  ];
+  document.getElementById("footSrcs").innerHTML = src.join("");
+})();
+</script>
+</body>
+</html>

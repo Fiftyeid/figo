@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP01 — نسخة الإنتاج | Vellum Logs</title>
+<style>
+  :root{--bg:#0b0907;--panel:#141010;--line:#2e241d;--ink:#f0e9dd;--muted:#a2958a;--gold:#d9b978;--gold2:#f4e2bb;--green:#7fc4a0}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.85;
+    font-family:"Noto Kufi Arabic","Cairo","Segoe UI",Tahoma,sans-serif;
+    background-image:radial-gradient(900px 500px at 80% -10%, rgba(224,138,74,.12), transparent 60%)}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 20px 80px}
+  .eb{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--gold);
+    border:1px solid rgba(217,185,120,.3);background:rgba(217,185,120,.06);padding:6px 13px;border-radius:999px;margin-bottom:18px}
+  h1{font-size:clamp(26px,4vw,40px);margin:0 0 10px;line-height:1.3}
+  h1 em{font-style:normal;color:var(--gold2)}
+  p.sub{color:var(--muted);margin:0 0 26px;font-size:15px;max-width:760px}
+  .player{background:#000;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.95)}
+  video{width:100%;display:block;aspect-ratio:16/9;background:#000}
+  .bar{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    padding:14px 18px;background:var(--panel);border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  .bar b{color:var(--gold2)}
+  .bar a{color:var(--gold);text-decoration:none;border-bottom:1px dotted rgba(217,185,120,.45)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+  .cell{background:linear-gradient(180deg,#181210,#110d0b);border:1px solid var(--line);border-radius:13px;padding:15px}
+  .cell .k{font-size:11px;color:var(--muted)}
+  .cell .v{font-size:19px;font-weight:800;color:var(--gold2);direction:ltr;text-align:right;margin-top:4px;font-variant-numeric:tabular-nums}
+  h2{font-size:18px;margin:42px 0 12px;color:var(--ink)}
+  h2 span{color:var(--gold);font-size:.7em;letter-spacing:.12em;margin-inline-start:8px}
+  ul{margin:0;padding-inline-start:20px;color:#c2b7aa;font-size:13.5px}
+  li{margin-bottom:7px}
+  li::marker{color:#6d5a2e}
+  .note{border:1px solid rgba(217,185,120,.28);background:linear-gradient(160deg,rgba(217,185,120,.08),rgba(217,185,120,.02));
+    border-radius:13px;padding:15px 17px;font-size:13px;color:#dbd0c2;margin-top:20px}
+  .note b{color:var(--gold2)}
+  .warn{border-color:rgba(224,116,92,.3);background:linear-gradient(160deg,rgba(224,116,92,.08),rgba(224,116,92,.02))}
+  .warn b{color:#e0745c}
+  code{background:#0e0b09;border:1px solid #241c17;border-radius:6px;padding:1px 6px;color:var(--green);font-size:11.5px;direction:ltr;display:inline-block}
+  footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:#7b6d62}
+  footer a{color:var(--gold);text-decoration:none}
+  @media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eb">EPISODE 01 · THE LOST NIGHTS</div>
+  <h1>The Last Night of Constantinople<br><em>نسخة الإنتاج — 1080p</em></h1>
+  <p class="sub">
+    المونتاج ونبرة الصوت بنفس مواصفات The Sleepy History Channel بالضبط: صورة شبه ثابتة،
+    انتقال 0.9 ثانية، طَبَد 432 Hz لا يتغيّر، وسرد بسرعة 153 كلمة/دقيقة. النسخة الأولى
+    (8:37) كانت إثباتًا للخطّ. النسخة الحالية (63 دقيقة) هي أول **ساعة كاملة** من الفيلم.
+  </p>
+
+  <div class="player">
+    <video id="v" controls preload="metadata" playsinline poster="../../studio/art/_graded/bg-01-constantinople.jpg">
+      <source src="exports/EP01_partA.mp4" type="video/mp4">
+      المتصفح لا يدعم تشغيل الفيديو — الملف موجود في <code>studio/video/exports/EP01_partA.mp4</code>.
+    </video>
+    <div class="bar">
+      <span><b>1920×1080</b> · 24fps · H.264 · ستيريو 48kHz · 386 MB</span>
+      <span><b>432 Hz</b> ambient bed — مُولّد برمجيًا</span>
+      <a href="exports/EP01_partA.mp4" download>تنزيل الملف (MP4)</a>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="cell"><div class="k">المدة</div><div class="v">63:23</div></div>
+    <div class="cell"><div class="k">سرد مُسجَّل</div><div class="v">9,005 w</div></div>
+    <div class="cell"><div class="k">سرعة السرد</div><div class="v">153 wpm</div></div>
+    <div class="cell"><div class="k">اللقطات</div><div class="v">36</div></div>
+  </div>
+
+  <div class="note">
+    <b>الفيلم الكامل: 2 ساعة و43 دقيقة.</b> السكربت كامل ومكتوب (14 فصلًا + 7 فصول وسطية،
+    24,700 كلمة)، و<code>narration/order.json</code> فيه ترتيب الـ108 مقطعًا.
+    المسجَّل حتى الآن 47 مقطعًا (63.5 دقيقة)، والباقي 61 مقطعًا يُسجَّل على دفعات.
+  </div>
+
+  <h2>ما الذي يجعله مطابقًا للنموذج <span>RECIPE</span></h2>
+  <ul>
+    <li><b>الحركة:</b> تكبير بطيء 2–12% على مدى اللقطة (74 ثانية) — أي 0.14% في الثانية. لا يُرى، لكنه يمنع «موت» الصورة.</li>
+    <li><b>الانتقال:</b> Cross-fade 0.9 ثانية. أبطأ من المعتاد، ولا يوجد أي قطع حاد في الفيديو كله.</li>
+    <li><b>اللون:</b> contrast 0.94 · saturation 0.88 · دفع أحمر/أصفر في الظلال · حبيبات فيلم متحركة · Vignette ضيقة.</li>
+    <li><b>الصوت:</b> السرد −16 LUFS، الموسيقى −27 LUFS (فرق 11 dB = السرد مفهوم بلا مجهود). Limiter عند −1 dBTP.</li>
+    <li><b>الموسيقى:</b> A2 + E3 + A3 + C4 + E4 بتuning 432 Hz، كل جزئية × 3 أصوات منحرفة قليلًا لـ slow beating، بلا إيقاع ولا لحن.</li>
+    <li><b>الخروج:</b> آخر كلمة، ثم 45 ثانية موسيقى وحدها، ثم fade للأسود. هذا هو الجزء الذي يترك المشاهد نائمًا.</li>
+  </ul>
+
+  <div class="note">
+    <b>لماذا 63 دقيقة وليس 2:43؟</b> الصوت هو العنق الوحيد للزجاجة: كل دفعة تسجيل تعطي ≈ 12 دقيقة
+    من الفيلم. الصورة والموسيقى والمانيفست جاهزون للـ108 مقطعًا كلها؛ الباقي تسجيل.
+    ترتيب القراءة الكامل في <code>narration/order.json</code>، والسكربت في
+    <code>scripts/EP01_FULL_SCRIPT.md</code>.
+  </div>
+
+  <div class="note warn">
+    <b>ملاحظة صدق:</b> السرد هنا بصوت TTS نظيف ومبطَّأ إلى 153 كلمة/دقيقة، وليس صوتًا بشريًا.
+    القناة المرجعية تستخدم راويًا بشريًا. إن أردت نفس الدفء بالضبط، سجّل الفصول بنفسك
+    (128–132 كلمة/دقيقة) وسأعيد تجميع الفيديو والموسيقى حول تسجيلك.
+  </div>
+
+  <h2>ملفات ما بعد النشر <span>PUBLISH PACK</span></h2>
+  <ul>
+    <li><code>scripts/EP01_publish.md</code> — العنوان، الوصف الجاهز للنسخ، الفصول، الوسوم، إعدادات الرفع، و4 أفكار Shorts.</li>
+    <li><code>scripts/EP01_The-Last-Night-of-Constantinople.md</code> — السكربت + خطة 13 فصلًا حتى 2:40.</li>
+    <li><code>PRODUCTION.md</code> — كيف بُني الفيديو، وطريقة الوصول إلى 2:40.</li>
+  </ul>
+
+  <h2>إعادة الإنتاج <span>REBUILD</span></h2>
+  <ul>
+    <li><code>python3 tools/make_ambient.py assets/ambient_432.wav --seconds 60</code></li>
+    <li><code>python3 tools/render_video.py scripts/ep01_demo.manifest.json</code></li>
+    <li>غيّر النص والصورة من <code>scripts/*.manifest.json</code> فقط.</li>
+  </ul>
+
+  <footer>
+    المصدر المرجعي: <a href="https://www.youtube.com/@TheSleepyHistoryChannel" target="_blank" rel="noopener">The Sleepy History Channel</a> ·
+    كل الصور والموسيقى أصلية ومولّدة لهذا المشروع.
+  </footer>
+</div>
+<script>
+  const v = document.getElementById('v');
+  v.addEventListener('error', () => {
+    document.querySelector('.bar').insertAdjacentHTML('beforeend',
+      '<span style="color:#e0745c">تعذّر التشغيل داخل المعاينة — استخدم زر التنزيل.</span>');
+  });
+</script>
+</body>
+</html>

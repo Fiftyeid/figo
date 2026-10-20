@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vellum Logs — نظام المحتوى الكامل (نموذج Sleepy History)</title>
+<style>
+  :root{
+    --bg:#0b0907; --panel:#141010; --panel2:#1b1512; --line:#2e241d;
+    --ink:#f0e9dd; --muted:#a2958a; --gold:#d9b978; --gold2:#f4e2bb;
+    --ember:#e08a4a; --green:#7fc4a0; --red:#e0745c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink); line-height:1.8;
+    font-family:"Noto Kufi Arabic","Cairo","Tajawal","Segoe UI",Tahoma,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 520px at 82% -8%, rgba(224,138,74,.14), transparent 62%),
+      radial-gradient(760px 480px at 6% 4%, rgba(217,185,120,.08), transparent 66%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 44px);
+  }
+  .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 22px 90px}
+
+  header{padding:62px 0 26px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.14em;
+    color:var(--gold);border:1px solid rgba(217,185,120,.3);background:rgba(217,185,120,.06);
+    padding:7px 14px;border-radius:999px;margin-bottom:24px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  h1{font-size:clamp(30px,4.8vw,52px);line-height:1.24;margin:0 0 14px;font-weight:800;letter-spacing:-.5px}
+  h1 em{font-style:normal;color:var(--gold2)}
+  .sub{color:var(--muted);font-size:16.5px;max-width:820px;margin:0 0 24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 24px;font-size:13px;color:var(--muted);
+    border-top:1px solid var(--line);padding-top:18px}
+  .meta b{color:var(--ink)}
+  .meta a{color:var(--gold);text-decoration:none;border-bottom:1px dotted rgba(217,185,120,.4)}
+
+  section{margin:56px 0 0}
+  .sec-head{margin-bottom:20px}
+  .sec-head h2{font-size:clamp(20px,2.6vw,28px);margin:0;font-weight:800;letter-spacing:-.2px}
+  .sec-head h2 span{color:var(--gold);font-size:.6em;letter-spacing:.14em;margin-inline-start:10px;transform:translateY(-3px);display:inline-block}
+  .sec-head p{margin:7px 0 0;color:var(--muted);font-size:14px;max-width:820px}
+
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .kpi{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+    border-radius:16px;padding:17px 15px;position:relative;overflow:hidden}
+  .kpi::after{content:"";position:absolute;inset:auto 0 0 0;height:2px;
+    background:linear-gradient(90deg,var(--ember),transparent);opacity:.6}
+  .kpi .lab{font-size:11.5px;color:var(--muted)}
+  .kpi .val{font-size:clamp(20px,2.4vw,28px);font-weight:800;color:var(--gold2);margin:6px 0 2px;
+    direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+  .kpi .hint{font-size:11px;color:#7b6d62;line-height:1.5}
+  .kpi.accent .val{color:var(--green)}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;
+    box-shadow:0 22px 50px -26px rgba(0,0,0,.9)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:11px 10px;border-bottom:1px solid #241c17;text-align:right;vertical-align:top}
+  th{color:#9d9084;font-weight:600;font-size:11.5px;letter-spacing:.03em}
+  td.num{direction:ltr;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  .good{color:var(--green)} .bad{color:var(--red)} .gold{color:var(--gold2)}
+
+  .formats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .fmt{background:linear-gradient(180deg,#191310,#120e0c);border:1px solid var(--line);
+    border-radius:14px;padding:16px}
+  .fmt .n{font-size:10.5px;letter-spacing:.16em;color:var(--ember);direction:ltr;text-align:right}
+  .fmt h4{margin:8px 0 6px;font-size:14px;color:var(--gold2)}
+  .fmt p{margin:0;font-size:12px;color:#9c8f83;line-height:1.75}
+  .fmt .len{margin-top:9px;font-size:10.5px;color:#7b6d62;border-top:1px solid #241c17;padding-top:8px;direction:ltr;text-align:right}
+
+  .timeline{display:flex;flex-direction:column;gap:0}
+  .tl{display:grid;grid-template-columns:104px 1fr;gap:16px;position:relative;padding-bottom:16px}
+  .tl:last-child{padding-bottom:0}
+  .tl .t{color:var(--gold);font-size:12px;direction:ltr;text-align:left;font-variant-numeric:tabular-nums;
+    border-inline-end:2px solid rgba(217,185,120,.28);padding-inline-end:14px;padding-top:2px}
+  .tl .c{font-size:13px;color:#c9bfb2}
+  .tl .c b{color:var(--gold2);display:block;margin-bottom:2px;font-size:13.5px}
+
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .shot{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .shot img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+  .shot .cap{padding:12px 14px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+  .shot .cap b{color:var(--gold2);font-weight:600}
+  .shot .cap span{direction:ltr;font-size:11px;color:#7b6d62}
+
+  .titles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .tt{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .tt .k{font-size:10.5px;color:var(--ember);letter-spacing:.12em;margin-bottom:6px}
+  .tt code{display:block;direction:ltr;text-align:left;background:#0e0b09;border:1px solid #241c17;
+    border-radius:8px;padding:8px 10px;color:#e8dcc7;font-size:11.5px;line-height:1.6;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}
+
+  .copybox{position:relative;background:#0e0b09;border:1px solid #241c17;border-radius:12px;
+    padding:16px;direction:ltr;text-align:left;font-family:ui-monospace,Menlo,monospace;
+    font-size:12px;line-height:1.85;color:#ddd2c0;white-space:pre-wrap;overflow-x:auto}
+  .copybox .ar{direction:rtl;unicode-bidi:embed;font-family:inherit}
+  .copybtn{position:absolute;top:10px;left:10px;background:#221a15;border:1px solid #3a2d24;
+    color:var(--gold);border-radius:8px;padding:5px 11px;font-size:11px;cursor:pointer;font-family:inherit}
+  .copybtn:hover{background:#2c221b}
+
+  .kw{display:flex;flex-wrap:wrap;gap:8px}
+  .kw span{direction:ltr;background:#1a1411;border:1px solid #2e241d;color:#c3b6a7;
+    border-radius:999px;padding:5px 12px;font-size:11.5px}
+  .kw span.core{border-color:rgba(217,185,120,.45);color:var(--gold2);background:rgba(217,185,120,.08)}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .pc{background:linear-gradient(180deg,#181210,#110d0b);border:1px solid var(--line);
+    border-radius:14px;padding:18px}
+  .pc h3{margin:0 0 8px;font-size:14.5px;color:var(--gold2)}
+  .pc p{margin:0;font-size:12.5px;color:#a4978a;line-height:1.85}
+  .pc code{background:#0b0908;border:1px solid #2e241d;border-radius:6px;padding:1px 6px;
+    color:var(--green);font-size:11px;direction:ltr;display:inline-block}
+
+  .callout{border:1px solid rgba(224,116,92,.3);background:linear-gradient(160deg,rgba(224,116,92,.09),rgba(224,116,92,.02));
+    border-radius:14px;padding:16px 18px;font-size:13px;color:#ddd1c8}
+  .callout b{color:var(--red)}
+  .callout.gold{border-color:rgba(217,185,120,.32);background:linear-gradient(160deg,rgba(217,185,120,.09),rgba(217,185,120,.02))}
+  .callout.gold b{color:var(--gold2)}
+
+  .check{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px}
+  .check li{font-size:13px;color:#bdb1a3;display:flex;gap:9px;align-items:flex-start}
+  .check li::before{content:"☐";color:var(--gold);font-size:15px;line-height:1.4}
+
+  footer{margin-top:64px;border-top:1px solid var(--line);padding-top:22px;font-size:12.5px;color:#7b6d62}
+  footer a{color:var(--gold);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  .note{margin-top:12px;font-size:11.5px;color:#6f6259;display:flex;gap:8px;align-items:flex-start}
+  .note span:first-child{color:var(--gold)}
+
+  @media (max-width:1060px){
+    .kpis{grid-template-columns:repeat(3,1fr)}
+    .formats{grid-template-columns:repeat(2,1fr)}
+    .cards3{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .wrap{padding:0 14px 70px}
+    header{padding:36px 0 18px}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .gallery,.titles,.check{grid-template-columns:1fr}
+    .tl{grid-template-columns:78px 1fr;gap:10px}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    body::before{display:none}
+    .card,.kpi,.fmt,.shot,.tt,.pc{background:#fff;border-color:#ddd;box-shadow:none}
+    .kpi .val,.gold,.shot .cap b{color:#7a5a1e}
+    table th,table td{border-color:#ddd}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow"><span class="dot"></span> نظام محتوى كامل · نموذج: Sleepy History Channel</div>
+  <h1>Vellum Logs — <em>«الرفّ الهادئ»</em><br>خطة تحويل قناتك إلى وثائقيات نوم</h1>
+  <p class="sub">
+    تشريح كامل للقناة المرجعية بالأرقام، ثم نظام تنفيذي جاهز: 5 صيغ محتوى، خطة 90 يومًا،
+    قوالب عناوين ووصف وكلمات مفتاحية، وصفة مونتاج، و5 صور مصغرة مولّدة فعليًا بهوية النيش.
+    كل ما هنا مبني على بيانات مسحوبة من يوتيوب وSocial Blade في 19 أكتوبر 2026.
+  </p>
+  <div class="card" style="margin:22px 0 6px;border-color:rgba(127,196,160,.35);background:linear-gradient(160deg,rgba(127,196,160,.10),rgba(127,196,160,.02))">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:11px;letter-spacing:.14em;color:var(--green);margin-bottom:4px">NEW · RENDERED EPISODE</div>
+        <div style="font-size:16px;font-weight:700;color:var(--gold2)">الحلقة الأولى مُنتَجة فعليًا — 1080p · 8:37</div>
+        <div style="font-size:12.5px;color:#9c8f83;margin-top:4px">نفس مونتاج ونبرة Sleepy History: صورة شبه ثابتة، انتقال 0.9 ثانية، 432 Hz، سرد 141 كلمة/دقيقة.</div>
+      </div>
+      <a href="video/index.html" style="background:rgba(127,196,160,.16);border:1px solid rgba(127,196,160,.5);color:#bfe7d3;text-decoration:none;border-radius:10px;padding:10px 18px;font-size:13px;white-space:nowrap">مشاهدة الفيديو ←</a>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div><b>القناة المرجعية:</b> <a href="https://www.youtube.com/@TheSleepyHistoryChannel" target="_blank" rel="noopener">Sleepy History Channel</a></div>
+    <div><b>قناتك:</b> <a href="https://www.youtube.com/@vellumlogs" target="_blank" rel="noopener">Vellum Logs</a></div>
+    <div><b>بيانات:</b> Social Blade · صفحات القنوات · وصف ونصوص الفيديوهات</div>
+  </div>
+</header>
+
+<!-- ================= TEARDOWN ================= -->
+<section>
+  <div class="sec-head">
+    <h2>تشريح النموذج <span>TEARDOWN</span></h2>
+    <p>القناة عمرها ≈ 15 شهرًا فقط. الأرقام التالية هي التي يجب أن تبني عليها قراراتك، وليس عدد المشتركين وحده.</p>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="lab">المشتركون</div><div class="val">56.6K</div><div class="hint">منذ 27 يوليو 2025</div></div>
+    <div class="kpi accent"><div class="lab">نمو آخر 30 يومًا</div><div class="val">+7K</div><div class="hint">≈ 12.4% شهريًا</div></div>
+    <div class="kpi"><div class="lab">إجمالي المشاهدات</div><div class="val">8.31M</div><div class="hint">131 فيديو</div></div>
+    <div class="kpi"><div class="lab">مشاهدات/فيديو</div><div class="val">63.4K</div><div class="hint">متوسط العمر الكامل</div></div>
+    <div class="kpi"><div class="lab">مدة الفيديو</div><div class="val">2:20–2:58</div><div class="hint">كل الفيديوهات تقريبًا</div></div>
+    <div class="kpi"><div class="lab">أعلى فيديو</div><div class="val">213K</div><div class="hint">Life In The Stone Age</div></div>
+  </div>
+  <div class="note"><span>◈</span><span>
+    ملاحظة مهمة: 22% من مشاهدات القناة كاملة حدثت في آخر 30 يومًا فقط — أي أن الزخم يتسارع، وليس ثابتًا.
+    هذه علامة على أن يوتيوب بدأ يقترح مكتبتها القديمة بشكل أوسع.
+  </span></div>
+</section>
+
+<!-- ================= WINNERS / LOSERS ================= -->
+<section>
+  <div class="sec-head">
+    <h2>ماذا ينجح وماذا يفشل <span>WHAT WORKS</span></h2>
+    <p>نفس القناة، نفس القالب، نفس الطول — لكن الفارق 30 ضعفًا. الفارق دائمًا في <b>الموضوع</b> أولًا ثم <b>العنوان</b>.</p>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>الفيديو</th><th>المدة</th><th>المشاهدات</th><th>الدرس</th></tr></thead>
+      <tbody>
+        <tr><td>Life In The Stone Age</td><td class="num">2:54</td><td class="num good">213K</td><td>موضوع بدائي + «حياة يومية» = جمهور واسع جدًا</td></tr>
+        <tr><td>100 Sleepy Facts About Human Evolution</td><td class="num">2:25</td><td class="num good">152K</td><td>موضوع تعلّمي + كلمة Facts في العنوان</td></tr>
+        <tr><td>How did we Survive the Dark Ages?!</td><td class="num">2:26</td><td class="num good">137K</td><td>سؤال + «كيف نجا الناس» = توتر هادئ</td></tr>
+        <tr><td>100 Sleepy Facts About Tudor England</td><td class="num">2:28</td><td class="num good">133K</td><td>دولة/عصر محدد > موضوع عام</td></tr>
+        <tr><td>What Was it Really Like to be a Caveman?</td><td class="num">2:21</td><td class="num good">124K</td><td>صيغة «ما الذي كان حقًا» تبيع فضولًا</td></tr>
+        <tr><td>100 Sleepy Facts About Ancient Sparta</td><td class="num">2:23</td><td class="num">34K</td><td>موضوع مستهلك — يحتاج زاوية مختلفة</td></tr>
+        <tr><td>100 Sleepy Facts About Napoleon</td><td class="num">2:24</td><td class="num">17K</td><td>شخصية مشهورة جدًا = منافسة عالية</td></tr>
+        <tr><td>100 Sleepy Facts About Roman Baths</td><td class="num">2:20</td><td class="num bad">7.3K</td><td>موضوع ضيق جدًا، والفيديو حديث (يوم واحد)</td></tr>
+        <tr><td>100 Sleepy Facts About Pandemics</td><td class="num">2:27</td><td class="num bad">6.7K</td><td>موضوع ثقيل/مقلق — يعارض وعد النوم</td></tr>
+        <tr><td>100 Sleepy Facts About the Empire State Building</td><td class="num">2:17</td><td class="num bad">8.4K</td><td>خارج نيش التاريخ القديم = جمهور مختلف</td></tr>
+      </tbody>
+    </table>
+    <div class="callout gold" style="margin-top:16px">
+      <b>القاعدة المستخلصة:</b> «حياة يومية + عصر محدد + كلمة sleep/facts» = أفضل تركيبة.
+      المواضيع الثقيلة (الأوبئة) أو الحديثة جدًا (ناطحات السحاب) أو الشخصيات شديدة الشهرة (نابليون) تفشل.
+    </div>
+  </div>
+</section>
+
+<!-- ================= FORMULAS ================= -->
+<section>
+  <div class="sec-head">
+    <h2>الصيغ الخمس <span>CONTENT SYSTEM</span></h2>
+    <p>بدل تقليد «100 حقيقة» حرفيًا، ابنِ 5 سلاسل تمنحك تنوعًا يحميك من سياسة المحتوى غير الأصيل، وكلها بنفس الطول والوعد.</p>
+  </div>
+  <div class="formats">
+    <div class="fmt">
+      <div class="n">01</div>
+      <h4>The Lost Nights</h4>
+      <p>ليلة واحدة أخيرة في مدينة أو إمبراطورية. سرد زمني من الغروب للفجر.</p>
+      <div class="len">2:00 – 3:00</div>
+    </div>
+    <div class="fmt">
+      <div class="n">02</div>
+      <h4>A Log from…</h4>
+      <p>يوميات شخص حقيقي (طبيب، جندي، راهب) بضمير المتكلم. أقوى صيغة للأصالة.</p>
+      <div class="len">2:00 – 2:30</div>
+    </div>
+    <div class="fmt">
+      <div class="n">03</div>
+      <h4>100 Slow Facts</h4>
+      <p>تحدي مباشر للنموذج: 100 حقيقة عن موضوع واحد، بترقيم صوتي بطيء.</p>
+      <div class="len">2:15 – 2:45</div>
+    </div>
+    <div class="fmt">
+      <div class="n">04</div>
+      <h4>The Quiet Craft</h4>
+      <p>كيف كان الناس ينامون، يأكلون، يعملون. أسئلة يومية بسيطة جدًا.</p>
+      <div class="len">2:00 – 2:30</div>
+    </div>
+    <div class="fmt">
+      <div class="n">05</div>
+      <h4>Vanished Rooms</h4>
+      <p>مكان واحد: غرفة، معبد، سفينة. وصف مكاني يريح الدماغ.</p>
+      <div class="len">1:45 – 2:15</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCHEMA ================= -->
+<section>
+  <div class="sec-head">
+    <h2>هيكل الفيديو — بالثانية <span>VIDEO SCHEMA</span></h2>
+    <p>هذا هو الهيكل الحرفي المستخلص من أول 90 ثانية في فيديو Stone Age، مطبّقًا على قناتك.</p>
+  </div>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl"><div class="t">0:00–0:20</div><div class="c"><b>Cold open — مشهد واحد</b>صوت محيط فقط (نار/مطر) + جملة واحدة: «It is the last night of…». لا شعار، لا موسيقى صاخبة.</div></div>
+      <div class="tl"><div class="t">0:20–1:10</div><div class="c"><b>توقيع الراوي</b>«Welcome back to the quiet shelf.» ثم تنويم حرفي: «Let your shoulders soften. Let your breathing slow.»</div></div>
+      <div class="tl"><div class="t">1:10–1:50</div><div class="c"><b>وعد + اشتراك ناعم</b>ماذا سيعرف المستمع في النهاية، ثم: «If these nights help you rest, you're welcome to stay.»</div></div>
+      <div class="tl"><div class="t">1:50–2:00</div><div class="c"><b>علامة الانتقال</b>«Let's begin.» — نفس الجملة في كل فيديو تبني عادة استماع.</div></div>
+      <div class="tl"><div class="t">2:00 → النهاية−6د</div><div class="c"><b>الجسم</b>40–100 مقطعًا، كل مقطع 40–90 ثانية. كل 8–10 دقائق: خفض طفيف في الصوت ونبرة أبطأ 5%.</div></div>
+      <div class="tl"><div class="t">النهاية−6د</div><div class="c"><b>التلخيص الهادئ</b>إعادة سرد سريعة + «Sleep well. The next log is already on the shelf.»</div></div>
+      <div class="tl"><div class="t">النهاية−1د</div><div class="c"><b>Fade out صامت</b>60 ثانية بلا كلام — هذا ما يجعل المشاهد ينام فعلاً ويرجع.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCRIPT SAMPLE ================= -->
+<section>
+  <div class="sec-head">
+    <h2>نموذج سكربت — افتتاحية الحلقة الأولى <span>SCRIPT SAMPLE</span></h2>
+    <p>حوالي 190 كلمة ≈ 90 ثانية بسرعة 130 كلمة/دقيقة. هذا هو الجزء الذي يحدد إن كان المشاهد سيبقى 30 ثانية أم 30 دقيقة.</p>
+  </div>
+  <div class="card">
+    <div class="copybox" id="scriptBox" style="line-height:2.05"><button class="copybtn" data-copy="scriptBox">نسخ</button>[Soft wind. Distant water. A single bell, far away.]
+
+It is the twenty-eighth of May, 1453. The sun has gone down behind the walls of Constantinople.
+
+For a thousand years, this city has been the heart of an empire. Its domes have outlived emperors, invasions, and plagues. But tonight, the lamps are being lit for the last time.
+
+Outside the walls, an army waits in the dark. Inside, nine thousand people wait with it.
+
+No one speaks loudly. There is nothing left to decide, and nothing left to prepare. Only a few hours remain — and in those hours, ordinary people will do what people have always done on the last night of a world.
+
+They will pray. They will hold their children. They will mend a torn cloak, or finish a letter they know may never be sent.
+
+My name is the Keeper, and this is the shelf where the old logs are kept.
+
+So find a comfortable place. Let your shoulders soften. Let your breathing slow. Let the day fall away from you.
+
+Tonight, we open the log of the last night of Constantinople.
+
+Let's begin.</div>
+    <div class="note"><span>◈</span><span>
+      لاحظ: لا شعار، لا «مرحبًا بكم في قناتي»، لا موسيقى صاخبة. مشهد → تاريخ → بشر → هوية الراوي → تنويم → وعد → «Let's begin».
+      كرر هذه البنية في كل حلقة، وغيّر المحتوى فقط.
+    </span></div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section>
+  <div class="sec-head">
+    <h2>الصور المصغرة — نماذج مولّدة فعليًا <span>THUMBNAILS</span></h2>
+    <p>خمس صور 1280×720 بهوية النيش: خلفية هادئة بألوان ترابية، خط Slab أسود ثقيل بظل ناعم، شارة صغيرة. مولّدة بمحرك <code style="color:var(--green);direction:ltr;display:inline-block">studio/tools/make_thumbnail.py</code>.</p>
+  </div>
+  <div class="gallery">
+    <div class="shot">
+      <img src="thumbnails/thumb-ep01-constantinople.png" alt="100 Sleepy Facts About the Fall of Constantinople">
+      <div class="cap"><b>الحملة الرابعة / القسطنطينية</b><span>ep01</span></div>
+    </div>
+    <div class="shot">
+      <img src="thumbnails/thumb-ep04-style-test.png" alt="The Last Night of an Empire">
+      <div class="cap"><b>سلسلة The Lost Nights</b><span>ep04</span></div>
+    </div>
+    <div class="shot">
+      <img src="thumbnails/thumb-ep02-scriptorium.png" alt="A Monk's Night — What did monks write at 3 a.m.">
+      <div class="cap"><b>سلسلة A Log from — راهب</b><span>ep02</span></div>
+    </div>
+    <div class="shot">
+      <img src="thumbnails/thumb-ep05-plague-log.png" alt="A Plague Doctor's Log — London 1665">
+      <div class="cap"><b>يوميات طبيب الطاعون</b><span>ep05</span></div>
+    </div>
+    <div class="shot" style="grid-column:1/-1">
+      <img src="thumbnails/thumb-ep03-egypt.png" alt="100 Sleepy Facts About Daily Life in Ancient Egypt">
+      <div class="cap"><b>الحياة اليومية في مصر القديمة — أكثر موضوع واعد في النيش</b><span>ep03</span></div>
+    </div>
+  </div>
+
+  <div class="cards3" style="margin-top:16px">
+    <div class="pc">
+      <h3>قاعدة الـ 3 عناصر</h3>
+      <p>خلفية سينمائية هادئة + نص عملاق (3–9 كلمات) + شارة بيضاء واحدة. لا أكثر. أي عنصر رابع يقتل الوضوح على الموبايل.</p>
+    </div>
+    <div class="pc">
+      <h3>الخط</h3>
+      <p>Slab Serif ثقيل (Roboto Slab Black) بحدّ أسود وظل ناعم — نفس عائلة خط القناة المرجعية، لكن بتوقيع Vellum (هلال أسفل اليمين).</p>
+    </div>
+    <div class="pc">
+      <h3>اللون</h3>
+      <p>عسلي/رملي + بني داكن. لا أزرق نيون ولا أحمر تحذيري. الصورة يجب أن تبدو كأنها صفحة من كتاب قديم، لا إعلان.</p>
+    </div>
+  </div>
+  <div class="note"><span>◈</span><span>
+    لتعديل أي صورة: افتح ملفها في <code style="direction:ltr;display:inline-block;color:var(--green)">studio/configs/</code>، غيّر النص أو الإحداثيات، ثم:
+    <code style="direction:ltr;display:inline-block;color:var(--green)">python3 tools/make_thumbnail.py configs/ep01.json</code>.
+  </span></div>
+</section>
+
+<!-- ================= TITLES ================= -->
+<section>
+  <div class="sec-head">
+    <h2>العناوين — 14 صيغة جاهزة <span>TITLES</span></h2>
+    <p>الصيغة العامة: <b style="color:var(--gold2)">[رقم/اسم] + [الموضوع] + | Sleepy History</b>. اجعل أول 40 حرفًا تحمل الوعد كاملًا، لأن يوتيوب يقطع الباقي على الموبايل.</p>
+  </div>
+  <div class="titles">
+    <div class="tt"><div class="k">100 SLOW FACTS</div><code>100 Sleepy Facts About Roman Baths | Vellum Logs</code></div>
+    <div class="tt"><div class="k">100 SLOW FACTS</div><code>100 Sleepy Facts About Daily Life in Ancient Egypt — No Adverts</code></div>
+    <div class="tt"><div class="k">100 SLOW FACTS</div><code>100 Sleepy Facts About Viking Longships | Sleepy History</code></div>
+    <div class="tt"><div class="k">LOST NIGHTS</div><code>The Last Night of Constantinople — 1453 | Sleepy History</code></div>
+    <div class="tt"><div class="k">LOST NIGHTS</div><code>The Last Night of Pompeii | A Calm History Documentary</code></div>
+    <div class="tt"><div class="k">LOST NIGHTS</div><code>The Last Night of the Library of Alexandria</code></div>
+    <div class="tt"><div class="k">A LOG FROM</div><code>A Plague Doctor's Journal, London 1665 | Sleepy History</code></div>
+    <div class="tt"><div class="k">A LOG FROM</div><code>A Roman Soldier's Diary: The Night Before Battle</code></div>
+    <div class="tt"><div class="k">A LOG FROM</div><code>A Crusader's Log from the Walls of Acre</code></div>
+    <div class="tt"><div class="k">QUIET CRAFT</div><code>How Did Medieval Peasants Sleep? | Sleepy History</code></div>
+    <div class="tt"><div class="k">QUIET CRAFT</div><code>What Did People Eat During a Siege? | Calm History</code></div>
+    <div class="tt"><div class="k">VANISHED ROOMS</div><code>Inside the Library of Alexandria | Sleepy History</code></div>
+    <div class="tt"><div class="k">COMPILATION</div><code>3 Hours of Calm History — Fall Asleep to the Ancient World</code></div>
+    <div class="tt"><div class="k">COMPILATION</div><code>2 Hours of Byzantine History to Fall Asleep To</code></div>
+  </div>
+</section>
+
+<!-- ================= DESCRIPTION ================= -->
+<section>
+  <div class="sec-head">
+    <h2>الوصف — قالب جاهز للنسخ <span>DESCRIPTION</span></h2>
+    <p>مبني على البنية الحرفية لأوصاف القناة المرجعية، لكنه يذكر المصادر ويبني هوية «السجل» بدل قائمة الحقائق.</p>
+  </div>
+  <div class="card">
+    <div class="copybox" id="descBox"><button class="copybtn" data-copy="descBox">نسخ</button>☕ If these nights help you rest → https://buymeacoffee.com/vellumlogs
+
+💤 Tonight we open the log of <span class="ar">[الموضوع]</span>. From <span class="ar">[نقطة البداية]</span> to <span class="ar">[نقطة النهاية]</span>, we follow <span class="ar">[البطل/المكان]</span> through <span class="ar">[٣ نقاط]</span>. Written for quiet evenings, slow breathing, and falling asleep to history — no loud sounds, no sudden edits, just a calm voice and a real story.
+
+🎧 432 Hz ambient bed · no adverts in this video · soft narration throughout.
+
+Whether you're drawn to <span class="ar">[مجال 1]</span>, <span class="ar">[مجال 2]</span>, or simply want to drift off to something calm and real, this quiet history documentary will guide you through <span class="ar">[الفترة]</span> at a gentle pace.
+
+😴 Perfect for:
+- Falling asleep to <span class="ar">[الموضوع]</span>
+- Bedtime history for adults
+- Slow learning about <span class="ar">[الفترة]</span>
+- Background audio for reading or rest
+
+📜 In this log:
+- <span class="ar">[نقطة 1]</span>
+- <span class="ar">[نقطة 2]</span>
+- <span class="ar">[نقطة 3]</span>
+- <span class="ar">[نقطة 4]</span>
+- <span class="ar">[نقطة 5]</span>
+- <span class="ar">[نقطة 6]</span>
+
+📚 Sources: <span class="ar">[مصدر 1]</span> · <span class="ar">[مصدر 2]</span> · <span class="ar">[مصدر 3]</span>
+
+Subscribe to Vellum Logs — a new log every week, read in a low voice.
+
+#SleepyHistory #HistoryForSleep #FallAsleepToHistory #VellumLogs</div>
+    <div class="note"><span>◈</span><span>
+      أول سطرين يظهران قبل «المزيد» — اجعلهما يحملان الوعد كاملًا. وذكر المصادر ليس تجميلًا: هو دليل الأصالة أمام مراجعة تحقيق الربح.
+    </span></div>
+  </div>
+</section>
+
+<!-- ================= KEYWORDS ================= -->
+<section>
+  <div class="sec-head">
+    <h2>الكلمات المفتاحية <span>KEYWORDS</span></h2>
+    <p>القاعدة: 3–5 وسوم فقط في نهاية الوصف + الكلمات نفسها مدمجة في جمل طبيعية. الحشو يضر ولا ينفع.</p>
+  </div>
+  <div class="card">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">أساسية (في كل فيديو):</div>
+    <div class="kw" style="margin-bottom:18px">
+      <span class="core">sleepy history</span>
+      <span class="core">history for sleep</span>
+      <span class="core">fall asleep to history</span>
+      <span class="core">calm history documentary</span>
+      <span class="core">bedtime history</span>
+    </div>
+
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">حسب السلسلة:</div>
+    <div class="kw" style="margin-bottom:18px">
+      <span>last night of constantinople</span><span>fall of pompeii</span><span>end of an empire</span>
+      <span>plague doctor diary</span><span>roman soldier journal</span><span>medieval monk life</span>
+      <span>100 facts history</span><span>roman baths</span><span>viking longships</span>
+      <span>how did medieval peasants sleep</span><span>ancient egypt daily life</span>
+      <span>library of alexandria</span>
+    </div>
+
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Long-tail (داخل الوصف فقط):</div>
+    <div class="kw">
+      <span>2 hours of history to fall asleep to</span>
+      <span>history documentary no adverts</span>
+      <span>432 hz history narration</span>
+      <span>learn history while sleeping</span>
+      <span>soft spoken history</span>
+      <span>history for insomnia</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MONTAGE ================= -->
+<section>
+  <div class="sec-head">
+    <h2>المونتاج والصوت <span>EDITING &amp; AUDIO</span></h2>
+    <p>هذه ليست نصائح جمالية — هي أرقام. أي انحراف عنها يظهر فورًا في منحنى الاحتفاظ.</p>
+  </div>
+  <div class="cards3">
+    <div class="pc"><h3>الصورة</h3><p>1920×1080 · 24fps. حركة Ken Burns بطيئة 2–4% فقط. انتقالات Cross-fade 0.8–1.2 ثانية. ممنوع: وميض، قطع سريع، مشاهد عنيفة أو دموية.</p></div>
+    <div class="pc"><h3>الصوت</h3><p>راوٍ واحد ثابت · −16 LUFS · سرعة 125–135 كلمة/دقيقة (أبطأ 20% من الطبيعي). EQ: قطع أقل من 80Hz وأعلى من 9kHz + Reverb غرفة صغيرة.</p></div>
+    <div class="pc"><h3>الموسيقى</h3><p>Ambient واحد مستمر · −26 LUFS · 432 Hz حقيقي. لا تغيّر مفاجئ، لا إيقاع قوي. أضف طبقة brown noise خفيفة (−34 dB) لدفن ضجيج البيئة.</p></div>
+    <div class="pc"><h3>الفصول</h3><p>6–10 فصول بأسماء سردية («The Wall at Dawn»، «The Last Liturgy») لا «Part 1/2». الفصول ترفع الاحتفاظ وتسمح بالإعلانات إن قررت الربح.</p></div>
+    <div class="pc"><h3>النص على الشاشة</h3><p>شارة صغيرة كل 10 حقائق («X / 100»). عناوين فصول هادئة بخط Inter، تظهر 6 ثوانٍ ثم تختفي. لا نصوص متحركة كاملة.</p></div>
+    <div class="pc"><h3>النهاية</h3><p>60 ثانية صامتة مع fade للأسود. لا موسيقى نهاية صاخبة — هذا أهم عنصر في «تجربة النوم» وأكثره إهمالًا.</p></div>
+  </div>
+</section>
+
+<!-- ================= CALENDAR ================= -->
+<section>
+  <div class="sec-head">
+    <h2>خطة 90 يومًا <span>LAUNCH CALENDAR</span></h2>
+    <p>فيديو واحد أسبوعيًا + 2 Shorts. كل فيديو يُضاف لسلسلته وقائمة تشغيل «History Facts For Sleep» فورًا.</p>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>الأسبوع</th><th>الفيديو</th><th>السلسلة</th><th>المدة</th><th>عنوان الصورة المصغرة</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>The Last Night of Constantinople</td><td>Lost Nights</td><td class="num">2:30</td><td class="num">THE LAST NIGHT OF AN EMPIRE</td></tr>
+        <tr><td class="num">2</td><td>100 Sleepy Facts About Roman Baths</td><td>100 Slow Facts</td><td class="num">2:20</td><td class="num">100 SLEEPY FACTS</td></tr>
+        <tr><td class="num">3</td><td>A Plague Doctor's Journal, 1665</td><td>A Log From</td><td class="num">2:00</td><td class="num">A PLAGUE DOCTOR'S LOG</td></tr>
+        <tr><td class="num">4</td><td>How Did Medieval Peasants Sleep?</td><td>Quiet Craft</td><td class="num">2:15</td><td class="num">HOW DID THEY SLEEP?</td></tr>
+        <tr><td class="num">5</td><td>100 Sleepy Facts About Viking Longships</td><td>100 Slow Facts</td><td class="num">2:25</td><td class="num">100 SLEEPY FACTS</td></tr>
+        <tr><td class="num">6</td><td>The Last Night of Pompeii</td><td>Lost Nights</td><td class="num">2:30</td><td class="num">THE LAST NIGHT OF POMPEII</td></tr>
+        <tr><td class="num">7</td><td>A Crusader's Log from Acre</td><td>A Log From</td><td class="num">2:10</td><td class="num">A CRUSADER'S LOG</td></tr>
+        <tr><td class="num">8</td><td>Inside the Library of Alexandria</td><td>Vanished Rooms</td><td class="num">1:55</td><td class="num">INSIDE THE LIBRARY</td></tr>
+        <tr><td class="num">9</td><td>100 Sleepy Facts About Daily Life in Ancient Egypt</td><td>100 Slow Facts</td><td class="num">2:35</td><td class="num">100 SLEEPY FACTS</td></tr>
+        <tr><td class="num">10</td><td>What Did People Eat During a Siege?</td><td>Quiet Craft</td><td class="num">2:05</td><td class="num">DINNER UNDER SIEGE</td></tr>
+        <tr><td class="num">11</td><td>A Roman Soldier's Diary</td><td>A Log From</td><td class="num">2:20</td><td class="num">A ROMAN SOLDIER'S DIARY</td></tr>
+        <tr><td class="num">12</td><td>3 Hours of Calm History (تجميع)</td><td>Compilation</td><td class="num">3:00</td><td class="num">3 HOURS OF CALM</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PUBLISHING ================= -->
+<section>
+  <div class="sec-head">
+    <h2>النشر والتحسين <span>PUBLISHING</span></h2>
+    <p>قناة النوم تُستهلك ليلًا. هذا يغيّر وقت النشر وطريقة كتابة الوصف بالكامل.</p>
+  </div>
+  <div class="cards3">
+    <div class="pc"><h3>وقت النشر</h3><p>20:00–22:00 بتوقيت الساحل الشرقي الأمريكي. نفس اليوم ونفس الساعة أسبوعيًا — الجمهور يبني عادة «ليلة الأربعاء».</p></div>
+    <div class="pc"><h3>الـ Shorts</h3><p>45–60 ثانية: مقطع واحد مثير من الفيديو + نص «Full log tonight at 8». وظيفتها جذب مشترك جديد فقط.</p></div>
+    <div class="pc"><h3>End Screen</h3><p>آخر 20 ثانية: «الفيديو التالي للنوم» + زر اشتراك. لا تضع فيديوهات قصيرة أو غير نوم في الـ End Screen.</p></div>
+    <div class="pc"><h3>Community</h3><p>استطلاع أسبوعي: «Any topic for this week's log?» + منشور شكر عند كل ألف مشترك. القناة المرجعية تفعلها وتجيب 800+ صوت.</p></div>
+    <div class="pc"><h3>التعليق المثبت</h3><p>سؤال واحد: «What should I read next week?» — يولّد أفكارًا مجانية ويضاعف التفاعل.</p></div>
+    <div class="pc"><h3>الـ Playlist</h3><p>سلسلة لكل صيغة + قائمة جامعة «History Facts For Sleep». الخوارزمية تحب البنية الواضحة.</p></div>
+  </div>
+</section>
+
+<!-- ================= RISK ================= -->
+<section>
+  <div class="sec-head">
+    <h2>تحذير جوهري <span>RISK</span></h2>
+  </div>
+  <div class="callout">
+    <b>لا تنسخ قالب «100 حقيقة» حرفيًا 100 مرة.</b> سياسة يوتيوب للمحتوى غير الأصيل (يوليو 2025 وما بعده)
+    تستهدف صراحةً «المحتوى المنتج بكميات كبيرة، والقوالب المتشابهة بلا اختلاف، والشرائح المصوّرة بلا سرد أو قيمة تعليمية».
+    «100 حقيقة» بصوت آلي ونفس الصورة المصغرة كل مرة = الأصل المثالي للرفض.
+    <br><br>
+    <b style="color:var(--green)">الحل الذي يقدّمه هذا النظام:</b> خمس صيغ سردية مختلفة (سجل / ليلة أخيرة / يوميات / سؤال / مكان)،
+    راوٍ واحد بشخصية ثابتة، مصادر مذكورة، وزاوية شخصية في كل حلقة. هذا يمنحك نفس سهولة الإنتاج، بأصالة قابلة للدفاع.
+  </div>
+</section>
+
+<!-- ================= CHECKLIST ================= -->
+<section>
+  <div class="sec-head">
+    <h2>قائمة أول 7 أيام <span>WEEK ONE</span></h2>
+  </div>
+  <div class="card">
+    <ul class="check">
+      <li>تصميم الأفاتار (هلال + ورق رقّ) والبanner بنفس ألوان الصور المصغرة.</li>
+      <li>كتابة وصف القناة: «Calm history, read in a low voice. 432 Hz. No adverts.»</li>
+      <li>تسجيل عيّنة 60 ثانية من الراوي للتأكد من النبرة والسرعة.</li>
+      <li>اختيار الموسيقى: مقطع Ambient واحد 432 Hz بلا إيقاع قوي.</li>
+      <li>كتابة سكربت الحلقة الأولى (≈ 12,000–15,000 كلمة لمدة 2:30).</li>
+      <li>توليد 6 خلفيات إضافية بنفس ألوان <code>studio/art/</code>.</li>
+      <li>تصدير الصورة المصغرة من <code>studio/configs/ep01.json</code>.</li>
+      <li>فتح Playlists الخمس قبل نشر أول فيديو.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div>المصادر:
+    <a href="https://www.youtube.com/@TheSleepyHistoryChannel" target="_blank" rel="noopener">Sleepy History Channel</a> ·
+    <a href="https://socialblade.com/youtube/handle/thesleepyhistorychannel" target="_blank" rel="noopener">Social Blade</a> ·
+    <a href="https://www.youtube.com/playlist?list=PLiA4peXWV_L5-6R_01JR-Xqm7Rplzk0dV" target="_blank" rel="noopener">Playlist — History Facts For Sleep</a> ·
+    <a href="https://support.google.com/youtube/answer/1311392?hl=en" target="_blank" rel="noopener">YouTube Monetization Policies</a>
+  </div>
+  <div style="margin-top:10px;font-size:11.5px;color:#6f6259">
+    الأرقام مسحوبة علنًا بتاريخ 19 أكتوبر 2026 من Social Blade وصفحات يوتيوب. الصور المصغرة أصلية وليست مأخوذة من القناة المرجعية.
+    هذا الملف تحليل تعليمي ولا يمثل يوتيوب أو القنوات المذكورة.
+  </div>
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll(".copybtn").forEach(btn=>{
+  btn.addEventListener("click", async ()=>{
+    const box = document.getElementById(btn.dataset.copy);
+    const text = box.innerText.replace(/^نسخ\s*/,"");
+    try{
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "تم النسخ ✓";
+    }catch(e){
+      const r = document.createRange(); r.selectNodeContents(box);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = "حدّد ثم Ctrl+C";
+    }
+    setTimeout(()=>btn.textContent="نسخ", 2200);
+  });
+});
+</script>
+</body>
+</html>

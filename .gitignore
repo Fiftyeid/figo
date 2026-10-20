@@ -1,0 +1,11 @@
+# Big media stays out of git (renders are reproducible), but the expensive
+# assets — narration mp3s, art stills, scripts — are tracked on purpose:
+# the workspace can be rolled back, and those are the things that cost time.
+__pycache__/
+.DS_Store
+*.wav
+*.mp4
+studio/video/exports/
+studio/video/out/_movements*/
+studio/video/movements/
+studio/video/narration/sent/_*

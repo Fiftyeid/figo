@@ -1,0 +1,254 @@
+{
+ "title": "The Last Night of Constantinople",
+ "output": "exports/EP01_partA.mp4",
+ "narration": "narration/narration_prefix.wav",
+ "ambient": "assets/ambient_432.wav",
+ "loudness_cache": "narration/.loudness.json",
+ "width": 1920,
+ "height": 1080,
+ "fps": 24,
+ "fade_in": 3.0,
+ "dip": 2.5,
+ "transition": 0.9,
+ "outro": 40.0,
+ "movements": [
+  {
+   "title": "00 · Welcome & Settle",
+   "duration": 82.32,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 82.324,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c1"
+   ]
+  },
+  {
+   "title": "I · The City at Dusk",
+   "duration": 460.43,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-10-lamps-city.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-01-constantinople.jpg",
+     "duration": 115.782,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "n1"
+   ]
+  },
+  {
+   "title": "II · The Wall",
+   "duration": 424.6,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 106.826,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 106.826,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-20-breach.jpg",
+     "duration": 106.826,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 106.826,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "n2",
+    "n3",
+    "n4",
+    "n5",
+    "n6",
+    "n7"
+   ]
+  },
+  {
+   "title": "III · The Camp Outside",
+   "duration": 425.81,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 107.128,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 107.128,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 107.128,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 107.128,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "n8",
+    "n9",
+    "n10",
+    "n11",
+    "n12",
+    "n13"
+   ]
+  },
+  {
+   "title": "Interlude · The Water Below",
+   "duration": 714.75,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 119.874,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-23-cistern-wall.jpg",
+     "duration": 119.874,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-22-aqueduct.jpg",
+     "duration": 119.874,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 119.874,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-23-cistern-wall.jpg",
+     "duration": 119.874,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-22-aqueduct.jpg",
+     "duration": 119.874,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "i1",
+    "i2",
+    "i3",
+    "i4",
+    "i5",
+    "i6",
+    "i7"
+   ]
+  }
+ ]
+}

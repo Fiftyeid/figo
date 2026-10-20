@@ -1,0 +1,11 @@
+{
+  "background": "art/bg-02-scriptorium.jpg",
+  "output": "thumbnails/thumb-ep02-scriptorium.png",
+  "vignette": 0.55,
+  "blocks": [
+    {"text": "A MONK'S\nNIGHT", "size": 96, "y": 0.060, "weight": 900, "align": "left", "x": 0.055, "stroke": 7, "line_gap": 1.02, "max_width": 0.48},
+    {"text": "2 HOURS · NO ADS", "size": 32, "y": 0.330, "weight": 700, "align": "left", "x": 0.058, "stroke": 5, "color": "#f6e6c8", "tracking": 0.14},
+    {"text": "WHAT DID\nMONKS WRITE\nAT 3 A.M.?", "size": 80, "y": 0.555, "weight": 900, "align": "left", "x": 0.055, "stroke": 6, "line_gap": 1.04, "max_width": 0.55}
+  ],
+  "brand": {"text": "VELLUM LOGS", "y": 0.935, "size": 20, "align": "right"}
+}
