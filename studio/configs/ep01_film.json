@@ -1,0 +1,13 @@
+{
+  "background": "art/bg-10-lamps-city.jpg",
+  "output": "thumbnails/thumb-ep01-film-lamps.png",
+  "vignette": 0.52,
+  "warmth": 0.16,
+  "pill": {"text": "432 Hz", "y": 0.255, "align": "center", "icon": "wave", "size": 34},
+  "blocks": [
+    {"text": "SLEEP HISTORY · 1453", "size": 44, "y": 0.070, "weight": 700, "align": "center", "stroke": 6, "color": "#f6e6c8", "tracking": 0.16, "shadow": 0.6},
+    {"text": "THE LAST NIGHT", "size": 96, "y": 0.520, "weight": 900, "align": "center", "stroke": 7, "tracking": 0.3},
+    {"text": "OF CONSTANTINOPLE", "size": 107, "y": 0.625, "weight": 900, "align": "center", "stroke": 7, "tracking": 0.05, "max_width": 0.95}
+  ],
+  "brand": {"text": "VELLUM LOGS", "y": 0.940, "size": 22}
+}

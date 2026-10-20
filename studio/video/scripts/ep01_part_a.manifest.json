@@ -183,11 +183,11 @@
   },
   {
    "title": "Interlude · The Water Below",
-   "duration": 714.75,
+   "duration": 809.01,
    "segments": [
     {
      "image": "../art/_graded/bg-12-cistern.jpg",
-     "duration": 119.874,
+     "duration": 116.344,
      "zoom": [
       1.0,
       1.06
@@ -196,7 +196,7 @@
     },
     {
      "image": "../art/_graded/bg-23-cistern-wall.jpg",
-     "duration": 119.874,
+     "duration": 116.344,
      "zoom": [
       1.06,
       1.0
@@ -205,7 +205,7 @@
     },
     {
      "image": "../art/_graded/bg-22-aqueduct.jpg",
-     "duration": 119.874,
+     "duration": 116.344,
      "zoom": [
       1.0,
       1.06
@@ -214,7 +214,7 @@
     },
     {
      "image": "../art/_graded/bg-12-cistern.jpg",
-     "duration": 119.874,
+     "duration": 116.344,
      "zoom": [
       1.06,
       1.0
@@ -223,7 +223,7 @@
     },
     {
      "image": "../art/_graded/bg-23-cistern-wall.jpg",
-     "duration": 119.874,
+     "duration": 116.344,
      "zoom": [
       1.0,
       1.06
@@ -232,12 +232,21 @@
     },
     {
      "image": "../art/_graded/bg-22-aqueduct.jpg",
-     "duration": 119.874,
+     "duration": 116.344,
      "zoom": [
       1.06,
       1.0
      ],
      "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-12-cistern.jpg",
+     "duration": 116.344,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
     }
    ],
    "narration_clips": [
@@ -247,7 +256,203 @@
     "i4",
     "i5",
     "i6",
-    "i7"
+    "i7",
+    "i8"
+   ]
+  },
+  {
+   "title": "IV · The Ships in the Horn",
+   "duration": 681.13,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-19-chain.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-18-ships-overland.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-19-chain.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-18-ships-overland.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-08-moon-sea.jpg",
+     "duration": 114.272,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c17"
+   ]
+  },
+  {
+   "title": "V · The Guns",
+   "duration": 394.91,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 99.402,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-20-breach.jpg",
+     "duration": 99.402,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 99.402,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-05-ottoman-camp.jpg",
+     "duration": 99.402,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c18",
+    "c19",
+    "c20",
+    "c21"
+   ]
+  },
+  {
+   "title": "VI · The Last Liturgy",
+   "duration": 423.83,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-06-hagia-sophia.jpg",
+     "duration": 106.634,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-07-prayer-crowd.jpg",
+     "duration": 106.634,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    },
+    {
+     "image": "../art/_graded/bg-06-hagia-sophia.jpg",
+     "duration": 106.634,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "none"
+    },
+    {
+     "image": "../art/_graded/bg-07-prayer-crowd.jpg",
+     "duration": 106.634,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "left"
+    }
+   ],
+   "narration_clips": [
+    "c22",
+    "c23",
+    "c24",
+    "c25"
+   ]
+  },
+  {
+   "title": "Interlude · The Names in the Stone",
+   "duration": 101.21,
+   "segments": [
+    {
+     "image": "../art/_graded/bg-13-masonry.jpg",
+     "duration": 51.057,
+     "zoom": [
+      1.0,
+      1.06
+     ],
+     "pan": "left"
+    },
+    {
+     "image": "../art/_graded/bg-04-walls-dusk.jpg",
+     "duration": 51.057,
+     "zoom": [
+      1.06,
+      1.0
+     ],
+     "pan": "right"
+    }
+   ],
+   "narration_clips": [
+    "i9"
    ]
   }
  ]
