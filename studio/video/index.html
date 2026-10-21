@@ -38,6 +38,11 @@
   .warn{border-color:rgba(224,116,92,.3);background:linear-gradient(160deg,rgba(224,116,92,.08),rgba(224,116,92,.02))}
   .warn b{color:#e0745c}
   code{background:#0e0b09;border:1px solid #241c17;border-radius:6px;padding:1px 6px;color:var(--green);font-size:11.5px;direction:ltr;display:inline-block}
+  .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px}
+  .thumbs figure{margin:0;background:#0e0b09;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+  .thumbs img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+  .thumbs figcaption{font-size:11px;color:var(--muted);padding:8px 10px 9px;line-height:1.5}
+  @media(max-width:760px){.thumbs{grid-template-columns:1fr}}
   footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:#7b6d62}
   footer a{color:var(--gold);text-decoration:none}
   @media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
@@ -58,11 +63,13 @@
       <source src="exports/EP01_partA_720p.mp4" type="video/mp4">
       المتصفح لا يدعم تشغيل الفيديو — الملف موجود في <code>studio/video/exports/EP01_partA.mp4</code>.
     </video>
+    <div id="fallback"></div>
     <div class="bar">
       <span><b>1920×1080</b> · 24fps · H.264 · ستيريو 48kHz · −16.1 LUFS</span>
       <span><b>432 Hz</b> ambient bed — مُولّد برمجيًا</span>
       <a href="exports/EP01_partA_720p.mp4" download>تنزيل 720p</a>
       <a href="exports/EP01_partA.mp4" download>تنزيل 1080p (386 MB)</a>
+      <a href="https://drive.google.com/drive/folders/1Irr1NZdqbZYw35GB8c1KGc4uQH_OxBhI" target="_blank" rel="noopener">نسخة درايف (1080p + 720p)</a>
     </div>
   </div>
 
@@ -102,11 +109,32 @@
     (128–132 كلمة/دقيقة) وسأعيد تجميع الفيديو والموسيقى حول تسجيلك.
   </div>
 
-  <h2>ملفات ما بعد النشر <span>PUBLISH PACK</span></h2>
+  <h2>ملف النشر <span>PUBLISH PACK</span></h2>
+  <p class="sub">كل حاجة تتلصق في يوتيوب كما هي: العنوان، الوصف بفصوله المحسوبة من المانيفست،
+  الوسوم، الإعدادات، التعليق المثبّت، وخطة الـShorts — بنفس بنية القناة المرجعية بندًا ببند.</p>
+
+  <div class="thumbs">
+    <figure>
+      <img src="../../studio/thumbnails/thumb-ep01-part1-a.png" alt="thumbnail A">
+      <figcaption><b>A</b> · الافتراضي — 432 Hz · NO ADVERTS</figcaption>
+    </figure>
+    <figure>
+      <img src="../../studio/thumbnails/thumb-ep01-part1-b.png" alt="thumbnail B">
+      <figcaption><b>B</b> · PART ONE — آيا صوفيا في الضباب</figcaption>
+    </figure>
+    <figure>
+      <img src="../../studio/thumbnails/thumb-ep01-part1-c.png" alt="thumbnail C">
+      <figcaption><b>C</b> · FALL ASLEEP TO — أقرب لوعد النوم</figcaption>
+    </figure>
+  </div>
+
   <ul>
-    <li><code>scripts/EP01_publish.md</code> — العنوان، الوصف الجاهز للنسخ، الفصول، الوسوم، إعدادات الرفع، و4 أفكار Shorts.</li>
-    <li><code>scripts/EP01_The-Last-Night-of-Constantinople.md</code> — السكربت + خطة 13 فصلًا حتى 2:40.</li>
-    <li><code>PRODUCTION.md</code> — كيف بُني الفيديو، وطريقة الوصول إلى 2:40.</li>
+    <li><a href="publish/EP01_PUBLISH.md">publish/EP01_PUBLISH.md</a> — ملف النشر الكامل (عربي + بلوكات إنجليزية جاهزة للّصق).</li>
+    <li><code>publish/ep01_part1.description.txt</code> — الوصف + الفصول، مولّد من المانيفست.</li>
+    <li><code>publish/ep01_part1.metadata.json</code> — جاهز لـ YouTube Data API v3 (snippet + status).</li>
+    <li><code>publish/ep01_full_PROJECTED.*</code> — حزمة الفيلم الكامل المتوقّع (2:48 · 21 فصلًا).</li>
+    <li><code>python3 tools/make_publish.py &lt;manifest&gt; --slug ... --preset ...</code> — يعيد توليد الكل بعد أي رندر.</li>
+    <li><code>python3 tools/check_publish.py publish/*.metadata.json</code> — يفحص حدود يوتيوب قبل الرفع.</li>
   </ul>
 
   <h2>إعادة الإنتاج <span>REBUILD</span></h2>
@@ -122,11 +150,28 @@
   </footer>
 </div>
 <script>
+  // If the rendered file is not in the workspace (snapshots drop big binaries),
+  // play the copy that lives on Drive instead of showing a dead player.
+  const DRIVE_720 = '1tqLpAsE_SyBHxjuHDg6SqBn--dHh6Dfk';
   const v = document.getElementById('v');
-  v.addEventListener('error', () => {
+  let swapped = false;
+  function useDrive() {
+    if (swapped) return;
+    swapped = true;
+    const box = document.getElementById('fallback');
+    box.innerHTML =
+      '<iframe src="https://drive.google.com/file/d/' + DRIVE_720 +
+      '/preview" style="width:100%;aspect-ratio:16/9;border:0;display:block" ' +
+      'allow="autoplay" title="EP01 on Drive"></iframe>';
+    v.style.display = 'none';
     document.querySelector('.bar').insertAdjacentHTML('beforeend',
-      '<span style="color:#e0745c">تعذّر التشغيل داخل المعاينة — استخدم زر التنزيل.</span>');
-  });
+      '<span style="color:#d9b978">يعمل من نسخة درايف — الملف المحلي غير موجود في هذه الجلسة.</span>');
+  }
+  v.addEventListener('error', useDrive);
+  const src = v.querySelector('source');
+  src.addEventListener('error', useDrive);
+  // the media element fires error only for decode problems; catch a 404 early
+  fetch(src.src, {method: 'HEAD'}).then(r => { if (!r.ok) useDrive(); }).catch(useDrive);
 </script>
 </body>
 </html>

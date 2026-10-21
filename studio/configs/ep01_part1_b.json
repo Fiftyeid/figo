@@ -1,0 +1,13 @@
+{
+  "background": "art/bg-01-constantinople.jpg",
+  "output": "thumbnails/thumb-ep01-part1-b.png",
+  "vignette": 0.44,
+  "warmth": 0.20,
+  "pill": {"text": "PART ONE", "y": 0.236, "align": "center", "icon": "none", "size": 34},
+  "blocks": [
+    {"text": "A SLEEPY HISTORY LOG", "size": 44, "y": 0.066, "weight": 700, "align": "center", "stroke": 6, "color": "#f6e6c8", "tracking": 0.18, "shadow": 0.6},
+    {"text": "THE LAST NIGHT", "size": 100, "y": 0.545, "weight": 900, "align": "center", "stroke": 8, "tracking": 0.28},
+    {"text": "OF CONSTANTINOPLE", "size": 104, "y": 0.658, "weight": 900, "align": "center", "stroke": 8, "tracking": 0.04, "max_width": 0.95}
+  ],
+  "brand": {"text": "VELLUM LOGS", "y": 0.942, "size": 22}
+}

@@ -1,0 +1,86 @@
+{
+  "snippet": {
+    "title": "The Last Night of Constantinople, 1453 — Sleepy History — Fall Asleep to History — No Adverts",
+    "description": "☕ If these nights help you rest → https://buymeacoffee.com/vellumlogs\n\n💤 Fall asleep while exploring the last night of Constantinople. On the evening of 28 May 1453 the lamps are lit for the last time in a city that has stood for a thousand years — and we walk it slowly, from the water at dusk, along the Theodosian Walls, across the ditch into the camp outside, past the great gun no one wants to look at, and into the candlelight of Hagia Sophia.\n\n🎧 432 Hz ambient bed · no adverts in this video · soft narration throughout.\n\nEnjoy with no adverts and 432 hz background music for sleep.\n\nWhether you're fascinated by the Byzantine Empire, the fall of Constantinople, medieval daily life, or simply want something calm and real to fall asleep to, this quiet history documentary moves at the pace of a long evening.\n\nThere are no loud sounds, no rush, and no flashing edits. Just one calm voice, a real city, and the small ordinary things people do on the last night of a world.\n\n😴 This relaxing history video is ideal for:\n- Falling asleep to Byzantine and medieval history\n- Bedtime history for adults\n- Slow learning about the fall of Constantinople\n- Background audio for reading, studying, or rest\n- Anyone who likes rain, candles, and old maps\n- Nights when you don't want to be talked at\n\n📜 Includes:\n- The city at dusk, seen from the water\n- The Theodosian Walls and the men who kept watch\n- The camp outside, and the great bombard\n- The ships in the Golden Horn, dragged over land\n- The last liturgy in Hagia Sophia\n- The names still cut into the stone\n\n⏱️ 63 minutes · 9 chapters · 36 slow shots, 0.9 s cross-fades, no cuts.\n\n🕰️ Chapters:\n0:00:00 00 · Welcome & Settle\n0:01:22 I · The City at Dusk\n0:09:03 II · The Wall\n0:16:07 III · The Camp Outside\n0:23:13 Interlude · The Water Below\n0:36:42 IV · The Ships in the Horn\n0:48:03 V · The Guns\n0:54:38 VI · The Last Liturgy\n1:01:42 Interlude · The Names in the Stone\n\n📚 Sources:\n- Steven Runciman, The Fall of Constantinople 1453\n- Roger Crowley, 1453: The Holy War for Constantinople\n- Donald M. Nicol, The Last Centuries of Byzantium\n- Jonathan Harris, The End of Byzantium\n- Contemporary accounts: Nicolò Barbaro, George Sphrantzes, Leonard of Chios\n\n🕯️ Subscribe to Vellum Logs — a new log every week, read in a low voice.\n\nsleepy history, history for sleep, fall asleep to history\n\n#SleepyHistory #HistoryForSleep #FallAsleepToHistory #ByzantineEmpire #VellumLogs\n",
+    "tags": [
+      "sleepy history",
+      "history for sleep",
+      "fall asleep to history",
+      "fall of constantinople",
+      "byzantine empire documentary",
+      "calm history documentary",
+      "bedtime history",
+      "medieval history for sleep",
+      "constantinople 1453",
+      "hagia sophia",
+      "sleep documentary",
+      "432 hz"
+    ],
+    "categoryId": "27",
+    "defaultLanguage": "en",
+    "defaultAudioLanguage": "en"
+  },
+  "status": {
+    "privacyStatus": "private",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "selfDeclaredMadeForKids": false
+  },
+  "recordingDetails": {
+    "recordingDate": "2026-10-21T00:00:00Z"
+  },
+  "local": {
+    "slug": "ep01_part1",
+    "manifest": "scripts/ep01_part_a.manifest.json",
+    "runtime_seconds": 3803.25,
+    "runtime": "1:03:23",
+    "movements": 9,
+    "shots": 36,
+    "chapters": [
+      {
+        "start": "0:00:00",
+        "title": "00 · Welcome & Settle"
+      },
+      {
+        "start": "0:01:22",
+        "title": "I · The City at Dusk"
+      },
+      {
+        "start": "0:09:03",
+        "title": "II · The Wall"
+      },
+      {
+        "start": "0:16:07",
+        "title": "III · The Camp Outside"
+      },
+      {
+        "start": "0:23:13",
+        "title": "Interlude · The Water Below"
+      },
+      {
+        "start": "0:36:42",
+        "title": "IV · The Ships in the Horn"
+      },
+      {
+        "start": "0:48:03",
+        "title": "V · The Guns"
+      },
+      {
+        "start": "0:54:38",
+        "title": "VI · The Last Liturgy"
+      },
+      {
+        "start": "1:01:42",
+        "title": "Interlude · The Names in the Stone"
+      }
+    ],
+    "title_alternates": [
+      "The Last Night of Constantinople (Part One) — A Sleepy History Log — 432 Hz",
+      "Fall Asleep to the Last Night of Constantinople — Sleepy History — No Adverts",
+      "The Last Night of an Empire — Constantinople, 1453 — Sleepy History"
+    ],
+    "pinned_comment": "What should the Keeper open next? Tell me a place and I will find its last night.",
+    "note": "Part One ends on the line about the stone. The music carries the last 40 seconds."
+  }
+}

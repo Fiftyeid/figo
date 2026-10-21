@@ -1,0 +1,13 @@
+{
+  "background": "art/bg-04-walls-dusk.jpg",
+  "output": "thumbnails/thumb-ep01-part1-c.png",
+  "vignette": 0.50,
+  "warmth": 0.22,
+  "pill": {"text": "432 Hz", "y": 0.232, "align": "center", "icon": "wave", "size": 34},
+  "blocks": [
+    {"text": "SLEEP HISTORY · NO ADVERTS", "size": 42, "y": 0.064, "weight": 700, "align": "center", "stroke": 6, "color": "#f6e6c8", "tracking": 0.14, "shadow": 0.6},
+    {"text": "FALL ASLEEP TO", "size": 92, "y": 0.520, "weight": 900, "align": "center", "stroke": 8, "tracking": 0.10},
+    {"text": "CONSTANTINOPLE", "size": 118, "y": 0.628, "weight": 900, "align": "center", "stroke": 8, "tracking": 0.02, "max_width": 0.95}
+  ],
+  "brand": {"text": "VELLUM LOGS", "y": 0.942, "size": 22}
+}
