@@ -2,7 +2,7 @@
 Status: Rev 3, updated 2026-10-24 after the user's decisions. Nothing is recorded or published. Source IDs in brackets are kept in ON SCREEN cues and production notes only; they are stripped from all VO text.
 Replaces script_v1.md. Every spoken number is in ../step1_research/sources.csv (ids in brackets; page or table in the CSV column page_or_table).
 Length: natural length with graphics, about 6:15 to 7:15. Do not pad: the narration is not stretched to reach the target. Hook: 25 to 28 seconds.
-Section times below are estimates at 150 words per minute (VO only: 759 words, about 5:04). The hook graphic holds to 0:27. Estimated runtime with graphics about 5:45. This is below the 6:15 to 7:15 target. I have not padded it. Final times come from the narration audio.
+Section times below are estimates at 150 words per minute (VO only: 772 words, about 5:09). The hook graphic holds to 0:27. Estimated runtime with graphics about 5:50. This is below the 6:15 to 7:15 target. I have not padded it. Final times come from the narration audio.
 
 ---
 
@@ -11,11 +11,11 @@ Timing: VO runs about 0:00-0:20 (50 words). The title and big-figure graphic hol
 ON SCREEN: Title card. Big figure: "4,959 manned aircraft, US Air Force, 2023 (includes 25 gliders)" [2, 12].
 VO: The US Air Force has 4,959 manned aircraft, the most of any US branch we can verify. But the Army's largest fleet, the H-60 Black Hawk, has about 2,100. So how many aircraft does the US military have? It depends on what you count. Here is how it breaks down.
 
-## [0:27-1:23] THE COUNTER RACE
+## [0:27-1:27] THE COUNTER RACE
 ON SCREEN: Bars grow in turn. Label on the race: "manned aircraft, 2023". Source chip under each bar. Caveat chip: "Air Force and Army: 2023. Navy + Marine Corps: FY2022."
 VO: Rules: manned aircraft only, fixed-wing and helicopters. Drones stay out of the bars. Every bar shows its year. Air Force: 4,959, which includes 25 gliders, from its 2024 almanac as of September 30, 2023. Army: about 3,900, from the Congressional Budget Office for 2023. The bars share a year, but the two sources were compiled separately and may not define the count identically. Read the gap as an approximate measure. On the figures we can verify, the Air Force leads the Army by more than a thousand aircraft on this measure. The Navy and Marine Corps are reported together as one combined figure, about 4,000 for fiscal 2022. That card has a different year and a combined scope, and the source does not say whether it includes unmanned aircraft. So its years and definitions cannot be ranked against these bars. Treat it as a separate question, not as a missing bar.
 
-## [1:23-2:07] AIR FORCE
+## [1:27-2:12] AIR FORCE
 ON SCREEN (a new visual every 30 to 45 seconds):
 - Total bar, 5,286. Label: "total inventory including unmanned aircraft and targets, 2023". Split: 4,959 manned (includes 25 gliders) | 327 unmanned and targets [1, 2, 12, 16].
 - Fighters and attack, 2,093 [4]. Stacked: F-16 family 862 [17], F-35A 408 [20], A-10C 261 [46], F-22A 185 [47]. A-10C is an on-screen figure only; no footage of the A-10C is used.
@@ -24,19 +24,19 @@ ON SCREEN (a new visual every 30 to 45 seconds):
 - Unmanned layer: MQ-9A 244 [13], RQ-4B 9 [14], MQ-1B 1 [15], aerial targets 73 [11]. Total 327 [16].
 VO: The Air Force's total inventory is 5,286 aircraft, including unmanned aircraft and targets. That is the second view, and it is not the race figure. The biggest manned group is fighters and attack aircraft, at 2,093, and the F-16 family makes up 862 of them. The F-35A adds 408. Tankers are the quiet part of the count. Fighters and bombers need fuel in the air, and the KC-135 family has 376 aircraft. Trainers are a large group, with 1,102 aircraft, and they count in the 5,286 total. The 4,959 manned figure includes 25 unpowered gliders. The unmanned layer, including MQ-9 Reapers, is shown separately, and it is part of the 5,286 total.
 
-## [2:07-3:11] ARMY
+## [2:12-3:16] ARMY
 ON SCREEN: Opening two-bar graphic, both 2023, labelled as aircraft types (not a branch ranking): "H-60 Black Hawk, about 2,100" [53] vs "F-16 (C and D), 862" [17]. Then "Army manned, about 3,900 (2023, CBO)" [24]. Types, approximate: H-60 about 2,100 [53]; AH-64 about 700 [54]; UH-72 about 500 [55]; H-47 about 400 (CBO text) [56]; manned fixed-wing about 200 [57]. Second-view card: "Army including drones, 2023: about 4,600 (3,900 manned + about 700 large unmanned systems; derived)" [25, 26], beside "Air Force total including unmanned aircraft and targets, 2023: 5,286" [1]. Caveat card: "CBO's Army data exclude smaller tactical drones" [52]. Source card: "Mission sentence: Congressional Research Service, IF12803" [27].
 VO: Start with the Army's largest fleet: about 2,100 H-60 Black Hawks, against 862 Air Force F-16s. These are aircraft types, not branch totals. The Congressional Research Service quotes the Army's aviation mission as: to find, fix and destroy any enemy through fire and maneuver. The Army also supports other services, combatant commands and partner governments with air assault, attack, reconnaissance, special operations and sustainment aircraft. CBO counts about 3,900 manned Army aircraft in 2023, most of them helicopters. CBO's figures are rounded, so each one is spoken with "about". The rest are mostly fixed-wing C-12 Huron passenger aircraft, CBO reports. CBO reports that the manned count has generally declined since 2000, mainly because older rotary-wing types were retired. CBO also counts about 700 large unmanned aerial systems, which brings the Army to about 4,600 including drones. That total is our sum of two CBO figures. CBO's data leave out smaller tactical drones, so that is not a full count.
 
-## [3:11-3:49] NAVY AND MARINE CORPS
+## [3:16-3:55] NAVY AND MARINE CORPS
 ON SCREEN: Combined card: "Navy + Marine Corps (combined, FY2022): about 4,000. The source reports them together. Not split. Not ranked." [28]. Navy role line: strike; maritime patrol; ISR; electronic attack; vertical lift; defense [34]. Marine line: six functions [35]. Excluded figures (USMC 1,262, 2022; Navy budget subsets) are listed in the description notes, not on screen.
 VO: Naval aviation flies from aircraft carriers, with strike, maritime patrol, intelligence surveillance, electronic attack, vertical lift and defense missions. Marine aviation has six functions: air reconnaissance, anti-air warfare, electronic warfare, offensive air support, assault support, and control of aircraft and missiles. The Navy and Marine Corps are reported together as one total: about 4,000 aircraft for fiscal year 2022. No same-year Navy-only or Marine-only figure could be verified, so I won't estimate either. That is why this is one combined card, not two bars. Every figure in this card is cited in the description, with its year.
 
-## [3:49-4:07] CONTEXT (scale check only)
+## [3:55-4:13] CONTEXT (scale check only)
 ON SCREEN: "FlightGlobal, 2026 World Air Forces Directory (public summary): just over 52,200 aircraft, 161 nations [36, 37]. Scale check, not a ranking."
 VO: For scale only: a public summary of FlightGlobal's 2026 World Air Forces directory puts military aircraft worldwide at just over 52,200, across 161 nations. The full directory is paywalled, so we can see only the public summary. It is a scale check, not a ranking.
 
-## [4:07-5:11] THE ANSWER
+## [4:13-5:16] THE ANSWER
 ON SCREEN: Final recap frame, four cards:
 - "Air Force: 4,959 manned, 2023 (includes 25 gliders)"
 - "Army: about 3,900 manned, 2023"

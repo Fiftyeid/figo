@@ -11,7 +11,7 @@
 - unverified.txt: updated (G1 resolved, G2 resolved, G5 and G6 added).
 
 ## Runtime
-- Rev 3 VO is 759 words, about 5:04 at 150 wpm. Estimated runtime with graphics about 5:45.
+- Rev 3 VO is 772 words, about 5:09 at 150 wpm. Estimated runtime with graphics about 5:50.
 - The 6:15 to 7:15 target is NOT met by verified content. No padding was added, as instructed.
 - Options for the user: (a) accept about 5:45; (b) add a verified section (for example, further type breakdowns from CBO or the almanac); (c) relax the target.
 
