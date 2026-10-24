@@ -1,0 +1,64 @@
+UNVERIFIED / NOT USED - "War Factor" research, Step 1
+Prepared 2026-10-24. Items listed here are NOT used in any on-screen or spoken number unless you approve them.
+
+A. NO VERIFIED CURRENT TOTAL FOUND
+
+1. Marine Corps total aircraft (current)
+   - Only official total found: 1,262 (2022 Marine Aviation Plan, as cited by CRS IF12803). Four years old.
+   - 2026 Marine Aviation Plan (Feb 2026) gives per-type figures and planned deliveries but no fleet total.
+   - Rejected: WDMMA 1,211 (third-party, page dated 2024-11-26).
+   - Rejected: a web article estimating "roughly 1,300" (non-official, approximate).
+   - Rejected: a web article summing Osprey buys (359 "bought"; buy is not inventory).
+   - Decision needed: use the 2022 official total with a dated caveat, or exclude the Marine Corps from the total comparison.
+
+2. Navy total aircraft (current)
+   - The FY2027 Navy O&M "Total Active Inventory" (2,231 FY25 actual / 2,369 FY27 estimate) is a flight-operations subset (fighter/attack, rotary, patrol/warning, other). It is NOT the total fleet. Excluded.
+   - Only combined figure: about 4,000 for Navy + Marine Corps (FY2022, rounded, via CRS). Cannot be split by branch.
+   - Rejected: WDMMA 2,504 (third-party).
+   - Rejected: a web article "almost 2,600" (non-official).
+   - Decision needed: how to handle the Navy total.
+
+3. Army total aircraft (current, same date and definition as the USAF figure)
+   - Best verified: CBO, 2023 data: about 3,900 manned + about 700 large UAS.
+   - Not retrieved: the Active Army and Army National Guard O&M overview (URL returned 404). It may hold the Army TAI by component, which would allow a current figure.
+   - Rejected: WDMMA 4,333 (third-party, page dated 2024-12-05).
+   - Decision needed: accept 2023 CBO data (2 years older than the USAF figure), or wait for an official current Army count.
+
+B. CONFLICTING FIGURES (range must be stated on screen if used)
+
+4. Air Force total: 4,865 (USAF Almanac, actual Sept 30 2025) vs 4,832 (CRS, FY2025 estimate) vs 5,004 (WDMMA, third-party). Using 4,865.
+
+5. Navy total: no agreed figure (WDMMA 2,504 vs combined DON ~4,000 FY2022 vs OMN subset 2,231).
+
+6. Marine Corps total: 1,262 (2022 official) vs 1,211 (WDMMA) vs ~1,300 (non-official web estimate).
+
+7. Army total: about 3,900 manned (CBO 2023) vs about 4,600 incl. drones (CBO 2023) vs 4,333 (WDMMA).
+
+C. SOURCE ACCESS PROBLEMS (not yet verified directly)
+
+8. Navy FY2027 OMN book PDF (secnav.navy.mil): direct fetch failed (HTTP 500). The figures in sources.csv rows 22-23 come from a search-index excerpt. Re-check before any use.
+
+9. USMC 2022 Marine Aviation Plan PDF: cited through CRS, not opened directly.
+
+10. DoD Annual Aviation Inventory and Funding Plan (per-service totals, FY2025-26): not located. This is the most likely official source for Navy and USMC totals. Recommended next step.
+
+11. FlightGlobal World Air Forces 2026 (country-level figures, including US total 13,032 and any comparison with China, Russia, India): paywalled; only the public summary "just over 52,200 aircraft, 161 nations" was checked. Country numbers reported by third-party sites are NOT verified and are not in sources.csv.
+
+12. Coast Guard: out of scope. The title covers the four branches (Air Force, Navy, Army, Marine Corps).
+
+D. TYPE-LEVEL FIGURES NOT USED
+
+13. MV-22B Osprey "359 bought" (news article, July 2026): buy count, not an inventory count. Not used.
+
+14. F-35B 205 / F-35C 56 (USMC plan): planned delivery counts "by end of 2026", not current inventory. Not used as counts.
+
+15. Army Aviation Mix and Navy type counts from aggregators (e.g., Black Hawk 2,298, AH-64 824, CH-47 510): not used. CBO rounded counts are used instead, labelled "about".
+
+E. WHAT CAN BE SAID ON SCREEN FROM VERIFIED DATA ALONE (for your review)
+
+- Air Force: 4,865 total (Sept 30 2025). Category breakdown verified; sums to 4,865.
+- Army: about 3,900 manned aircraft in 2023 (CBO); about 700 large drones in 2023 (CBO). Dated 2023.
+- Navy + Marine Corps combined: about 4,000 (FY2022, CBO/CRS). Dated 2022.
+- Marine Corps: 1,262 (2022 Marine Aviation Plan). Dated 2022.
+- Navy alone: no verified total.
+- Result: the Air Force is the largest verified single-service total. The Army is the only near comparison, and it is two years older. The Navy and Marine Corps totals cannot be verified for the same date. The title question therefore cannot be answered with full confidence until items 1-3 are resolved.
