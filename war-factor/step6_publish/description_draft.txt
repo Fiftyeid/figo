@@ -35,11 +35,11 @@ Footage credits (DVIDS video IDs; copy each credit line exactly from its asset p
 Chapters (provisional; update to the final edit):
 0:00 Hook
 0:27 The counter race
-1:23 Air Force
-2:07 Army
-3:11 Navy and Marine Corps
-3:49 Context
-4:07 The answer
+1:27 Air Force
+2:12 Army
+3:16 Navy and Marine Corps
+3:55 Context
+4:13 The answer
 
 Sources and years:
 - Air Force: 2024 USAF & USSF Almanac, Air & Space Forces Magazine (June 7, 2024). Total inventory 5,286 as of Sept 30, 2023, including unmanned aircraft and targets. Manned figure 4,959 is derived (5,286 minus 327 unmanned), and includes 25 gliders. https://www.airandspaceforces.com/article/2024-usaf-ussf-almanac-equipment/
