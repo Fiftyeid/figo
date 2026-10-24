@@ -2,7 +2,7 @@
 Status: Rev 3, updated 2026-10-24 after the user's decisions. Nothing is recorded or published. Source IDs in brackets are kept in ON SCREEN cues and production notes only; they are stripped from all VO text.
 Replaces script_v1.md. Every spoken number is in ../step1_research/sources.csv (ids in brackets; page or table in the CSV column page_or_table).
 Length: natural length with graphics, about 6:15 to 7:15. Do not pad: the narration is not stretched to reach the target. Hook: 25 to 28 seconds.
-Section times below are estimates at 150 words per minute (VO only: 772 words, about 5:09). The hook graphic holds to 0:27. Estimated runtime with graphics about 5:50. This is below the 6:15 to 7:15 target. I have not padded it. Final times come from the narration audio.
+Section times below are estimates at 150 words per minute. VO is 822 spoken words, about 5:29 at that rate (recounted 2026-10-24 after the Navy sentence and the closing-line fix). The hook graphic holds to 0:27. Estimated runtime with graphics about 5:50. This is below the 6:15 to 7:15 target. I have not padded it. Final times come from the narration audio.
 
 ---
 
@@ -30,7 +30,7 @@ VO: Start with the Army's largest fleet: about 2,100 H-60 Black Hawks, against 8
 
 ## [3:16-3:55] NAVY AND MARINE CORPS
 ON SCREEN: Combined card: "Navy + Marine Corps (combined, FY2022): about 4,000. The source reports them together. Not split. Not ranked." [28]. Navy role line: strike; maritime patrol; ISR; electronic attack; vertical lift; defense [34]. Marine line: six functions [35]. Excluded figures (USMC 1,262, 2022; Navy budget subsets) are listed in the description notes, not on screen.
-VO: Naval aviation flies from aircraft carriers, with strike, maritime patrol, intelligence surveillance, electronic attack, vertical lift and defense missions. Marine aviation has six functions: air reconnaissance, anti-air warfare, electronic warfare, offensive air support, assault support, and control of aircraft and missiles. The Navy and Marine Corps are reported together as one total: about 4,000 aircraft for fiscal year 2022. No same-year Navy-only or Marine-only figure could be verified, so I won't estimate either. That is why this is one combined card, not two bars. Every figure in this card is cited in the description, with its year.
+VO: Naval aviation flies from aircraft carriers, with strike, maritime patrol, intelligence surveillance, electronic attack, vertical lift and defense missions. Marine aviation has six functions: air reconnaissance, anti-air warfare, electronic warfare, offensive air support, assault support, and control of aircraft and missiles. The Navy and Marine Corps are reported together as one total: about 4,000 aircraft for fiscal year 2022. For context, that combined figure is below the Air Force's 4,959, but it is from a different year, so it is not ranked against the Army. No same-year Navy-only or Marine-only figure could be verified, so I won't estimate either. That is why this is one combined card, not two bars. Every figure in this card is cited in the description, with its year.
 
 ## [3:55-4:13] CONTEXT (scale check only)
 ON SCREEN: "FlightGlobal, 2026 World Air Forces Directory (public summary): just over 52,200 aircraft, 161 nations [36, 37]. Scale check, not a ranking."
@@ -43,7 +43,7 @@ ON SCREEN: Final recap frame, four cards:
 - "Navy + Marine Corps: about 4,000 combined, FY2022 (not ranked)"
 - "Second view: Air Force 5,286 total incl. unmanned aircraft and targets | Army about 4,600 incl. drones, 2023"
 End card: "Sources, years and excluded figures are in the description."
-VO: So, how many aircraft does the US military have? It depends on the rules. Among the single-branch figures we can verify, the Air Force has the most. What changes is the number: 4,959 manned, 5,286 including unmanned aircraft and targets. That is the point of this video. The Army has about 3,900 manned aircraft, and about 4,600 including drones. On the figures we can verify, the Air Force leads the Army on both views. Here is how to read any number in this video: check the year, check whether drones are counted, and check whether the bar is one branch or a combined card. If a same-year, same-definition Navy and Marine Corps count is published, this video will need an update. The sources, the years, and the figures left out are in the description. Tell me in the comments which counting rule you would use, and why. If you want more analysis like this, subscribe to War Factor.
+VO: So, how many aircraft does the US military have? It depends on the rules. Among the single-branch figures we can verify, the Air Force has the most. What changes is the number: 4,959 manned, 5,286 including unmanned aircraft and targets. That is the point of this video. The Army has about 3,900 manned aircraft, and about 4,600 including drones. On the figures we can verify, the Air Force leads the Army on the manned count. The Army's including-drones figure is a second view, not a second race, because only two branches have a verified figure on that definition. Here is how to read any number in this video: check the year, check whether drones are counted, and check whether the bar is one branch or a combined card. If a same-year, same-definition Navy and Marine Corps count is published, this video will need an update. The sources, the years, and the figures left out are in the description. Tell me in the comments which counting rule you would use, and why. If you want more analysis like this, subscribe to War Factor.
 
 ---
 ## Production notes (not spoken)
@@ -54,4 +54,6 @@ VO: So, how many aircraft does the US military have? It depends on the rules. Am
 - CBO claims checked against the PDF text on 2026-10-24, with quotes and pages in sources.csv: rows 24, 25, 51, 52, 53, 54, 55, 56, 57, 60.
 - Navy + Marine Corps combined figure (about 4,000, FY2022): cited via CRS IF12803. The primary DoD FY2022 report is subscriber-only and was not read.
 - Excluded from the video (listed in the description notes and sources.csv): USMC-only 1,262 (2022); Navy budget subset figures; FlightGlobal country figures (paywalled).
-- Runtime: VO is about 5:04. The 6:15 to 7:15 target is not met by verified content alone; see the cover note.
+- Runtime: VO is about 5:29 (822 words at 150 wpm). The 6:15 to 7:15 target is not met by verified content alone; not padded.
+- HOOK STATUS (open): the wording in this file is the earlier five-sentence hook. The approved nine-sentence version, with "more than twice the Air Force's 862 F-16s" and the on-screen "aircraft types, not branch totals", is NOT saved in the workspace. Replace the hook VO with the user's exact approved text before recording. Do not use this file's hook as approved.
+- Second-view wording: the closing VO now says the Air Force leads on the manned count only. A two-branch including-drones figure is not a race (the rule needs all four branches on that definition).

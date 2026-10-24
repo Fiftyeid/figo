@@ -1,0 +1,42 @@
+{
+  "_status": "PLACEHOLDER. No approved Step 4 palette or layout spec was found in the repo, the commit history, or the session notes. These values are proposals for review, not approved values.",
+  "canvas": {"width": 1920, "height": 1080, "fps": 30},
+  "colors": {
+    "background_placeholder": "#0E1116",
+    "panel": "#161B22",
+    "panel_alpha": 235,
+    "text_primary": "#F2F4F7",
+    "text_secondary": "#9AA4B2",
+    "chip_fill": "#222A35",
+    "chip_text": "#C9D1DB",
+    "branch_air_force": "#3B82F6",
+    "branch_army": "#84A94B",
+    "branch_navy_marine_combined": "#F59E0B",
+    "second_view": "#A78BFA",
+    "unmanned": "#64748B",
+    "caveat": "#F87171"
+  },
+  "type": {
+    "font_bold": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "font_regular": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "headline_px": 64,
+    "big_figure_px": 200,
+    "label_px": 40,
+    "chip_px": 28,
+    "minimum_px": 28
+  },
+  "layout": {
+    "safe_margin_x": 96,
+    "safe_margin_y": 90,
+    "headline_y": 110,
+    "chip_row_y": 900,
+    "chip_height": 46,
+    "corner_radius": 14
+  },
+  "rules": {
+    "no_logos_or_seals": true,
+    "no_unit_insignia": true,
+    "numbers_from": "../step1_research/sources.csv via graphics_data.json source_id",
+    "on_screen_source": "Every key number shows its source chip and year on screen."
+  }
+}

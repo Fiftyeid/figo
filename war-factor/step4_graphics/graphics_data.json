@@ -1,0 +1,119 @@
+{
+  "_note": "Scene data for build_graphics.py. Each number is a source_id. The renderer reads the value from ../step1_research/sources.csv and stops if 'expected' differs from the CSV.",
+  "cards": [
+    {
+      "id": "01_hook_big_figure",
+      "layout": "big_figure",
+      "headline": "Manned aircraft, US Air Force, 2023",
+      "figure": {"source_id": 2, "expected": 4959},
+      "sub": "includes 25 gliders",
+      "chips": ["Source: 2024 USAF & USSF Almanac (TAI as of Sep 30, 2023) [2, 12]"]
+    },
+    {
+      "id": "02_hook_types_not_totals",
+      "layout": "two_bar_types",
+      "headline": "Aircraft types, not branch totals",
+      "bars": [
+        {"label": "H-60 Black Hawk (Army, CBO)", "source_id": 53, "expected": 2100, "approx": true, "color": "branch_army"},
+        {"label": "F-16 (C and D, Air Force)", "source_id": 17, "expected": 862, "approx": false, "color": "branch_air_force"}
+      ],
+      "chips": ["H-60: CBO 2023 (approximate) [53]", "F-16: 2024 USAF & USSF Almanac, 2023 [17]"]
+    },
+    {
+      "id": "03_race_manned_2023",
+      "layout": "race",
+      "headline": "Manned aircraft, 2023",
+      "bars": [
+        {"label": "US Air Force (manned, includes 25 gliders)", "source_id": 2, "expected": 4959, "approx": false, "color": "branch_air_force"},
+        {"label": "US Army (manned, CBO)", "source_id": 24, "expected": 3900, "approx": true, "color": "branch_army"}
+      ],
+      "caveat": "Air Force and Army: 2023. Navy + Marine Corps is shown separately (FY2022).",
+      "chips": ["Air Force [2]", "Army, CBO 2023 [24]"],
+      "animate": {"bar_1_start_s": 2.0, "bar_2_start_s": 4.0, "grow_s": 1.5, "hold_until_s": 14.0}
+    },
+    {
+      "id": "04_af_total_split",
+      "layout": "stacked_split",
+      "headline": "Air Force total inventory, 2023",
+      "definition_line": "total inventory including unmanned aircraft and targets, 2023",
+      "total": {"source_id": 1, "expected": 5286},
+      "parts": [
+        {"label": "manned (includes 25 gliders)", "source_id": 2, "expected": 4959, "color": "branch_air_force"},
+        {"label": "unmanned and targets", "source_id": 16, "expected": 327, "color": "unmanned"}
+      ],
+      "chips": ["2024 USAF & USSF Almanac, TAI as of Sep 30, 2023 [1, 2, 16]"]
+    },
+    {
+      "id": "05_af_types",
+      "layout": "type_list",
+      "headline": "Air Force types, 2023 (selected)",
+      "rows": [
+        {"label": "Fighter and attack (category)", "source_id": 4, "expected": 2093},
+        {"label": "F-16 family (C and D)", "source_id": 17, "expected": 862},
+        {"label": "F-35A", "source_id": 20, "expected": 408},
+        {"label": "F-22A", "source_id": 47, "expected": 185},
+        {"label": "Tankers: KC-135 family", "source_id": 21, "expected": 376},
+        {"label": "Trainers (category)", "source_id": 10, "expected": 1102},
+        {"label": "T-6A", "source_id": 19, "expected": 442},
+        {"label": "C-17A", "source_id": 43, "expected": 222},
+        {"label": "A-10C (on-screen figure only; no footage used)", "source_id": 46, "expected": 261}
+      ],
+      "chips": ["2024 USAF & USSF Almanac, TAI as of Sep 30, 2023 [4, 10, 17, 19, 20, 21, 43, 46, 47]"],
+      "note": ""
+    },
+    {
+      "id": "06_army_types",
+      "layout": "type_list",
+      "headline": "Army aircraft types, 2023 (CBO, approximate)",
+      "rows": [
+        {"label": "H-60 Black Hawk", "source_id": 53, "expected": 2100, "approx": true},
+        {"label": "AH-64 Apache", "source_id": 54, "expected": 700, "approx": true},
+        {"label": "UH-72 Lakota", "source_id": 55, "expected": 500, "approx": true},
+        {"label": "H-47 Chinook (CBO text)", "source_id": 56, "expected": 400, "approx": true},
+        {"label": "Manned fixed-wing (mostly C-12)", "source_id": 57, "expected": 200, "approx": true}
+      ],
+      "chips": ["CBO, Availability and Use of Aircraft in the Army (Aug 2024), 2023 [53-57]"],
+      "note": "Types, not a branch total."
+    },
+    {
+      "id": "07_army_two_views",
+      "layout": "two_views",
+      "headline": "Army: two counts, not mixed",
+      "view_a": {"title": "Manned only (main race)", "source_id": 24, "expected": 3900, "approx": true, "color": "branch_army"},
+      "view_b": {"title": "Including drones (about {s26})", "source_id": 26, "expected": 4600, "approx": true, "color": "second_view", "note": "{s24} manned + about {s25} large unmanned systems (derived)"},
+      "compare": {"title": "Air Force total incl. unmanned aircraft and targets", "source_id": 1, "expected": 5286, "color": "second_view"},
+      "caveats": ["CBO's Army data exclude smaller tactical drones [52]", "2023. Figures are CBO rounded: use 'about'."],
+      "chips": ["CBO 2023 [24, 25, 26, 52]", "2024 USAF & USSF Almanac, 2023 [1]"]
+    },
+    {
+      "id": "08_navy_marine_combined",
+      "layout": "combined_card",
+      "headline": "Navy + Marine Corps (combined, FY2022)",
+      "figure": {"source_id": 28, "expected": 4000, "approx": true},
+      "lines": ["The source reports them together. Not split. Not ranked.", "FY2022 vs 2023 bars: different year, not ranked."],
+      "chips": ["CRS IF12803 (combined Navy + Marine Corps, FY2022) [28]"]
+    },
+    {
+      "id": "09_context_scale",
+      "layout": "context",
+      "headline": "Scale check (not a ranking)",
+      "figure": {"source_id": 36, "expected": 52200, "approx": false, "prefix": "just over"},
+      "sub": "military aircraft in {s37} nations",
+      "nations": {"source_id": 37, "expected": 161},
+      "chips": ["FlightGlobal, 2026 World Air Forces Directory (public summary) [36, 37]"]
+    },
+    {
+      "id": "10_answer_recap",
+      "layout": "recap",
+      "headline": "The count decides the answer",
+      "cards": [
+        {"label": "Air Force: manned, 2023 (includes 25 gliders)", "source_id": 2, "expected": 4959},
+        {"label": "Army: manned, 2023 (about)", "source_id": 24, "expected": 3900},
+        {"label": "Navy + Marine Corps: combined, FY2022 (not ranked)", "source_id": 28, "expected": 4000},
+        {"label": "Second view: Air Force total incl. unmanned and targets, 2023", "source_id": 1, "expected": 5286},
+        {"label": "Second view: Army incl. drones, 2023 (about)", "source_id": 26, "expected": 4600}
+      ],
+      "chips": ["Sources, years and excluded figures are in the description."]
+    }
+  ]
+}
