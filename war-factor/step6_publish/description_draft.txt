@@ -1,48 +1,52 @@
+BEFORE PUBLISHING (delete this block):
+- Re-copy the DoW sentence below from https://www.dvidshub.net/about/copyright on the day of publishing. Text here was copied 2026-10-24.
+- Copy each footage credit line exactly from its DVIDS page. Check the credit on 1024004 (it says "Army National Guard" for an Air National Guard unit).
+- Keep the footage note only after the visual check confirms blur work.
+- Publish nothing from this file yet.
+
+---
+
 How many US military aircraft are there? It depends on what you count, and which branch you ask about.
-This video compares US military aircraft counts for the Air Force, Army, Navy and Marine Corps, with the year and source for each figure.
+This video compares US military aircraft counts for the Air Force, Army, and Navy with Marine Corps, with the year and source shown for each figure.
 
 The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.
 
-Footage: U.S. Department of War (DoW) visual information from DVIDS (dvidshub.net). [Copy each exact credit line from its DVIDS asset page before publishing.] [Tail numbers and unit insignia are obscured where practical. Confirm after the visual check.]
+This video is an analytical comparison based on publicly available information.
 
-Footage credits (DVIDS video IDs; unit and photographer as listed on each asset page):
+Footage: U.S. Department of War (DoW) visual information from DVIDS (dvidshub.net). Tail numbers and unit insignia are obscured where practical. [Keep only after the visual check.]
+
+Footage credits (DVIDS video IDs; copy each credit line exactly from its asset page):
 - 1013336 F-16 B-Roll, 148th Fighter Wing
-- 1009682 F-16 Fighting Falcon launches at Rickenbacker, 180th Fighter Wing (Ohio ANG), U.S. Air National Guard video by Ralph Branson
+- 1024004 113th Wing F-16 fighter jet preparation, 113th Wing (DC ANG)
 - 972113 DC Air National Guard keeps F-16s flight ready during REFORPAC, 113th Wing
-- 1019039 USS Abraham Lincoln (CVN 72) Flight Ops, U.S. Naval Forces Central Command Public Affairs
-- 1019464 VMFA-232 F/A-18s take to the skies for Harpoon exercise, 1st Marine Aircraft Wing
-- 1023244 Alaska Army National Guard Black Hawk training
-- 1027256 B-Roll: Beverly Sunrise 27-01 F-35A, 35th Fighter Wing, A1C Hannah Bench
-- 1017719 B-52 air refueling B-Roll, 22nd Air Refueling Wing, SrA Patrick O'Neill
-- 1015760 Night/day: B-1 comes out to play, 22nd Air Refueling Wing, SrA Patrick O'Neill
-- 1026631 B-2 Spirit of Kitty Hawk comes back home, SrA Bryce Moore
-- 1024038 2-Ship C-17 Globemaster III Flyover B-Roll Package, A1C Nathan Langston
-- 1025674 KC-135 performs night air refuel operations, SrA Adriana Jordan Alcaniz
-- 997699 T-38 Talons conduct flight operations during Sentry South 26-2, 174th Attack Wing, SSgt Dylan McCrink
-- 1025824 1st Combat Aviation Brigade conducts Diesel Express flight operations, SGT Joshua Fish
-- 1019898 AH-64 Apache B-Roll, 16th Combat Aviation Brigade, SGT 1st Class Brandon Rickert
-- 1025348 U.S. Marines launch U.S. Marine Corps F-35C Lightning II's, MARCENT, Sgt Joealfred Damaso
-- 1021582 George Washington Conducts Flight Operations, U.S. Navy video
-[A-10C clip still pending. Add its credit only if it is used.]
+- 1026939 PCU John F. Kennedy Conducts Helicopter Flight Operations, U.S. Navy
+- 1019464 VMFA-232, 1st Marine Aircraft Wing
+- 1023244 Alaska Army National Guard UH-60L training
+- 1027256 B-Roll: Beverly Sunrise 27-01 F-35A, 35th Fighter Wing
+- 1017719 B-52 air refueling B-Roll, 22nd Air Refueling Wing
+- 1015760 Night/day: B-1 comes out to play, 22nd Air Refueling Wing
+- 1025674 KC-135 performs night air refuel operations, United States Air Forces Central
+- 1019898 AH-64 Apache B-Roll, 16th Combat Aviation Brigade
+- 1025824 1st Combat Aviation Brigade Conducts Diesel Express Flight Operations
+- 1025348 U.S. Marines launch U.S. Marine Corps F-35C Lightning II's, MARCENT
+- 1025001 446th Airlift Wing MOBEX 26 AE, 446th Airlift Wing
+- 789984 T-6 Texan II B-roll, 14th Flying Training Wing
 
-Chapters (provisional, from script Rev 3. Recompute after the runtime decision):
+Chapters (provisional; update to the final edit):
 0:00 Hook
-0:22 The counter race
-1:16 Air Force
-2:25 Army
-3:16 Navy and Marine Corps
-3:59 Context
-4:18 The answer
+0:27 The counter race
+1:23 Air Force
+2:07 Army
+3:11 Navy and Marine Corps
+3:49 Context
+4:07 The answer
 
 Sources and years:
-- 2024 USAF & USSF Almanac, Air & Space Forces Magazine, June 7, 2024. Air Force total inventory 5,286 as of Sept 30, 2023, including unmanned aircraft and targets. Manned figure 4,959 (derived: 5,286 minus 327 unmanned), including 25 gliders. https://www.airandspaceforces.com/article/2024-usaf-ussf-almanac-equipment/
-- Congressional Budget Office, "Availability and Use of Aircraft in the Army," Sept 2024. About 3,900 manned Army aircraft (2023). About 700 large unmanned aerial systems. Smaller tactical drones are not included. https://www.cbo.gov/publication/60313 and https://www.cbo.gov/system/files/2024-08/60313-army-aircraft.pdf
-- Congressional Research Service, In Focus IF12803 (Nov 1, 2024). Navy and Marine Corps reported together, about 4,000 aircraft, FY2022, citing the DoD Annual Aviation Inventory and Funding Plan. https://www.congress.gov/crs_external_products/IF/HTML/IF12803.html
-- FlightGlobal, 2026 World Air Forces Directory (public summary): just over 52,200 aircraft, 161 nations. Scale check only, not a ranking. https://www.flightglobal.com/defence/2025/11/2026-world-air-forces-directory/
+- Air Force: 2024 USAF & USSF Almanac, Air & Space Forces Magazine (June 7, 2024). Total inventory 5,286 as of Sept 30, 2023, including unmanned aircraft and targets. Manned figure 4,959 is derived (5,286 minus 327 unmanned), and includes 25 gliders. https://www.airandspaceforces.com/article/2024-usaf-ussf-almanac-equipment/
+- Army: Congressional Budget Office, "Availability and Use of Aircraft in the Army" (August 2024; publication page Sept 2024). About 3,900 manned Army aircraft in 2023, and about 700 large unmanned aerial systems. Smaller tactical drones are not included. https://www.cbo.gov/publication/60313 and https://www.cbo.gov/system/files/2024-08/60313-army-aircraft.pdf
+- Navy and Marine Corps: Congressional Research Service, In Focus IF12803 (Nov 1, 2024). The source reports the Navy and Marine Corps together, about 4,000 aircraft, FY2022. Army mission statement also from this source. https://www.congress.gov/crs_external_products/IF/HTML/IF12803.html
+- Scale check: FlightGlobal, 2026 World Air Forces Directory (public summary). Just over 52,200 aircraft in 161 nations. https://www.flightglobal.com/defence/2025/11/2026-world-air-forces-directory/
 
-All figures are rounded where CBO says "about". Figures are not ranked across different years or definitions.
-
-Not used in this video: USMC 1,262 (2022 plan, different year); USAF FY2025 total 4,865 (category definition changed); Navy budget subset figures; aggregator websites.
-[Army H-47 Chinook display pending decision: "about 400" (CBO text) or "400 to 450" (CBO tables).]
+Figures are rounded where the source says "about." Counts from different years or definitions are not ranked against each other. Not used in this video: USMC-only 1,262 (2022); Navy budget subset figures; country figures from paywalled sources.
 
 #USMilitary #MilitaryAviation #AirForce

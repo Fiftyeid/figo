@@ -46,8 +46,9 @@ F. WHAT CAN BE SAID ON SCREEN FROM VERIFIED DATA (as of 2026-10-24)
  - The title answer ("Air Force") rests only on the verified figures above. It is provisional until the user approves the Step 2 script and the race basis.
 
 G. OPEN ITEMS FROM CBO PDF CHECK (2026-10-24)
- G1. CBO H-47 Chinook count conflicts inside the same PDF: text says "400 H-47 Chinook heavy-transport helicopters" (p. 6); trend table gives 0.43 thousand (430) for 2023; Chinook variant table gives 450. Display options: "about 400 (CBO text)" or "400 to 450 (CBO tables)". Decision pending with user. Until decided, do not state an exact H-47 figure.
- G2. Army mission sentence (row 27) is not in the CBO check and rests on CRS IF12803 text. Not verified against the CBO PDF.
+ G1. [RESOLVED 2026-10-24: display "about 400 (CBO text)"; conflict kept on record] CBO H-47 Chinook count conflicts inside the same PDF: text says "400 H-47 Chinook heavy-transport helicopters" (p. 6); trend table gives 0.43 thousand (430) for 2023; Chinook variant table gives 450. Display options: "about 400 (CBO text)" or "400 to 450 (CBO tables)". The H-47 figure is never shown as exact.
+ G2. [RESOLVED 2026-10-24] Army mission sentence (row 27) is from CRS IF12803, not CBO. The quoted sentence is in the CRS text and is attributed to CRS in the script.
  G3. CBO extracted text shows no page footers, so some pages are taken from the contents listing and are marked as such in sources.csv.
  G4. Navy and Marine Corps: no same-year (2023), same-definition Navy-only or Marine-only count is verified. The only combined figure is about 4,000 (FY2022, row 28). Not split, not ranked.
-
+ G5. CBO Army row 61 (definition comparability between the CBO Army count and the Air Force almanac count): NOT CONFIRMED. The spoken caveat about definitions stays in the script.
+ G6. The Navy and Marine Corps combined figure (about 4,000, FY2022) does not say whether it includes unmanned aircraft. The script says so. It is not shown as manned-only.
