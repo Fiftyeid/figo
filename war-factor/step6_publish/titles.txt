@@ -1,0 +1,6 @@
+TITLE OPTIONS (3). Choice made by user: option 1.
+1 (chosen): How Many Aircraft Does the US Military Have? It Depends on the Count
+2: US Military Aircraft: Air Force, Army, Navy, Marines Compared (2023)
+3: How Many Aircraft Does the US Military Really Have? Count Matters
+Lengths (characters): 1 = 68; 2 = 68; 3 = 65. All under 70.
+Note: option 2 uses "(2023)", but the Navy and Marine Corps figure is FY2022. Check the wording before use.

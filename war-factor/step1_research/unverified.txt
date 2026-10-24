@@ -3,8 +3,8 @@ Rule: a figure enters the video only if it is in sources.csv with a primary-docu
 Anything listed here is NOT spoken, NOT on screen, and NOT used in any comparison.
 
 A. NOT READ IN A PRIMARY DOCUMENT (search excerpts or unreadable PDFs)
- 1. Army type counts: H-60 about 2,100; AH-64 about 700; UH-72 about 500; H-47 about 400; RQ-7B Shadow about 500; MQ-1C Gray Eagle about 200.
-    Source: CBO PDF (60313-army-aircraft.pdf) seen only in search excerpts. The publication page read this session gives only the 3,900 manned and 700 UAS totals. The Army section names types without counts.
+ 1. [RESOLVED 2026-10-24 except H-47] Army type counts were read in CBO PDF text: H-60 2,100; AH-64 700; UH-72 500; fixed-wing about 200 (rows 53-55, 57).
+    H-47 is still open: see section G1. Army UAS 700 (row 25) and the 'declined since 2000' trend (row 51) are also confirmed in the PDF.
  2. Army rotary-wing about 3,700 and Army manned fixed-wing about 200 (derived). Depends on CBO 60982, which was not read. Not used.
  3. DoN rotary-wing about 1,400 (CBO 60982 excerpt, combined Navy + Marine Corps). Not read in document. Not used.
  4. Navy OMN "Total Active Inventory" FY2025 actual 2,231 and FY2027 estimate 2,369. Read from a search excerpt only; direct fetch failed (HTTP 500). Also a flight-operations subset, not the total fleet. EXCLUDED.
@@ -44,3 +44,10 @@ F. WHAT CAN BE SAID ON SCREEN FROM VERIFIED DATA (as of 2026-10-24)
  - Navy + Marine Corps combined, FY2022: about 4,000. Shown as one combined bar; the source reports them together; no split.
  - Provisional comparison: the Air Force leads the Army on both the manned view and the total-including-drones view (same year, 2023). The combined Navy + Marine Corps figure (FY2022, about 4,000) is below the Air Force manned count under any reading of the combined figure, so the Air Force leads on verified data. The year gap (2022 vs 2023) is shown on screen and in the spoken caveat.
  - The title answer ("Air Force") rests only on the verified figures above. It is provisional until the user approves the Step 2 script and the race basis.
+
+G. OPEN ITEMS FROM CBO PDF CHECK (2026-10-24)
+ G1. CBO H-47 Chinook count conflicts inside the same PDF: text says "400 H-47 Chinook heavy-transport helicopters" (p. 6); trend table gives 0.43 thousand (430) for 2023; Chinook variant table gives 450. Display options: "about 400 (CBO text)" or "400 to 450 (CBO tables)". Decision pending with user. Until decided, do not state an exact H-47 figure.
+ G2. Army mission sentence (row 27) is not in the CBO check and rests on CRS IF12803 text. Not verified against the CBO PDF.
+ G3. CBO extracted text shows no page footers, so some pages are taken from the contents listing and are marked as such in sources.csv.
+ G4. Navy and Marine Corps: no same-year (2023), same-definition Navy-only or Marine-only count is verified. The only combined figure is about 4,000 (FY2022, row 28). Not split, not ranked.
+
