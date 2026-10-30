@@ -1,0 +1,6 @@
+public/fonts/
+public/voice.mp3
+out/
+node_modules/
+*.tsbuildinfo
+dist/
