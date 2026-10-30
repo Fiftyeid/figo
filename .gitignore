@@ -1,0 +1,11 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# runtime/scratch artifacts
+deliver/_smoke.mp4
+deliver/*.ass
+media/
+asr/*.tgz
+asr/model/
