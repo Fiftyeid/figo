@@ -9,3 +9,6 @@ deliver/*.ass
 media/
 asr/*.tgz
 asr/model/
+
+# الفيديوهات النهائية كبيرة — الماستر على Google Drive
+motion/deliver/final_v2.mp4

@@ -141,20 +141,20 @@ class Background:
 
         # ---- waveform strip ---------------------------------------------------
         if envelope is not None and len(envelope):
-            ybase = self.h - 74
-            bars, bw, gap = 46, 5, 4
+            ybase = self.h - 84
+            bars, bw, gap = 40, 5, 4
             total = bars * (bw + gap)
             x_start = (self.w - total) // 2
             idx = np.linspace(0, len(envelope) - 1, bars).astype(int)
             colA = hex2rgb(self.pal["ui"][0]); colB = hex2rgb(self.pal["ui"][1])
             for i, k in enumerate(idx):
                 v = float(envelope[k])
-                hgt = int(3 + v * 44)
+                hgt = int(3 + v * 34)
                 x0 = x_start + i * (bw + gap)
                 k2 = i / max(1, bars - 1)
                 col = colA * (1 - k2) + colB * k2
                 y0 = ybase - hgt
-                img[y0:ybase, x0:x0 + bw] += col * (0.55 + 0.45 * v)
+                img[y0:ybase, x0:x0 + bw] += col * (0.34 + 0.40 * v)
 
         # ---- progress bar ------------------------------------------------------
         if progress is not None:
