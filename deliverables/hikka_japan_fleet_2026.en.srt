@@ -1,0 +1,248 @@
+1
+00:00:00,200 --> 00:00:04,639
+Japan is an island nation with a fleet built for distance.
+
+2
+00:00:04,639 --> 00:00:10,991
+Here is every aircraft its military is flying in 2026 — the fighters, the gunships,
+
+3
+00:00:10,991 --> 00:00:15,583
+the patrol planes, the tankers, the trainers and the drones.
+
+4
+00:00:16,833 --> 00:00:22,116
+Japan is an island nation, and its air force is built to cover open sea,
+
+5
+00:00:22,116 --> 00:00:25,197
+far-flung islands and very long distances.
+
+6
+00:00:25,197 --> 00:00:26,958
+Start with the fighters.
+
+7
+00:00:26,958 --> 00:00:32,681
+Two hundred F-15J Eagles still form the backbone, licence-built by Mitsubishi,
+
+8
+00:00:32,681 --> 00:00:38,330
+meeting Chinese and Russian aircraft near Japanese airspace almost every day.
+
+9
+00:00:38,330 --> 00:00:43,026
+The F-2 is the anti-ship striker: a larger wing, heavy missiles,
+
+10
+00:00:43,026 --> 00:00:46,694
+designed to break up a landing fleet far offshore.
+
+11
+00:00:46,694 --> 00:00:52,783
+And the F-35 quietly changes the maths — one of the largest fleets outside America,
+
+12
+00:00:52,783 --> 00:00:58,873
+with the short-takeoff B models destined for the converted carriers Izumo and Kaga.
+
+13
+00:00:59,673 --> 00:01:04,556
+Attack helicopters are the part of the fleet Japan is letting go.
+
+14
+00:01:04,556 --> 00:01:08,387
+The AH-1S Cobra was the ground force's tank killer,
+
+15
+00:01:08,387 --> 00:01:14,922
+bought to blunt a Soviet landing on Hokkaido; only thirty-four were left in March 2026.
+
+16
+00:01:14,922 --> 00:01:20,030
+The AH-64D Apache was meant to be the heavy fist — twelve were kept,
+
+17
+00:01:20,030 --> 00:01:24,462
+after costs soared and licence production was halted early.
+
+18
+00:01:24,462 --> 00:01:28,969
+Both were built for a fight that drones now do more cheaply,
+
+19
+00:01:28,969 --> 00:01:33,702
+and Japan has already started retiring the units that fly them.
+
+20
+00:01:34,502 --> 00:01:36,044
+Then the workhorses.
+
+21
+00:01:36,044 --> 00:01:42,755
+The CH-47J Chinook has been Japan's heavy lifter since nineteen eighty-six — artillery,
+
+22
+00:01:42,755 --> 00:01:49,389
+troops, relief supplies, and in twenty eleven, water dropped on the crippled Fukushima
+
+23
+00:01:49,389 --> 00:01:50,083
+reactors.
+
+24
+00:01:50,083 --> 00:01:55,945
+The SH-60K Seahawk hunts submarines from destroyers and helicopter carriers,
+
+25
+00:01:55,945 --> 00:02:00,033
+lowering a dipping sonar into the water around Japan.
+
+26
+00:02:00,033 --> 00:02:14,072
+And the V-22 Osprey finally left its temporary base: by August 2025 the whole fleet had moved to Camp Saga in Kyushu, close to the amphibious brigade it was bought to carry along the
+
+27
+00:02:14,072 --> 00:02:16,077
+southwestern island chain.
+
+28
+00:02:16,877 --> 00:02:22,965
+Out over the sea lanes, Japan flies some of the longest patrol missions in the world.
+
+29
+00:02:22,965 --> 00:02:27,335
+The P-3C Orion hunted Soviet submarines through the Cold War;
+
+30
+00:02:27,335 --> 00:02:31,203
+only twenty-four remain as a homegrown jet takes over.
+
+31
+00:02:31,203 --> 00:02:36,002
+The Kawasaki P-1 is that jet — four engines, fly-by-light controls,
+
+32
+00:02:36,002 --> 00:02:40,801
+and the first patrol aircraft designed and built entirely in Japan.
+
+33
+00:02:40,801 --> 00:02:47,247
+Forty were in service in March 2026, though spare-parts shortages have reportedly grounded
+
+34
+00:02:47,247 --> 00:02:48,178
+some of them.
+
+35
+00:02:48,178 --> 00:02:52,476
+Between them, these two types watch the water between Japan,
+
+36
+00:02:52,476 --> 00:02:54,911
+its islands and the wider Pacific.
+
+37
+00:02:55,711 --> 00:03:03,228
+To move troops, fuel and cargo across a very long country, Japan relies on the airlift wing.
+
+38
+00:03:03,228 --> 00:03:06,414
+The C-2 is the homegrown jet airlifter,
+
+39
+00:03:06,414 --> 00:03:12,215
+designed by Kawasaki to carry heavy vehicles between scattered islands.
+
+40
+00:03:12,215 --> 00:03:16,218
+The C-130H has served since nineteen eighty-four,
+
+41
+00:03:16,218 --> 00:03:20,222
+and some now refuel rescue helicopters in flight.
+
+42
+00:03:20,222 --> 00:03:35,092
+Around them sit the tankers: the KC-767, Japan's first, which quietly gave the force a reach it had never had, and the newer KC-46A Pegasus, whose camera-guided boom has had teething
+
+43
+00:03:35,092 --> 00:03:37,461
+problems in American service.
+
+44
+00:03:38,261 --> 00:03:43,483
+Some of the most important aircraft in the fleet carry no weapons at all.
+
+45
+00:03:43,483 --> 00:03:56,290
+Four E-767s lift a radar dome high over the horizon and turn the air force into a single network: every fighter, every ship, every rescue helicopter seeing what the aircraft above
+
+46
+00:03:56,290 --> 00:03:57,220
+them can see.
+
+47
+00:03:57,220 --> 00:04:01,727
+The E-2D Advanced Hawkeye does the same job from smaller decks,
+
+48
+00:04:01,727 --> 00:04:05,232
+watching the water between Japan and its islands.
+
+49
+00:04:05,232 --> 00:04:10,026
+Neither type fires a shot, and both decide how the fight is fought.
+
+50
+00:04:10,826 --> 00:04:14,024
+Not every aircraft in the fleet is built to fight.
+
+51
+00:04:14,024 --> 00:04:17,414
+The T-4 has trained Japanese pilots for four decades,
+
+52
+00:04:17,414 --> 00:04:21,380
+and still does the job at a fraction of the cost of a fighter.
+
+53
+00:04:21,380 --> 00:04:27,073
+The US-2 flying boat is the strange one: it lands on open ocean to pull people out of the
+
+54
+00:04:27,073 --> 00:04:32,382
+sea, and a transport version flies supplies to Japan's research base in Antarctica.
+
+55
+00:04:32,382 --> 00:04:38,074
+Both are reminders that a military fleet is mostly made of everything that is not combat.
+
+56
+00:04:38,874 --> 00:04:40,443
+Last, the newest wing.
+
+57
+00:04:40,443 --> 00:04:46,788
+The RQ-4B Global Hawk flies higher and stays up longer than anything with a pilot aboard,
+
+58
+00:04:46,788 --> 00:04:49,853
+watching the sea lanes for hours at a time.
+
+59
+00:04:49,853 --> 00:04:54,772
+It is a small fleet doing a big job — the same job the P-3C once did,
+
+60
+00:04:54,772 --> 00:04:59,763
+and the same job drones are now taking from Japan's retiring gunships.
+
+61
+00:04:59,763 --> 00:05:04,753
+That is the shape of the fleet in 2026: fewer airframes, longer reach,
+
+62
+00:05:04,753 --> 00:05:09,316
+and more of the work done by aircraft that never carry a person.
+

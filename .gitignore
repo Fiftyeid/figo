@@ -1,0 +1,18 @@
+# renders & intermediates (regenerate with `python3 video/build.py`)
+deliverables/*.mp4
+deliverables/*.wav
+build/
+assets_raw/
+out/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# node (only used to fetch a static ffmpeg binary)
+tools/node_modules/
+tools/package-lock.json
+
+# field footage imported with `python3 video/broll.py` (licensing is yours)
+broll/
