@@ -29,7 +29,8 @@ pip install pillow numpy scipy matplotlib      # مرة واحدة
 python3 video/build.py                          # الفيديو الكامل (1080p30 + صوت)
 python3 video/build.py --only 01,05,18          # نسخة سريعة لثلاث حلقات فقط
 python3 video/build.py --poster intro           # إطار من الفيديو
-python3 video/thumbnail.py                      # صورة مصغّرة 1280×720 (نسختين)
+python3 video/thumbnail.py --showroom           # الثمبنيل الرئيسي: بانلين + ستنسل + أرضية عاكسة
+python3 video/thumbnail.py --light --dark       # نسختان بديلتان (فاتحة/سينمائية)
 python3 video/build.py --draft                  # ~540p للتجربة السريعة
 ```
 
