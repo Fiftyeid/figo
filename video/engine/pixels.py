@@ -272,6 +272,11 @@ def flag(size: int, country: str, round_: bool = True) -> Image.Image:
             if i % 2 == 0:
                 d.rectangle([0, i * stripe, s, (i + 1) * stripe], fill=(178, 34, 52, 255))
         d.rectangle([0, 0, s * 0.42, s * 0.54], fill=(24, 48, 96, 255))
+    elif country == "jp":
+        # white field, red sun disc, faint keyline so it reads on white chrome
+        d.rectangle([0, 0, s, s], fill=(250, 250, 250, 255))
+        r = s * 0.30
+        d.ellipse([s / 2 - r, s / 2 - r, s / 2 + r, s / 2 + r], fill=(188, 0, 45, 255))
     else:
         d.rectangle([0, 0, s, s], fill=(206, 38, 38, 255))
         # one big star + four small, stylised

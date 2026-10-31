@@ -96,7 +96,8 @@ def write_srt(path: str, cues) -> str:
     return path
 
 
-def export(segs, out_dir: str, intro_text: str, intro_text_ar: str) -> list[str]:
+def export(segs, out_dir: str, intro_text: str, intro_text_ar: str = "",
+           stem: str = "hikka_gear_usa_vs_china") -> list[str]:
     """Write <name>.en.srt and <name>.ar.srt into out_dir."""
     import os
 
@@ -107,7 +108,7 @@ def export(segs, out_dir: str, intro_text: str, intro_text_ar: str) -> list[str]
     made = []
     for name, subset in (("en", en), ("ar", ar)):
         if subset:
-            made.append(write_srt(os.path.join(out_dir, f"hikka_gear_usa_vs_china.{name}.srt"),
+            made.append(write_srt(os.path.join(out_dir, f"{stem}.{name}.srt"),
                                   subset))
     return made
 

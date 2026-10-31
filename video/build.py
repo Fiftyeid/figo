@@ -19,6 +19,7 @@ import sys
 import time
 
 import numpy as np
+from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -37,10 +38,21 @@ def _ffmpeg_bin():
         os.path.join(ROOT, "tools", "node_modules", "@ffmpeg-installer", "linux-x64", "ffmpeg"),
         "/usr/bin/ffmpeg",
         "/usr/local/bin/ffmpeg",
+        _imageio_ffmpeg(),
     ):
         if os.path.exists(p):
             return p
     return "ffmpeg"
+
+
+def _imageio_ffmpeg():
+    """Last resort: the binary bundled with the imageio-ffmpeg wheel."""
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return ""
 
 
 FFMPEG = os.environ.get("FFMPEG_BIN") or _ffmpeg_bin()
@@ -67,10 +79,11 @@ def vo_duration(path: str) -> float:
     return len(audio.read_wav(cache)) / audio.SR
 
 
-def build_timeline(vo_dir: str, only=None):
+def build_timeline(vo_dir: str, only=None, sections=None):
+    sections = SECTIONS if sections is None else sections
     segs = []
     t = 0.0
-    sections = [s for s in SECTIONS if not only or s["id"] in only]
+    sections = [s for s in sections if not only or s["id"] in only]
 
     intro_vo = os.path.join(vo_dir, "intro.mp3")
     intro_len = vo_duration(intro_vo)
@@ -184,14 +197,17 @@ def mix_audio(segs, total, vo_dir, out_path):
 
 
 # ---------------------------------------------------------------- render
-def render(segs, total, assets, out_path, w=C.W, h=C.H, fps=C.FPS, only=None):
-    sections = [s for s in SECTIONS if not only or s["id"] in only]
-    r = Renderer(sections, INTRO_NARRATION, assets, segs, total)
+def render(segs, total, assets, out_path, w=C.W, h=C.H, fps=C.FPS, only=None,
+           sections=None, renderer_cls=None, intro_narration=None, mix_path=None):
+    all_sections = SECTIONS if sections is None else sections
+    sections = [s for s in all_sections if not only or s["id"] in only]
+    r = (renderer_cls or Renderer)(sections, intro_narration or INTRO_NARRATION,
+                                   assets, segs, total)
     frames = int(total * fps)
     cmd = [
         FFMPEG, "-y", "-loglevel", "error",
         "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", str(fps), "-i", "-",
-        "-i", os.path.join(ROOT, "build", "mix.wav"),
+        "-i", mix_path or os.path.join(ROOT, "build", "mix.wav"),
         "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart", "-c:a", "aac", "-b:a", "192k", "-shortest", out_path,
     ]
@@ -214,6 +230,8 @@ def render(segs, total, assets, out_path, w=C.W, h=C.H, fps=C.FPS, only=None):
         else:
             s_idx = sections.index(seg["section"]) + 1
             frame = r.draw_section(frame, seg["section"], local, s_idx) or frame
+        if frame.size != (w, h):
+            frame = frame.resize((w, h), Image.LANCZOS)
         proc.stdin.write(np.asarray(frame, dtype=np.uint8).tobytes())
         if f % fps == 0:
             el = time.time() - t0
@@ -224,10 +242,12 @@ def render(segs, total, assets, out_path, w=C.W, h=C.H, fps=C.FPS, only=None):
     print(f"\n  wrote {out_path}  in {time.time()-t0:.0f}s")
 
 
-def poster(segs, total, assets, which, out_path):
+def poster(segs, total, assets, which, out_path, sections=None,
+           renderer_cls=None, intro_narration=None):
     """One still frame, for thumbnails / previews."""
-    sections = [s for s in SECTIONS if s["kind"] != "endcard"]
-    r = Renderer(SECTIONS, INTRO_NARRATION, assets, segs, total)
+    all_sections = SECTIONS if sections is None else sections
+    r = (renderer_cls or Renderer)(all_sections, intro_narration or INTRO_NARRATION,
+                                   assets, segs, total)
     f = r.stage.frame()
     if which == "intro":
         r._global_t = 8.0
@@ -235,11 +255,12 @@ def poster(segs, total, assets, which, out_path):
     elif which == "end":
         r.draw_endcard(f, 3.0)
     else:
-        sec = next(s for s in SECTIONS if s["id"] == which)
-        seg = next(s for s in segs if s.get("section") is sec)
+        sec = next(s for s in all_sections if s["id"] == which)
+        seg = next(s for s in segs
+                   if s.get("section") and s["section"]["id"] == sec["id"])
         r._global_t = seg["start"] + 5
         r._seg_dur = seg["dur"]
-        f = r.draw_section(f, sec, 6.0, SECTIONS.index(sec) + 1) or f
+        f = r.draw_section(f, sec, 6.0, all_sections.index(sec) + 1) or f
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     f.save(out_path)
     print("  poster ->", out_path)

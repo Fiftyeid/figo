@@ -168,3 +168,26 @@ prepare_cutouts("assets_raw", "assets")     # تفريغ تلقائي + تنظي
 | ذاكرة | أقل من 1 GB |
 
 الإطارات بتتبعت لـ ffmpeg عبر pipe (rawvideo) — مفيش ملفات PNG وسيطة، فمفيش استهلاك ديسك.
+
+## Episode 03 — JAPAN AIR FLEET 2026
+
+A second film on the same engine, for a one-country inventory instead of a
+duel.  Everything is shared with the USA-vs-CHINA build except the chrome and
+the section layout:
+
+```
+python3 video/matte_aircraft.py               # white-sweep shots -> assets/fleet
+python3 video/build_fleet.py                  # full 1080p30 render
+python3 video/build_fleet.py --draft           # 960x540 proof
+python3 video/build_fleet.py --poster 05       # one still
+python3 video/build_fleet.py --only 01,03      # a couple of chapters
+```
+
+* content lives in `video/content_japan.py` — chapters are a small roster of
+  types, and the hero airframe changes **on the word** (see
+  `FleetRenderer.cue_times`, which maps each type's first mention in the
+  narration to a share of the measured voiceover);
+* `video/engine/fleet.py` subclasses the duel renderer, so the stage, dolly,
+  pills, grain and progress chrome are literally the same code;
+* narration clips go in `audio/vo_jp/<id>.mp3` (+ `intro.mp3`) and still drive
+  every chapter length and the `.srt` export.
