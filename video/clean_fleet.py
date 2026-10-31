@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
 
-def clean(path, lo=0.72, satmax=0.062, stdmax=0.026, min_blob=1800):
+def clean(path, lo=0.70, satmax=0.085, stdmax=0.030, min_blob=1400):
     im = Image.open(path).convert("RGBA")
     a = np.asarray(im).astype(np.float32) / 255.0
     rgb, al = a[..., :3], a[..., 3]
