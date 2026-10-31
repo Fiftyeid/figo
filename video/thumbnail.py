@@ -238,8 +238,12 @@ def main():
     ap.add_argument("--showroom", action="store_true", help="reference-style two-panel cut")
     ap.add_argument("--light", action="store_true")
     ap.add_argument("--dark", action="store_true")
+    ap.add_argument("--japan", action="store_true", help="EP.03 JAPAN AIR FLEET 2026")
     a = ap.parse_args()
-    picked = a.showroom or a.light or a.dark
+    picked = a.showroom or a.light or a.dark or a.japan
+    if a.japan:
+        save(build_japan(), "thumbnail_japan.png")
+        return
     if not picked or a.showroom:
         save(build_showroom(), "thumbnail_showroom.png")
     if not picked or a.light:
@@ -425,6 +429,97 @@ def build_showroom():
     _, vig = radial((TW, TH), (0, 0, 0), centre=(0.5, 0.44), radius=1.02, strength=1.0)
     f.paste((24, 22, 20), (0, 0), vig.point(lambda v: int(v * 0.14)))
     return f
+
+
+# ============================================================ EP.03  JAPAN
+JP_FLOOR = 618
+JP_LINEUP = (
+    # (asset, cx, width) — left to right, biggest in the middle
+    ("fleet/f15j", 236, 462),
+    ("fleet/f35", 646, 500),
+    ("fleet/ch47j", 1052, 452),
+)
+
+
+def build_japan():
+    """JAPAN AIR FLEET 2026 — one wall, one fleet, one number."""
+    f = grad_v((TW, TH), (247, 247, 248), (242, 243, 244)).convert("RGB")
+    yy = np.arange(TH, dtype=np.float32)
+    ts = 0.62 * np.exp(-yy / 150.0)
+    soft = Image.fromarray(np.repeat((ts * 255)[:, None].astype(np.uint8), TW, axis=1), "L")
+    f.paste(grad_v((TW, TH), (206, 207, 210), (232, 232, 233)), (0, 0), soft)
+
+    d = ImageDraw.Draw(f, "RGBA")
+    for cx in (150, 360, 570, 780, 990, 1200):
+        glow = Image.new("L", (230, 200), 0)
+        ImageDraw.Draw(glow).ellipse([50, 14, 180, 112], fill=188)
+        glow = glow.filter(ImageFilter.GaussianBlur(24))
+        f.paste((255, 251, 241), (cx - 115, 0), glow)
+        d.ellipse([cx - 8, 9, cx + 8, 24], fill=(255, 253, 246, 255))
+
+    fl = grad_v((TW, TH - JP_FLOOR), (232, 233, 235), (212, 214, 217))
+    f.paste(fl, (0, JP_FLOOR))
+    d.line([(0, JP_FLOOR), (TW, JP_FLOOR)], fill=(196, 198, 202, 255), width=2)
+    d.line([(0, JP_FLOOR + 2), (TW, JP_FLOOR + 2)], fill=(255, 255, 255, 190), width=2)
+
+    # the word, distressed, straight from the showroom engine
+    stencil = _stencil("JAPAN", 1120)
+    tx, ty = TW // 2 - stencil.width // 2, 22
+    f.paste(stencil.convert("RGB"), (tx, ty), stencil.split()[3])
+    spray = Image.new("RGBA", (TW, TH), (0, 0, 0, 0))
+    sdraw = ImageDraw.Draw(spray)
+    rng = np.random.default_rng(88)
+    for _ in range(240):
+        px = tx + rng.integers(-26, stencil.width + 26)
+        py = ty + rng.integers(-14, stencil.height + 18)
+        r = int(rng.integers(1, 3))
+        sdraw.ellipse([px - r, py - r, px + r, py + r],
+                      fill=(24, 24, 26, int(rng.integers(18, 70))))
+    f.paste(spray.convert("RGB"), (0, 0), spray.split()[3])
+
+    objects = Image.new("RGBA", (TW, TH), (0, 0, 0, 0))
+    for name, cx, w in JP_LINEUP:
+        spr = _mount(name, 520, upright=False)
+        spr = spr.resize((w, max(2, int(spr.height * w / spr.width))), Image.LANCZOS)
+        objects.paste(spr, (cx - spr.width // 2, JP_FLOOR - spr.height), spr.split()[3])
+
+    sh = Image.new("L", (TW, TH), 0)
+    sd = ImageDraw.Draw(sh)
+    for name, cx, w in JP_LINEUP:
+        sd.ellipse([cx - w * 0.62, JP_FLOOR - 6, cx + w * 0.62, JP_FLOOR + 10], fill=110)
+    sh = sh.filter(ImageFilter.GaussianBlur(9))
+    f.paste((96, 99, 104), (0, 0), sh)
+
+    above = objects.crop((0, 0, TW, JP_FLOOR))
+    refl = above.transpose(Image.FLIP_TOP_BOTTOM).filter(ImageFilter.GaussianBlur(1.3))
+    h_ = TH - JP_FLOOR
+    ramp = np.clip(1.0 - np.linspace(0, 1, h_) ** 1.5, 0, 1) * 0.66
+    rmask = Image.fromarray(np.repeat((ramp * 255)[:, None].astype(np.uint8), TW, axis=1), "L")
+    a = refl.split()[3].crop((0, 0, TW, h_))
+    f.paste(refl.convert("RGB").crop((0, 0, TW, h_)), (0, JP_FLOOR),
+            Image.composite(a, Image.new("L", (TW, h_), 0), rmask))
+    f.paste(objects.convert("RGB"), (0, 0), objects.split()[3])
+
+    # the promise, as two pills under the word — no banner across the mirror
+    lead = "EVERY AIRCRAFT  ·  2026"
+    lw = int(tw(lead, "bold", 26, 3.0) + 84)
+    pw = 186
+    total = lw + 18 + pw
+    x0 = TW // 2 - total // 2
+    dark = Image.new("RGBA", (lw, 56), (0, 0, 0, 0))
+    ImageDraw.Draw(dark).rounded_rectangle([0, 0, lw - 1, 55], 28, fill=(18, 21, 26, 255))
+    f.paste(dark.convert("RGB"), (x0, 214), dark.split()[3])
+    text(f, (x0 + lw // 2, 242), lead, "bold", 26, (255, 255, 255), tracking=3.0, anchor="mm")
+    red = Image.new("RGBA", (pw, 56), (0, 0, 0, 0))
+    ImageDraw.Draw(red).rounded_rectangle([0, 0, pw - 1, 55], 28, fill=(188, 0, 45, 255))
+    f.paste(red.convert("RGB"), (x0 + lw + 18, 214), red.split()[3])
+    text(f, (x0 + lw + 18 + pw // 2, 242), "19 TYPES", "bold", 26, (255, 255, 255),
+         tracking=2, anchor="mm")
+
+    _, vig = radial((TW, TH), (0, 0, 0), centre=(0.5, 0.44), radius=1.02, strength=1.0)
+    f.paste((24, 22, 20), (0, 0), vig.point(lambda v: int(v * 0.13)))
+    return f
+
 
 if __name__ == "__main__":
     main()

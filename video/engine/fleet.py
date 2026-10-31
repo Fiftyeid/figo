@@ -236,6 +236,16 @@ class FleetRenderer(Renderer):
         x = int(cx - spr.width / 2)
         y = int(baseline - spr.height - lift)
 
+        # ambient occlusion on the wall: white airframes (Global Hawk, T-4)
+        # would otherwise dissolve into a white showroom.
+        halo = Image.new("L", (spr.width + 120, spr.height + 120), 0)
+        hm = spr.split()[3].point(lambda v: 255 if v > 120 else 0)
+        halo.paste(hm, (60, 60))
+        halo = halo.filter(ImageFilter.GaussianBlur(34))
+        strength = 0.16 + 0.34 * _paleness(path)
+        halo = halo.point(lambda v: int(v * strength * alpha))
+        f.paste((150, 154, 160), (x - 60, y - 60), halo)
+
         # a very faint floor pool: the product shots carry their own soft
         # shadow, so this only has to stop the airframe looking pasted on.
         rgb, m = P.shadow(path, spr.height, spread=56, opacity=0.18)
@@ -358,6 +368,21 @@ class FleetRenderer(Renderer):
 
 
 # ---------------------------------------------------------------- caches
+@lru_cache(maxsize=64)
+def _paleness(path: str) -> float:
+    """0 for a dark airframe, 1 for a white one.
+
+    White aircraft need a stronger ambient shadow to separate from the white
+    showroom wall; dark ones only need a whisper of it.
+    """
+    a = np.asarray(Image.open(path).convert("RGBA")).astype(np.float32) / 255.0
+    m = a[..., 3] > 0.6
+    if not m.any():
+        return 0.0
+    lum = 0.299 * a[..., 0] + 0.587 * a[..., 1] + 0.114 * a[..., 2]
+    return float(np.clip((float(lum[m].mean()) - 0.55) / 0.35, 0, 1))
+
+
 @lru_cache(maxsize=4)
 def _fleet_glow():
     """A soft pool of light behind the hero, so the wall never looks flat."""
