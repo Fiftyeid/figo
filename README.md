@@ -180,8 +180,19 @@ python3 video/matte_aircraft.py               # white-sweep shots -> assets/flee
 python3 video/build_fleet.py                  # full 1080p30 render
 python3 video/build_fleet.py --draft           # 960x540 proof
 python3 video/build_fleet.py --poster 05       # one still
+python3 video/build_fleet.py --poster hook:2.1 # still from the cold open
 python3 video/build_fleet.py --only 01,03      # a couple of chapters
+python3 video/build_fleet.py --hook 0          # render without the cold open
 ```
+
+**Cold open.**  The film opens on ~5.9 s of pure motion: every one of the 19
+airframes flips past on its vertical axis — no chrome, no type, no narration —
+then hard-cuts into the intro.  The turn is a real perspective map
+(`_flip` in `engine/fleet.py` solves a 4-point homography, so the edge
+swinging towards camera grows and the far edge compresses), and the card
+hands over to the next type at edge-on, which is why no aircraft is ever
+seen mirrored.  `--hook <seconds>` sets the length (`0` disables it); the
+score keeps running and each landing gets a soft tick (`sfx_events`).
 
 * content lives in `video/content_japan.py` — chapters are a small roster of
   types, and the hero airframe changes **on the word** (see

@@ -63,6 +63,15 @@ INTRO_TAIL = 0.9
 LEAD_IN = 0.35      # beat between the cut and the voice (was 1.05)
 TAIL_OUT = 0.45     # beat after the voice before the next cut (was 1.45)
 
+HOOK_HOLD = 0.55    # the last cold-open card rests for this long before the cut
+
+
+def hook_timing(dur: float, count: int) -> dict:
+    """Geometry of the cold open: one card per slot, then a short hold."""
+    count = max(1, int(count))
+    slot = max(0.06, (dur - HOOK_HOLD) / count)
+    return {"dur": dur, "count": count, "slot": slot, "hold": HOOK_HOLD}
+
 
 # ---------------------------------------------------------------- timing
 def vo_duration(path: str) -> float:
@@ -79,18 +88,26 @@ def vo_duration(path: str) -> float:
     return len(audio.read_wav(cache)) / audio.SR
 
 
-def build_timeline(vo_dir: str, only=None, sections=None):
+def build_timeline(vo_dir: str, only=None, sections=None, hook=None):
+    """`hook` = {"dur": seconds, "count": n} prepends a silent cold open."""
     sections = SECTIONS if sections is None else sections
     segs = []
     t = 0.0
     sections = [s for s in sections if not only or s["id"] in only]
 
+    if hook:
+        cfg = hook_timing(float(hook.get("dur", 5.1)),
+                          hook.get("count") or sum(len(s.get("items") or []) for s in sections))
+        segs.append({"kind": "hook", "start": 0.0, "dur": cfg["dur"], "vo": 0.0,
+                     "vo_at": 0.0, "hook": cfg})
+        t = cfg["dur"]
+
     intro_vo = os.path.join(vo_dir, "intro.mp3")
     intro_len = vo_duration(intro_vo)
     dur = INTRO_LEAD + max(intro_len, 8.0) + INTRO_TAIL
-    segs.append({"kind": "intro", "start": 0.0, "dur": dur, "vo": intro_len,
+    segs.append({"kind": "intro", "start": t, "dur": dur, "vo": intro_len,
                  "vo_at": INTRO_LEAD})
-    t = dur
+    t += dur
 
     for sec in sections:
         vo = vo_duration(os.path.join(vo_dir, sec["id"] + ".mp3"))
@@ -110,6 +127,12 @@ def sfx_events(segs):
     """(time, kind, gain) for clicks, whooshes and the opening impact."""
     ev = [(0.0, "impact", 1.0)]
     for seg in segs:
+        if seg["kind"] == "hook":
+            cfg = seg.get("hook") or {}
+            slot = float(cfg.get("slot") or 0.0)
+            for i in range(1, int(cfg.get("count") or 0)):   # card 0 is already flat
+                if slot > 0:
+                    ev.append((seg["start"] + i * slot + 0.06, "tick", 0.5))
         if seg["kind"] != "section":
             continue
         t0 = seg["start"]
@@ -208,7 +231,7 @@ def render(segs, total, assets, out_path, w=C.W, h=C.H, fps=C.FPS, only=None,
         FFMPEG, "-y", "-loglevel", "error",
         "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", str(fps), "-i", "-",
         "-i", mix_path or os.path.join(ROOT, "build", "mix.wav"),
-        "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-preset", "fast", "-crf", "20", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart", "-c:a", "aac", "-b:a", "192k", "-shortest", out_path,
     ]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
@@ -223,7 +246,10 @@ def render(segs, total, assets, out_path, w=C.W, h=C.H, fps=C.FPS, only=None,
         r._global_t = t
         r._seg_dur = seg["dur"]
         frame = r.stage.frame()
-        if seg["kind"] == "intro":
+        if seg["kind"] == "hook":
+            r._hook_cfg = seg.get("hook")
+            frame = r.draw_hook(frame, local, seg["dur"]) or frame
+        elif seg["kind"] == "intro":
             frame = r.draw_intro(frame, local, seg["dur"]) or frame
         elif seg["kind"] == "endcard":
             r.draw_endcard(frame, local)
@@ -249,7 +275,14 @@ def poster(segs, total, assets, which, out_path, sections=None,
     r = (renderer_cls or Renderer)(all_sections, intro_narration or INTRO_NARRATION,
                                    assets, segs, total)
     f = r.stage.frame()
-    if which == "intro":
+    if which.startswith("hook"):
+        seg = next((s for s in segs if s["kind"] == "hook"), None)
+        if seg:
+            at = float(which.split(":")[1]) if ":" in which else 1.4
+            r._hook_cfg = seg.get("hook")
+            r._global_t = at
+            f = r.draw_hook(f, at, seg["dur"]) or f
+    elif which == "intro":
         r._global_t = 8.0
         f = r.draw_intro(f, 8.0, 20) or f
     elif which == "end":

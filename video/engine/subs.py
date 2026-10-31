@@ -66,8 +66,8 @@ def cues_for(segs, intro_text, intro_text_ar):
     """[(start, end, text)] for the whole film."""
     cues = []
     for seg in segs:
-        if seg["kind"] == "endcard":
-            continue
+        if seg["kind"] in ("endcard", "hook"):
+            continue          # the cold open carries no narration by design
         if seg["kind"] == "intro":
             body, body_ar = intro_text, intro_text_ar
         else:

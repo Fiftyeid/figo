@@ -11,6 +11,7 @@ only the chrome + the section layout are new.
 """
 from __future__ import annotations
 
+import math
 import os
 from functools import lru_cache
 
@@ -50,6 +51,11 @@ HEAD_PILL_Y = 144
 HEAD_NAME_Y = 184
 NAME_MIN = 40
 
+# cold open: every airframe in the film, flipping past on its vertical axis
+HOOK_BOX = (1472, 528)
+HOOK_TURN = 0.43          # share of a slot spent turning the card over
+HOOK_DIST = 4.2           # virtual camera distance, in half-cards
+
 
 def _fit_h(path: str, box_w: int, box_h: int) -> Image.Image:
     return fit(path, box_w, box_h)
@@ -59,6 +65,7 @@ class FleetRenderer(Renderer):
     def __init__(self, sections, intro_narration, assets_dir, timeline, total_duration):
         super().__init__(sections, intro_narration, assets_dir, timeline, total_duration)
         self.intro_lines = wrap(META_JP["deck"], "reg", 23, 760, 3)
+        self._hook_cfg = None
 
     # ------------------------------------------------------------ helpers
     def cue_times(self, sec):
@@ -300,6 +307,81 @@ class FleetRenderer(Renderer):
                         pad_x=pad_x, pad_y=pad_y, alpha=alpha * (1.0 if active else 0.75))
             x += w + gap
 
+    # ------------------------------------------------------------ cold open
+    def hook_items(self):
+        """Every type in the film, in running order."""
+        return [it for sec in self.sections for it in (sec.get("items") or [])]
+
+    def draw_hook(self, f, local, dur):
+        """Cold open: the whole inventory flipping past, one airframe at a time.
+
+        No chrome, no type, no narration.  Each card turns about its vertical
+        axis; at edge-on the next type takes the stage, so the film opens on
+        pure motion and cuts straight into the intro.
+        """
+        items = self.hook_items()
+        if not items:
+            return f
+        cfg = self._hook_cfg or {}
+        n = len(items)
+        hold = float(cfg.get("hold", 0.55))
+        slot = float(cfg.get("slot") or max(0.06, (dur - hold) / n))
+
+        t = max(0.0, min(local, dur - 1e-3))
+        i = min(n - 1, int(t / slot))
+        u = t - i * slot
+
+        half = min(0.15, slot * HOOK_TURN)
+        theta, alpha = 0.0, 1.0
+
+        if i > 0 and u < half:                       # this card swings in
+            p = u / half
+            theta = -math.pi / 2 * (1.0 - C.ease_out_expo(p))
+            alpha = 0.55 + 0.45 * p
+        elif i < n - 1 and u > slot - half:          # this card swings away
+            p = (u - (slot - half)) / half
+            theta = math.pi / 2 * C.ease_in_out(p)
+            alpha = 1.0 - 0.42 * p
+
+        # a short drop as the card lands, so the cut has weight
+        v = C.clamp((u - half) / 0.09) if i > 0 else 1.0
+        lift = 22.0 * (1.0 - C.ease_out_expo(v))
+
+        path = self.asset(items[i]["asset"])
+        if not path:
+            return f
+        spr = fit(path, HOOK_BOX[0], HOOK_BOX[1])
+        self._hook_card(f, path, spr, theta, C.DIVIDER_X, FLEET_BASE, alpha, lift)
+        return f
+
+    def _hook_card(self, f, path, spr, theta, cx, baseline, alpha, lift):
+        """One airframe mid-turn: trapezoid projection, wall glow, floor pool."""
+        if alpha <= 0.01:
+            return
+        card, w = _flip(spr, theta)
+        if card is None:
+            return
+        face = abs(math.cos(theta))
+        x = int(round(cx - w / 2))
+        y = int(baseline - card.height - lift)
+
+        # ambient occlusion on the wall: white airframes would otherwise
+        # dissolve into the showroom, so they get a stronger wash
+        halo, pad = _hook_halo(path, HOOK_BOX[0], HOOK_BOX[1])
+        strength = (0.14 + 0.30 * _paleness(path)) * alpha * (0.30 + 0.70 * face)
+        m = halo.point(lambda v: int(v * strength))
+        f.paste((150, 154, 160), (x - pad, y - pad), m)
+
+        # contact shadow, squashed with the card
+        rgb, sm = P.shadow(path, spr.height, spread=56, opacity=0.18)
+        sw = max(8, int(w * 1.14))
+        sh = max(10, int(sm.height * 0.12))
+        m2 = sm.resize((sw, sh), Image.BILINEAR)
+        m2 = m2.point(lambda v: int(v * alpha * (0.25 + 0.75 * face) * 0.55))
+        f.paste(rgb.getpixel((0, 0)), (int(cx - sw / 2), int(baseline - sh * 0.30)), m2)
+
+        paste_rgba(f, card, (x, y), alpha)
+
     # ------------------------------------------------------------ intro
     def draw_intro(self, f, local, dur):
         self.side_wash(f, 0.09)
@@ -368,6 +450,61 @@ class FleetRenderer(Renderer):
 
 
 # ---------------------------------------------------------------- caches
+@lru_cache(maxsize=48)
+def _hook_halo(path: str, box_w: int, box_h: int):
+    """Soft wall wash behind a cold-open card, blurred once and kept."""
+    spr = fit(path, box_w, box_h)
+    pad = 90
+    im = Image.new("L", (spr.width + pad * 2, spr.height + pad * 2), 0)
+    im.paste(spr.split()[3].point(lambda v: 255 if v > 120 else 0), (pad, pad))
+    k = 4
+    small = im.resize((max(2, im.width // k), max(2, im.height // k)), Image.BILINEAR)
+    small = small.filter(ImageFilter.GaussianBlur(9))
+    return small.resize(im.size, Image.BICUBIC), pad
+
+
+def _homography(dst, src):
+    """8 coefficients for PIL's PERSPECTIVE: output (x, y) -> source (u, v)."""
+    A, b = [], []
+    for (x, y), (u, v) in zip(dst, src):
+        A.append([x, y, 1.0, 0.0, 0.0, 0.0, -u * x, -u * y])
+        b.append(u)
+        A.append([0.0, 0.0, 0.0, x, y, 1.0, -v * x, -v * y])
+        b.append(v)
+    return np.linalg.solve(np.asarray(A, dtype=np.float64), np.asarray(b, dtype=np.float64))
+
+
+def _flip(spr, theta, dist=HOOK_DIST):
+    """Project a card turned `theta` radians about its vertical axis.
+
+    A true perspective map, so the edge that swings towards camera grows and
+    the far edge compresses — that trapezoid is what reads as a card, not a
+    flat squash.
+    """
+    c, s = math.cos(theta), math.sin(theta)
+    if abs(s) < 1.5e-3:
+        return spr, spr.width
+    W, H = spr.size
+    hw, hh = W / 2.0, H / 2.0
+    corner = ((-1.0, -1.0, 0.0, 0.0), (1.0, -1.0, W, 0.0),
+              (1.0, 1.0, W, H), (-1.0, 1.0, 0.0, H))
+    pts, src = [], []
+    for xc, yc, u, v in corner:
+        k = dist / (dist + xc * s)
+        pts.append((hw + xc * c * k * hw, hh + yc * k * hh))
+        src.append((u, v))
+
+    x0 = min(p[0] for p in pts)
+    y0 = min(p[1] for p in pts)
+    w = int(round(max(p[0] for p in pts) - x0))
+    h = int(round(max(p[1] for p in pts) - y0))
+    if w < 2 or h < 2:
+        return None, 0
+    dst = [(p[0] - x0, p[1] - y0) for p in pts]
+    coef = _homography(dst, src)
+    return spr.transform((w, h), Image.PERSPECTIVE, tuple(coef), Image.BILINEAR), w
+
+
 @lru_cache(maxsize=64)
 def _paleness(path: str) -> float:
     """0 for a dark airframe, 1 for a white one.

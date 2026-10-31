@@ -38,10 +38,13 @@ def main():
     ap.add_argument("--audio-only", action="store_true")
     ap.add_argument("--draft", action="store_true", help="960x540 proof render")
     ap.add_argument("--no-subs", action="store_true")
+    ap.add_argument("--hook", default=5.9, type=float,
+                    help="cold open: every airframe flipping past, silent (0 = off)")
     args = ap.parse_args()
 
     only = set(x.strip() for x in args.only.split(",") if x.strip())
-    segs, total = B.build_timeline(args.vo, only or None, JP_SECTIONS)
+    hook = {"dur": args.hook, "count": sum(len(s["items"]) for s in JP_SECTIONS)} if args.hook > 0 else None
+    segs, total = B.build_timeline(args.vo, only or None, JP_SECTIONS, hook=hook)
     os.makedirs(os.path.join(ROOT, "build"), exist_ok=True)
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     print(f"  timeline: {len(segs)} segments, {total/60:.1f} min")
