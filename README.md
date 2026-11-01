@@ -205,3 +205,12 @@ and every cut gets a soft tick, both read from the same `hook_timing` list.
   pills, grain and progress chrome are literally the same code;
 * narration clips go in `audio/vo_jp/<id>.mp3` (+ `intro.mp3`) and still drive
   every chapter length and the `.srt` export.
+
+## SEO package
+
+`deliverables/seo_metadata_japan_fleet_2026.md` holds the upload copy for
+EP.03: title (plus four alternates), a 2 145-character description with a
+verified chapter list, 328 characters of tags, pinned comment, and the
+YouTube settings checklist.  The chapter timestamps are recomputed from
+`build_timeline` whenever the cold open or the voiceover changes — the file
+records how (`0:00` must stay the first chapter, gaps ≥ 10 s).
