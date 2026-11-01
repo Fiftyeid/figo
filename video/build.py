@@ -63,14 +63,29 @@ INTRO_TAIL = 0.9
 LEAD_IN = 0.35      # beat between the cut and the voice (was 1.05)
 TAIL_OUT = 0.45     # beat after the voice before the next cut (was 1.45)
 
-HOOK_HOLD = 0.55    # the last cold-open card rests for this long before the cut
+HOOK_HOLD = 0.62    # the last shot rests this long before the cut to the intro
+HOOK_SLOW = 1.55    # the last shot is this much longer than the first: the
+                    # montage decelerates instead of machine-gunning out
 
 
 def hook_timing(dur: float, count: int) -> dict:
-    """Geometry of the cold open: one card per slot, then a short hold."""
+    """Cut list for the cold open.
+
+    The roster is cut hard, one shot per type, but the shot lengths ramp up
+    from the first to the last (HOOK_SLOW), so the montage opens as a burst
+    and settles into a rhythm — and the final airframe holds before the cut
+    into the intro.  Video and sound design both read this schedule.
+    """
     count = max(1, int(count))
-    slot = max(0.06, (dur - HOOK_HOLD) / count)
-    return {"dur": dur, "count": count, "slot": slot, "hold": HOOK_HOLD}
+    weights = [1.0 + (HOOK_SLOW - 1.0) * (i / max(1, count - 1)) for i in range(count)]
+    body = max(0.2, float(dur) - HOOK_HOLD)
+    total_w = sum(weights)
+    cuts, t = [], 0.0
+    for w in weights:
+        cuts.append(round(t, 4))
+        t += body * w / total_w
+    return {"dur": round(t + HOOK_HOLD, 4), "count": count, "cuts": cuts,
+            "shots": [round(body * w / total_w, 4) for w in weights], "hold": HOOK_HOLD}
 
 
 # ---------------------------------------------------------------- timing
@@ -129,10 +144,8 @@ def sfx_events(segs):
     for seg in segs:
         if seg["kind"] == "hook":
             cfg = seg.get("hook") or {}
-            slot = float(cfg.get("slot") or 0.0)
-            for i in range(1, int(cfg.get("count") or 0)):   # card 0 is already flat
-                if slot > 0:
-                    ev.append((seg["start"] + i * slot + 0.06, "tick", 0.5))
+            for cut in list(cfg.get("cuts") or [])[1:]:
+                ev.append((seg["start"] + cut + 0.005, "tick", 0.42))
         if seg["kind"] != "section":
             continue
         t0 = seg["start"]

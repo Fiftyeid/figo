@@ -38,7 +38,7 @@ def main():
     ap.add_argument("--audio-only", action="store_true")
     ap.add_argument("--draft", action="store_true", help="960x540 proof render")
     ap.add_argument("--no-subs", action="store_true")
-    ap.add_argument("--hook", default=5.9, type=float,
+    ap.add_argument("--hook", default=6.4, type=float,
                     help="cold open: every airframe flipping past, silent (0 = off)")
     args = ap.parse_args()
 

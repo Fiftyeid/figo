@@ -185,14 +185,17 @@ python3 video/build_fleet.py --only 01,03      # a couple of chapters
 python3 video/build_fleet.py --hook 0          # render without the cold open
 ```
 
-**Cold open.**  The film opens on ~5.9 s of pure motion: every one of the 19
-airframes flips past on its vertical axis — no chrome, no type, no narration —
-then hard-cuts into the intro.  The turn is a real perspective map
-(`_flip` in `engine/fleet.py` solves a 4-point homography, so the edge
-swinging towards camera grows and the far edge compresses), and the card
-hands over to the next type at edge-on, which is why no aircraft is ever
-seen mirrored.  `--hook <seconds>` sets the length (`0` disables it); the
-score keeps running and each landing gets a soft tick (`sfx_events`).
+**Cold open.**  The film opens on ~6.4 s of pure motion: every one of the 19
+types is cut hard, shot after shot — no chrome, no type, no narration — then
+it hard-cuts into the intro.  There is no morph: each airframe is its own
+shot with its own slow dolly (odd shots push in, even shots pull back), so
+the sequence reads as an edit and not an effect.  Shot lengths ramp from
+0.24 s to 0.37 s (`HOOK_SLOW` in `build.py`), so the montage opens as a burst
+and settles instead of machine-gunning out; the final airframe holds 0.62 s.
+`--hook <seconds>` sets the budget (`0` disables it); the score keeps running
+and every cut gets a soft tick, both read from the same `hook_timing` list.
+`video/motion_study.py` renders five alternative transitions side by side
+(hard cut / push / wipe / dissolve / conveyor) for style checks.
 
 * content lives in `video/content_japan.py` — chapters are a small roster of
   types, and the hero airframe changes **on the word** (see
