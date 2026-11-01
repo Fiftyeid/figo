@@ -29,7 +29,7 @@ from engine import config as C  # noqa: E402
 from engine import pixels as P  # noqa: E402
 from engine import subs  # noqa: E402
 from engine.fleet import FleetRenderer, _hook_halo, _paleness  # noqa: E402
-from engine.scenes import Stage, camera, fit, paste_rgba  # noqa: E402
+from engine.scenes import Stage, camera, fit, paste_rgba, tw  # noqa: E402
 from content_countdown import END_VO, ENTRIES, INTRO_VO  # noqa: E402
 
 ROOT = os.path.dirname(HERE)
@@ -45,13 +45,14 @@ ENDCARD = 4.6
 
 
 # ---------------------------------------------------------------- timeline
-def timeline(vo_dir: str):
+def timeline(vo_dir: str, upto: int | None = None):
     intro = B.vo_duration(os.path.join(vo_dir, "intro.mp3"))
     segs = [{"kind": "intro", "start": 0.0,
              "dur": INTRO_LEAD + max(intro, 5.0) + 0.8, "vo": intro,
              "vo_at": INTRO_LEAD}]
     t = segs[0]["dur"]
-    for i, (asset, name, role, count, _vo) in enumerate(ENTRIES):
+    entries = ENTRIES if not upto else ENTRIES[:upto]
+    for i, (asset, name, role, count, _vo) in enumerate(entries):
         vo = B.vo_duration(os.path.join(vo_dir, f"{i + 1:02d}.mp3"))
         dur = LEAD + max(vo, 2.4) + TAIL
         segs.append({"kind": "beat", "start": t, "dur": dur, "vo": vo,
@@ -138,8 +139,8 @@ class CountdownRenderer:
         # role + count, as one dark pill and one light pill: the HIKKA pairing
         msize = 20
         gap = 12
-        w1 = P.tw(role, "bold", msize, 5.0) + 44
-        w2 = P.tw(count, "bold", msize, 5.0) + 44
+        w1 = tw(role, "bold", msize, 5.0) + 44
+        w2 = tw(count, "bold", msize, 5.0) + 44
         x = C.DIVIDER_X - (w1 + gap + w2) / 2
         y = ly + nsize + 16
         P.draw_pill(f, x, y, role, size=msize, fg=C.PAPER, bg=C.CHARCOAL,
@@ -238,8 +239,9 @@ def mix(segs, total, vo_dir, out_path):
 
 
 # ---------------------------------------------------------------- main
-def render(segs, total, out, w=C.W, h=C.H, fps=C.FPS, mix_path=None):
-    r = CountdownRenderer([e[:4] for e in ENTRIES], os.path.join(ROOT, "assets"))
+def render(segs, total, out, w=C.W, h=C.H, fps=C.FPS, mix_path=None, upto=None):
+    r = CountdownRenderer([e[:4] for e in (ENTRIES if not upto else ENTRIES[:upto])],
+                          os.path.join(ROOT, "assets"))
     frames = int(total * fps)
     cmd = [B.FFMPEG, "-y", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", str(fps), "-i", "-",
@@ -279,9 +281,11 @@ def main():
     ap.add_argument("--draft", action="store_true")
     ap.add_argument("--audio-only", action="store_true")
     ap.add_argument("--still", type=float, default=None)
+    ap.add_argument("--upto", type=int, default=0,
+                    help="render only the first N entries (for VO proofs)")
     args = ap.parse_args()
 
-    segs, total = timeline(args.vo)
+    segs, total = timeline(args.vo, args.upto or None)
     os.makedirs(os.path.join(ROOT, "build"), exist_ok=True)
     print(f"  {len(segs)} segments, {total/60:.2f} min")
 
@@ -302,17 +306,25 @@ def main():
     mix(segs, total, args.vo, mix_path)
     print("  audio mixed")
 
-    cues = [{"kind": "intro" if s["kind"] == "intro" else "section",
-             "start": s["start"], "dur": s["dur"], "vo": s["vo"], "vo_at": s["vo_at"],
-             "section": {"narration": INTRO_VO if s["kind"] == "intro" else s["entry"][1]}}
-            for s in segs]
+    cues = []
+    for s in segs:
+        if s["kind"] == "intro":
+            text = INTRO_VO
+        elif s["kind"] == "end":
+            text = END_VO
+        else:
+            i = s["idx"]
+            text = ENTRIES[i][4] if i < len(ENTRIES) else ""
+        cues.append({"kind": "intro" if s["kind"] == "intro" else "section",
+                     "start": s["start"], "dur": s["dur"], "vo": s["vo"],
+                     "vo_at": s["vo_at"], "section": {"narration": text}})
     subs.export(cues, os.path.join(ROOT, "deliverables"), INTRO_VO, "",
                 stem="hikka_japan_19_aircraft")
     print("  subs ->", "hikka_japan_19_aircraft.en.srt")
 
     if not args.audio_only:
         w, h = (960, 540) if args.draft else (C.W, C.H)
-        render(segs, total, args.out, w=w, h=h, mix_path=mix_path)
+        render(segs, total, args.out, w=w, h=h, mix_path=mix_path, upto=args.upto or None)
 
 
 if __name__ == "__main__":
