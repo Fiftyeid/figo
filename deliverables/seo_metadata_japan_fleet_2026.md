@@ -12,31 +12,37 @@ Character counts are verified against YouTube's limits.
 
 ---
 
-## 1. Title
+## 1. Title — FINAL
 
-**Primary (recommended):**
+Publish with this one:
 
 ```
 Every Aircraft Japan Flies in 2026 — All 19 Types, One by One
 ```
 
-Why it works: the search phrase ("aircraft Japan flies 2026") sits at the
-front, the number 19 makes the promise concrete, and "one by one" is the
-format — the same promise the film keeps for five minutes.
+61 characters.  The search phrase sits in the first 40 characters, the number
+19 turns a vague promise into a counted one, and "one by one" states the
+format — which is exactly what the film does for five minutes.  It also does
+not repeat the thumbnail, which already shouts JAPAN / 19 TYPES: title and
+thumbnail say two different things instead of one thing twice.
 
-**Alternates, for A/B or a re-upload:**
+**Backups, in order of preference** (for A/B on a re-upload, not for the
+first publish):
 
 ```
-Japan's Entire Air Fleet 2026: 19 Aircraft, One Island Nation
-JAPAN AIR FLEET 2026 — Every Aircraft, Type by Type
-What Japan Actually Flies in 2026 (Fighters to Drones)
-19 Aircraft Japan Flies in 2026 — Fighters, Tankers, Drones
+Air Fleet 2026: Japan — Every Aircraft, Type by Type          52
+Japan's Air Fleet 2026 — 19 Aircraft, One Island Nation      55
+Every Aircraft Japan Flies in 2026 (Fighters to Drones)      55
+19 Types: The Entire Japanese Air Fleet in 2026              47
 ```
 
-Avoid in the title: "military", "war", "vs China". The film is an inventory,
-not a confrontation — and the softer framing keeps it monetisable.
+Backup 1 is the one that matches the channel's own naming family
+(`Gear Compared: …` = series name, colon, subject).  Pick it if you would
+rather the library read as one series than optimise this single video.
 
----
+Avoid in the title: "military", "war", "vs China".  The film is an inventory,
+not a confrontation — the softer framing keeps it monetisable and keeps the
+recommendation surface wide.
 
 ## 2. Description
 
