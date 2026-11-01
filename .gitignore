@@ -16,3 +16,6 @@ tools/package-lock.json
 
 # field footage imported with `python3 video/broll.py` (licensing is yours)
 broll/
+
+# frame breakdowns (reference stills are not redistributed)
+build/frames/
