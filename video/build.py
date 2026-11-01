@@ -93,7 +93,11 @@ def vo_duration(path: str) -> float:
     """Decode the clip to mono 44.1k wav (cached) and measure it."""
     if not os.path.exists(path):
         return 0.0
-    cache = os.path.join(ROOT, "build", "vo_cache", os.path.basename(path) + ".wav")
+    # key on the whole path: two films both use "01.mp3" for their first
+    # chapter, and a basename-only key served EP.03's cached 42 s clip for
+    # this film's 6 s line.
+    key = os.path.basename(os.path.dirname(path)) + "__" + os.path.basename(path) + ".wav"
+    cache = os.path.join(ROOT, "build", "vo_cache", key)
     os.makedirs(os.path.dirname(cache), exist_ok=True)
     if not os.path.exists(cache):
         subprocess.run(
