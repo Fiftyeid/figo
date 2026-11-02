@@ -215,10 +215,13 @@ class Stage:
 
 # ================================================================ renderer
 class Renderer:
-    def __init__(self, sections, intro_narration, assets_dir, timeline, total_duration):
+    def __init__(self, sections, intro_narration, assets_dir, timeline, total_duration,
+                 meta=None, sides=None):
         self.sections = sections
+        self.meta = meta or META
+        self.sides = sides or SIDES
         self.intro_narration = intro_narration
-        self.intro_lines = wrap(META["deck"], "reg", 23, 560, 4)
+        self.intro_lines = wrap(self.meta["deck"], "reg", 23, 560, 4)
         self.assets = assets_dir
         self.tl = timeline
         self.total = total_duration
@@ -238,12 +241,14 @@ class Renderer:
         if alpha <= 0.01:
             return
         y = 54
-        P.draw_flag_chip(f, C.SAFE, y, 42, "us", "USA", SIDES["left"]["accent"], alpha=alpha, dark=True)
-        P.draw_flag_chip(f, C.W - C.SAFE, y, 42, "cn", "CHN", SIDES["right"]["accent"],
+        P.draw_flag_chip(f, C.SAFE, y, 42, self.sides["left"]["country"], self.sides["left"]["code"],
+                         self.sides["left"]["accent"], alpha=alpha, dark=True)
+        P.draw_flag_chip(f, C.W - C.SAFE, y, 42, self.sides["right"]["country"], self.sides["right"]["code"],
+                         self.sides["right"]["accent"],
                          alpha=alpha, dark=True, align="right")
-        P.draw_text(f, (C.W / 2, y - 2), META["title"], "bold", 27, C.INK, tracking=10,
+        P.draw_text(f, (C.W / 2, y - 2), self.meta["title"], "bold", 27, C.INK, tracking=10,
                     anchor="mt", alpha=alpha)
-        P.draw_text(f, (C.W / 2, y + 36), META["episode"], "reg", 14, C.INK_FAINT,
+        P.draw_text(f, (C.W / 2, y + 36), self.meta["episode"], "reg", 14, C.INK_FAINT,
                     tracking=5, anchor="mt", alpha=alpha)
         py = 116
         d = ImageDraw.Draw(f, "RGBA")
@@ -259,9 +264,9 @@ class Renderer:
         if rule:
             ImageDraw.Draw(f, "RGBA").line([(C.SAFE, y - 40), (C.W - C.SAFE, y - 40)],
                                            fill=(150, 158, 168, 65), width=2)
-        P.draw_text(f, (C.SAFE, y), left_note or META["disclaimer"], "reg", 16, C.INK_FAINT,
+        P.draw_text(f, (C.SAFE, y), left_note or self.meta["disclaimer"], "reg", 16, C.INK_FAINT,
                     tracking=3, alpha=alpha)
-        P.draw_text(f, (C.W - C.SAFE, y), right_note or META["channel"], "bold", 16, C.INK_DIM,
+        P.draw_text(f, (C.W - C.SAFE, y), right_note or self.meta["channel"], "bold", 16, C.INK_DIM,
                     tracking=3, anchor="rt", alpha=alpha)
 
     def side_wash(self, f, alpha=0.06):
@@ -271,8 +276,8 @@ class Renderer:
         if overlay is None:
             w, h = C.W, C.H
             xs = np.arange(w, dtype=np.float32) / w
-            us = np.array(SIDES["left"]["accent"], dtype=np.float32)
-            cn = np.array(SIDES["right"]["accent"], dtype=np.float32)
+            us = np.array(self.sides["left"]["accent"], dtype=np.float32)
+            cn = np.array(self.sides["right"]["accent"], dtype=np.float32)
             lu = np.clip(1 - xs / 0.58, 0, 1) ** 1.7
             ru = np.clip((xs - 0.42) / 0.58, 0, 1) ** 1.7
             layer = us * lu[:, None] + cn * ru[:, None]
@@ -320,7 +325,7 @@ class Renderer:
         e = C.ramp(local, start, 0.55, C.ease_out_expo)
         if e <= 0.01:
             return
-        accent = SIDES[side]["accent"]
+        accent = self.sides[side]["accent"]
         left = side == "left"
         x = C.SAFE + 6 if left else C.W - C.SAFE - 6
         dy = (1 - e) * 18
@@ -343,8 +348,8 @@ class Renderer:
 
     def spec_pills(self, f, side, specs, local, times=None, size=19, y0=PILL_Y):
         times = times or self.pill_times()
-        accent = SIDES[side]["accent"]
-        for i, (label, lv, rv) in enumerate(specs):
+        accent = self.sides[side]["accent"]
+        for i, (label, lv, rv) in enumerate(specs or ()):
             value = lv if side == "left" else rv
             t0 = times[min(i, len(times) - 1)]
             e = C.ramp(local, t0, 0.45, C.ease_out_back)
@@ -375,15 +380,16 @@ class Renderer:
 
         # headline (top bar keeps the brand, so the hero line is the question)
         e1 = C.ramp(local, 0.05, 0.7, C.ease_out_expo)
-        P.draw_text(f, (C.W / 2, 130 - (1 - e1) * 30), META["hero_a"], "bold", 88, C.INK,
+        P.draw_text(f, (C.W / 2, 130 - (1 - e1) * 30), self.meta["hero_a"], "bold", 88, C.INK,
                     tracking=7, anchor="mt", alpha=e1)
         e1b = C.ramp(local, 0.2, 0.7, C.ease_out_expo)
-        P.draw_text(f, (C.W / 2, 212 - (1 - e1b) * 26), META["hero_b"], "bold", 88,
+        P.draw_text(f, (C.W / 2, 212 - (1 - e1b) * 26), self.meta["hero_b"], "bold", 88,
                     C.INK_DIM, tracking=7, anchor="mt", alpha=e1b)
 
         # the two soldiers; each one pops forward on its own narration line
-        for side, key, cx, cue in (("left", "soldier_us", 350, 0.35),
-                                   ("right", "soldier_cn", 1570, 3.10)):
+        for side, key, cx, cue in self.meta.get("hero_sprites",
+                 (("left", "soldier_us", 350, 0.35),
+                  ("right", "soldier_cn", 1570, 3.10))):
             path = self.asset(key)
             if not path:
                 continue
@@ -401,12 +407,12 @@ class Renderer:
                 bw = 120
                 bx, by = cx - bw / 2, 972
                 d.line([(bx, by), (bx + bw, by)],
-                       fill=SIDES[side]["accent"] + (a,), width=4)
+                       fill=self.sides[side]["accent"] + (a,), width=4)
 
         # centre copy block
         e2 = C.ramp(local, 0.5, 0.8, C.ease_out_expo)
-        parts = [("USA", SIDES["left"]["accent"]), ("  ×  ", C.INK_FAINT),
-                 ("CHINA", SIDES["right"]["accent"])]
+        parts = [("USA", self.sides["left"]["accent"]), ("  ×  ", C.INK_FAINT),
+                 ("CHINA", self.sides["right"]["accent"])]
         widths = [tw(p, "bold", 44, 8) for p, _ in parts]
         x = C.W / 2 - sum(widths) / 2
         for (p, col), w in zip(parts, widths):
@@ -422,14 +428,14 @@ class Renderer:
                         anchor="mt", alpha=e4)
         # key numbers under the copy, so the hook lands with data
         e5 = C.ramp(local, 1.6, 0.6)
-        P.draw_text(f, (C.W / 2, 604), META["hero_stat"], "bold", 20, C.INK_FAINT,
+        P.draw_text(f, (C.W / 2, 604), self.meta["hero_stat"], "bold", 20, C.INK_FAINT,
                     tracking=8, anchor="mt", alpha=e5)
         # dolly the stage + soldiers, then lay the UI on top so it stays sharp
         f = camera(f, 1.0 + 0.05 * C.ease_in_out(C.clamp(local / max(0.1, dur))),
                    cy=C.H * 0.52)
         self.top_bar(f, local, C.ramp(local, 0.05, 0.6))
         self.bottom_bar(f, C.ramp(local, 0.7, 0.7),
-                        left_note="18 ITEMS   ·   ONE QUESTION   ·   OPEN SOURCES", rule=False)
+                        left_note="19 TYPES   ·   ONE QUESTION   ·   OPEN SOURCES", rule=False)
         return f
 
     # ------------------------------------------------------------ end card
@@ -633,18 +639,18 @@ class Renderer:
 
     # -------------------------------------------------- scene: duel
     def scene_duel(self, f, sec, local, box=(640, 300), baseline=612, name_y=NAME_Y,
-                   pill_y=PILL_Y):
+                   pill_y=PILL_Y, cx_off=452):
         flips = set(sec.get("flip", ()))
         for side in ("left", "right"):
             path = self.asset(sec["assets"].get(side))
-            cx = C.DIVIDER_X - 452 if side == "left" else C.DIVIDER_X + 452
+            cx = C.DIVIDER_X - cx_off if side == "left" else C.DIVIDER_X + cx_off
             e = C.ramp(local, 0.14, 0.95, C.ease_out_expo)
             off = (1 - e) * 160 * (1 if side == "left" else -1)
             if path:
                 paste_object(f, path, cx + off, baseline, box[0], box[1], alpha=e,
                              lift=(1 - e) * 34, flip=side in flips)
             self.side_name(f, side, sec["names"][side], local, start=0.5, y=name_y)
-            self.spec_pills(f, side, sec["specs"], local, y0=pill_y)
+            self.spec_pills(f, side, sec.get("specs") or (), local, y0=pill_y)
 
     # -------------------------------------------------- scene: bars
     def scene_bars(self, f, sec, local):
@@ -652,7 +658,7 @@ class Renderer:
         seam = C.DIVIDER_X
         span, h, bar_y = 600, 82, 470
         for side in ("left", "right"):
-            accent = SIDES[side]["accent"]
+            accent = self.sides[side]["accent"]
             e = C.ramp(local, 0.3, 1.0, C.ease_out_expo)
             val = b["left"] if side == "left" else b["right"]
             w = span * C.clamp(val / b["max"]) * e
@@ -678,12 +684,14 @@ class Renderer:
             nx = C.SAFE + 6 if side == "left" else C.W - C.SAFE - 6
             P.draw_text(f, (nx, 386), sec["names"][side], "bold", 36, C.INK, tracking=3,
                         anchor="lt" if side == "left" else "rt", alpha=ne)
-            P.draw_text(f, (nx, 432), SIDES[side]["force"], "reg", 16, C.INK_FAINT,
+            P.draw_text(f, (nx, 432), self.sides[side]["force"], "reg", 16, C.INK_FAINT,
                         tracking=4, anchor="lt" if side == "left" else "rt", alpha=ne)
-            self.spec_pills(f, side, sec["specs"], local, y0=PILL_Y)
+            if sec.get("specs"):
+                self.spec_pills(f, side, sec.get("specs") or (), local, y0=PILL_Y)
         # unit caption above the seam
-        P.draw_text(f, (seam, bar_y - 74), b["unit"], "bold", 17, C.INK_FAINT, tracking=7,
-                    anchor="mt", alpha=C.ramp(local, 0.7, 0.6))
+        if b.get("unit"):
+            P.draw_text(f, (seam, bar_y - 74), b["unit"], "bold", 17, C.INK_FAINT,
+                        tracking=7, anchor="mt", alpha=C.ramp(local, 0.7, 0.6))
         # scale ticks
         ua = C.ramp(local, 0.8, 0.6)
         d = ImageDraw.Draw(f, "RGBA")
@@ -714,9 +722,9 @@ class Renderer:
             ne = C.ramp(local, 0.6, 0.6)
             P.draw_text(f, (x + 26, y + 22), sec["names"][side], "bold", 38, C.PAPER,
                         tracking=4, alpha=ne)
-            P.draw_flag_chip(f, x + 26, y + h - 74, 36, SIDES[side]["country"],
-                             SIDES[side]["code"], SIDES[side]["accent"], alpha=ne, dark=True)
-            self.spec_pills(f, side, sec["specs"], local, y0=PILL_Y)
+            P.draw_flag_chip(f, x + 26, y + h - 74, 36, self.sides[side]["country"],
+                             self.sides[side]["code"], self.sides[side]["accent"], alpha=ne, dark=True)
+            self.spec_pills(f, side, sec.get("specs") or (), local, y0=PILL_Y)
         for side in ("left", "right"):
             nx = C.SAFE + 6 if side == "left" else C.W - C.SAFE - 6
             P.draw_text(f, (nx, 648), "PATTERN", "bold", 13, C.INK_FAINT, tracking=6,
@@ -731,7 +739,7 @@ class Renderer:
         for side in ("left", "right"):
             e = C.ramp(local, 0.22, 1.0, C.ease_out_expo)
             cx = C.DIVIDER_X - 430 if side == "left" else C.DIVIDER_X + 430
-            accent = SIDES[side]["accent"]
+            accent = self.sides[side]["accent"]
             cal = sec["bullets"][side]
             spr = _cartridge(cal, int(112 * (cal / 6.8) ** 0.9))
             off = (1 - e) * 150 * (1 if side == "left" else -1)
@@ -748,18 +756,18 @@ class Renderer:
             for xx in (x, x + spr.width):
                 d.line([(xx, 570), (xx, 584)], fill=(120, 128, 138, a), width=2)
             self.side_name(f, side, sec["names"][side], local, start=0.55, y=NAME_Y, size=34)
-            self.spec_pills(f, side, sec["specs"], local, y0=PILL_Y)
+            self.spec_pills(f, side, sec.get("specs") or (), local, y0=PILL_Y)
 
     # -------------------------------------------------- scene: list
     def scene_list(self, f, sec, local):
         for side in ("left", "right"):
-            accent = SIDES[side]["accent"]
+            accent = self.sides[side]["accent"]
             left = side == "left"
             ne = C.ramp(local, 0.35, 0.6)
             nx = C.SAFE + 6 if left else C.W - C.SAFE - 6
             P.draw_text(f, (nx, 356), sec["names"][side], "bold", 42, C.INK, tracking=4,
                         anchor="lt" if left else "rt", alpha=ne)
-            P.draw_text(f, (nx, 408), SIDES[side]["force"], "reg", 16, C.INK_FAINT,
+            P.draw_text(f, (nx, 408), self.sides[side]["force"], "reg", 16, C.INK_FAINT,
                         tracking=4, anchor="lt" if left else "rt", alpha=ne)
             for i, it in enumerate(sec["list"][side]):
                 e = C.ramp(local, 0.6 + i * 0.16, 0.5, C.ease_out_expo)
@@ -773,13 +781,13 @@ class Renderer:
                 tx = bx + 26 if left else bx - 12
                 P.draw_text(f, (tx, y), it, "reg", size, C.INK, tracking=0.2,
                             anchor="lt" if left else "rt", alpha=e)
-            self.spec_pills(f, side, sec["specs"], local, y0=PILL_Y)
+            self.spec_pills(f, side, sec.get("specs") or (), local, y0=PILL_Y)
 
     # -------------------------------------------------- scene: stat
     def scene_stat(self, f, sec, local):
         for side in ("left", "right"):
             st = sec["stats"][side]
-            accent = SIDES[side]["accent"]
+            accent = self.sides[side]["accent"]
             cx = C.DIVIDER_X - 430 if side == "left" else C.DIVIDER_X + 430
             e = C.ramp(local, 0.18, 0.9, C.ease_out_expo)
             hb, hm = P.hex_badge(330, (236, 239, 243), "")
@@ -795,7 +803,7 @@ class Renderer:
             P.draw_text(f, (cx, STAGE_TOP + 286), st["note"], "reg", 20, C.INK_FAINT,
                         tracking=1, anchor="mt", alpha=C.ramp(local, 0.7, 0.6))
             self.side_name(f, side, sec["names"][side], local, start=0.65, y=660, size=32)
-            self.spec_pills(f, side, sec["specs"], local, y0=722)
+            self.spec_pills(f, side, sec.get("specs") or (), local, y0=722)
 
     # -------------------------------------------------- scene: outro
     def scene_outro(self, f, sec, local):
@@ -809,7 +817,7 @@ class Renderer:
                     tracking=0.6, anchor="mt", alpha=C.ramp(local, 0.45, 0.7))
 
         # verdict table: small label on the seam, each side answers on its own half
-        for i, (label, lv, rv) in enumerate(sec["specs"]):
+        for i, (label, lv, rv) in enumerate(sec.get("specs") or ()):
             ea = C.ramp(local, 0.7 + i * 0.16, 0.55, C.ease_out_expo)
             if ea <= 0.01:
                 continue
@@ -821,12 +829,12 @@ class Renderer:
             P.draw_text(f, (C.DIVIDER_X, y), label, "bold", 13, C.INK_FAINT, tracking=5,
                         anchor="mt", alpha=ea * 0.9)
             P.draw_text(f, (C.DIVIDER_X - 30, y + 24), lv, "bold", 23,
-                        SIDES["left"]["accent"], tracking=0.4, anchor="rt", alpha=ea)
+                        self.sides["left"]["accent"], tracking=0.4, anchor="rt", alpha=ea)
             P.draw_text(f, (C.DIVIDER_X + 30, y + 24), rv, "bold", 23,
-                        SIDES["right"]["accent"], tracking=0.4, anchor="lt", alpha=ea)
+                        self.sides["right"]["accent"], tracking=0.4, anchor="lt", alpha=ea)
 
         for side in ("left", "right"):
-            path = self.asset(sec["assets"][side])
+            path = self.asset((sec.get("assets") or {}).get(side)) if sec.get("assets") else None
             cx = 340 if side == "left" else 1580
             ea = C.ramp(local, 0.5, 1.0, C.ease_out_expo)
             off = (1 - ea) * 220 * (1 if side == "left" else -1)
