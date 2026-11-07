@@ -76,3 +76,12 @@ rendered by `render.scene_note()`. They carry no narration, so the music bed is 
 block's time proportionally — no truncation (185 cues, 1966/1966 words).
 `python3 pipeline/build.py --srt-only` regenerates `.srt` + `-packaging.md` from
 `work/timeline.json` without re-encoding.
+
+## Style system (brief v2)
+
+`plan/remake-plan-2.md` defines the look: pure white field, **serif** headings
+(`F_SB`/`F_SR`), accent red `#CC0000`, a faint graph-paper grid (`background_grid`),
+a light turntable plate under each exhibit (`studio_ground`), still frames only,
+0.5 s wipes into every section card (`WIPE_SECS`, `make_wipe`), and an Oryx
+confirmed-loss chart (`scene_losses`). Micro-labels stay sans (`F_BOLD`) for legibility.
+Deliberate deviation: no drop shadows — the standing instruction is "no shadows, no glow".
