@@ -4,3 +4,4 @@ work/scenes/
 work/*.wav
 node_modules/
 output/*.mp4
+work/

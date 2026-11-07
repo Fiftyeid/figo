@@ -51,3 +51,12 @@ output/thumbnail.jpg                      1280x720
 - Tone is analytical, not celebratory: capability plus recorded battlefield behaviour.
 - Vehicle names use the designation the force uses (2S34 Khosta rather than the
   source plan's "2S34 Koalitsiya", which conflates it with the 2S35).
+
+## Image QA
+
+Every render is reviewed against reference silhouettes before the film is built. Pass 1
+(52 vehicles) flagged ten vehicles with wrong or incomplete features — barrels truncated,
+wrong hull family, generic airbrushed bodies. Those were regenerated with feature-level
+prompts (turret shape, launcher type, hull lineage, wheel count) and re-reviewed.
+Known-acceptable approximations: the Astais body reads more generic than the real
+Remdiesel car, and the T-90's Shtora dazzler housings are understated.
