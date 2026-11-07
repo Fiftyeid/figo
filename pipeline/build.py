@@ -30,7 +30,8 @@ def srt_time(t):
     return "%02d:%02d:%02d,%03d" % (h, m, s, ms)
 
 
-def wrap(text, width=58):
+def wrap(text, width=42):
+    """Wrap to a list of lines (no truncation)."""
     words, lines, cur = text.split(), [], ""
     for w in words:
         if len(cur) + len(w) + 1 <= width:
@@ -40,7 +41,13 @@ def wrap(text, width=58):
             cur = w
     if cur:
         lines.append(cur)
-    return "\n".join(lines[:2])
+    return lines
+
+
+def cue_chunks(text, width=42, per_cue=2):
+    """Split narration into subtitle cues of at most `per_cue` lines."""
+    lines = wrap(text, width)
+    return [lines[i:i + per_cue] for i in range(0, len(lines), per_cue)]
 
 
 def render_scenes(tl, scenes, data):
@@ -65,19 +72,123 @@ def render_scenes(tl, scenes, data):
 
 
 def build_srt(frames):
+    """Full subtitles: long narration is split across cues, never truncated;
+    each cue's share of the scene time follows its share of the text."""
     meta = json.load(open("data/vehicles.json"))["meta"]
-    lines = []
-    for i, (_, s) in enumerate(frames):
+    cues = []
+    for _, s in frames:
         if s["kind"] == "vehicle":
             txt = s["vehicle"]["vo"]
         elif s["kind"] == "section":
             txt = s["category"]["vo"]
         elif s["kind"] == "intro":
             txt = meta["intro_vo"]
+        elif s["kind"] == "note":
+            txt = " ".join(s["lines"])
         else:
             txt = meta["outro_vo"]
-        lines.append("%d\n%s --> %s\n%s\n" % (i + 1, srt_time(s["a0"]), srt_time(s["a1"]), wrap(txt)))
-    return "\n".join(lines)
+        chunks = cue_chunks(txt)
+        lens = [len(" ".join(c)) for c in chunks]
+        span = max(0.4, s["a1"] - s["a0"])
+        t = s["a0"]
+        for c, ln in zip(chunks, lens):
+            d = span * ln / sum(lens)
+            cues.append((t, t + d, "\n".join(c)))
+            t += d
+    out = []
+    for i, (a, b, txt) in enumerate(cues):
+        out.append("%d\n%s --> %s\n%s\n" % (i + 1, srt_time(a), srt_time(b), txt))
+    return "\n".join(out)
+
+
+# ------------------------------------------------------------------ appendix
+NOTE_SECS = 18.0
+
+APPENDIX = [
+    ("METHODOLOGY", [
+        "Every vehicle here is confirmed in Russian service in 2026.",
+        "One representative variant per family; sub-variants are grouped.",
+        "Specifications are compiled from open sources and are approximate.",
+        "Nothing in this film comes from classified material.",
+    ]),
+    ("READING THE NUMBERS", [
+        "Entered service: the year the type was adopted, not the first prototype.",
+        "Combat weight: loaded, as fielded, not empty.",
+        "Crew: the vehicle's own crew; dismounts are counted separately.",
+        "Loss figures circulating online count only visually confirmed vehicles.",
+    ]),
+    ("SOURCES & LIMITS", [
+        "Open sources: manufacturer data, ministry releases, reference works.",
+        "Figures differ between sources; numbers here are mid-range estimates.",
+        "Production and loss totals are published by neither side.",
+        "These are inventories, not assessments of combat effectiveness.",
+    ]),
+]
+
+
+def appendix_scenes(t_start):
+    """Video-only end cards appended after the sign-off."""
+    out = []
+    for k, (title, lines) in enumerate(APPENDIX, 1):
+        out.append(dict(kind="note", cat=None, vid=None, index=k, title=title, lines=lines,
+                        a0=t_start, a1=t_start + NOTE_SECS,
+                        t0=t_start, t1=t_start + NOTE_SECS, dur=NOTE_SECS))
+        t_start += NOTE_SECS
+    return out
+
+
+def write_outputs(args, tl, frames):
+    """Write .srt and the YouTube packaging file next to the master."""
+    base = os.path.splitext(args.out)[0]
+    with open(base + ".srt", "w") as f:
+        f.write(build_srt(frames))
+
+    chapters = "\n".join("%s %s" % (srt_time(s["a0"])[3:8], s["category"]["title"].title())
+                         for s in tl["scenes"] if s["kind"] == "section")
+    notes = [s for _, s in frames if s["kind"] == "note"]
+    notes_line = ""
+    if notes:
+        notes_line = "%s End notes · methodology & sources\n" % srt_time(notes[0]["a0"])[3:8]
+
+    pack = f"""# YouTube packaging
+
+**Title**
+
+Every Russian Tank & Armored Vehicle in Active Service (Full Breakdown)
+
+**Thumbnail**
+
+output/thumbnail.jpg
+
+**Description**
+
+All {tl['total_vehicles']} tanks, armored cars, tank destroyers, APCs, IFVs, self-propelled guns and
+engineering vehicles currently in Russian service — in one technical inventory.
+Each machine: what it is, when it entered service, what it carries, and how it is
+actually being used in the war in Ukraine.
+
+00:00 Intro
+{chapters}
+{notes_line}
+Specifications are compiled from open sources and are approximate.
+Loss figures refer only to visually confirmed vehicles, so real totals are higher.
+
+No footage: every vehicle is a rendered still, presented as a technical exhibit.
+
+**Chapters**
+
+00:00 Intro
+{chapters}
+{notes_line}
+**Tags**
+
+russian tanks, t-90m, t-72b3, t-80bvm, bmp-3, btr-80, 2s19 msta-s, tos-1a,
+bmpt terminator, russian armor, armored vehicles explained, military vehicles,
+ukraine war armor, tank inventory, armored personnel carrier, self-propelled
+artillery, military documentary, defense analysis
+"""
+    with open(base + "-packaging.md", "w") as f:
+        f.write(pack)
 
 
 def main():
@@ -85,6 +196,8 @@ def main():
     ap.add_argument("--out", default="output/russian-armor-inventory.mp4")
     ap.add_argument("--crf", default="21")
     ap.add_argument("--until", type=float, default=0)
+    ap.add_argument("--srt-only", action="store_true",
+                    help="rewrite .srt + packaging from work/timeline.json (no encode)")
     args = ap.parse_args()
 
     os.makedirs("work", exist_ok=True)
@@ -105,8 +218,33 @@ def main():
         scenes[-1]["t1"] = args.until
         scenes[-1]["dur"] = args.until - scenes[-1]["t0"]
 
+    if args.srt_only:
+        frames = []
+        for s in scenes:
+            if s["kind"] == "vehicle":
+                s["vehicle"] = vmap[s["vid"]]
+                s["category"] = cats[s["cat"]]
+            elif s["kind"] == "section":
+                s["category"] = cats[s["cat"]]
+            frames.append((None, s))
+        for note in appendix_scenes(frames[-1][1]["t1"]):
+            frames.append((None, note))
+        write_outputs(args, tl, frames)
+        return
+
     frames = render_scenes(tl, scenes, data)
     print("scenes rendered:", len(frames), "of", len(scenes))
+
+    t_start = frames[-1][1]["t1"]
+    for k, (title, lines) in enumerate(APPENDIX, 1):
+        name = "work/scenes/%03d_note.png" % (len(frames))
+        R.scene_note(k, len(APPENDIX), title, lines).save(name)
+        s = dict(kind="note", cat=None, vid=None, index=k, title=title, lines=lines,
+                 a0=t_start, a1=t_start + NOTE_SECS, t0=t_start, t1=t_start + NOTE_SECS,
+                 dur=NOTE_SECS)
+        frames.append((name, s))
+        t_start += NOTE_SECS
+    print("appendix cards:", len(APPENDIX), "total video %.2fs" % t_start)
 
     with open("work/concat.txt", "w") as f:
         for path, s in frames:
@@ -137,7 +275,7 @@ def main():
            "[1:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=8:release=180,"
            "loudnorm=I=-18:TP=-2:LRA=9[v];"
            "[2:a]volume=0.085,lowpass=f=6000[m];"
-           "[v][m]amix=inputs=2:duration=first:dropout_transition=0,"
+           "[v][m]amix=inputs=2:duration=longest:dropout_transition=0,"
            "aformat=sample_fmts=fltp:channel_layouts=stereo,"
            "loudnorm=I=-16:TP=-1.5:LRA=11,"
            "afade=t=in:st=0:d=1.2,afade=t=out:st=%.2f:d=1.6[a]" % (total - 1.8),
@@ -157,50 +295,8 @@ def main():
         print(r.stderr[-3000:])
         raise SystemExit("encode failed")
 
-    base = os.path.splitext(args.out)[0]
-    with open(base + ".srt", "w") as f:
-        f.write(build_srt(frames))
+    write_outputs(args, tl, frames)
 
-    chapters = "\n".join("%s %s" % (srt_time(s["a0"])[3:8], s["category"]["title"].title())
-                         for s in tl["scenes"] if s["kind"] == "section")
-    pack = f"""# YouTube packaging
-
-**Title**
-
-Every Russian Tank & Armored Vehicle in Active Service (Full Breakdown)
-
-**Thumbnail**
-
-output/thumbnail.jpg
-
-**Description**
-
-All {tl['total_vehicles']} tanks, armored cars, tank destroyers, APCs, IFVs, self-propelled guns and
-engineering vehicles currently in Russian service — in one technical inventory.
-Each machine: what it is, when it entered service, what it carries, and how it is
-actually being used in the war in Ukraine.
-
-00:00 Intro
-{chapters}
-
-Specifications are compiled from open sources and are approximate.
-Loss figures refer only to visually confirmed vehicles, so real totals are higher.
-
-No footage: every vehicle is a rendered still, presented as a technical exhibit.
-
-**Chapters**
-
-{chapters}
-
-**Tags**
-
-russian tanks, t-90m, t-72b3, t-80bvm, bmp-3, btr-80, 2s19 msta-s, tos-1a,
-bmpt terminator, russian armor, armored vehicles explained, military vehicles,
-ukraine war armor, tank inventory, armored personnel carrier, self-propelled
-artillery, military documentary, defense analysis
-"""
-    with open(base + "-packaging.md", "w") as f:
-        f.write(pack)
 
     for f in ("work/voice.wav", "work/music.wav"):
         if os.path.exists(f):

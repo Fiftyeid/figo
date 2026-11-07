@@ -324,6 +324,61 @@ def scene_intro(meta, total, renders_dir):
     return canvas.convert("RGB")
 
 
+def _wrap(draw, s, f, max_w):
+    out, cur = [], ""
+    for word in s.split():
+        t = (cur + " " + word).strip()
+        if draw.textlength(t, font=f) <= max_w:
+            cur = t
+        else:
+            out.append(cur)
+            cur = word
+    if cur:
+        out.append(cur)
+    return out
+
+
+def scene_note(index, total_notes, title, lines):
+    """Appendix card: end notes over the same white display unit."""
+    canvas = Image.new("RGBA", (W, H), WHITE + (255,))
+    draw = ImageDraw.Draw(canvas)
+    frame(draw)
+    header(draw, category="APPENDIX %02d / %02d" % (index, total_notes))
+
+    f_let = font(F_BOLD, 150)
+    f_title = font(F_BOLD, 56)
+    f_body = font(F_REG, 28)
+
+    # pre-wrap body, then centre the whole block vertically
+    wrapped = []
+    for line in lines:
+        wrapped.append(_wrap(draw, line, f_body, 1440))
+    body_h = sum(len(w) * 44 for w in wrapped) + (len(wrapped) - 1) * 26
+    block_h = 150 + 18 + 70 + 40 + body_h
+    top = max(150, int((H - block_h) / 2) - 20)
+
+    tracked(draw, (MARGIN, top), "ABCDEFGH"[index - 1], f_let, RED, tracking=0)
+    ty = top + 170
+    tracked(draw, (MARGIN, ty), title, f_title, INK, tracking=2)
+
+    ry = ty + 78
+    hairline(draw, [(MARGIN, ry), (W - MARGIN, ry)], HAIR, 1)
+    draw.rectangle([MARGIN, ry - 2, MARGIN + 150, ry + 3], fill=RED)
+
+    y = ry + 44
+    for w in wrapped:
+        for i, seg in enumerate(w):
+            if i == 0:
+                draw.rectangle([MARGIN + 2, y + 13, MARGIN + 13, y + 24], fill=RED)
+            draw.text((MARGIN + 38, y), seg, font=f_body, fill=INK)
+            y += 44
+        y += 26
+
+    footer(draw, left_lines=["RUSSIAN ARMOR · TECHNICAL INVENTORY"],
+           right_lines=["OPEN SOURCES · SPECIFICATIONS APPROXIMATE"])
+    return canvas.convert("RGB")
+
+
 def scene_outro(meta, total, renders_dir):
     canvas = Image.new("RGBA", (W, H), WHITE + (255,))
     draw = ImageDraw.Draw(canvas)

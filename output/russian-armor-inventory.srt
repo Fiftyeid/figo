@@ -1,308 +1,891 @@
 1
-00:00:00,000 --> 00:00:22,969
-Russia's armored force is part museum and part laboratory.
-Old hulls are pulled out of storage, new ones are built in
+00:00:00,000 --> 00:00:06,210
+Russia's armored force is part museum and
+part laboratory. Old hulls are pulled out
 
 2
-00:00:22,969 --> 00:00:31,955
-We begin with the main battle tanks: eight families, from
-nineteen-forties steel to the newest welded turret.
+00:00:06,210 --> 00:00:12,120
+of storage, new ones are built in small
+numbers, and both meet the same drones.
 
 3
-00:00:31,955 --> 00:00:53,189
-We start where the Soviet school begins. The T-54 and T-55
-are seventy-year-old designs, pulled out of deep storage
+00:00:12,120 --> 00:00:17,657
+This is a technical inventory of every
+tank and armored vehicle in Russian
 
 4
-00:00:53,189 --> 00:01:07,881
-The T-62 introduced the smoothbore tank gun. Its M and MV
-upgrades bolt on composite cheeks, a laser rangefinder and
+00:00:17,657 --> 00:00:22,969
+service today. Fifty-two machines. Eight
+categories. Open sources only.
 
 5
-00:01:07,881 --> 00:01:25,379
-The T-64 was a revolution: a flat, compact hull, an
-autoloader and a three-man crew. Ukraine inherited most of
+00:00:22,969 --> 00:00:29,875
+We begin with the main battle tanks: eight
+families, from nineteen-forties steel to
 
 6
-00:01:25,379 --> 00:01:44,290
-The T-72B3 is the workhorse. Sosna-U thermal sight,
-Kontakt-5 explosive armor, a modernized
+00:00:29,875 --> 00:00:31,955
+the newest welded turret.
 
 7
-00:01:44,290 --> 00:02:01,551
-The T-80 runs on a gas turbine, and it drinks fuel like an
-aircraft. The BVM upgrade gives it Relikt armor and a
+00:00:31,955 --> 00:00:38,774
+We start where the Soviet school begins.
+The T-54 and T-55 are seventy-year-old
 
 8
-00:02:01,551 --> 00:02:18,124
-The T-90 introduced Shtora-one: two infrared dazzlers that
-try to blind incoming missiles. In practice the system has
+00:00:38,774 --> 00:00:46,111
+designs, pulled out of deep storage by the
+thousand. A hundred-millimeter rifled gun,
 
 9
-00:02:18,124 --> 00:02:35,037
-The BMPT Terminator was built for a problem tanks keep
-meeting in cities: infantry with anti-tank missiles. Two
+00:00:46,111 --> 00:00:53,189
+homogeneous steel armor, and no thermal
+sight. But a running tank is still a tank.
 
 10
-00:02:35,037 --> 00:02:51,594
-The T-90M Proryv is Russia's most capable tank in service:
-a new welded turret, Kalina fire control, Relikt armor and
+00:00:53,189 --> 00:00:58,246
+The T-62 introduced the smoothbore tank
+gun. Its M and MV upgrades bolt on
 
 11
-00:02:51,594 --> 00:02:57,970
-Next, the wheeled vehicles: light armor for escort, patrol
-and internal security.
+00:00:58,246 --> 00:01:03,986
+composite cheeks, a laser rangefinder and
+missiles. Obsolete on paper, and common on
 
 12
-00:02:57,970 --> 00:03:11,967
-The Tigr is the ubiquitous four-by-four of the Russian
-army: light, fast and thin-skinned. A remote machine-gun
+00:01:03,986 --> 00:01:07,881
+the battlefield, because Russia has
+thousands in reserve.
 
 13
-00:03:11,967 --> 00:03:25,570
-The KamAZ Patrol is a National Guard vehicle: a V-hull, a
-twelve-point-seven-millimeter mount, and a role that is
+00:01:07,881 --> 00:01:14,414
+The T-64 was a revolution: a flat, compact
+hull, an autoloader and a three-man crew.
 
 14
-00:03:25,570 --> 00:03:39,586
-Typhoon-K is a mine-resistant truck: twenty tonnes, a
-V-shaped belly, and an armored capsule for the crew. It
+00:01:14,414 --> 00:01:20,791
+Ukraine inherited most of them, and Moscow
+now fields survivors captured in Donbas
 
 15
-00:03:39,586 --> 00:03:50,268
-The airborne Typhoon is smaller and lighter so that it can
-be flown and dropped. Same protection philosophy, half the
+00:01:20,791 --> 00:01:25,379
+since twenty-fourteen. The same factory,
+on the other side.
 
 16
-00:03:50,268 --> 00:04:04,523
-The Z-STS Akhmat appeared in twenty-twenty-two, built for
-Chechen units. Ten tonnes, a machine gun and a grenade
+00:01:25,379 --> 00:01:31,629
+The T-72B3 is the workhorse. Sosna-U
+thermal sight, Kontakt-5 explosive armor,
 
 17
-00:04:04,523 --> 00:04:18,913
-Astais is the newest member of the family, a Remdiesel
-design shown in twenty-twenty-three. Modular armor, a
+00:01:31,629 --> 00:01:36,037
+a modernized
+hundred-and-twenty-five-millimeter gun. It
 
 18
-00:04:18,913 --> 00:04:23,147
-Tank destroyers: machines built to ambush armor from
-cover.
+00:01:36,037 --> 00:01:42,367
+is not the newest tank Russia has. It is
+the one there are most of, and the one
 
 19
-00:04:23,147 --> 00:04:35,154
-Shturm-S carries radio-guided Shturm missiles on an MT-LB
-chassis, hidden behind a retractable launcher. It shoots
+00:01:42,367 --> 00:01:44,290
+Ukraine sees most often.
 
 20
-00:04:35,154 --> 00:04:50,430
-The Sprut-SD is a light tank in all but name: a
-hundred-and-twenty-five-millimeter gun on an airborne
+00:01:44,290 --> 00:01:50,226
+The T-80 runs on a gas turbine, and it
+drinks fuel like an aircraft. The BVM
 
 21
-00:04:50,430 --> 00:05:05,940
-Krizantema-S guides two supersonic missiles at once, by
-radar beam or laser, day or night. One crew, two targets,
+00:01:50,226 --> 00:01:56,631
+upgrade gives it Relikt armor and a modern
+fire-control system. Fast, cold-blooded
 
 22
-00:05:05,940 --> 00:05:20,174
-Konkurs-M is older, cheaper and everywhere: a tandem
-warhead on a wire-guided missile, mounted on vehicles or
+00:01:56,631 --> 00:02:01,551
+and expensive: the pride of a force that
+cannot always fuel it.
 
 23
-00:05:20,174 --> 00:05:23,411
-Reconnaissance: the vehicles that go first.
+00:02:01,551 --> 00:02:06,690
+The T-90 introduced Shtora-one: two
+infrared dazzlers that try to blind
 
 24
-00:05:23,411 --> 00:05:37,367
-The BRDM-2 has been scouting since nineteen-sixty-two:
-four wheels, two more in the middle, a small turret and
+00:02:06,690 --> 00:02:12,624
+incoming missiles. In practice the system
+has not saved many crews, but the tank's
 
 25
-00:05:37,367 --> 00:05:50,967
-BRM-1K is the battlefield reconnaissance version of the
-BMP-1: a thirty-millimeter cannon, ground-surveillance
+00:02:12,624 --> 00:02:16,677
+welded turret and
+hundred-and-twenty-five-millimeter gun
 
 26
-00:05:50,967 --> 00:06:02,776
-The Vystrel is a KamAZ truck turned armored car, used
-mostly by border guards: a fourteen-point-five-millimeter
+00:02:16,677 --> 00:02:18,124
+keep it in the line.
 
 27
-00:06:02,776 --> 00:06:11,056
-Armored personnel carriers: the vehicles that carry
-infantry, and the ones their crews trust least.
+00:02:18,124 --> 00:02:23,587
+The BMPT Terminator was built for a
+problem tanks keep meeting in cities:
 
 28
-00:06:11,056 --> 00:06:25,302
-The BTR-50 belongs in a museum: a nineteen-fifties tracked
-amphibious carrier. It came back into service from
+00:02:23,587 --> 00:02:29,200
+infantry with anti-tank missiles. Two
+thirty-millimeter cannons, four Ataka
 
 29
-00:06:25,302 --> 00:06:40,870
-The MT-LB is the mule of the Russian army. Artillery
-tractor, ambulance, mortar carrier, and in this war a
+00:02:29,200 --> 00:02:35,037
+missiles, and a hull that is still a T-72.
+Few were made, fewer are committed.
 
 30
-00:06:40,870 --> 00:06:54,613
-The BTR-70 uses two petrol engines and eight wheels, with
-side doors so narrow they are dangerous under fire. Its
+00:02:35,037 --> 00:02:40,876
+The T-90M Proryv is Russia's most capable
+tank in service: a new welded turret,
 
 31
-00:06:54,613 --> 00:07:06,627
-The BTR-D is the airborne carrier: light, tracked, and
-designed to be dropped. It has almost no protection, which
+00:02:40,876 --> 00:02:46,272
+Kalina fire control, Relikt armor and
+better situational awareness. It is
 
 32
-00:07:06,627 --> 00:07:19,932
-The BTR-80 fixed the BTR-70's worst problem with side
-hatches and a diesel engine, and kept the
+00:02:46,272 --> 00:02:51,594
+genuinely modern, which is exactly why so
+few are risked near the front.
 
 33
-00:07:19,932 --> 00:07:32,829
-The BMO-T is a heavy carrier built on a T-72 hull to move
-flamethrower teams: forty tonnes of armor, no main gun,
+00:02:51,594 --> 00:02:57,970
+Next, the wheeled vehicles: light armor
+for escort, patrol and internal security.
 
 34
-00:07:32,829 --> 00:07:45,205
-Rakushka means little shell. It is a paratrooper carrier
-with thirteen seats, a machine gun, and enough buoyancy to
+00:02:57,970 --> 00:03:03,751
+The Tigr is the ubiquitous four-by-four of
+the Russian army: light, fast and
 
 35
-00:07:45,205 --> 00:07:50,612
-Infantry fighting vehicles: designed to fight alongside
-the men they carry.
+00:03:03,751 --> 00:03:09,913
+thin-skinned. A remote machine-gun mount,
+ten passengers, and enough speed to run
 
 36
-00:07:50,612 --> 00:08:03,552
-The BMP-1 invented the infantry fighting vehicle: a
-seventy-three-millimeter gun, a missile on the barrel, and
+00:03:09,913 --> 00:03:11,967
+from a fight it cannot win.
 
 37
-00:08:03,552 --> 00:08:16,420
-The BMP-2 replaced the low-pressure gun with a
-thirty-millimeter cannon that elevates high enough to hit
+00:03:11,967 --> 00:03:16,048
+The KamAZ Patrol is a National Guard
+vehicle: a V-hull, a
 
 38
-00:08:16,420 --> 00:08:28,682
-The BMD-2 is the airborne version of the BMP-2: eight
-tonnes, a thirty-millimeter cannon, and armor you can
+00:03:16,048 --> 00:03:22,062
+twelve-point-seven-millimeter mount, and a
+role that is mostly internal security and
 
 39
-00:08:28,682 --> 00:08:43,458
-The BMP-3 is the most heavily armed infantry vehicle in
-the world: a hundred-millimeter gun that also fires
+00:03:22,062 --> 00:03:25,570
+rear-area escort rather than the line of
+contact.
 
 40
-00:08:43,458 --> 00:08:56,782
-The BMD-4M carries the same hundred-millimeter gun as the
-BMP-3 on an airborne hull, with add-on anti-drone armor
+00:03:25,570 --> 00:03:31,118
+Typhoon-K is a mine-resistant truck:
+twenty tonnes, a V-shaped belly, and an
 
 41
-00:08:56,782 --> 00:09:02,773
-Self-propelled artillery: the arm doing most of the damage
-in this war.
+00:03:31,118 --> 00:03:37,250
+armored capsule for the crew. It survives
+blasts that would destroy a BTR. But it is
 
 42
-00:09:02,773 --> 00:09:17,121
-Akatsiya has been the standard Soviet self-propelled
-howitzer since nineteen-seventy-one: a
+00:03:37,250 --> 00:03:39,586
+a truck, not a fighting vehicle.
 
 43
-00:09:17,121 --> 00:09:30,211
-Gvozdika is small, light and amphibious, with a
-hundred-and-twenty-two-millimeter gun. It follows infantry
+00:03:39,586 --> 00:03:44,479
+The airborne Typhoon is smaller and
+lighter so that it can be flown and
 
 44
-00:09:30,211 --> 00:09:43,520
-Tyulpan fires the largest mortar ever fielded: two hundred
-and forty millimeters, loaded from the breech, with a
+00:03:44,479 --> 00:03:50,268
+dropped. Same protection philosophy, half
+the weight, and a machine gun on the roof.
 
 45
-00:09:43,520 --> 00:09:59,457
-Pion is the heaviest self-propelled gun in service: two
-hundred and three millimeters, forty-six tonnes, and a
+00:03:50,268 --> 00:03:55,250
+The Z-STS Akhmat appeared in
+twenty-twenty-two, built for Chechen
 
 46
-00:09:59,457 --> 00:10:09,823
-Giatsint-S has a long hundred-and-fifty-two-millimeter
-barrel with exceptional range and brutal recoil. It is
+00:03:55,250 --> 00:04:01,075
+units. Ten tonnes, a machine gun and a
+grenade launcher, and a hull designed
 
 47
-00:10:09,823 --> 00:10:24,977
-Nona is a gun, a mortar and a howitzer in one, mounted on
-an airborne chassis that swims. A hundred and twenty
+00:04:01,075 --> 00:04:04,523
+around ambushes and mines on secondary
+roads.
 
 48
-00:10:24,977 --> 00:10:37,183
-Solntsepyok is not artillery. It is a thermobaric launcher
-on a T-72 chassis: thirty rockets, a wall of pressure and
+00:04:04,523 --> 00:04:09,715
+Astais is the newest member of the family,
+a Remdiesel design shown in
 
 49
-00:10:37,183 --> 00:10:52,213
-Msta-S is the modern tracked howitzer: a
-hundred-and-fifty-two-millimeter gun, an autoloader, and a
+00:04:09,715 --> 00:04:15,278
+twenty-twenty-three. Modular armor, a
+remote weapon station, and production
 
 50
-00:10:52,213 --> 00:11:04,151
-Nona-SVK puts the hundred-and-twenty-millimeter gun-mortar
-on an eight-wheeled BTR-80 hull. Faster on roads than the
+00:04:15,278 --> 00:04:18,913
+numbers measured in dozens rather than
+thousands.
 
 51
-00:11:04,151 --> 00:11:16,810
-Khosta is a Gvozdika rebuilt around a
-hundred-and-twenty-millimeter gun-mortar, giving one
+00:04:18,913 --> 00:04:23,147
+Tank destroyers: machines built to ambush
+armor from cover.
 
 52
-00:11:16,810 --> 00:11:30,609
-Floks is new: a hundred-and-twenty-millimeter gun-mortar
-on a wheeled Ural chassis, first seen in
+00:04:23,147 --> 00:04:28,016
+Shturm-S carries radio-guided Shturm
+missiles on an MT-LB chassis, hidden
 
 53
-00:11:30,609 --> 00:11:44,901
-Malva is the wheeled answer to drone artillery: a
-hundred-and-fifty-two-millimeter gun on an
+00:04:28,016 --> 00:04:33,219
+behind a retractable launcher. It shoots
+from cover, then moves: a tank killer
 
 54
-00:11:44,901 --> 00:11:50,214
-Engineering vehicles: the unglamorous machines that make
-movement possible.
+00:04:33,219 --> 00:04:35,154
+built to ambush, not to duel.
 
 55
-00:11:50,214 --> 00:12:02,603
-MTU-72 lays a twenty-meter bridge from a T-72 hull in
-about three minutes. Armor keeps the crew alive while it
+00:04:35,154 --> 00:04:41,448
+The Sprut-SD is a light tank in all but
+name: a hundred-and-twenty-five-millimeter
 
 56
-00:12:02,603 --> 00:12:15,486
-UR-77 Meteorit clears minefields with a rocket-towed hose
-of explosive: two hundred meters of lane, opened in
+00:04:41,448 --> 00:04:47,283
+gun on an airborne chassis. It can be
+dropped by parachute, and it can swim.
 
 57
-00:12:15,486 --> 00:12:26,044
-BAT-2 is a bulldozer that can keep up with tanks: a blade,
-a crane and a winch on a tracked chassis, used to cut
+00:04:47,283 --> 00:04:50,430
+That is a lot of gun for eighteen tonnes.
 
 58
-00:12:26,044 --> 00:12:38,658
-IMR-2 is the combat engineer's tank: a telescopic crane
-arm, a dozer blade, and a T-72 hull to survive the work.
+00:04:50,430 --> 00:04:55,990
+Krizantema-S guides two supersonic
+missiles at once, by radar beam or laser,
 
 59
-00:12:38,658 --> 00:12:51,770
-GMZ-3 is a minelayer: it ploughs and buries anti-tank
-mines at speed, turning an open field into an obstacle
+00:04:55,990 --> 00:05:02,209
+day or night. One crew, two targets, and a
+chassis borrowed from the BMP-3. It is the
 
 60
-00:12:51,770 --> 00:13:04,605
-BREM-1 is the recovery vehicle built on a T-72: a crane, a
-winch, and a crew willing to drive toward broken tanks.
+00:05:02,209 --> 00:05:05,940
+most sophisticated anti-tank vehicle
+Russia fields.
 
 61
-00:13:04,605 --> 00:13:16,672
-UBIM is the newest engineer vehicle: recovery, breaching
-and clearing on one armored eight-wheeled chassis, with a
+00:05:05,940 --> 00:05:10,637
+Konkurs-M is older, cheaper and
+everywhere: a tandem warhead on a
 
 62
-00:13:16,672 --> 00:13:39,660
-Fifty-two vehicles. A force rebuilding in public, losing
-armor faster than it can be replaced, and adapting faster
+00:05:10,637 --> 00:05:16,562
+wire-guided missile, mounted on vehicles
+or fired from the ground. Simple, proven,
+
+63
+00:05:16,562 --> 00:05:20,174
+and produced in numbers no Western system
+matches.
+
+64
+00:05:20,174 --> 00:05:23,411
+Reconnaissance: the vehicles that go
+first.
+
+65
+00:05:23,411 --> 00:05:29,083
+The BRDM-2 has been scouting since
+nineteen-sixty-two: four wheels, two more
+
+66
+00:05:29,083 --> 00:05:34,531
+in the middle, a small turret and the
+ability to swim. It is a scout that
+
+67
+00:05:34,531 --> 00:05:37,367
+survives by being small and unnoticed.
+
+68
+00:05:37,367 --> 00:05:43,597
+BRM-1K is the battlefield reconnaissance
+version of the BMP-1: a thirty-millimeter
+
+69
+00:05:43,597 --> 00:05:49,903
+cannon, ground-surveillance radar, and a
+crew of six who are trained to look rather
+
+70
+00:05:49,903 --> 00:05:50,967
+than to fight.
+
+71
+00:05:50,967 --> 00:05:56,353
+The Vystrel is a KamAZ truck turned
+armored car, used mostly by border guards:
+
+72
+00:05:56,353 --> 00:06:02,155
+a fourteen-point-five-millimeter turret, a
+rear ramp, and a long service life in the
+
+73
+00:06:02,155 --> 00:06:02,776
+Caucasus.
+
+74
+00:06:02,776 --> 00:06:09,535
+Armored personnel carriers: the vehicles
+that carry infantry, and the ones their
+
+75
+00:06:09,535 --> 00:06:11,056
+crews trust least.
+
+76
+00:06:11,056 --> 00:06:16,021
+The BTR-50 belongs in a museum: a
+nineteen-fifties tracked amphibious
+
+77
+00:06:16,021 --> 00:06:21,849
+carrier. It came back into service from
+storage, thinly armored and slow, because
+
+78
+00:06:21,849 --> 00:06:25,302
+Russia needed hulls more than it needed
+quality.
+
+79
+00:06:25,302 --> 00:06:31,331
+The MT-LB is the mule of the Russian army.
+Artillery tractor, ambulance, mortar
+
+80
+00:06:31,331 --> 00:06:37,283
+carrier, and in this war a platform for
+improvised armor, naval guns and drone
+
+81
+00:06:37,283 --> 00:06:40,870
+cages. Seventy years old, and still
+everywhere.
+
+82
+00:06:40,870 --> 00:06:46,728
+The BTR-70 uses two petrol engines and
+eight wheels, with side doors so narrow
+
+83
+00:06:46,728 --> 00:06:52,886
+they are dangerous under fire. Its crews
+prefer the later BTR-80, for reasons that
+
+84
+00:06:52,886 --> 00:06:54,613
+are easy to understand.
+
+85
+00:06:54,613 --> 00:07:00,475
+The BTR-D is the airborne carrier: light,
+tracked, and designed to be dropped. It
+
+86
+00:07:00,475 --> 00:07:06,627
+has almost no protection, which is why its
+crews ride on the roof rather than inside.
+
+87
+00:07:06,627 --> 00:07:11,477
+The BTR-80 fixed the BTR-70's worst
+problem with side hatches and a diesel
+
+88
+00:07:11,477 --> 00:07:15,541
+engine, and kept the
+fourteen-point-five-millimeter turret. It
+
+89
+00:07:15,541 --> 00:07:19,932
+is the standard wheeled carrier, and
+Ukraine has captured hundreds.
+
+90
+00:07:19,932 --> 00:07:25,186
+The BMO-T is a heavy carrier built on a
+T-72 hull to move flamethrower teams:
+
+91
+00:07:25,186 --> 00:07:30,441
+forty tonnes of armor, no main gun, and a
+job that puts it close to infantry,
+
+92
+00:07:30,441 --> 00:07:32,829
+exactly where anti-tank teams wait.
+
+93
+00:07:32,829 --> 00:07:38,322
+Rakushka means little shell. It is a
+paratrooper carrier with thirteen seats, a
+
+94
+00:07:38,322 --> 00:07:44,162
+machine gun, and enough buoyancy to swim.
+Light, roomy, and only as safe as its thin
+
+95
+00:07:44,162 --> 00:07:45,205
+aluminum sides.
+
+96
+00:07:45,205 --> 00:07:50,612
+Infantry fighting vehicles: designed to
+fight alongside the men they carry.
+
+97
+00:07:50,612 --> 00:07:56,820
+The BMP-1 invented the infantry fighting
+vehicle: a seventy-three-millimeter gun, a
+
+98
+00:07:56,820 --> 00:08:02,655
+missile on the barrel, and eight soldiers
+inside. Its armor stops bullets, and
+
+99
+00:08:02,655 --> 00:08:03,552
+little else.
+
+100
+00:08:03,552 --> 00:08:08,867
+The BMP-2 replaced the low-pressure gun
+with a thirty-millimeter cannon that
+
+101
+00:08:08,867 --> 00:08:14,532
+elevates high enough to hit aircraft and
+rooftops. It is the most common infantry
+
+102
+00:08:14,532 --> 00:08:16,420
+vehicle in Russian service.
+
+103
+00:08:16,420 --> 00:08:22,367
+The BMD-2 is the airborne version of the
+BMP-2: eight tonnes, a thirty-millimeter
+
+104
+00:08:22,367 --> 00:08:27,874
+cannon, and armor you can hear. It is
+built to be dropped, not to survive a
+
+105
+00:08:27,874 --> 00:08:28,682
+direct hit.
+
+106
+00:08:28,682 --> 00:08:33,188
+The BMP-3 is the most heavily armed
+infantry vehicle in the world: a
+
+107
+00:08:33,188 --> 00:08:38,555
+hundred-millimeter gun that also fires
+missiles, plus a thirty-millimeter cannon.
+
+108
+00:08:38,555 --> 00:08:43,458
+In this war it is often used as light
+artillery, firing from behind cover.
+
+109
+00:08:43,458 --> 00:08:48,323
+The BMD-4M carries the same
+hundred-millimeter gun as the BMP-3 on an
+
+110
+00:08:48,323 --> 00:08:53,962
+airborne hull, with add-on anti-drone
+armor and a modern sight. Thirteen tonnes,
+
+111
+00:08:53,962 --> 00:08:56,782
+and a crew that knows speed beats armor.
+
+112
+00:08:56,782 --> 00:09:02,773
+Self-propelled artillery: the arm doing
+most of the damage in this war.
+
+113
+00:09:02,773 --> 00:09:07,286
+Akatsiya has been the standard Soviet
+self-propelled howitzer since
+
+114
+00:09:07,286 --> 00:09:11,665
+nineteen-seventy-one: a
+hundred-and-fifty-two-millimeter gun on a
+
+115
+00:09:11,665 --> 00:09:16,852
+tracked chassis. Old, mechanical, and
+still doing most of the killing in this
+
+116
+00:09:16,852 --> 00:09:17,121
+war.
+
+117
+00:09:17,121 --> 00:09:22,761
+Gvozdika is small, light and amphibious,
+with a hundred-and-twenty-two-millimeter
+
+118
+00:09:22,761 --> 00:09:28,122
+gun. It follows infantry closely and
+shoots fast, and it is the most numerous
+
+119
+00:09:28,122 --> 00:09:30,211
+self-propelled gun Russia has.
+
+120
+00:09:30,211 --> 00:09:34,626
+Tyulpan fires the largest mortar ever
+fielded: two hundred and forty
+
+121
+00:09:34,626 --> 00:09:40,079
+millimeters, loaded from the breech, with
+a shell that can flatten a building. Fewer
+
+122
+00:09:40,079 --> 00:09:43,520
+than a hundred exist, and each one is a
+siege weapon.
+
+123
+00:09:43,520 --> 00:09:48,513
+Pion is the heaviest self-propelled gun in
+service: two hundred and three
+
+124
+00:09:48,513 --> 00:09:54,054
+millimeters, forty-six tonnes, and a range
+beyond thirty-seven kilometers. It was
+
+125
+00:09:54,054 --> 00:09:59,457
+built to fire nuclear shells, and it fires
+far more often than anyone expected.
+
+126
+00:09:59,457 --> 00:10:03,336
+Giatsint-S has a long
+hundred-and-fifty-two-millimeter barrel
+
+127
+00:10:03,336 --> 00:10:07,915
+with exceptional range and brutal recoil.
+It is accurate, expensive, and
+
+128
+00:10:07,915 --> 00:10:09,823
+increasingly rare on the line.
+
+129
+00:10:09,823 --> 00:10:15,945
+Nona is a gun, a mortar and a howitzer in
+one, mounted on an airborne chassis that
+
+130
+00:10:15,945 --> 00:10:21,842
+swims. A hundred and twenty millimeters,
+high elevation, and the ability to hit
+
+131
+00:10:21,842 --> 00:10:24,977
+anything from a trench line to a hillside.
+
+132
+00:10:24,977 --> 00:10:30,199
+Solntsepyok is not artillery. It is a
+thermobaric launcher on a T-72 chassis:
+
+133
+00:10:30,199 --> 00:10:35,623
+thirty rockets, a wall of pressure and
+heat, and a range so short that it has to
+
+134
+00:10:35,623 --> 00:10:37,183
+come close to use them.
+
+135
+00:10:37,183 --> 00:10:42,925
+Msta-S is the modern tracked howitzer: a
+hundred-and-fifty-two-millimeter gun, an
+
+136
+00:10:42,925 --> 00:10:47,959
+autoloader, and a computerised
+fire-control system. It shoots and moves
+
+137
+00:10:47,959 --> 00:10:52,213
+in minutes, which is the only way to
+survive drone spotting.
+
+138
+00:10:52,213 --> 00:10:56,286
+Nona-SVK puts the
+hundred-and-twenty-millimeter gun-mortar
+
+139
+00:10:56,286 --> 00:11:02,115
+on an eight-wheeled BTR-80 hull. Faster on
+roads than the tracked version, and used
+
+140
+00:11:02,115 --> 00:11:04,151
+to support infantry directly.
+
+141
+00:11:04,151 --> 00:11:09,616
+Khosta is a Gvozdika rebuilt around a
+hundred-and-twenty-millimeter gun-mortar,
+
+142
+00:11:09,616 --> 00:11:15,288
+giving one chassis the jobs of two. Few
+were converted, and most stay close to the
+
+143
+00:11:15,288 --> 00:11:16,810
+infantry they support.
+
+144
+00:11:16,810 --> 00:11:20,793
+Floks is new: a
+hundred-and-twenty-millimeter gun-mortar
+
+145
+00:11:20,793 --> 00:11:26,697
+on a wheeled Ural chassis, first seen in
+twenty-twenty-three. Cheaper and faster to
+
+146
+00:11:26,697 --> 00:11:30,609
+build than a tracked gun, and now in
+serial production.
+
+147
+00:11:30,609 --> 00:11:34,200
+Malva is the wheeled answer to drone
+artillery: a
+
+148
+00:11:34,200 --> 00:11:40,283
+hundred-and-fifty-two-millimeter gun on an
+eight-wheel-drive chassis that can shoot
+
+149
+00:11:40,283 --> 00:11:44,901
+and leave in under two minutes. Few exist,
+but more are coming.
+
+150
+00:11:44,901 --> 00:11:50,214
+Engineering vehicles: the unglamorous
+machines that make movement possible.
+
+151
+00:11:50,214 --> 00:11:56,079
+MTU-72 lays a twenty-meter bridge from a
+T-72 hull in about three minutes. Armor
+
+152
+00:11:56,079 --> 00:12:02,164
+keeps the crew alive while it works, which
+is the entire point of an armored bridge
+
+153
+00:12:02,164 --> 00:12:02,603
+layer.
+
+154
+00:12:02,603 --> 00:12:08,093
+UR-77 Meteorit clears minefields with a
+rocket-towed hose of explosive: two
+
+155
+00:12:08,093 --> 00:12:14,095
+hundred meters of lane, opened in seconds,
+by a vehicle that has to drive into the
+
+156
+00:12:14,095 --> 00:12:15,486
+minefield to do it.
+
+157
+00:12:15,486 --> 00:12:21,067
+BAT-2 is a bulldozer that can keep up with
+tanks: a blade, a crane and a winch on a
+
+158
+00:12:21,067 --> 00:12:26,044
+tracked chassis, used to cut routes
+through forests and rubble under fire.
+
+159
+00:12:26,044 --> 00:12:32,274
+IMR-2 is the combat engineer's tank: a
+telescopic crane arm, a dozer blade, and a
+
+160
+00:12:32,274 --> 00:12:38,658
+T-72 hull to survive the work. It clears
+obstacles while people are shooting at it.
+
+161
+00:12:38,658 --> 00:12:44,330
+GMZ-3 is a minelayer: it ploughs and
+buries anti-tank mines at speed, turning
+
+162
+00:12:44,330 --> 00:12:50,223
+an open field into an obstacle belt in
+minutes. The Russian army still lays more
+
+163
+00:12:50,223 --> 00:12:51,770
+mines than any other.
+
+164
+00:12:51,770 --> 00:12:57,861
+BREM-1 is the recovery vehicle built on a
+T-72: a crane, a winch, and a crew willing
+
+165
+00:12:57,861 --> 00:13:03,735
+to drive toward broken tanks. Every hull
+it recovers is one that does not have to
+
+166
+00:13:03,735 --> 00:13:04,605
+be replaced.
+
+167
+00:13:04,605 --> 00:13:09,644
+UBIM is the newest engineer vehicle:
+recovery, breaching and clearing on one
+
+168
+00:13:09,644 --> 00:13:14,816
+armored eight-wheeled chassis, with a
+manipulator arm and a dozer blade. Fewer
+
+169
+00:13:14,816 --> 00:13:16,672
+than a dozen have been seen.
+
+170
+00:13:16,672 --> 00:13:22,632
+Fifty-two vehicles. A force rebuilding in
+public, losing armor faster than it can be
+
+171
+00:13:22,632 --> 00:13:28,237
+replaced, and adapting faster than most
+expected. Specifications here come from
+
+172
+00:13:28,237 --> 00:13:34,126
+open sources, and recorded losses are only
+the ones visually confirmed, which means
+
+173
+00:13:34,126 --> 00:13:39,660
+the real numbers are higher. If you want
+more breakdowns like this, subscribe.
+
+174
+00:13:41,860 --> 00:13:47,686
+Every vehicle here is confirmed in Russian
+service in 2026. One representative
+
+175
+00:13:47,686 --> 00:13:53,511
+variant per family; sub-variants are
+grouped. Specifications are compiled from
+
+176
+00:13:53,511 --> 00:13:59,188
+open sources and are approximate. Nothing
+in this film comes from classified
+
+177
+00:13:59,188 --> 00:13:59,860
+material.
+
+178
+00:13:59,860 --> 00:14:05,525
+Entered service: the year the type was
+adopted, not the first prototype. Combat
+
+179
+00:14:05,525 --> 00:14:11,119
+weight: loaded, as fielded, not empty.
+Crew: the vehicle's own crew; dismounts
+
+180
+00:14:11,119 --> 00:14:16,497
+are counted separately. Loss figures
+circulating online count only visually
+
+181
+00:14:16,497 --> 00:14:17,860
+confirmed vehicles.
+
+182
+00:14:17,860 --> 00:14:23,673
+Open sources: manufacturer data, ministry
+releases, reference works. Figures differ
+
+183
+00:14:23,673 --> 00:14:28,856
+between sources; numbers here are
+mid-range estimates. Production and loss
+
+184
+00:14:28,856 --> 00:14:34,389
+totals are published by neither side.
+These are inventories, not assessments of
+
+185
+00:14:34,389 --> 00:14:35,860
+combat effectiveness.

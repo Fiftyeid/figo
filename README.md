@@ -62,3 +62,17 @@ wrong hull family, generic airbrushed bodies. Those were regenerated with featur
 prompts (turret shape, launcher type, hull lineage, wheel count) and re-reviewed.
 Known-acceptable approximations: the Astais body reads more generic than the real
 Remdiesel car, and the T-90's Shtora dazzler housings are understated.
+
+## Appendix end-notes
+
+Three silent end cards (METHODOLOGY · READING THE NUMBERS · SOURCES & LIMITS, 18 s each)
+are appended after the sign-off card: `APPENDIX` / `NOTE_SECS` in `pipeline/build.py`,
+rendered by `render.scene_note()`. They carry no narration, so the music bed is extended
+(`amix duration=longest`) and the master runs 14:35.87.
+
+## Subtitles
+
+`build_srt()` splits every narration block into cues of up to two lines and distributes the
+block's time proportionally — no truncation (185 cues, 1966/1966 words).
+`python3 pipeline/build.py --srt-only` regenerates `.srt` + `-packaging.md` from
+`work/timeline.json` without re-encoding.

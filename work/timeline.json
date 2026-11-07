@@ -659,7 +659,7 @@
    "index": 18,
    "vehicle": {
     "id": "konkurs",
-    "name": "9P163M1 KONKURS-M",
+    "name": "KONKURS-M",
     "cat": "destroyers",
     "year": "1991",
     "crew": "3",
@@ -1008,7 +1008,7 @@
     "year": "2001",
     "crew": "2 + 7",
     "weight": "40 t",
-    "armament": "2 \u00d7 RPG-7 / RPO-A",
+    "armament": "2 \u00d7 RPO-A / RShG-2",
     "tags": [
      "HEAVY SUPERSTRUCTURE",
      "T-72 RUNNING GEAR"

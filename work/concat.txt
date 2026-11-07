@@ -122,4 +122,10 @@ file '/home/user/figo/work/scenes/060_vehicle.png'
 duration 12.068
 file '/home/user/figo/work/scenes/061_outro.png'
 duration 25.468
-file '/home/user/figo/work/scenes/061_outro.png'
+file '/home/user/figo/work/scenes/062_note.png'
+duration 18.000
+file '/home/user/figo/work/scenes/063_note.png'
+duration 18.000
+file '/home/user/figo/work/scenes/064_note.png'
+duration 18.000
+file '/home/user/figo/work/scenes/064_note.png'

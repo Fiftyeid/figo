@@ -24,6 +24,7 @@ actually being used in the war in Ukraine.
 07:45 Infantry Fighting Vehicles
 08:56 Self-Propelled Artillery
 11:44 Engineering Vehicles
+13:41 End notes · methodology & sources
 
 Specifications are compiled from open sources and are approximate.
 Loss figures refer only to visually confirmed vehicles, so real totals are higher.
@@ -32,6 +33,7 @@ No footage: every vehicle is a rendered still, presented as a technical exhibit.
 
 **Chapters**
 
+00:00 Intro
 00:22 Main Battle Tanks
 02:51 Armored Cars
 04:18 Tank Destroyers
@@ -40,10 +42,7 @@ No footage: every vehicle is a rendered still, presented as a technical exhibit.
 07:45 Infantry Fighting Vehicles
 08:56 Self-Propelled Artillery
 11:44 Engineering Vehicles
-
-**Shorts**
-
-output/shorts-8-vehicles.mp4 — vertical 1080x1920 teaser, 0:69, same narrator.
+13:41 End notes · methodology & sources
 
 **Tags**
 
