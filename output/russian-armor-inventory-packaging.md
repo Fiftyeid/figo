@@ -41,6 +41,10 @@ No footage: every vehicle is a rendered still, presented as a technical exhibit.
 08:56 Self-Propelled Artillery
 11:44 Engineering Vehicles
 
+**Shorts**
+
+output/shorts-8-vehicles.mp4 — vertical 1080x1920 teaser, 0:69, same narrator.
+
 **Tags**
 
 russian tanks, t-90m, t-72b3, t-80bvm, bmp-3, btr-80, 2s19 msta-s, tos-1a,
