@@ -1,0 +1,854 @@
+{
+ "meta": {
+  "title": "EVERY RUSSIAN TANK & ARMORED VEHICLE",
+  "subtitle": "IN ACTIVE SERVICE TODAY",
+  "kicker": "RUSSIAN ARMOR · TECHNICAL INVENTORY",
+  "source_note": "OPEN SOURCES · SPECIFICATIONS APPROXIMATE",
+  "intro_vo": "Russia's armored force is part museum and part laboratory. Old hulls are pulled out of storage, new ones are built in small numbers, and both meet the same drones. This is a technical inventory of every tank and armored vehicle in Russian service today. Fifty-two machines. Eight categories. Open sources only.",
+  "outro_vo": "Fifty-two vehicles. A force rebuilding in public, losing armor faster than it can be replaced, and adapting faster than most expected. Specifications here come from open sources, and recorded losses are only the ones visually confirmed, which means the real numbers are higher. If you want more breakdowns like this, subscribe.",
+  "outro_lines": [
+   "52 VEHICLES · 8 CATEGORIES",
+   "OPEN-SOURCE TECHNICAL INVENTORY"
+  ]
+ },
+ "categories": [
+  {
+   "id": "tanks",
+   "index": "01",
+   "title": "MAIN BATTLE TANKS",
+   "subtitle": "1947 — 2020",
+   "vo": "We begin with the main battle tanks: eight families, from nineteen-forties steel to the newest welded turret."
+  },
+  {
+   "id": "cars",
+   "index": "02",
+   "title": "ARMORED CARS",
+   "subtitle": "LIGHT WHEELED ARMOR",
+   "vo": "Next, the wheeled vehicles: light armor for escort, patrol and internal security."
+  },
+  {
+   "id": "destroyers",
+   "index": "03",
+   "title": "TANK DESTROYERS",
+   "subtitle": "ANTI-ARMOR SYSTEMS",
+   "vo": "Tank destroyers: machines built to ambush armor from cover."
+  },
+  {
+   "id": "recon",
+   "index": "04",
+   "title": "RECONNAISSANCE",
+   "subtitle": "THE VEHICLES THAT GO FIRST",
+   "vo": "Reconnaissance: the vehicles that go first."
+  },
+  {
+   "id": "apc",
+   "index": "05",
+   "title": "ARMORED PERSONNEL CARRIERS",
+   "subtitle": "INFANTRY TRANSPORT",
+   "vo": "Armored personnel carriers: the vehicles that carry infantry, and the ones their crews trust least."
+  },
+  {
+   "id": "ifv",
+   "index": "06",
+   "title": "INFANTRY FIGHTING VEHICLES",
+   "subtitle": "ARMORED INFANTRY SUPPORT",
+   "vo": "Infantry fighting vehicles: designed to fight alongside the men they carry."
+  },
+  {
+   "id": "artillery",
+   "index": "07",
+   "title": "SELF-PROPELLED ARTILLERY",
+   "subtitle": "THE WAR-WINNING ARM",
+   "vo": "Self-propelled artillery: the arm doing most of the damage in this war."
+  },
+  {
+   "id": "engineering",
+   "index": "08",
+   "title": "ENGINEERING VEHICLES",
+   "subtitle": "BATTLEFIELD SUPPORT",
+   "vo": "Engineering vehicles: the unglamorous machines that make movement possible."
+  }
+ ],
+ "vehicles": [
+  {
+   "id": "t54",
+   "name": "T-54 / T-55",
+   "cat": "tanks",
+   "year": "1947",
+   "crew": "4",
+   "weight": "36 t",
+   "armament": "100 mm D-10T",
+   "tags": [
+    "CAST DOME TURRET",
+    "HOMOGENEOUS STEEL"
+   ],
+   "render": "Soviet T-55 main battle tank, dome-shaped cast turret, long 100mm rifled gun, infrared searchlight beside the mantlet, dark green paint, front three-quarter view",
+   "vo": "We start where the Soviet school begins. The T-54 and T-55 are seventy-year-old designs, pulled out of deep storage by the thousand. A hundred-millimeter rifled gun, homogeneous steel armor, and no thermal sight. But a running tank is still a tank."
+  },
+  {
+   "id": "t62",
+   "name": "T-62M / MV",
+   "cat": "tanks",
+   "year": "1961",
+   "crew": "4",
+   "weight": "40 t",
+   "armament": "115 mm U-5TS",
+   "tags": [
+    "BOLT-ON COMPOSITE CHEEKS",
+    "COMPOSITE GLACIS"
+   ],
+   "render": "Soviet T-62M main battle tank with bolt-on composite armor blocks on the turret cheeks, 115mm smoothbore gun, thermal sight box on the roof, desert-green paint, front three-quarter view",
+   "vo": "The T-62 introduced the smoothbore tank gun. Its M and MV upgrades bolt on composite cheeks, a laser rangefinder and missiles. Obsolete on paper, and common on the battlefield, because Russia has thousands in reserve."
+  },
+  {
+   "id": "t64",
+   "name": "T-64",
+   "cat": "tanks",
+   "year": "1963",
+   "crew": "3",
+   "weight": "38 t",
+   "armament": "125 mm 2A46",
+   "tags": [
+    "COMPACT CAST TURRET",
+    "LOW SILHOUETTE HULL"
+   ],
+   "render": "Soviet T-64 main battle tank, very low flat hull, small pointed turret with integrated autoloader, 125mm gun, olive green paint, front three-quarter view",
+   "vo": "The T-64 was a revolution: a flat, compact hull, an autoloader and a three-man crew. Ukraine inherited most of them, and Moscow now fields survivors captured in Donbas since twenty-fourteen. The same factory, on the other side."
+  },
+  {
+   "id": "t72b3",
+   "name": "T-72B3",
+   "cat": "tanks",
+   "year": "2011",
+   "crew": "3",
+   "weight": "46 t",
+   "armament": "125 mm 2A46M-5",
+   "tags": [
+    "SOSNA-U THERMAL SIGHT",
+    "KONTAKT-5 ERA"
+   ],
+   "render": "Russian T-72B3 main battle tank with Kontakt-5 explosive reactive armor blocks across the turret and hull front, thermal sight on the turret roof, 125mm gun with thermal sleeve, dark green paint, front three-quarter view",
+   "vo": "The T-72B3 is the workhorse. Sosna-U thermal sight, Kontakt-5 explosive armor, a modernized hundred-and-twenty-five-millimeter gun. It is not the newest tank Russia has. It is the one there are most of, and the one Ukraine sees most often."
+  },
+  {
+   "id": "t80",
+   "name": "T-80BV / BVM",
+   "cat": "tanks",
+   "year": "1976",
+   "crew": "3",
+   "weight": "46 t",
+   "armament": "125 mm 2A46M-4",
+   "tags": [
+    "RELIKT ERA PANELS",
+    "FRONTAL ERA ARRAY"
+   ],
+   "render": "Russian T-80BVM main battle tank, gas turbine engine deck with distinctive louvered grilles, Relikt explosive reactive armor panels on the turret sides, 125mm gun, green and black camouflage, front three-quarter view, rear engine deck partially visible",
+   "vo": "The T-80 runs on a gas turbine, and it drinks fuel like an aircraft. The BVM upgrade gives it Relikt armor and a modern fire-control system. Fast, cold-blooded and expensive: the pride of a force that cannot always fuel it."
+  },
+  {
+   "id": "t90",
+   "name": "T-90",
+   "cat": "tanks",
+   "year": "1992",
+   "crew": "3",
+   "weight": "46.5 t",
+   "armament": "125 mm 2A46M",
+   "tags": [
+    "SHTORA-1 DAZZLERS",
+    "ERA ON GLACIS"
+   ],
+   "render": "Russian T-90 main battle tank with two distinctive Shtora-1 infrared dazzler boxes mounted on either side of the 125mm gun, boxy welded turret, dark green paint, front three-quarter view",
+   "vo": "The T-90 introduced Shtora-one: two infrared dazzlers that try to blind incoming missiles. In practice the system has not saved many crews, but the tank's welded turret and hundred-and-twenty-five-millimeter gun keep it in the line."
+  },
+  {
+   "id": "bmpt",
+   "name": "BMPT TERMINATOR",
+   "cat": "tanks",
+   "year": "2018",
+   "crew": "5",
+   "weight": "48 t",
+   "armament": "2 × 30 mm 2A42",
+   "tags": [
+    "TWIN 30 MM AUTOCANNONS",
+    "T-72 RUNNING GEAR"
+   ],
+   "render": "Russian BMPT Terminator tank support vehicle, T-72 style hull with a tall low-profile turret carrying twin 30mm autocannons, four anti-tank missile tubes in boxes on each side of the turret, green paint, front three-quarter view",
+   "vo": "The BMPT Terminator was built for a problem tanks keep meeting in cities: infantry with anti-tank missiles. Two thirty-millimeter cannons, four Ataka missiles, and a hull that is still a T-72. Few were made, fewer are committed."
+  },
+  {
+   "id": "t90m",
+   "name": "T-90M PRORYV",
+   "cat": "tanks",
+   "year": "2020",
+   "crew": "3",
+   "weight": "48 t",
+   "armament": "125 mm 2A46M-5",
+   "tags": [
+    "KALINA FIRE CONTROL",
+    "RELIKT ERA PANELS"
+   ],
+   "render": "Russian T-90M Proryv main battle tank, angular new welded turret covered in Relikt explosive reactive armor with slat panels at the rear of the turret, 125mm gun, remote machine gun mount, dark green paint, front three-quarter view",
+   "vo": "The T-90M Proryv is Russia's most capable tank in service: a new welded turret, Kalina fire control, Relikt armor and better situational awareness. It is genuinely modern, which is exactly why so few are risked near the front."
+  },
+  {
+   "id": "tigr",
+   "name": "GAZ TIGR",
+   "cat": "cars",
+   "year": "2005",
+   "crew": "2 + 9",
+   "weight": "7.2 t",
+   "armament": "12.7 mm Kord RCWS",
+   "tags": [
+    "REMOTE WEAPON STATION",
+    "4 × 4 CHASSIS"
+   ],
+   "render": "Russian GAZ Tigr 4x4 armored car, boxy angular body with big off-road tires, roof-mounted remote machine gun turret, olive green paint, front three-quarter view",
+   "vo": "The Tigr is the ubiquitous four-by-four of the Russian army: light, fast and thin-skinned. A remote machine-gun mount, ten passengers, and enough speed to run from a fight it cannot win."
+  },
+  {
+   "id": "kamaz_patrol",
+   "name": "KAMAZ PATROL",
+   "cat": "cars",
+   "year": "2013",
+   "crew": "2 + 8",
+   "weight": "15 t",
+   "armament": "12.7 mm",
+   "tags": [
+    "MACHINE-GUN TURRET",
+    "V-SHAPED NOSE"
+   ],
+   "render": "Russian KamAZ Patrol armored personnel vehicle, large boxy truck-based hull with V-shaped lower body, small turret with machine gun on the roof, grey-green paint with National Guard style markings, front three-quarter view",
+   "vo": "The KamAZ Patrol is a National Guard vehicle: a V-hull, a twelve-point-seven-millimeter mount, and a role that is mostly internal security and rear-area escort rather than the line of contact."
+  },
+  {
+   "id": "typhoon_k",
+   "name": "TYPHOON-K",
+   "cat": "cars",
+   "year": "2014",
+   "crew": "3 + 10",
+   "weight": "21 t",
+   "armament": "14.5 mm KPVT",
+   "tags": [
+    "ROOF WEAPON STATION",
+    "6 × 6 V-HULL CHASSIS"
+   ],
+   "render": "Russian KamAZ Typhoon-K 6x6 mine-resistant armored truck, tall boxy cab, V-shaped hull, large off-road wheels, roof weapon station with heavy machine gun, sand-green paint, front three-quarter view",
+   "vo": "Typhoon-K is a mine-resistant truck: twenty tonnes, a V-shaped belly, and an armored capsule for the crew. It survives blasts that would destroy a BTR. But it is a truck, not a fighting vehicle."
+  },
+  {
+   "id": "typhoon_vdv",
+   "name": "TYPHOON-VDV",
+   "cat": "cars",
+   "year": "2018",
+   "crew": "3 + 7",
+   "weight": "13.5 t",
+   "armament": "12.7 mm",
+   "tags": [
+    "ROOF MACHINE GUN",
+    "COMPACT 4 × 4 HULL"
+   ],
+   "render": "Russian K4386 Typhoon-VDV airborne armored car, compact 4x4 mine-resistant body, roof machine gun turret, light grey-green paint, front three-quarter view",
+   "vo": "The airborne Typhoon is smaller and lighter so that it can be flown and dropped. Same protection philosophy, half the weight, and a machine gun on the roof."
+  },
+  {
+   "id": "akhmat",
+   "name": "Z-STS AKHMAT",
+   "cat": "cars",
+   "year": "2022",
+   "crew": "3 + 7",
+   "weight": "10 t",
+   "armament": "12.7 mm + AGS-17",
+   "tags": [
+    "SLAT-CAGED WEAPON STATION",
+    "TRUCK-BASED HULL"
+   ],
+   "render": "Russian Z-STS Akhmat armored vehicle, tall boxy body on a KamAZ chassis, slat armor cage around the roof weapon station with machine gun and automatic grenade launcher, sand paint, front three-quarter view",
+   "vo": "The Z-STS Akhmat appeared in twenty-twenty-two, built for Chechen units. Ten tonnes, a machine gun and a grenade launcher, and a hull designed around ambushes and mines on secondary roads."
+  },
+  {
+   "id": "astais",
+   "name": "ASTAIS",
+   "cat": "cars",
+   "year": "2023",
+   "crew": "3 + 6",
+   "weight": "12 t",
+   "armament": "12.7 mm RCWS",
+   "tags": [
+    "REMOTE WEAPON STATION",
+    "MODULAR ARMOR PANELS"
+   ],
+   "render": "Russian Astais armored car, modern angular modular armored body with pronounced hood, remote weapon station on roof, large wheels, dark grey-green paint, front three-quarter view",
+   "vo": "Astais is the newest member of the family, a Remdiesel design shown in twenty-twenty-three. Modular armor, a remote weapon station, and production numbers measured in dozens rather than thousands."
+  },
+  {
+   "id": "shturm",
+   "name": "9P149 SHTURM-S",
+   "cat": "destroyers",
+   "year": "1979",
+   "crew": "2",
+   "weight": "12 t",
+   "armament": "9M114 SHTURM",
+   "tags": [
+    "RETRACTABLE LAUNCHER",
+    "MT-LB CHASSIS"
+   ],
+   "render": "Soviet 9P149 Shturm-S anti-tank missile carrier, low MT-LB tracked chassis with a raised box launcher of missile tubes on top, launcher in elevated position, olive green paint, front three-quarter view",
+   "vo": "Shturm-S carries radio-guided Shturm missiles on an MT-LB chassis, hidden behind a retractable launcher. It shoots from cover, then moves: a tank killer built to ambush, not to duel."
+  },
+  {
+   "id": "sprut",
+   "name": "2S25 SPRUT-SD",
+   "cat": "destroyers",
+   "year": "2005",
+   "crew": "3",
+   "weight": "18 t",
+   "armament": "125 mm 2A75",
+   "tags": [
+    "125 MM 2A75",
+    "AIRBORNE CHASSIS"
+   ],
+   "render": "Russian 2S25 Sprut-SD light airborne tank destroyer, compact low hull with a large 125mm gun and small turret, tracked chassis derived from airborne vehicle, green paint, front three-quarter view",
+   "vo": "The Sprut-SD is a light tank in all but name: a hundred-and-twenty-five-millimeter gun on an airborne chassis. It can be dropped by parachute, and it can swim. That is a lot of gun for eighteen tonnes."
+  },
+  {
+   "id": "krizantema",
+   "name": "KRIZANTEMA-S",
+   "cat": "destroyers",
+   "year": "2015",
+   "crew": "2",
+   "weight": "19 t",
+   "armament": "2 × 9M123",
+   "tags": [
+    "TWIN MISSILE LAUNCHERS",
+    "BMP-3 CHASSIS"
+   ],
+   "render": "Russian 9P157-2 Krizantema-S anti-tank missile carrier, BMP-3 style tracked chassis with a low turret holding two large box missile launchers raised at an angle, radar panel on the turret, green paint, front three-quarter view",
+   "vo": "Krizantema-S guides two supersonic missiles at once, by radar beam or laser, day or night. One crew, two targets, and a chassis borrowed from the BMP-3. It is the most sophisticated anti-tank vehicle Russia fields."
+  },
+  {
+   "id": "konkurs",
+   "name": "9P163M1 KONKURS-M",
+   "cat": "destroyers",
+   "year": "1991",
+   "crew": "3",
+   "weight": "12 t",
+   "armament": "9M113M TANDEM",
+   "tags": [
+    "MISSILE TUBE ASSEMBLY",
+    "LIGHT TRACKED CARRIER"
+   ],
+   "render": "Russian 9P163M1 Konkurs-M anti-tank guided missile launcher on a light tracked MT-LB carrier, tripod mounted missile launch tube on the roof deck, olive paint, front three-quarter view",
+   "vo": "Konkurs-M is older, cheaper and everywhere: a tandem warhead on a wire-guided missile, mounted on vehicles or fired from the ground. Simple, proven, and produced in numbers no Western system matches."
+  },
+  {
+   "id": "brdm2",
+   "name": "BRDM-2",
+   "cat": "recon",
+   "year": "1962",
+   "crew": "4",
+   "weight": "7 t",
+   "armament": "14.5 mm KPVT",
+   "tags": [
+    "KPVT TURRET",
+    "EIGHT-WHEEL HULL"
+   ],
+   "render": "Soviet BRDM-2 amphibious reconnaissance vehicle, boat-shaped hull with four large road wheels and two retractable belly wheels, small turret with heavy machine gun, olive green paint, front three-quarter view",
+   "vo": "The BRDM-2 has been scouting since nineteen-sixty-two: four wheels, two more in the middle, a small turret and the ability to swim. It is a scout that survives by being small and unnoticed."
+  },
+  {
+   "id": "brm1k",
+   "name": "BRM-1K",
+   "cat": "recon",
+   "year": "1976",
+   "crew": "6",
+   "weight": "13 t",
+   "armament": "30 mm 2A42",
+   "tags": [
+    "30 MM TURRET",
+    "BMP-1 DERIVED HULL"
+   ],
+   "render": "Soviet BRM-1K reconnaissance vehicle, BMP-1 style low tracked hull with a small turret carrying a 30mm cannon, tall antenna array and radar box on the turret roof, green paint, front three-quarter view",
+   "vo": "BRM-1K is the battlefield reconnaissance version of the BMP-1: a thirty-millimeter cannon, ground-surveillance radar, and a crew of six who are trained to look rather than to fight."
+  },
+  {
+   "id": "vystrel",
+   "name": "BPM-97 VYSTREL",
+   "cat": "recon",
+   "year": "1999",
+   "crew": "3 + 7",
+   "weight": "12 t",
+   "armament": "14.5 mm KPVT",
+   "tags": [
+    "KPVT TURRET",
+    "KAMAZ 4 × 4 CHASSIS"
+   ],
+   "render": "Russian BPM-97 Vystrel armored car, KamAZ 4x4 chassis with boxy armored body and small turret with heavy machine gun, rear door ramp, border guard green paint, front three-quarter view",
+   "vo": "The Vystrel is a KamAZ truck turned armored car, used mostly by border guards: a fourteen-point-five-millimeter turret, a rear ramp, and a long service life in the Caucasus."
+  },
+  {
+   "id": "btr50",
+   "name": "BTR-50",
+   "cat": "apc",
+   "year": "1954",
+   "crew": "2 + 20",
+   "weight": "14 t",
+   "armament": "7.62 mm SGMB",
+   "tags": [
+    "OPEN TROOP DECK",
+    "TRACKED AMPHIBIOUS HULL"
+   ],
+   "render": "Soviet BTR-50 tracked amphibious armored personnel carrier, long low boat-like hull with no turret, open top troop compartment at the rear, small machine gun shield, faded green paint, front three-quarter view",
+   "vo": "The BTR-50 belongs in a museum: a nineteen-fifties tracked amphibious carrier. It came back into service from storage, thinly armored and slow, because Russia needed hulls more than it needed quality."
+  },
+  {
+   "id": "mtlb",
+   "name": "MT-LB",
+   "cat": "apc",
+   "year": "1970",
+   "crew": "2 + 11",
+   "weight": "12 t",
+   "armament": "7.62 mm PKT",
+   "tags": [
+    "IMPROVISED SLAT ARMOR",
+    "LOW TRACKED HULL"
+   ],
+   "render": "Soviet MT-LB tracked armored tractor, low flat boxy hull with front machine gun mount, add-on slat armor cages and improvised side armor plates, muddy olive paint, front three-quarter view",
+   "vo": "The MT-LB is the mule of the Russian army. Artillery tractor, ambulance, mortar carrier, and in this war a platform for improvised armor, naval guns and drone cages. Seventy years old, and still everywhere."
+  },
+  {
+   "id": "btr70",
+   "name": "BTR-70",
+   "cat": "apc",
+   "year": "1972",
+   "crew": "3 + 7",
+   "weight": "11.5 t",
+   "armament": "14.5 mm KPVT",
+   "tags": [
+    "KPVT TURRET",
+    "EIGHT-WHEEL HULL"
+   ],
+   "render": "Soviet BTR-70 eight-wheeled armored personnel carrier, boat-shaped hull with small conical turret and heavy machine gun, eight large road wheels, green paint, front three-quarter view",
+   "vo": "The BTR-70 uses two petrol engines and eight wheels, with side doors so narrow they are dangerous under fire. Its crews prefer the later BTR-80, for reasons that are easy to understand."
+  },
+  {
+   "id": "btrd",
+   "name": "BTR-D",
+   "cat": "apc",
+   "year": "1974",
+   "crew": "3 + 10",
+   "weight": "8 t",
+   "armament": "7.62 mm PKT",
+   "tags": [
+    "OPEN ROOF HATCHES",
+    "AIRBORNE TRACKED HULL"
+   ],
+   "render": "Soviet BTR-D airborne tracked armored carrier, very low wide hull based on BMD design with no turret, open roof hatches at the rear, small machine gun mount, light green paint, front three-quarter view",
+   "vo": "The BTR-D is the airborne carrier: light, tracked, and designed to be dropped. It has almost no protection, which is why its crews ride on the roof rather than inside."
+  },
+  {
+   "id": "btr80",
+   "name": "BTR-80",
+   "cat": "apc",
+   "year": "1986",
+   "crew": "3 + 7",
+   "weight": "13.6 t",
+   "armament": "14.5 mm KPVT",
+   "tags": [
+    "14.5 MM TURRET",
+    "HULL SIDE HATCHES"
+   ],
+   "render": "Soviet BTR-80 eight-wheeled armored personnel carrier, boat-shaped hull with side hatches in the upper hull, small turret with 14.5mm heavy machine gun and 7.62mm coaxial, eight wheels, green paint, front three-quarter view",
+   "vo": "The BTR-80 fixed the BTR-70's worst problem with side hatches and a diesel engine, and kept the fourteen-point-five-millimeter turret. It is the standard wheeled carrier, and Ukraine has captured hundreds."
+  },
+  {
+   "id": "bmot",
+   "name": "BMO-T",
+   "cat": "apc",
+   "year": "2001",
+   "crew": "2 + 7",
+   "weight": "40 t",
+   "armament": "2 × RPG-7 / RPO-A",
+   "tags": [
+    "HEAVY SUPERSTRUCTURE",
+    "T-72 RUNNING GEAR"
+   ],
+   "render": "Russian BMO-T heavy armored personnel carrier, T-72 tank hull and running gear with a large boxy superstructure instead of a turret, roof hatches, dark green paint, front three-quarter view",
+   "vo": "The BMO-T is a heavy carrier built on a T-72 hull to move flamethrower teams: forty tonnes of armor, no main gun, and a job that puts it close to infantry, exactly where anti-tank teams wait."
+  },
+  {
+   "id": "rakushka",
+   "name": "BTR-MDM RAKUSHKA",
+   "cat": "apc",
+   "year": "2013",
+   "crew": "2 + 13",
+   "weight": "13.5 t",
+   "armament": "7.62 mm PKTM",
+   "tags": [
+    "REMOTE MACHINE GUN",
+    "TRACKED AMPHIBIOUS HULL"
+   ],
+   "render": "Russian BTR-MDM Rakushka airborne armored carrier, wide low tracked hull with boxy troop compartment and small remote machine gun mount, light green paint, front three-quarter view",
+   "vo": "Rakushka means little shell. It is a paratrooper carrier with thirteen seats, a machine gun, and enough buoyancy to swim. Light, roomy, and only as safe as its thin aluminum sides."
+  },
+  {
+   "id": "bmp1",
+   "name": "BMP-1",
+   "cat": "ifv",
+   "year": "1966",
+   "crew": "3 + 8",
+   "weight": "13 t",
+   "armament": "73 mm 2A28 GROM",
+   "tags": [
+    "73 MM 2A28 GUN",
+    "LOW-PROFILE HULL"
+   ],
+   "render": "Soviet BMP-1 infantry fighting vehicle, low pointed boat-shaped nose, small round turret with short 73mm low-pressure gun and a missile rail above the barrel, tracked, green paint, front three-quarter view",
+   "vo": "The BMP-1 invented the infantry fighting vehicle: a seventy-three-millimeter gun, a missile on the barrel, and eight soldiers inside. Its armor stops bullets, and little else."
+  },
+  {
+   "id": "bmp2",
+   "name": "BMP-2",
+   "cat": "ifv",
+   "year": "1980",
+   "crew": "3 + 7",
+   "weight": "14 t",
+   "armament": "30 mm 2A42",
+   "tags": [
+    "30 MM 2A42 CANNON",
+    "TRACKED HULL"
+   ],
+   "render": "Soviet BMP-2 infantry fighting vehicle, low tracked hull with a two-man turret carrying a long 30mm autocannon and a missile tube on top, green paint, front three-quarter view",
+   "vo": "The BMP-2 replaced the low-pressure gun with a thirty-millimeter cannon that elevates high enough to hit aircraft and rooftops. It is the most common infantry vehicle in Russian service."
+  },
+  {
+   "id": "bmd2",
+   "name": "BMD-2",
+   "cat": "ifv",
+   "year": "1988",
+   "crew": "3 + 6",
+   "weight": "8 t",
+   "armament": "30 mm 2A42",
+   "tags": [
+    "30 MM CANNON TURRET",
+    "AIRBORNE HULL"
+   ],
+   "render": "Soviet BMD-2 airborne infantry fighting vehicle, very low squat tracked hull, small turret with 30mm autocannon and missile launcher, light green paint, front three-quarter view",
+   "vo": "The BMD-2 is the airborne version of the BMP-2: eight tonnes, a thirty-millimeter cannon, and armor you can hear. It is built to be dropped, not to survive a direct hit."
+  },
+  {
+   "id": "bmp3",
+   "name": "BMP-3",
+   "cat": "ifv",
+   "year": "1987",
+   "crew": "3 + 7",
+   "weight": "18.7 t",
+   "armament": "100 mm 2A70 + 30 mm",
+   "tags": [
+    "100 MM + 30 MM MOUNT",
+    "LOW HULL AND SKIRTS"
+   ],
+   "render": "Russian BMP-3 infantry fighting vehicle, low hull with rounded turret carrying a 100mm gun and a coaxial 30mm cannon, rear engine, green paint, front three-quarter view",
+   "vo": "The BMP-3 is the most heavily armed infantry vehicle in the world: a hundred-millimeter gun that also fires missiles, plus a thirty-millimeter cannon. In this war it is often used as light artillery, firing from behind cover."
+  },
+  {
+   "id": "bmd4m",
+   "name": "BMD-4M",
+   "cat": "ifv",
+   "year": "2016",
+   "crew": "3 + 5",
+   "weight": "13.5 t",
+   "armament": "100 mm 2A70 + 30 mm",
+   "tags": [
+    "100 MM GUN-MORTAR",
+    "ANTI-DRONE SLAT ARMOR"
+   ],
+   "render": "Russian BMD-4M airborne infantry fighting vehicle, compact tracked hull with turret carrying 100mm gun and 30mm cannon, add-on slat anti-drone armor panels on the sides and turret, green paint, front three-quarter view",
+   "vo": "The BMD-4M carries the same hundred-millimeter gun as the BMP-3 on an airborne hull, with add-on anti-drone armor and a modern sight. Thirteen tonnes, and a crew that knows speed beats armor."
+  },
+  {
+   "id": "2s3",
+   "name": "2S3 AKATSIYA",
+   "cat": "artillery",
+   "year": "1971",
+   "crew": "4",
+   "weight": "27.5 t",
+   "armament": "152 mm 2A33",
+   "tags": [
+    "152 MM 2A33",
+    "TRACKED CHASSIS"
+   ],
+   "render": "Soviet 2S3 Akatsiya self-propelled howitzer, tracked chassis with large boxy rotating turret and long 152mm gun, green paint, front three-quarter view",
+   "vo": "Akatsiya has been the standard Soviet self-propelled howitzer since nineteen-seventy-one: a hundred-and-fifty-two-millimeter gun on a tracked chassis. Old, mechanical, and still doing most of the killing in this war."
+  },
+  {
+   "id": "2s1",
+   "name": "2S1 GVOZDIKA",
+   "cat": "artillery",
+   "year": "1972",
+   "crew": "4",
+   "weight": "15.7 t",
+   "armament": "122 mm 2A31",
+   "tags": [
+    "122 MM 2A31",
+    "LIGHT TRACKED CHASSIS"
+   ],
+   "render": "Soviet 2S1 Gvozdika self-propelled howitzer, light tracked chassis with a small rotating turret and 122mm gun, green paint, front three-quarter view",
+   "vo": "Gvozdika is small, light and amphibious, with a hundred-and-twenty-two-millimeter gun. It follows infantry closely and shoots fast, and it is the most numerous self-propelled gun Russia has."
+  },
+  {
+   "id": "2s4",
+   "name": "2S4 TYULPAN",
+   "cat": "artillery",
+   "year": "1975",
+   "crew": "4",
+   "weight": "27.5 t",
+   "armament": "240 mm 2B8 MORTAR",
+   "tags": [
+    "240 MM MORTAR TUBE",
+    "TRACKED CHASSIS"
+   ],
+   "render": "Soviet 2S4 Tyulpan heavy self-propelled mortar, tracked chassis with a huge upward-angled 240mm mortar tube mounted on a turntable, green paint, front three-quarter view",
+   "vo": "Tyulpan fires the largest mortar ever fielded: two hundred and forty millimeters, loaded from the breech, with a shell that can flatten a building. Fewer than a hundred exist, and each one is a siege weapon."
+  },
+  {
+   "id": "2s7",
+   "name": "2S7 PION",
+   "cat": "artillery",
+   "year": "1975",
+   "crew": "7",
+   "weight": "46 t",
+   "armament": "203 mm 2A44",
+   "tags": [
+    "203 MM 2A44",
+    "LONG TRACKED CHASSIS"
+   ],
+   "render": "Soviet 2S7 Pion heavy self-propelled gun, very long tracked chassis with an enormous 203mm gun barrel extending far beyond the hull, no turret, green paint, front three-quarter view",
+   "vo": "Pion is the heaviest self-propelled gun in service: two hundred and three millimeters, forty-six tonnes, and a range beyond thirty-seven kilometers. It was built to fire nuclear shells, and it fires far more often than anyone expected."
+  },
+  {
+   "id": "2s5",
+   "name": "2S5 GIATSINT-S",
+   "cat": "artillery",
+   "year": "1976",
+   "crew": "5",
+   "weight": "28 t",
+   "armament": "152 mm 2A37",
+   "tags": [
+    "LONG 152 MM BARREL",
+    "OPEN FIGHTING COMPARTMENT"
+   ],
+   "render": "Soviet 2S5 Giatsint-S self-propelled gun, tracked chassis with an open-topped fighting compartment and a very long 152mm gun with muzzle brake, green paint, front three-quarter view",
+   "vo": "Giatsint-S has a long hundred-and-fifty-two-millimeter barrel with exceptional range and brutal recoil. It is accurate, expensive, and increasingly rare on the line."
+  },
+  {
+   "id": "2s9",
+   "name": "2S9 NONA-S",
+   "cat": "artillery",
+   "year": "1981",
+   "crew": "4",
+   "weight": "8.7 t",
+   "armament": "120 mm 2A51",
+   "tags": [
+    "120 MM GUN-MORTAR",
+    "AIRBORNE HULL"
+   ],
+   "render": "Soviet 2S9 Nona-S airborne self-propelled gun-mortar, small tracked amphibious chassis with a short 120mm howitzer in a low turret, green paint, front three-quarter view",
+   "vo": "Nona is a gun, a mortar and a howitzer in one, mounted on an airborne chassis that swims. A hundred and twenty millimeters, high elevation, and the ability to hit anything from a trench line to a hillside."
+  },
+  {
+   "id": "tos1a",
+   "name": "TOS-1A SOLNTSEPYOK",
+   "cat": "artillery",
+   "year": "2001",
+   "crew": "3",
+   "weight": "44 t",
+   "armament": "30 × 220 mm THERMOBARIC",
+   "tags": [
+    "30-TUBE THERMOBARIC LAUNCHER",
+    "T-72 CHASSIS"
+   ],
+   "render": "Russian TOS-1A Solntsepyok thermobaric rocket launcher, T-72 tank chassis with a large box launcher of thirty rocket tubes mounted on the turret ring, elevated launcher, green paint, front three-quarter view",
+   "vo": "Solntsepyok is not artillery. It is a thermobaric launcher on a T-72 chassis: thirty rockets, a wall of pressure and heat, and a range so short that it has to come close to use them."
+  },
+  {
+   "id": "2s19",
+   "name": "2S19 MSTA-S",
+   "cat": "artillery",
+   "year": "1989",
+   "crew": "5",
+   "weight": "42 t",
+   "armament": "152 mm 2A64",
+   "tags": [
+    "152 MM 2A64",
+    "TRACKED CHASSIS"
+   ],
+   "render": "Soviet 2S19 Msta-S self-propelled howitzer, T-80 style tracked chassis with a large angular turret and long 152mm gun with muzzle brake, green paint, front three-quarter view",
+   "vo": "Msta-S is the modern tracked howitzer: a hundred-and-fifty-two-millimeter gun, an autoloader, and a computerised fire-control system. It shoots and moves in minutes, which is the only way to survive drone spotting."
+  },
+  {
+   "id": "2s23",
+   "name": "2S23 NONA-SVK",
+   "cat": "artillery",
+   "year": "1990",
+   "crew": "4",
+   "weight": "14.6 t",
+   "armament": "120 mm 2A60",
+   "tags": [
+    "120 MM GUN-MORTAR",
+    "BTR-80 HULL"
+   ],
+   "render": "Russian 2S23 Nona-SVK self-propelled gun-mortar, BTR-80 eight-wheeled hull with an open turret carrying a 120mm gun, eight large wheels, green paint, front three-quarter view",
+   "vo": "Nona-SVK puts the hundred-and-twenty-millimeter gun-mortar on an eight-wheeled BTR-80 hull. Faster on roads than the tracked version, and used to support infantry directly."
+  },
+  {
+   "id": "2s34",
+   "name": "2S34 KHOSTA",
+   "cat": "artillery",
+   "year": "2008",
+   "crew": "4",
+   "weight": "16 t",
+   "armament": "120 mm 2A80",
+   "tags": [
+    "120 MM 2A80",
+    "GVOZDIKA CHASSIS"
+   ],
+   "render": "Russian 2S34 Khosta self-propelled gun-mortar, 2S1 Gvozdika tracked chassis with a small turret and a short 120mm gun, green paint, front three-quarter view",
+   "vo": "Khosta is a Gvozdika rebuilt around a hundred-and-twenty-millimeter gun-mortar, giving one chassis the jobs of two. Few were converted, and most stay close to the infantry they support."
+  },
+  {
+   "id": "2s40",
+   "name": "2S40 FLOKS",
+   "cat": "artillery",
+   "year": "2023",
+   "crew": "4",
+   "weight": "20 t",
+   "armament": "120 mm 2A80",
+   "tags": [
+    "120 MM GUN-MORTAR",
+    "URAL 6 × 6 CHASSIS"
+   ],
+   "render": "Russian 2S40 Floks self-propelled gun-mortar, Ural 6x6 truck chassis with an armored cab and a 120mm gun mounted on the rear bed, green paint, front three-quarter view",
+   "vo": "Floks is new: a hundred-and-twenty-millimeter gun-mortar on a wheeled Ural chassis, first seen in twenty-twenty-three. Cheaper and faster to build than a tracked gun, and now in serial production."
+  },
+  {
+   "id": "2s43",
+   "name": "2S43 MALVA",
+   "cat": "artillery",
+   "year": "2023",
+   "crew": "5",
+   "weight": "32 t",
+   "armament": "152 mm 2A64",
+   "tags": [
+    "152 MM 2A64",
+    "8 × 8 WHEELED CHASSIS"
+   ],
+   "render": "Russian 2S43 Malva self-propelled howitzer, large eight-wheeled BAZ chassis with an armored cab and a long 152mm gun mounted on the rear deck, green paint, front three-quarter view",
+   "vo": "Malva is the wheeled answer to drone artillery: a hundred-and-fifty-two-millimeter gun on an eight-wheel-drive chassis that can shoot and leave in under two minutes. Few exist, but more are coming."
+  },
+  {
+   "id": "mtu72",
+   "name": "MTU-72",
+   "cat": "engineering",
+   "year": "1974",
+   "crew": "2",
+   "weight": "40 t",
+   "armament": "20 m BRIDGE",
+   "tags": [
+    "20 M BRIDGE SPAN",
+    "T-72 CHASSIS"
+   ],
+   "render": "Soviet MTU-72 armored bridge layer, T-72 tank chassis carrying a long folded metal bridge section on top of the hull, green paint, front three-quarter view",
+   "vo": "MTU-72 lays a twenty-meter bridge from a T-72 hull in about three minutes. Armor keeps the crew alive while it works, which is the entire point of an armored bridge layer."
+  },
+  {
+   "id": "ur77",
+   "name": "UR-77 METEORIT",
+   "cat": "engineering",
+   "year": "1978",
+   "crew": "2",
+   "weight": "15 t",
+   "armament": "2 × UZP-77 LINE CHARGE",
+   "tags": [
+    "LINE-CHARGE LAUNCHER",
+    "TRACKED CHASSIS"
+   ],
+   "render": "Soviet UR-77 Meteorit mine-clearing vehicle, tracked chassis based on 2S1 with a boxy launcher on the rear deck holding rocket-towed explosive hoses, green paint, front three-quarter view",
+   "vo": "UR-77 Meteorit clears minefields with a rocket-towed hose of explosive: two hundred meters of lane, opened in seconds, by a vehicle that has to drive into the minefield to do it."
+  },
+  {
+   "id": "bat2",
+   "name": "BAT-2",
+   "cat": "engineering",
+   "year": "1988",
+   "crew": "2",
+   "weight": "39 t",
+   "armament": "DOZER + CRANE",
+   "tags": [
+    "CRANE ARM",
+    "DOZER BLADE"
+   ],
+   "render": "Soviet BAT-2 combat engineer vehicle, tracked chassis with a large front dozer blade and a hydraulically operated crane arm folded over the roof, green paint, front three-quarter view",
+   "vo": "BAT-2 is a bulldozer that can keep up with tanks: a blade, a crane and a winch on a tracked chassis, used to cut routes through forests and rubble under fire."
+  },
+  {
+   "id": "imr2",
+   "name": "IMR-2",
+   "cat": "engineering",
+   "year": "1982",
+   "crew": "2",
+   "weight": "44 t",
+   "armament": "CRANE ARM + BLADE",
+   "tags": [
+    "TELESCOPIC CRANE",
+    "DOZER BLADE"
+   ],
+   "render": "Soviet IMR-2 combat engineer vehicle, T-72 hull with a large telescopic crane arm folded on the roof and a wide dozer blade at the front, green paint, front three-quarter view",
+   "vo": "IMR-2 is the combat engineer's tank: a telescopic crane arm, a dozer blade, and a T-72 hull to survive the work. It clears obstacles while people are shooting at it."
+  },
+  {
+   "id": "gmz3",
+   "name": "GMZ-3",
+   "cat": "engineering",
+   "year": "1984",
+   "crew": "3",
+   "weight": "28 t",
+   "armament": "MINELAYING SYSTEM",
+   "tags": [
+    "MINELAYING SYSTEM",
+    "TRACKED CHASSIS"
+   ],
+   "render": "Soviet GMZ-3 tracked minelaying vehicle, boxy tracked chassis with a rear minelaying mechanism and plow-like equipment, green paint, front three-quarter view",
+   "vo": "GMZ-3 is a minelayer: it ploughs and buries anti-tank mines at speed, turning an open field into an obstacle belt in minutes. The Russian army still lays more mines than any other."
+  },
+  {
+   "id": "brem1",
+   "name": "BREM-1",
+   "cat": "engineering",
+   "year": "1984",
+   "crew": "3",
+   "weight": "41 t",
+   "armament": "CRANE + WINCH",
+   "tags": [
+    "RECOVERY CRANE",
+    "T-72 CHASSIS"
+   ],
+   "render": "Soviet BREM-1 armored recovery vehicle, T-72 hull with a large hydraulic crane on the roof, dozer blade at the front, stowed recovery equipment, green paint, front three-quarter view",
+   "vo": "BREM-1 is the recovery vehicle built on a T-72: a crane, a winch, and a crew willing to drive toward broken tanks. Every hull it recovers is one that does not have to be replaced."
+  },
+  {
+   "id": "ubim",
+   "name": "UBIM",
+   "cat": "engineering",
+   "year": "2023",
+   "crew": "3",
+   "weight": "16 t",
+   "armament": "MANIPULATOR + BLADE",
+   "tags": [
+    "MANIPULATOR ARM",
+    "DOZER BLADE"
+   ],
+   "render": "Russian UBIM universal armored engineering vehicle, BTR-82 style eight-wheeled armored hull with a hydraulic manipulator arm and a dozer blade at the front, green paint, front three-quarter view",
+   "vo": "UBIM is the newest engineer vehicle: recovery, breaching and clearing on one armored eight-wheeled chassis, with a manipulator arm and a dozer blade. Fewer than a dozen have been seen."
+  }
+ ]
+}

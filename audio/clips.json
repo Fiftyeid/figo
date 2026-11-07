@@ -1,0 +1,437 @@
+[
+ {
+  "id": "clip01",
+  "text": "Russia's armored force is part museum and part laboratory. Old hulls are pulled out of storage, new ones are built in small numbers, and both meet the same drones. This is a technical inventory of every tank and armored vehicle in Russian service today. Fifty-two machines. Eight categories. Open sources only. We begin with the main battle tanks: eight families, from nineteen-forties steel to the newest welded turret. We start where the Soviet school begins. The T-54 and T-55 are seventy-year-old designs, pulled out of deep storage by the thousand. A hundred-millimeter rifled gun, homogeneous steel armor, and no thermal sight. But a running tank is still a tank. The T-62 introduced the smoothbore tank gun. Its M and MV upgrades bolt on composite cheeks, a laser rangefinder and missiles. Obsolete on paper, and common on the battlefield, because Russia has thousands in reserve. The T-64 was a revolution: a flat, compact hull, an autoloader and a three-man crew. Ukraine inherited most of them, and Moscow now fields survivors captured in Donbas since twenty-fourteen. The same factory, on the other side. The T-72B3 is the workhorse. Sosna-U thermal sight, Kontakt-5 explosive armor, a modernized hundred-and-twenty-five-millimeter gun. It is not the newest tank Russia has. It is the one there are most of, and the one Ukraine sees most often.",
+  "units": [
+   {
+    "kind": "intro",
+    "cat": null,
+    "vid": null,
+    "chars": 310
+   },
+   {
+    "kind": "section",
+    "cat": "tanks",
+    "vid": null,
+    "chars": 109
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t54",
+    "chars": 248
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t62",
+    "chars": 217
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t64",
+    "chars": 227
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t72b3",
+    "chars": 239
+   }
+  ],
+  "chars": 1355
+ },
+ {
+  "id": "clip02",
+  "text": "The T-80 runs on a gas turbine, and it drinks fuel like an aircraft. The BVM upgrade gives it Relikt armor and a modern fire-control system. Fast, cold-blooded and expensive: the pride of a force that cannot always fuel it. The T-90 introduced Shtora-one: two infrared dazzlers that try to blind incoming missiles. In practice the system has not saved many crews, but the tank's welded turret and hundred-and-twenty-five-millimeter gun keep it in the line. The BMPT Terminator was built for a problem tanks keep meeting in cities: infantry with anti-tank missiles. Two thirty-millimeter cannons, four Ataka missiles, and a hull that is still a T-72. Few were made, fewer are committed. The T-90M Proryv is Russia's most capable tank in service: a new welded turret, Kalina fire control, Relikt armor and better situational awareness. It is genuinely modern, which is exactly why so few are risked near the front. Next, the wheeled vehicles: light armor for escort, patrol and internal security. The Tigr is the ubiquitous four-by-four of the Russian army: light, fast and thin-skinned. A remote machine-gun mount, ten passengers, and enough speed to run from a fight it cannot win. The KamAZ Patrol is a National Guard vehicle: a V-hull, a twelve-point-seven-millimeter mount, and a role that is mostly internal security and rear-area escort rather than the line of contact.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t80",
+    "chars": 223
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t90",
+    "chars": 232
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "bmpt",
+    "chars": 228
+   },
+   {
+    "kind": "vehicle",
+    "cat": "tanks",
+    "vid": "t90m",
+    "chars": 226
+   },
+   {
+    "kind": "section",
+    "cat": "cars",
+    "vid": null,
+    "chars": 81
+   },
+   {
+    "kind": "vehicle",
+    "cat": "cars",
+    "vid": "tigr",
+    "chars": 186
+   },
+   {
+    "kind": "vehicle",
+    "cat": "cars",
+    "vid": "kamaz_patrol",
+    "chars": 192
+   }
+  ],
+  "chars": 1374
+ },
+ {
+  "id": "clip03",
+  "text": "Typhoon-K is a mine-resistant truck: twenty tonnes, a V-shaped belly, and an armored capsule for the crew. It survives blasts that would destroy a BTR. But it is a truck, not a fighting vehicle. The airborne Typhoon is smaller and lighter so that it can be flown and dropped. Same protection philosophy, half the weight, and a machine gun on the roof. The Z-STS Akhmat appeared in twenty-twenty-two, built for Chechen units. Ten tonnes, a machine gun and a grenade launcher, and a hull designed around ambushes and mines on secondary roads. Astais is the newest member of the family, a Remdiesel design shown in twenty-twenty-three. Modular armor, a remote weapon station, and production numbers measured in dozens rather than thousands. Tank destroyers: machines built to ambush armor from cover. Shturm-S carries radio-guided Shturm missiles on an MT-LB chassis, hidden behind a retractable launcher. It shoots from cover, then moves: a tank killer built to ambush, not to duel. The Sprut-SD is a light tank in all but name: a hundred-and-twenty-five-millimeter gun on an airborne chassis. It can be dropped by parachute, and it can swim. That is a lot of gun for eighteen tonnes. Krizantema-S guides two supersonic missiles at once, by radar beam or laser, day or night. One crew, two targets, and a chassis borrowed from the BMP-3. It is the most sophisticated anti-tank vehicle Russia fields.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "cars",
+    "vid": "typhoon_k",
+    "chars": 194
+   },
+   {
+    "kind": "vehicle",
+    "cat": "cars",
+    "vid": "typhoon_vdv",
+    "chars": 156
+   },
+   {
+    "kind": "vehicle",
+    "cat": "cars",
+    "vid": "akhmat",
+    "chars": 188
+   },
+   {
+    "kind": "vehicle",
+    "cat": "cars",
+    "vid": "astais",
+    "chars": 196
+   },
+   {
+    "kind": "section",
+    "cat": "destroyers",
+    "vid": null,
+    "chars": 59
+   },
+   {
+    "kind": "vehicle",
+    "cat": "destroyers",
+    "vid": "shturm",
+    "chars": 182
+   },
+   {
+    "kind": "vehicle",
+    "cat": "destroyers",
+    "vid": "sprut",
+    "chars": 201
+   },
+   {
+    "kind": "vehicle",
+    "cat": "destroyers",
+    "vid": "krizantema",
+    "chars": 214
+   }
+  ],
+  "chars": 1397
+ },
+ {
+  "id": "clip04",
+  "text": "Konkurs-M is older, cheaper and everywhere: a tandem warhead on a wire-guided missile, mounted on vehicles or fired from the ground. Simple, proven, and produced in numbers no Western system matches. Reconnaissance: the vehicles that go first. The BRDM-2 has been scouting since nineteen-sixty-two: four wheels, two more in the middle, a small turret and the ability to swim. It is a scout that survives by being small and unnoticed. BRM-1K is the battlefield reconnaissance version of the BMP-1: a thirty-millimeter cannon, ground-surveillance radar, and a crew of six who are trained to look rather than to fight. The Vystrel is a KamAZ truck turned armored car, used mostly by border guards: a fourteen-point-five-millimeter turret, a rear ramp, and a long service life in the Caucasus. Armored personnel carriers: the vehicles that carry infantry, and the ones their crews trust least. The BTR-50 belongs in a museum: a nineteen-fifties tracked amphibious carrier. It came back into service from storage, thinly armored and slow, because Russia needed hulls more than it needed quality. The MT-LB is the mule of the Russian army. Artillery tractor, ambulance, mortar carrier, and in this war a platform for improvised armor, naval guns and drone cages. Seventy years old, and still everywhere.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "destroyers",
+    "vid": "konkurs",
+    "chars": 199
+   },
+   {
+    "kind": "section",
+    "cat": "recon",
+    "vid": null,
+    "chars": 43
+   },
+   {
+    "kind": "vehicle",
+    "cat": "recon",
+    "vid": "brdm2",
+    "chars": 189
+   },
+   {
+    "kind": "vehicle",
+    "cat": "recon",
+    "vid": "brm1k",
+    "chars": 181
+   },
+   {
+    "kind": "vehicle",
+    "cat": "recon",
+    "vid": "vystrel",
+    "chars": 173
+   },
+   {
+    "kind": "section",
+    "cat": "apc",
+    "vid": null,
+    "chars": 99
+   },
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "btr50",
+    "chars": 200
+   },
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "mtlb",
+    "chars": 206
+   }
+  ],
+  "chars": 1297
+ },
+ {
+  "id": "clip05",
+  "text": "The BTR-70 uses two petrol engines and eight wheels, with side doors so narrow they are dangerous under fire. Its crews prefer the later BTR-80, for reasons that are easy to understand. The BTR-D is the airborne carrier: light, tracked, and designed to be dropped. It has almost no protection, which is why its crews ride on the roof rather than inside. The BTR-80 fixed the BTR-70's worst problem with side hatches and a diesel engine, and kept the fourteen-point-five-millimeter turret. It is the standard wheeled carrier, and Ukraine has captured hundreds. The BMO-T is a heavy carrier built on a T-72 hull to move flamethrower teams: forty tonnes of armor, no main gun, and a job that puts it close to infantry, exactly where anti-tank teams wait. Rakushka means little shell. It is a paratrooper carrier with thirteen seats, a machine gun, and enough buoyancy to swim. Light, roomy, and only as safe as its thin aluminum sides. Infantry fighting vehicles: designed to fight alongside the men they carry. The BMP-1 invented the infantry fighting vehicle: a seventy-three-millimeter gun, a missile on the barrel, and eight soldiers inside. Its armor stops bullets, and little else. The BMP-2 replaced the low-pressure gun with a thirty-millimeter cannon that elevates high enough to hit aircraft and rooftops. It is the most common infantry vehicle in Russian service.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "btr70",
+    "chars": 185
+   },
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "btrd",
+    "chars": 167
+   },
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "btr80",
+    "chars": 205
+   },
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "bmot",
+    "chars": 191
+   },
+   {
+    "kind": "vehicle",
+    "cat": "apc",
+    "vid": "rakushka",
+    "chars": 180
+   },
+   {
+    "kind": "section",
+    "cat": "ifv",
+    "vid": null,
+    "chars": 75
+   },
+   {
+    "kind": "vehicle",
+    "cat": "ifv",
+    "vid": "bmp1",
+    "chars": 175
+   },
+   {
+    "kind": "vehicle",
+    "cat": "ifv",
+    "vid": "bmp2",
+    "chars": 186
+   }
+  ],
+  "chars": 1371
+ },
+ {
+  "id": "clip06",
+  "text": "The BMD-2 is the airborne version of the BMP-2: eight tonnes, a thirty-millimeter cannon, and armor you can hear. It is built to be dropped, not to survive a direct hit. The BMP-3 is the most heavily armed infantry vehicle in the world: a hundred-millimeter gun that also fires missiles, plus a thirty-millimeter cannon. In this war it is often used as light artillery, firing from behind cover. The BMD-4M carries the same hundred-millimeter gun as the BMP-3 on an airborne hull, with add-on anti-drone armor and a modern sight. Thirteen tonnes, and a crew that knows speed beats armor. Self-propelled artillery: the arm doing most of the damage in this war. Akatsiya has been the standard Soviet self-propelled howitzer since nineteen-seventy-one: a hundred-and-fifty-two-millimeter gun on a tracked chassis. Old, mechanical, and still doing most of the killing in this war. Gvozdika is small, light and amphibious, with a hundred-and-twenty-two-millimeter gun. It follows infantry closely and shoots fast, and it is the most numerous self-propelled gun Russia has. Tyulpan fires the largest mortar ever fielded: two hundred and forty millimeters, loaded from the breech, with a shell that can flatten a building. Fewer than a hundred exist, and each one is a siege weapon.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "ifv",
+    "vid": "bmd2",
+    "chars": 169
+   },
+   {
+    "kind": "vehicle",
+    "cat": "ifv",
+    "vid": "bmp3",
+    "chars": 225
+   },
+   {
+    "kind": "vehicle",
+    "cat": "ifv",
+    "vid": "bmd4m",
+    "chars": 191
+   },
+   {
+    "kind": "section",
+    "cat": "artillery",
+    "vid": null,
+    "chars": 71
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s3",
+    "chars": 216
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s1",
+    "chars": 190
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s4",
+    "chars": 207
+   }
+  ],
+  "chars": 1275
+ },
+ {
+  "id": "clip07",
+  "text": "Pion is the heaviest self-propelled gun in service: two hundred and three millimeters, forty-six tonnes, and a range beyond thirty-seven kilometers. It was built to fire nuclear shells, and it fires far more often than anyone expected. Giatsint-S has a long hundred-and-fifty-two-millimeter barrel with exceptional range and brutal recoil. It is accurate, expensive, and increasingly rare on the line. Nona is a gun, a mortar and a howitzer in one, mounted on an airborne chassis that swims. A hundred and twenty millimeters, high elevation, and the ability to hit anything from a trench line to a hillside. Solntsepyok is not artillery. It is a thermobaric launcher on a T-72 chassis: thirty rockets, a wall of pressure and heat, and a range so short that it has to come close to use them. Msta-S is the modern tracked howitzer: a hundred-and-fifty-two-millimeter gun, an autoloader, and a computerised fire-control system. It shoots and moves in minutes, which is the only way to survive drone spotting. Nona-SVK puts the hundred-and-twenty-millimeter gun-mortar on an eight-wheeled BTR-80 hull. Faster on roads than the tracked version, and used to support infantry directly. Khosta is a Gvozdika rebuilt around a hundred-and-twenty-millimeter gun-mortar, giving one chassis the jobs of two. Few were converted, and most stay close to the infantry they support.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s7",
+    "chars": 235
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s5",
+    "chars": 165
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s9",
+    "chars": 205
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "tos1a",
+    "chars": 182
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s19",
+    "chars": 214
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s23",
+    "chars": 172
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s34",
+    "chars": 185
+   }
+  ],
+  "chars": 1364
+ },
+ {
+  "id": "clip08",
+  "text": "Floks is new: a hundred-and-twenty-millimeter gun-mortar on a wheeled Ural chassis, first seen in twenty-twenty-three. Cheaper and faster to build than a tracked gun, and now in serial production. Malva is the wheeled answer to drone artillery: a hundred-and-fifty-two-millimeter gun on an eight-wheel-drive chassis that can shoot and leave in under two minutes. Few exist, but more are coming. Engineering vehicles: the unglamorous machines that make movement possible. MTU-72 lays a twenty-meter bridge from a T-72 hull in about three minutes. Armor keeps the crew alive while it works, which is the entire point of an armored bridge layer. UR-77 Meteorit clears minefields with a rocket-towed hose of explosive: two hundred meters of lane, opened in seconds, by a vehicle that has to drive into the minefield to do it. BAT-2 is a bulldozer that can keep up with tanks: a blade, a crane and a winch on a tracked chassis, used to cut routes through forests and rubble under fire. IMR-2 is the combat engineer's tank: a telescopic crane arm, a dozer blade, and a T-72 hull to survive the work. It clears obstacles while people are shooting at it. GMZ-3 is a minelayer: it ploughs and buries anti-tank mines at speed, turning an open field into an obstacle belt in minutes. The Russian army still lays more mines than any other.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s40",
+    "chars": 196
+   },
+   {
+    "kind": "vehicle",
+    "cat": "artillery",
+    "vid": "2s43",
+    "chars": 197
+   },
+   {
+    "kind": "section",
+    "cat": "engineering",
+    "vid": null,
+    "chars": 75
+   },
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "mtu72",
+    "chars": 171
+   },
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "ur77",
+    "chars": 178
+   },
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "bat2",
+    "chars": 158
+   },
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "imr2",
+    "chars": 165
+   },
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "gmz3",
+    "chars": 180
+   }
+  ],
+  "chars": 1327
+ },
+ {
+  "id": "clip09",
+  "text": "BREM-1 is the recovery vehicle built on a T-72: a crane, a winch, and a crew willing to drive toward broken tanks. Every hull it recovers is one that does not have to be replaced. UBIM is the newest engineer vehicle: recovery, breaching and clearing on one armored eight-wheeled chassis, with a manipulator arm and a dozer blade. Fewer than a dozen have been seen. Fifty-two vehicles. A force rebuilding in public, losing armor faster than it can be replaced, and adapting faster than most expected. Specifications here come from open sources, and recorded losses are only the ones visually confirmed, which means the real numbers are higher. If you want more breakdowns like this, subscribe.",
+  "units": [
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "brem1",
+    "chars": 179
+   },
+   {
+    "kind": "vehicle",
+    "cat": "engineering",
+    "vid": "ubim",
+    "chars": 184
+   },
+   {
+    "kind": "outro",
+    "cat": null,
+    "vid": null,
+    "chars": 327
+   }
+  ],
+  "chars": 692
+ }
+]

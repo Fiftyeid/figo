@@ -1,0 +1,164 @@
+{
+  "video_info": {
+    "title": "Every Russian Tank & Armored Vehicle In Active Service Today",
+    "channel": "Statewide USA",
+    "duration": "19:02",
+    "views": 58394,
+    "publish_date": "2026-10-28",
+    "category": "Education",
+    "upload_format": "1080p/720p YouTube standard"
+  },
+  "analysis_summary": {
+    "primary_production_type": "ai_video",
+    "confidence": 0.95,
+    "production_style": "countdown_educational",
+    "content_type": "military_historical_analytical"
+  },
+  "shots": [
+    {
+      "shot_id": "intro",
+      "timestamp": "00:00-00:12",
+      "duration": 12,
+      "type": "ai_video",
+      "confidence": 0.98,
+      "description": "Intro sequence with channel branding",
+      "production_method": "ai_generated_motion graphics",
+      "evidence": ["YouTube channel branding typical of AI channel intros", "Clean animated text", "Consistent educational channel style"],
+      "recommendations": ["Use AI animation tool with military aesthetic", "Include channel logo animation"]
+    },
+    {
+      "shot_id": "tanks_header",
+      "timestamp": "00:12-01:00",
+      "duration": 48,
+      "type": "ai_video",
+      "confidence": 0.92,
+      "description": "T-54/55 and T-62 vehicle presentations",
+      "prompt": "Detailed 3D render of T-54/55 tank in Soviet-era camouflage, military museum background, with technical annotation labels for armor thickness and vintage sights. Style: professional military documentary, high detail, dramatic lighting",
+      "production_notes": "AI-generated 3D models with overlay graphics"
+    },
+    {
+      "shot_id": "tanks_body",
+      "timestamp": "01:00-03:26",
+      "duration": 146,
+      "type": "ai_video",
+      "confidence": 0.95,
+      "description": "T-64 through T-90M Proryv detailed breakdowns",
+      "prompt": "Military documentary style: T-64 tank in separatist markings, T-72 field production, T-80 gas turbine details, T-90 showing Shtora-1 infrared dazzlers, BMPT Terminator in combat scenario, T-90M Proryv close-up with modern sights highlighted",
+      "production_notes": "AI-generated vehicle renders, technical overlays, Oryx loss data visualization"
+    },
+    {
+      "shot_id": "armored_cars",
+      "timestamp": "03:26-05:05",
+      "duration": 99,
+      "type": "ai_video",
+      "confidence": 0.93,
+      "description": "GAZ Tigr, Kamaz Patrol, Typhoon series",
+      "prompt": "Wheeled armored vehicles in Ukrainian battlefield context: GAZ Tigr with roof machine gun, Kamaz Patrol National Guard variant, Typhoon-K heavy troop carrier, Typhoon-VDV air-transportable variant, ZSTS Akhmat Remdiesel Chechen variant - all with detailed technical callouts",
+      "production_notes": "Mixed AI vehicle renders with tactical background environments"
+    },
+    {
+      "shot_id": "tank_destroyers",
+      "timestamp": "05:05-06:41",
+      "duration": 96,
+      "type": "ai_video",
+      "confidence": 0.91,
+      "description": "9P149 Shturm-S, 2S25 Sprut-SD, 2Krizantema-S, Konkurs-M",
+      "prompt": "Tank destroyer systems in combat scenarios: Shturm-S missile launcher on light tracked carrier, Sprut-SD air-droppable tank gun, Krizantema-S with millimeter wave radar, Konkurs-M laser-guided missiles - emphasize stealth and anti-tank capabilities",
+      "production_notes": "AI-generated with missile guidance system visualization"
+    },
+    {
+      "shot_id": "reconnaissance",
+      "timestamp": "06:41-07:35",
+      "duration": 54,
+      "type": "ai_video",
+      "confidence": 0.89,
+      "description": "BRDM-2, BRM-1K, BPM-97 Vystrel",
+      "prompt": "Reconnaissance vehicles: Soviet-era BRDM-2 scout car, upgraded BRM-1K with new turret, BPM-97 Vystrel wheeled armored car - show stealthy movement through varied terrain",
+      "production_notes": "Low-profile AI renders with surveillance equipment callouts"
+    },
+    {
+      "shot_id": "apcs",
+      "timestamp": "07:35-10:04",
+      "duration": 149,
+      "type": "ai_video",
+      "confidence": 0.94,
+      "description": "BTR-50, MT-LB, BTR-70, BTR-D, BTR-80, BMOT, BTR-MDM Rakushka",
+      "prompt": "Infantry carrier vehicles: BTR-50 tracked APC from 1950s, MT-LB with improvised weapon mounts, BTR-70 eight-wheeled, BTR-D airborne carrier, BTR-80 with side hatches, BMOT flamethrower carrier, BTR-MDM paratrooper carrier - show troop deployment scenarios",
+      "production_notes": "AI-generated with troop loading/unloading dynamics"
+    },
+    {
+      "shot_id": "ifvs",
+      "timestamp": "10:04-12:02",
+      "duration": 118,
+      "type": "ai_video",
+      "confidence": 0.96,
+      "description": "BMP-1, BMP-2, BMD-2, BMP-3, BMD-4M",
+      "prompt": "Infantry Fighting Vehicles: BMP-1 world-first IFV with thin armor, BMP-2 fast-firing cannon, BMD-2 airborne compact design, BMP-3 with 100mm gun and missile capability, BMD-4M with anti-drone protection - show urban combat contexts",
+      "production_notes": "High-detail AI renders with weapon system annotations, Oryx loss count graphics"
+    },
+    {
+      "shot_id": "artillery",
+      "timestamp": "12:02-16:39",
+      "duration": 277,
+      "type": "ai_video",
+      "confidence": 0.95,
+      "description": "2S3 Akatsiya through 2S43 Malva self-propelled artillery",
+      "prompt": "Self-propelled artillery systems: 2S3 Akatsiya 152mm howitzer, 2S1 Gvozdika amphibious howitzer, 2S4 Tyulpan 240mm mortar, 2S7 Pion ultra-heavy artillery, 2S5 Giatsint-S long-barrel design, 2S9 Nona, TOS-1A Solntsepyok thermobaric rocket launcher, 2S19 Msta-S, 2S23 Nona-SVK, 2S34 Koalitsiya, 2S40 Floks, 2S43 Malva - emphasize range and firepower",
+      "production_notes": "AI-generated firing sequences with smoke effects and range visualization"
+    },
+    {
+      "shot_id": "engineering",
+      "timestamp": "16:39-18:54",
+      "duration": 135,
+      "type": "ai_video",
+      "confidence": 0.90,
+      "description": "MTU-72, UR-77 Meteorit, BAT-2, IMR-2, GMZ-3, BREM-1, UBIM",
+      "prompt": "Engineering vehicles: MTU-72 bridge layer deploying span, UR-77 Meteorit mine-clearing rockets, BAT-2 earth-moving blade vehicle, IMR-2 crane-arm engineer vehicle, GMZ-3 mineplowing vehicle, BREM-1 tank recovery with crane, UBIM multi-role engineer platform - show mission-critical battlefield support",
+      "production_notes": "AI-generated with operational deployment animations"
+    },
+    {
+      "shot_id": "outro",
+      "timestamp": "18:54-end",
+      "duration": 8,
+      "type": "ai_video",
+      "confidence": 0.88,
+      "description": "Subscribe call-to-action with channel branding",
+      "prompt": "Professional YouTube outro for military education channel: join button animation, subscribe prompt with military-themed graphics, clean minimalist design with channel color scheme",
+      "production_notes": "Standard AI-generated YouTube outro template"
+    }
+  ],
+  "production_analyses": {
+    "overall_production_type": "ai_video",
+    "evidence": [
+      "Highly consistent visual style across all segments",
+      "Professional military-themed stock footage would be prohibitively expensive for independent channel",
+      "Precise chronological layout with smooth transitions between categories",
+      "Clean technical annotations and data visualization consistent with AI generation",
+      "No visible camera shake or lighting inconsistencies",
+      "Perfectly timed voiceover synchronization"
+    ],
+    "likely_tools": {
+      "primary": "Omni 1.1 Flash (for AI image/video generation)",
+      "supporting": ["Mixkit stock footage (minimal stock use)", "Edge TTS (voiceover)", "ffmpeg (assembly)", "AI animation tools for transitions"]
+    },
+    "voiceover_analysis": {
+      "type": "text_to_speech",
+      "voice": "male_corporate_neutral",
+      "style": "educational_documentary",
+      "pacing": "steady_with_pauses_for_technical_terms"
+    },
+    "visual_style": {
+      "aesthetic": "military_documentary",
+      "color_palette": "desaturated_greys_with_military_green_accents",
+      "graphic_overlay": "technical_annotations_with_white_serif_font",
+      "background": "subtle_military_terrain_underlays"
+    },
+    "asset_complexity": {
+      "total_vehicles_to_generate": 37,
+      "unique_vehicle_models": 37,
+      "estimated_ai_render_hours": 8.5,
+      "voiceover_length": 1802,
+      "transition_sequences": 10
+    }
+  }
+}

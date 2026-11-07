@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+work/scenes/
+work/*.wav
+node_modules/
