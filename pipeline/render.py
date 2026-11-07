@@ -298,10 +298,12 @@ def scene_intro(meta, total, renders_dir):
     frame(draw)
     header(draw, index=0, total=total)
 
-    hero = cutout(render_path(renders_dir, "t90m"), 980)
-    hw = int(hero.width * 640 / hero.height)
-    hero = hero.resize((hw, 640), Image.LANCZOS)
-    canvas.alpha_composite(hero, (W - MARGIN - hw + 30, 300))
+    hp = render_path(renders_dir, "t90m")
+    if os.path.exists(hp):
+        hero = cutout(hp, 980)
+        hw = int(hero.width * 640 / hero.height)
+        hero = hero.resize((hw, 640), Image.LANCZOS)
+        canvas.alpha_composite(hero, (W - MARGIN - hw + 30, 300))
 
     f1 = font(F_BOLD, 92)
     tracked(draw, (MARGIN, 214), "EVERY RUSSIAN", f1, INK, tracking=1)
