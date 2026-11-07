@@ -12,26 +12,36 @@ All imagery is still; only the scene cuts move.
 ```
 data/vehicles.json     52 vehicles: name, category, year, crew, weight, armament,
                        two on-screen feature tags, render prompt, narration line
-build/pack_audio.py    packs the narration into <=1500-char TTS clips
-build/audio_timeline.py  measures the voice track, finds the pauses, builds the
+pipeline/pack_audio.py    packs the narration into <=1500-char TTS clips
+pipeline/audio_timeline.py  measures the voice track, finds the pauses, builds the
                        master timeline (scene in/out points) -> work/timeline.json
-build/render.py        frame renderer (white display unit, cut-out exhibit,
+pipeline/render.py        frame renderer (white display unit, cut-out exhibit,
                        silhouette-anchored callouts, spec grid)
-build/music.py         synthesised ambient score (drone + pulse, no melody)
-build/build.py         renders stills, cuts them to the timeline, mixes voice +
+pipeline/music.py         synthesised ambient score (drone + pulse, no melody)
+pipeline/build.py         renders stills, cuts them to the timeline, mixes voice +
                        score, encodes 1080p30 H.264 master + .srt
 ```
 
 ## Build
 
 ```bash
-python3 build/pack_audio.py          # narration -> audio/clips.json
-python3 build/build.py               # full film -> output/*.mp4
-python3 build/build.py --until 171   # partial render (preview)
+python3 pipeline/pack_audio.py          # narration -> audio/clips.json
+python3 pipeline/build.py               # full film -> output/*.mp4
+python3 pipeline/build.py --until 171   # partial render (preview)
 ```
 
 Requires `pillow numpy scipy imageio-ffmpeg` (ffmpeg is bundled by the last one).
-Renders live in `renders/<vehicle-id>.png`; scenes are composited on white.
+Renders live in `renders/<vehicle-id>.png` (or `.jpg`); scenes are composited on white
+and the vehicles are keyed out of their studio background at render time.
+
+## Deliverables
+
+```
+output/russian-armor-inventory.mp4        13:42 · 1920x1080 · 30 fps · H.264 + AAC stereo
+output/russian-armor-inventory.srt        full subtitles, one cue per vehicle
+output/russian-armor-inventory-packaging.md  title, description, chapters, tags
+output/thumbnail.jpg                      1280x720
+```
 
 ## Editorial rules
 
