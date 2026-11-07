@@ -182,12 +182,15 @@ actually being used in the war in Ukraine.
 
 00:00 Intro
 {chapters}
-{chapters}
 
 Specifications are compiled from open sources and are approximate.
 Loss figures refer only to visually confirmed vehicles, so real totals are higher.
 
 No footage: every vehicle is a rendered still, presented as a technical exhibit.
+
+**Chapters**
+
+{chapters}
 
 **Tags**
 

@@ -3,3 +3,4 @@ __pycache__/
 work/scenes/
 work/*.wav
 node_modules/
+output/*.mp4
