@@ -45,7 +45,7 @@ output/russian-armor-inventory.srt        full subtitles, one cue per vehicle
 output/russian-armor-inventory-packaging.md  title, description, chapters, tags
 output/thumbnail.jpg                      1280x720  (catalogue style)
 output/thumbnail-v2*.jpg                  full-title worn type, squeezed DejaVu
-output/thumbnail-v3*.jpg                  hook-word set in Anton (primary)
+output/thumbnail-v3*.jpg                  RUSSIAN TANK wordmark in Anton (primary)
 output/shorts-8-vehicles.mp4              vertical teaser 1080x1920 · 1:09 · one card per line
 ```
 

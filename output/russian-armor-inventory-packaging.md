@@ -6,18 +6,16 @@ Every Russian Tank & Armored Vehicle in Active Service (Full Breakdown)
 
 **Thumbnails**
 
-Hook-word set (Anton, heavy condensed — same lettering family as the reference):
+Single headline, `RUSSIAN TANK`, set in Anton — heavy condensed, worn, edge-to-edge
+across the top, exactly the reference layout (no sub-line, no other text):
 
-- `thumbnail-v3.jpg` — one-word hook **ACTIVE**, T-90M (primary)
-- `thumbnail-v3-truck.jpg` — same hook, 2S43 Malva (closest to the reference frame)
-- `thumbnail-v3-service.jpg` — hook **ACTIVE SERVICE** as an edge-to-edge line
+- `thumbnail-v3.jpg` — T-90M (primary)
+- `thumbnail-v3-truck.jpg` — 2S43 Malva (same frame as the reference)
 
-Earlier passes:
+Earlier passes (superseded):
 
-- `thumbnail-v2.jpg` / `thumbnail-v2-truck.jpg` — full title in two worn lines, DejaVu squeezed
+- `thumbnail-v2.jpg` / `thumbnail-v2-truck.jpg` — full title in two worn lines
 - `thumbnail.jpg` — catalogue style (serif, white, #CC0000)
-
-All of them carry the small kicker `EVERY RUSSIAN TANK & ARMORED VEHICLE · 52 MACHINES`.
 
 **Description**
 

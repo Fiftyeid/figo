@@ -31,7 +31,7 @@ def _font(size):
     return ImageFont.truetype(FACE, size)
 
 
-def line_at_cap(text, cap, tracking=0, stroke=2):
+def line_at_cap(text, cap, tracking=0, stroke=2, space=0.24):
     """Render one line whose capital height == cap px (Anton 'H' ratio based)."""
     probe = _font(200)
     h_ref = probe.getbbox("H", stroke_width=0)[3] - probe.getbbox("H", stroke_width=0)[1]
@@ -39,12 +39,18 @@ def line_at_cap(text, cap, tracking=0, stroke=2):
     f = _font(size)
     pad = 24 + stroke
     box = f.getbbox(text, stroke_width=stroke)
-    w = int(f.getlength(text) + tracking * (len(text) - 1)) + 2 * pad
+    span = f.getlength(text)
+    span -= f.getlength(" ") * text.count(" ")          # swap the font's space
+    span += int(space * cap) * text.count(" ")
+    w = int(span + tracking * (len(text) - 1)) + 2 * pad
     h = box[3] - box[1] + 2 * pad
     layer = Image.new("RGBA", (max(2, w), max(2, h)), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
     x, y = pad, pad - box[1]
     for ch in text:
+        if ch == " ":
+            x += int(space * cap) + tracking
+            continue
         d.text((x, y), ch, font=f, fill=INK + (255,), stroke_width=stroke,
                stroke_fill=INK + (255,))
         x += f.getlength(ch) + tracking
@@ -84,7 +90,7 @@ def tracked_line(text, cap, tracking, stroke=1):
 
 
 # ---------------------------------------------------------------- page
-def build(vehicle, out, hook, kicker, vh, gap_after_hook, top, cap=0, spread=False, spread_w=1246, ktrack=6, kcap=30):
+def build(vehicle, out, hook, kicker, vh, gap_after_hook, top, cap=0, spread=False, spread_w=1246, ktrack=6, kcap=30, xfill=False):
     canvas = studio_bg()
 
     veh = edge_fix(R.cutout(R.render_path("renders", vehicle), 1200))
@@ -96,7 +102,11 @@ def build(vehicle, out, hook, kicker, vh, gap_after_hook, top, cap=0, spread=Fal
                                           int(vw * 0.46), 22), (0, 0))
     canvas.alpha_composite(veh, (vx, vy))
 
-    if spread:
+    if xfill:
+        lay = line_at_cap(hook, cap or 190, tracking=-6, stroke=3)
+        print("  natural", lay.width, "-> stretch x%.2f" % (1246.0 / lay.width))
+        big = lay.resize((1246, lay.height), Image.LANCZOS)
+    elif spread:
         big = spread_line(hook, cap or 200, spread_w, stroke=3)
     elif cap:
         big = line_at_cap(hook, cap, tracking=-8, stroke=3)
@@ -108,7 +118,8 @@ def build(vehicle, out, hook, kicker, vh, gap_after_hook, top, cap=0, spread=Fal
     y = top
     canvas.alpha_composite(big, ((W - big.width) // 2, y))
     y += big.height + gap_after_hook
-    canvas.alpha_composite(small, ((W - small.width) // 2, y))
+    if kicker.strip():
+        canvas.alpha_composite(small, ((W - small.width) // 2, y))
 
     # vignette
     vig = Image.new("L", (W, H), 0)
@@ -138,8 +149,9 @@ if __name__ == "__main__":
     ap.add_argument("--top", type=int, default=18)
     ap.add_argument("--cap", type=int, default=0)
     ap.add_argument("--spread", action="store_true")
+    ap.add_argument("--xfill", action="store_true")
     ap.add_argument("--spread-w", type=int, default=1246)
     ap.add_argument("--ktrack", type=int, default=6)
     ap.add_argument("--kcap", type=int, default=30)
     a = ap.parse_args()
-    build(a.vehicle, a.out, a.hook, a.kicker, a.vh, a.gap, a.top, a.cap, a.spread, a.spread_w, a.ktrack, a.kcap)
+    build(a.vehicle, a.out, a.hook, a.kicker, a.vh, a.gap, a.top, a.cap, a.spread, a.spread_w, a.ktrack, a.kcap, a.xfill)
