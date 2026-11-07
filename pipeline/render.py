@@ -17,15 +17,21 @@ from scipy import ndimage
 W, H = 1920, 1080
 MARGIN = 72
 
-RED = (200, 30, 30)
-INK = (20, 20, 20)
+RED = (204, 0, 0)          # #CC0000 — accent, per the style brief
+INK = (18, 18, 18)
 GREY = (138, 138, 138)
-HAIR = (222, 222, 222)
+HAIR = (216, 216, 216)
 WHITE = (255, 255, 255)
+GRID = (245, 245, 245)     # studio grid, barely there
+FLOOR = (234, 234, 234)
 
 FONT_DIR = "/usr/share/fonts/truetype/dejavu"
+# headings + data in serif (the brief asks for a serif technical look);
+# micro-labels stay sans so the small tracked type keeps its crispness
 F_BOLD = os.path.join(FONT_DIR, "DejaVuSans-Bold.ttf")
 F_REG = os.path.join(FONT_DIR, "DejaVuSans.ttf")
+F_SB = os.path.join(FONT_DIR, "DejaVuSerif-Bold.ttf")
+F_SR = os.path.join(FONT_DIR, "DejaVuSerif.ttf")
 
 _font_cache = {}
 
@@ -106,6 +112,10 @@ def cutout(path, target_h=900):
         dist = ndimage.distance_transform_edt(~bg)
         bg = bg | ((dist < 55) & (sat < 0.16) & (lum > 0.78))
 
+    # residual backdrop: anything near-white and unsaturated is not the subject
+    flat = (lum > 0.70) & (sat < 0.13)
+    bg = bg | flat
+
     alpha = (~bg).astype(np.float32)
     alpha = ndimage.binary_closing(alpha > 0.5, np.ones((5, 5))).astype(np.float32)
     alpha = ndimage.binary_fill_holes(alpha > 0.5).astype(np.float32)
@@ -141,6 +151,24 @@ def silhouette_edges(img):
 
 
 # ---------------------------------------------------------------- furniture
+def background_grid(draw, step=96):
+    """Faint graph-paper field — the 'grid studio floor' of the brief."""
+    for x in range(step, W, step):
+        draw.line([(x, 0), (x, H)], fill=GRID, width=1)
+    for y in range(step, H, step):
+        draw.line([(0, y), (W, y)], fill=GRID, width=1)
+
+
+def studio_ground(draw, cx, base_y, half_w):
+    """Light turntable plate under an exhibit: flat, no cast shadow."""
+    half_w = int(max(120, min(half_w, 700)))
+    h = max(10, int(half_w * 0.075))
+    draw.ellipse([cx - half_w, base_y - h, cx + half_w, base_y + h], fill=FLOOR, outline=None)
+    draw.ellipse([cx - int(half_w * 0.72), base_y - int(h * 0.62),
+                  cx + int(half_w * 0.72), base_y + int(h * 0.62)], fill=(242, 242, 242))
+    draw.line([(cx - half_w, base_y), (cx + half_w, base_y)], fill=HAIR, width=1)
+
+
 def frame(draw):
     c = 46
     for (x, y, dx, dy) in [
@@ -159,7 +187,7 @@ def header(draw, category=None, index=None, total=None):
     tracked(draw, (MARGIN + 28, 58), "RUSSIAN ARMOR  ·  TECHNICAL INVENTORY", f_lab, RED, tracking=4)
 
     if index is not None:
-        f_num = font(F_BOLD, 30)
+        f_num = font(F_SB, 30)
         f_tot = font(F_BOLD, 17)
         s_num, s_tot = str(index).zfill(2), "/ %d" % total
         tw_tot = text_width(draw, s_tot, f_tot, 1)
@@ -199,12 +227,15 @@ def footer(draw, left_lines=None, right_lines=None):
 def scene_vehicle(v, cat, index, total, renders_dir):
     canvas = Image.new("RGBA", (W, H), WHITE + (255,))
     draw = ImageDraw.Draw(canvas)
+    background_grid(draw)
     frame(draw)
     header(draw, category="%s · %s" % (cat["index"], cat["title"]), index=index, total=total)
 
     veh = cutout(render_path(renders_dir, v["id"]), 980)
     box = (MARGIN - 16, 160, W - MARGIN + 16, 736)
     px, py, pw, ph = place(canvas, veh, box)
+    studio_ground(draw, px + pw // 2, py + ph - 6, int(pw * 0.56))
+    canvas.alpha_composite(veh.resize((pw, ph), Image.LANCZOS), (px, py))
 
     scaled = veh.resize((pw, ph), Image.LANCZOS)
     rows = silhouette_edges(scaled)
@@ -233,7 +264,7 @@ def scene_vehicle(v, cat, index, total, renders_dir):
             draw.rectangle([ex - 8, ey - 3, ex - 2, ey + 3], fill=RED)
             tracked(draw, (lx, ey - 24), lbl, f_tag, RED, tracking=2)
 
-    f_name = fit_font(draw, v["name"], F_BOLD, 1180, 88, tracking=1)
+    f_name = fit_font(draw, v["name"], F_SB, 1180, 92, tracking=1)
     tracked(draw, (MARGIN, 748), v["name"], f_name, RED, tracking=1)
 
     hairline(draw, [(MARGIN, 866), (W - MARGIN, 866)], HAIR, 1)
@@ -245,7 +276,7 @@ def scene_vehicle(v, cat, index, total, renders_dir):
     for i, (lab, val) in enumerate(specs):
         x = MARGIN + i * 452
         tracked(draw, (x, 892), lab, f_lab, RED, tracking=2)
-        f_val = fit_font(draw, val, F_BOLD, 400, 30, tracking=0)
+        f_val = fit_font(draw, val, F_SB, 400, 31, tracking=0)
         draw.text((x, 918), val, font=f_val, fill=INK)
 
     footer(draw, left_lines=["SECTION %s · %s" % (cat["index"], cat["title"])],
@@ -256,13 +287,14 @@ def scene_vehicle(v, cat, index, total, renders_dir):
 def scene_section(cat, vehicles, index, total):
     canvas = Image.new("RGBA", (W, H), WHITE + (255,))
     draw = ImageDraw.Draw(canvas)
+    background_grid(draw)
     frame(draw)
     header(draw, index=index, total=total)
 
-    f_big = font(F_BOLD, 300)
+    f_big = font(F_SB, 300)
     tracked(draw, (MARGIN - 12, 172), cat["index"], f_big, RED, tracking=-6)
 
-    f_title = fit_font(draw, cat["title"], F_BOLD, 1060, 74, tracking=1)
+    f_title = fit_font(draw, cat["title"], F_SB, 1060, 78, tracking=1)
     tracked(draw, (MARGIN, 500), cat["title"], f_title, INK, tracking=1)
 
     f_sub = font(F_BOLD, 17)
@@ -272,7 +304,7 @@ def scene_section(cat, vehicles, index, total):
     x = 1180
     tracked(draw, (x, 172), "IN THIS SECTION", font(F_BOLD, 14), RED, tracking=3)
     row_h = min(62, int(560 / max(1, len(vehicles))))
-    f_item = font(F_BOLD, 27 if row_h >= 56 else 24)
+    f_item = font(F_SR, 27 if row_h >= 56 else 24)
     y = 210
     for i, v in enumerate(vehicles):
         tracked(draw, (x, y), "%02d" % (i + 1), font(F_BOLD, 15), GREY, tracking=1)
@@ -295,17 +327,19 @@ def scene_section(cat, vehicles, index, total):
 def scene_intro(meta, total, renders_dir):
     canvas = Image.new("RGBA", (W, H), WHITE + (255,))
     draw = ImageDraw.Draw(canvas)
+    background_grid(draw)
     frame(draw)
     header(draw, index=0, total=total)
 
     hp = render_path(renders_dir, "t90m")
     if os.path.exists(hp):
         hero = cutout(hp, 980)
-        hw = int(hero.width * 640 / hero.height)
-        hero = hero.resize((hw, 640), Image.LANCZOS)
+        hw = int(hero.width * 560 / hero.height)
+        hero = hero.resize((hw, 560), Image.LANCZOS)
+        studio_ground(draw, W - MARGIN - hw // 2 + 30, 300 + 560 - 8, int(hw * 0.52))
         canvas.alpha_composite(hero, (W - MARGIN - hw + 30, 300))
 
-    f1 = font(F_BOLD, 92)
+    f1 = fit_font(draw, "TANK & ARMORED", F_SB, 800, 92, tracking=1)
     tracked(draw, (MARGIN, 214), "EVERY RUSSIAN", f1, INK, tracking=1)
     tracked(draw, (MARGIN, 316), "TANK & ARMORED", f1, RED, tracking=1)
     tracked(draw, (MARGIN, 418), "VEHICLE", f1, RED, tracking=1)
@@ -313,8 +347,8 @@ def scene_intro(meta, total, renders_dir):
     hairline(draw, [(MARGIN, 546), (MARGIN + 520, 546)], HAIR, 1)
     draw.rectangle([MARGIN, 544, MARGIN + 120, 549], fill=RED)
 
-    f2 = font(F_BOLD, 24)
-    tracked(draw, (MARGIN, 578), "IN ACTIVE SERVICE TODAY", f2, INK, tracking=5)
+    f2 = font(F_SR, 26)
+    tracked(draw, (MARGIN, 578), "IN ACTIVE SERVICE TODAY", f2, INK, tracking=4)
 
     f3 = font(F_BOLD, 16)
     tracked(draw, (MARGIN, 640), "52 MACHINES   ·   8 CATEGORIES   ·   1947 — 2023", f3, GREY, tracking=3)
@@ -342,12 +376,13 @@ def scene_note(index, total_notes, title, lines):
     """Appendix card: end notes over the same white display unit."""
     canvas = Image.new("RGBA", (W, H), WHITE + (255,))
     draw = ImageDraw.Draw(canvas)
+    background_grid(draw)
     frame(draw)
     header(draw, category="APPENDIX %02d / %02d" % (index, total_notes))
 
-    f_let = font(F_BOLD, 150)
-    f_title = font(F_BOLD, 56)
-    f_body = font(F_REG, 28)
+    f_let = font(F_SB, 150)
+    f_title = font(F_SB, 58)
+    f_body = font(F_SR, 29)
 
     # pre-wrap body, then centre the whole block vertically
     wrapped = []
@@ -379,21 +414,68 @@ def scene_note(index, total_notes, title, lines):
     return canvas.convert("RGB")
 
 
+def scene_losses(index, total_notes, rows, source, note):
+    """Appendix card: confirmed-loss bars (Oryx figures supplied in the brief)."""
+    canvas = Image.new("RGBA", (W, H), WHITE + (255,))
+    draw = ImageDraw.Draw(canvas)
+    background_grid(draw)
+    frame(draw)
+    header(draw, category="APPENDIX %02d / %02d" % (index, total_notes))
+
+    f_let = font(F_SB, 120)
+    tracked(draw, (MARGIN, 150), "ABCDEFGH"[index - 1], f_let, RED, tracking=0)
+
+    f_title = font(F_SB, 50)
+    tracked(draw, (MARGIN, 300), "LOSSES  ·  VISUALLY CONFIRMED", f_title, INK, tracking=2)
+
+    f_src = font(F_SB, 17)
+    tracked(draw, (MARGIN, 366), source, f_src, RED, tracking=3)
+
+    hairline(draw, [(MARGIN, 408), (W - MARGIN, 408)], HAIR, 1)
+    draw.rectangle([MARGIN, 406, MARGIN + 150, 411], fill=RED)
+
+    top = 452
+    track_w = 1330
+    scale = max(r[1] for r in rows)
+    f_lab = font(F_SR, 32)
+    f_val = font(F_SB, 40)
+    for i, (label, value, shown) in enumerate(rows):
+        y = top + i * 118
+        draw.text((MARGIN, y), label, font=f_lab, fill=INK)
+        tracked(draw, (MARGIN + track_w + 60, y - 10), shown, f_val, RED, tracking=0)
+        bar_y = y + 56
+        draw.rectangle([MARGIN, bar_y, MARGIN + track_w, bar_y + 22], fill=(244, 244, 244))
+        w = int(track_w * (value / scale))
+        draw.rectangle([MARGIN, bar_y, MARGIN + w, bar_y + 22], fill=RED)
+        draw.rectangle([MARGIN + w - 2, bar_y - 6, MARGIN + w, bar_y + 28], fill=INK)
+
+    f_note = font(F_SR, 22)
+    y = top + len(rows) * 118 + 10
+    for line in _wrap(draw, note, f_note, 1300):
+        draw.text((MARGIN, y), line, font=f_note, fill=GREY)
+        y += 32
+
+    footer(draw, left_lines=["RUSSIAN ARMOR · TECHNICAL INVENTORY"],
+           right_lines=["ORYX · FEBRUARY 2026"])
+    return canvas.convert("RGB")
+
+
 def scene_outro(meta, total, renders_dir):
     canvas = Image.new("RGBA", (W, H), WHITE + (255,))
     draw = ImageDraw.Draw(canvas)
+    background_grid(draw)
     frame(draw)
     header(draw, index=total, total=total)
 
-    f1 = font(F_BOLD, 150)
-    tracked(draw, (W // 2, 300), "52", f1, RED, tracking=0, anchor="ma")
-    f2 = font(F_BOLD, 40)
+    f1 = font(F_SB, 156)
+    tracked(draw, (W // 2, 296), "52", f1, RED, tracking=0, anchor="ma")
+    f2 = font(F_SB, 42)
     tracked(draw, (W // 2, 500), "VEHICLES  ·  8 CATEGORIES", f2, INK, tracking=6, anchor="ma")
 
     hairline(draw, [(W // 2 - 300, 590), (W // 2 + 300, 590)], HAIR, 1)
     draw.rectangle([W // 2 - 60, 588, W // 2 + 60, 592], fill=RED)
 
-    f3 = font(F_REG, 22)
+    f3 = font(F_SR, 23)
     for i, line in enumerate(["Specifications are drawn from open sources and are approximate.",
                               "Loss figures circulating online count only visually confirmed vehicles."]):
         draw.text((W // 2, 626 + i * 38), line, font=f3, fill=GREY, anchor="ma")

@@ -853,39 +853,48 @@ in this film comes from classified
 material.
 
 178
-00:13:59,860 --> 00:14:05,525
+00:13:59,860 --> 00:14:14,485
+Oryx, February 2026: T-72 family 1,815
+confirmed losses. BMP-2 over 2,000. BTR
+
+179
+00:14:14,485 --> 00:14:17,860
+series over 1,000.
+
+180
+00:14:17,860 --> 00:14:23,525
 Entered service: the year the type was
 adopted, not the first prototype. Combat
 
-179
-00:14:05,525 --> 00:14:11,119
+181
+00:14:23,525 --> 00:14:29,119
 weight: loaded, as fielded, not empty.
 Crew: the vehicle's own crew; dismounts
 
-180
-00:14:11,119 --> 00:14:16,497
+182
+00:14:29,119 --> 00:14:34,497
 are counted separately. Loss figures
 circulating online count only visually
 
-181
-00:14:16,497 --> 00:14:17,860
+183
+00:14:34,497 --> 00:14:35,860
 confirmed vehicles.
 
-182
-00:14:17,860 --> 00:14:23,673
+184
+00:14:35,860 --> 00:14:41,673
 Open sources: manufacturer data, ministry
 releases, reference works. Figures differ
 
-183
-00:14:23,673 --> 00:14:28,856
+185
+00:14:41,673 --> 00:14:46,856
 between sources; numbers here are
 mid-range estimates. Production and loss
 
-184
-00:14:28,856 --> 00:14:34,389
+186
+00:14:46,856 --> 00:14:52,389
 totals are published by neither side.
 These are inventories, not assessments of
 
-185
-00:14:34,389 --> 00:14:35,860
+187
+00:14:52,389 --> 00:14:53,860
 combat effectiveness.

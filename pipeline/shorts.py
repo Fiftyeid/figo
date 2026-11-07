@@ -37,6 +37,7 @@ def card_frame(kind, name, meta, idx, renders_dir):
     from PIL import Image, ImageDraw
     canvas = Image.new("RGBA", (W, H), R.WHITE + (255,))
     d = ImageDraw.Draw(canvas)
+    R.background_grid(d)          # studio grid, same system as the film
 
     # frame marks
     for (x, y, dx, dy) in [(M - 24, 120, 1, 1), (W - M + 24, 120, -1, 1),
@@ -51,33 +52,36 @@ def card_frame(kind, name, meta, idx, renders_dir):
         R.tracked(d, (W - M, 222), "%02d/08" % idx, R.font(R.F_BOLD, 24), R.WHITE, tracking=2, anchor="ra")
 
     if kind == "intro":
-        f = R.font(R.F_BOLD, 108)
-        R.tracked(d, (M, 560), "52", f, R.RED, tracking=0)
-        f2 = R.font(R.F_BOLD, 62)
+        f = R.font(R.F_SB, 112)
+        R.tracked(d, (M, 556), "52", f, R.RED, tracking=0)
+        f2 = R.font(R.F_SB, 66)
         R.tracked(d, (M, 720), "RUSSIAN", f2, R.INK, tracking=2)
         R.tracked(d, (M, 800), "ARMORED", f2, R.RED, tracking=2)
         R.tracked(d, (M, 880), "VEHICLES", f2, R.RED, tracking=2)
         R.hairline(d, [(M, 1000), (M + 420, 1000)], R.HAIR, 2)
-        R.tracked(d, (M, 1030), "THE EIGHT THAT MATTER", R.font(R.F_BOLD, 34), R.GREY, tracking=4)
+        R.tracked(d, (M, 1030), "THE EIGHT THAT MATTER", R.font(R.F_SR, 36), R.GREY, tracking=4)
         hero = R.cutout(R.render_path(renders_dir, "t90m"), 940)
         hh = 760
         hero = hero.resize((int(hero.width * hh / hero.height), hh), Image.LANCZOS)
+        R.studio_ground(d, W // 2, 1100 + hh - 10, int(hero.width * 0.5))
         canvas.alpha_composite(hero, ((W - hero.width) // 2, 1100))
     elif kind == "outro":
-        f = R.font(R.F_BOLD, 76)
-        R.tracked(d, (W // 2, 620), "FULL INVENTORY", f, R.INK, tracking=2, anchor="ma")
+        f = R.font(R.F_SB, 80)
+        R.tracked(d, (W // 2, 616), "FULL INVENTORY", f, R.INK, tracking=2, anchor="ma")
         R.tracked(d, (W // 2, 720), "52 MACHINES", f, R.RED, tracking=2, anchor="ma")
         R.hairline(d, [(W // 2 - 300, 850), (W // 2 + 300, 850)], R.HAIR, 2)
-        f3 = R.font(R.F_BOLD, 34)
+        f3 = R.font(R.F_SR, 36)
         R.tracked(d, (W // 2, 890), "8 CATEGORIES · 13 MINUTES", f3, R.GREY, tracking=3, anchor="ma")
         R.tracked(d, (W // 2, 1500), "LINK IN THE DESCRIPTION", R.font(R.F_BOLD, 30), R.RED, tracking=4, anchor="ma")
     else:
         veh = R.cutout(R.render_path(renders_dir, kind), 900)
         box = (M - 30, 330, W - M + 30, 1180)
         px, py, pw, ph = R.place(canvas, veh, box)
-        f_name = R.fit_font(d, name, R.F_BOLD, W - 2 * M, 104, tracking=1)
+        R.studio_ground(d, px + pw // 2, py + ph - 8, int(pw * 0.55))
+        canvas.alpha_composite(veh.resize((pw, ph), Image.LANCZOS), (px, py))
+        f_name = R.fit_font(d, name, R.F_SB, W - 2 * M, 108, tracking=1)
         R.tracked(d, (M, 1250), name, f_name, R.RED, tracking=1)
-        R.tracked(d, (M, 1390), meta, R.font(R.F_BOLD, 30), R.GREY, tracking=3)
+        R.tracked(d, (M, 1390), meta, R.font(R.F_SR, 32), R.GREY, tracking=2)
         R.hairline(d, [(M, 1470), (W - M, 1470)], R.HAIR, 2)
         d.rectangle([M, 1468, M + 140, 1473], fill=R.RED)
         d.rectangle([0, 1700, W, 1772], fill=R.RED)
