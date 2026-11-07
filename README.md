@@ -32,6 +32,8 @@ python3 pipeline/build.py --until 171   # partial render (preview)
 ```
 
 Requires `pillow numpy scipy imageio-ffmpeg` (ffmpeg is bundled by the last one).
+Thumbnail type uses **Anton** (`assets/fonts/Anton-Regular.ttf`, SIL OFL) — the
+closest free match to the reference thumbnail's heavy condensed lettering.
 Renders live in `renders/<vehicle-id>.png` (or `.jpg`); scenes are composited on white
 and the vehicles are keyed out of their studio background at render time.
 
@@ -41,7 +43,9 @@ and the vehicles are keyed out of their studio background at render time.
 output/russian-armor-inventory.mp4        13:42 · 1920x1080 · 30 fps · H.264 + AAC stereo
 output/russian-armor-inventory.srt        full subtitles, one cue per vehicle
 output/russian-armor-inventory-packaging.md  title, description, chapters, tags
-output/thumbnail.jpg                      1280x720
+output/thumbnail.jpg                      1280x720  (catalogue style)
+output/thumbnail-v2*.jpg                  full-title worn type, squeezed DejaVu
+output/thumbnail-v3*.jpg                  hook-word set in Anton (primary)
 output/shorts-8-vehicles.mp4              vertical teaser 1080x1920 · 1:09 · one card per line
 ```
 

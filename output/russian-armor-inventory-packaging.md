@@ -4,9 +4,20 @@
 
 Every Russian Tank & Armored Vehicle in Active Service (Full Breakdown)
 
-**Thumbnail**
+**Thumbnails**
 
-output/thumbnail.jpg
+Hook-word set (Anton, heavy condensed — same lettering family as the reference):
+
+- `thumbnail-v3.jpg` — one-word hook **ACTIVE**, T-90M (primary)
+- `thumbnail-v3-truck.jpg` — same hook, 2S43 Malva (closest to the reference frame)
+- `thumbnail-v3-service.jpg` — hook **ACTIVE SERVICE** as an edge-to-edge line
+
+Earlier passes:
+
+- `thumbnail-v2.jpg` / `thumbnail-v2-truck.jpg` — full title in two worn lines, DejaVu squeezed
+- `thumbnail.jpg` — catalogue style (serif, white, #CC0000)
+
+All of them carry the small kicker `EVERY RUSSIAN TANK & ARMORED VEHICLE · 52 MACHINES`.
 
 **Description**
 
@@ -24,7 +35,7 @@ actually being used in the war in Ukraine.
 07:45 Infantry Fighting Vehicles
 08:56 Self-Propelled Artillery
 11:44 Engineering Vehicles
-13:41 End notes · methodology & sources
+13:41 End notes · methodology, losses, sources
 
 Specifications are compiled from open sources and are approximate.
 Loss figures refer only to visually confirmed vehicles, so real totals are higher.
@@ -42,11 +53,16 @@ No footage: every vehicle is a rendered still, presented as a technical exhibit.
 07:45 Infantry Fighting Vehicles
 08:56 Self-Propelled Artillery
 11:44 Engineering Vehicles
-13:41 End notes · methodology & sources
+13:41 End notes · methodology, losses, sources
+
+**Shorts (vertical)**
+
+shorts-8-vehicles.mp4 — 1080x1920, 1:09, same narrator and same design system.
+Upload 24h before the long-form.
 
 **Tags**
 
 russian tanks, t-90m, t-72b3, t-80bvm, bmp-3, btr-80, 2s19 msta-s, tos-1a,
 bmpt terminator, russian armor, armored vehicles explained, military vehicles,
 ukraine war armor, tank inventory, armored personnel carrier, self-propelled
-artillery, military documentary, defense analysis
+artillery, military documentary, defense analysis, oryx losses
