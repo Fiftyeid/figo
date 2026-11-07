@@ -18,6 +18,7 @@ pipeline/audio_timeline.py  measures the voice track, finds the pauses, builds t
 pipeline/render.py        frame renderer (white display unit, cut-out exhibit,
                        silhouette-anchored callouts, spec grid)
 pipeline/music.py         synthesised ambient score (drone + pulse, no melody)
+pipeline/shorts.py        vertical teaser (per-line TTS = exact sync)
 pipeline/build.py         renders stills, cuts them to the timeline, mixes voice +
                        score, encodes 1080p30 H.264 master + .srt
 ```
@@ -41,6 +42,7 @@ output/russian-armor-inventory.mp4        13:42 · 1920x1080 · 30 fps · H.264 
 output/russian-armor-inventory.srt        full subtitles, one cue per vehicle
 output/russian-armor-inventory-packaging.md  title, description, chapters, tags
 output/thumbnail.jpg                      1280x720
+output/shorts-8-vehicles.mp4              vertical teaser 1080x1920 · 1:09 · one card per line
 ```
 
 ## Editorial rules
