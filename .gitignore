@@ -1,0 +1,7 @@
+build/*
+!build/vo/
+build/vo/*.wav
+image-search/
+assets/test/
+*.pyc
+__pycache__/

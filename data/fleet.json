@@ -1,0 +1,1727 @@
+{
+  "meta": {
+    "title": "Every Aircraft Currently in U.S. Navy & Marine Corps Service",
+    "subtitle": "2026 EDITION",
+    "channel": "Statewide USA",
+    "year": 2026,
+    "total_aircraft": 44,
+    "total_categories": 13,
+    "style": "white technical catalog"
+  },
+  "categories": [
+    {
+      "numeral": "I",
+      "index": 1,
+      "title": "COMBAT JETS",
+      "kicker": "STRIKE FIGHTERS",
+      "lead": "First up, combat jets. Four airframes carry the fight off the carrier deck, and every one of them is a Hornet or an F-35.",
+      "aircraft": [
+        {
+          "id": "fa18c",
+          "name": "F/A-18C HORNET",
+          "short": "F/A-18C",
+          "role": "LEGACY STRIKE FIGHTER",
+          "year": "1983",
+          "view": "three-quarter front view, landing gear down",
+          "desc": "twin-engine, twin-tail legacy Hornet fighter in overall grey tactical paint, single-seat canopy, rounded intakes, no external tanks",
+          "specs": [
+            [
+              "CREW",
+              "1"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE F404-GE-402"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 1.8"
+            ],
+            [
+              "COMBAT RADIUS",
+              "330 NMI"
+            ],
+            [
+              "ARMAMENT",
+              "20MM M61 + 6,200 KG"
+            ]
+          ],
+          "inventory": "≈125 AIRFRAMES",
+          "operator": "USMC",
+          "status": "SUNSET",
+          "status_note": "SQUADRONS STAND DOWN BY 2030",
+          "script": "F/A-18C Hornet. This is the original, the jet that made carrier strike and air combat one airframe back in the nineteen-eighties. The Navy has moved on, but about one hundred and twenty-five legacy Hornets still fly with Marine squadrons in 2026. Their clock is running, though: an order signed in May 2026 stands down every remaining squadron by 2030."
+        },
+        {
+          "id": "fa18ef",
+          "name": "F/A-18E/F SUPER HORNET",
+          "short": "F/A-18E/F",
+          "role": "CARRIER AIR WING BACKBONE",
+          "year": "1999",
+          "view": "three-quarter front view, landing gear down",
+          "desc": "large twin-engine twin-tail Super Hornet fighter, rectangular intakes, grey tactical paint, clean wings with no stores",
+          "specs": [
+            [
+              "CREW",
+              "1 OR 2"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE F414-GE-400"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 1.6"
+            ],
+            [
+              "COMBAT RADIUS",
+              "390 NMI"
+            ],
+            [
+              "ARMAMENT",
+              "11 STATIONS, 8,000 KG"
+            ]
+          ],
+          "inventory": "≈550 AIRFRAMES",
+          "operator": "USN / USMC",
+          "status": "IN SERVICE",
+          "status_note": "PRODUCTION RUNNING TO 2027",
+          "script": "F/A-18E/F Super Hornet. In the US Navy and Marine Corps, no combat jet comes close in numbers. Bigger, heavier and longer-legged than the jet it replaced, the Super Hornet is the backbone of the carrier air wing: strike, escort, tanking and reconnaissance from eleven weapons stations."
+        },
+        {
+          "id": "ea18g",
+          "name": "EA-18G GROWLER",
+          "short": "EA-18G",
+          "role": "ELECTRONIC ATTACK",
+          "year": "2009",
+          "view": "three-quarter front view, landing gear down",
+          "desc": "electronic warfare Growler, twin-engine twin-tail, prominent jamming pods and antenna fairings on the wingtips, grey paint",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE F414-GE-400"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 1.6"
+            ],
+            [
+              "MISSION",
+              "RADAR JAMMING / SEAD"
+            ],
+            [
+              "ARMAMENT",
+              "ALQ-99 + AGM-88"
+            ]
+          ],
+          "inventory": "≈160 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "ONLY WESTERN SEAD JET",
+          "script": "EA-18G Growler. Built on the Super Hornet's airframe, this jet trades bombs for jamming pods. Its job is electronic attack: blinding enemy radars and tearing holes in air defences so the strike package can get through. Roughly one hundred and sixty serve with the Navy."
+        },
+        {
+          "id": "f35",
+          "name": "F-35B / F-35C LIGHTNING II",
+          "short": "F-35",
+          "role": "STEALTH MULTIROLE",
+          "year": "2015",
+          "view": "three-quarter front view, landing gear down",
+          "desc": "stealthy single-engine fighter with angular faceted fuselage, single vertical tail, matte grey radar-absorbent finish, no external stores",
+          "specs": [
+            [
+              "CREW",
+              "1"
+            ],
+            [
+              "POWERPLANT",
+              "1× P&W F135"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 1.6"
+            ],
+            [
+              "COMBAT RADIUS",
+              "450+ NMI"
+            ],
+            [
+              "ARMAMENT",
+              "INTERNAL BAY + 6 STATIONS"
+            ]
+          ],
+          "inventory": "100+ AIRFRAMES",
+          "operator": "USMC / USN",
+          "status": "IN SERVICE",
+          "status_note": "FULL-RATE PRODUCTION",
+          "script": "F-35B and F-35C Lightning II. Both services are betting their future on this stealth fighter. Marines fly the B model, which takes off short and lands vertically from assault ships and improvised strips. The Navy's C model is built around the catapult and the arresting wire."
+        }
+      ],
+      "rail": "COMBAT JETS"
+    },
+    {
+      "numeral": "II",
+      "index": 2,
+      "title": "HEAVY LIFT & PRESIDENTIAL",
+      "kicker": "ROTARY-WING, PART ONE",
+      "lead": "Now, helicopters. We begin with the heavy lifters and the white-tops of HMX-1.",
+      "aircraft": [
+        {
+          "id": "vh3d",
+          "name": "VH-3D SEA KING",
+          "short": "VH-3D",
+          "role": "PRESIDENTIAL TRANSPORT",
+          "year": "1975",
+          "view": "three-quarter front view, on the ground",
+          "desc": "large amphibious-hull presidential helicopter, glossy dark green and white HMX-1 livery, twin engines, five-blade main rotor, boat-shaped fuselage",
+          "specs": [
+            [
+              "CREW",
+              "2 + 13 PASSENGERS"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE T58-GE-402"
+            ],
+            [
+              "CRUISE SPEED",
+              "120 KT"
+            ],
+            [
+              "MISSION",
+              "MARINE ONE"
+            ],
+            [
+              "UNIT",
+              "HMX-1 QUANTICO"
+            ]
+          ],
+          "inventory": "≈11 AIRFRAMES",
+          "operator": "USMC",
+          "status": "SUNSET",
+          "status_note": "RETIRES 2026",
+          "script": "VH-3D Sea King. For decades, this was the helicopter people pictured on the White House lawn. Marine Squadron HMX-1 was still flying it on presidential missions in July 2026, but the Sea King is due to retire this year, closing out more than sixty years on the job."
+        },
+        {
+          "id": "vh60n",
+          "name": "VH-60N WHITE HAWK",
+          "short": "VH-60N",
+          "role": "PRESIDENTIAL TRANSPORT",
+          "year": "1989",
+          "view": "three-quarter front view, on the ground",
+          "desc": "presidential Black Hawk variant, glossy dark green and white HMX-1 livery, four-blade rotor, single main rotor, streamlined nose",
+          "specs": [
+            [
+              "CREW",
+              "4 + 10 PASSENGERS"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE T700-GE-401C"
+            ],
+            [
+              "CRUISE SPEED",
+              "150 KT"
+            ],
+            [
+              "MISSION",
+              "MARINE ONE / SUPPORT"
+            ],
+            [
+              "UNIT",
+              "HMX-1 QUANTICO"
+            ]
+          ],
+          "inventory": "≈8 AIRFRAMES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "SERVES THROUGH 2030+",
+          "script": "VH-60N White Hawk. A smaller presidential helicopter, and the one crews trust in awkward conditions. It is prized for handling hot weather and thin, high-altitude air, where heavier machines struggle for lift."
+        },
+        {
+          "id": "vh92",
+          "name": "VH-92A PATRIOT",
+          "short": "VH-92A",
+          "role": "PRESIDENTIAL TRANSPORT",
+          "year": "2024",
+          "view": "three-quarter front view, on the ground",
+          "desc": "modern presidential helicopter, glossy dark green and white HMX-1 livery, angular S-92 airframe, five-blade rotor, large cabin windows",
+          "specs": [
+            [
+              "CREW",
+              "4 + 14 PASSENGERS"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE CT7-8A6"
+            ],
+            [
+              "CRUISE SPEED",
+              "165 KT"
+            ],
+            [
+              "MISSION",
+              "MARINE ONE"
+            ],
+            [
+              "UNIT",
+              "HMX-1 QUANTICO"
+            ]
+          ],
+          "inventory": "23 AIRFRAMES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "ALL 23 DELIVERED AUG 2024",
+          "script": "VH-92A Patriot. The new face of Marine One. Based on Sikorsky's commercial S-92, all twenty-three were delivered by August 2024, and the type first flew the president later that same month."
+        },
+        {
+          "id": "ch53e",
+          "name": "CH-53E SUPER STALLION",
+          "short": "CH-53E",
+          "role": "HEAVY-LIFT TRANSPORT",
+          "year": "1981",
+          "view": "three-quarter front view, on the ground",
+          "desc": "huge three-engine heavy-lift helicopter, seven-blade main rotor, grey Marine Corps paint, hoist and refuelling probe, bulky fuselage",
+          "specs": [
+            [
+              "CREW",
+              "3 TO 6"
+            ],
+            [
+              "POWERPLANT",
+              "3× GE T64-GE-416"
+            ],
+            [
+              "CRUISE SPEED",
+              "170 KT"
+            ],
+            [
+              "EXTERNAL LOAD",
+              "16,000 KG"
+            ],
+            [
+              "ROTOR",
+              "7-BLADE MAIN"
+            ]
+          ],
+          "inventory": "≈127 AIRFRAMES",
+          "operator": "USMC / USN",
+          "status": "TRANSITION",
+          "status_note": "REPLACED THROUGH FY2032",
+          "script": "CH-53E Super Stallion. Three engines and a seven-bladed rotor make this the Marines' heavy hauler, lifting artillery, vehicles and troops from ship to shore. About one hundred and twenty-seven are left in 2026, and the type is being replaced through fiscal 2032."
+        },
+        {
+          "id": "ch53k",
+          "name": "CH-53K KING STALLION",
+          "short": "CH-53K",
+          "role": "HEAVY-LIFT TRANSPORT",
+          "year": "2022",
+          "view": "three-quarter front view, on the ground",
+          "desc": "modern heavy-lift helicopter, three engines, seven-blade composite rotor, wide grey fuselage, digital cockpit, Marine Corps markings",
+          "specs": [
+            [
+              "CREW",
+              "3 TO 5"
+            ],
+            [
+              "POWERPLANT",
+              "3× GE T408"
+            ],
+            [
+              "CRUISE SPEED",
+              "170 KT"
+            ],
+            [
+              "EXTERNAL LOAD",
+              "16,300 KG"
+            ],
+            [
+              "COCKPIT",
+              "FULLY DIGITAL"
+            ]
+          ],
+          "inventory": "≈25 DELIVERED",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "FIRST DEPLOYMENT FY2027",
+          "script": "CH-53K King Stallion. Replacing that ageing heavy lifter is a bigger, more powerful helicopter with a digital cockpit, built to carry much heavier loads over much longer distances. Twenty-five had reached Marine squadrons by spring 2026, with the first deployment set for fiscal 2027."
+        }
+      ],
+      "rail": "HEAVY LIFT"
+    },
+    {
+      "numeral": "III",
+      "index": 3,
+      "title": "SEA & ASSAULT ROTARY",
+      "kicker": "ROTARY-WING, PART TWO",
+      "lead": "The working helicopters of the fleet: anti-submarine, rescue, and attack.",
+      "aircraft": [
+        {
+          "id": "mh53e",
+          "name": "MH-53E SEA DRAGON",
+          "short": "MH-53E",
+          "role": "AIRBORNE MINE COUNTERMEASURES",
+          "year": "1983",
+          "view": "three-quarter front view, low over water",
+          "desc": "large three-engine minesweeping helicopter, seven-blade rotor, grey Navy paint, sponson fuel tanks, towing sled gear visible",
+          "specs": [
+            [
+              "CREW",
+              "3 TO 6"
+            ],
+            [
+              "POWERPLANT",
+              "3× GE T64-GE-419"
+            ],
+            [
+              "MISSION",
+              "MINE SWEEPING"
+            ],
+            [
+              "TOW SPEED",
+              "25 KT"
+            ],
+            [
+              "UNIT",
+              "HM-15"
+            ]
+          ],
+          "inventory": "≈18 AIRFRAMES",
+          "operator": "USN",
+          "status": "SUNSET",
+          "status_note": "RETIRES END OF 2027",
+          "script": "MH-53E Sea Dragon. This big mine-sweeping helicopter tows sleds through the water to clear shipping lanes of mines. Only one squadron still flies it, with about eighteen left, and the type is set to retire completely by the end of 2027."
+        },
+        {
+          "id": "mh60s",
+          "name": "MH-60S KNIGHTHAWK",
+          "short": "MH-60S",
+          "role": "SEA COMBAT / RESCUE",
+          "year": "2002",
+          "view": "three-quarter front view, low over water",
+          "desc": "naval Seahawk variant, grey Navy paint, single main rotor, four-blade tail, rescue hoist, radome nose, FLIR turret",
+          "specs": [
+            [
+              "CREW",
+              "3 TO 4"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE T700-GE-401C"
+            ],
+            [
+              "CRUISE SPEED",
+              "150 KT"
+            ],
+            [
+              "MISSION",
+              "SAR / CSAR / VERTREP"
+            ],
+            [
+              "ROTOR",
+              "4-BLADE ARTICULATED"
+            ]
+          ],
+          "inventory": "≈230 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "SINCE 2002",
+          "script": "MH-60S Knighthawk. If a sailor goes overboard, this is often the helicopter that comes. Since 2002 it has flown search and rescue, combat rescue, medevac and special warfare support, and it also hauls pallets across the deck as the fleet's cargo lifter."
+        },
+        {
+          "id": "mh60r",
+          "name": "MH-60R SEAHAWK",
+          "short": "MH-60R",
+          "role": "ANTI-SUBMARINE WARFARE",
+          "year": "2006",
+          "view": "three-quarter front view, low over water",
+          "desc": "naval anti-submarine Seahawk, grey Navy paint, nose-mounted surface search radar, dipping sonar, torpedo on pylon, FLIR turret",
+          "specs": [
+            [
+              "CREW",
+              "3 TO 4"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE T700-GE-401C"
+            ],
+            [
+              "CRUISE SPEED",
+              "145 KT"
+            ],
+            [
+              "SENSORS",
+              "DIPPING SONAR / SONOBUOYS"
+            ],
+            [
+              "ARMAMENT",
+              "MK-54 + AGM-114"
+            ]
+          ],
+          "inventory": "≈270 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "SINCE 2006",
+          "script": "MH-60R Seahawk. Where its rescue-focused sibling saves lives, this one hunts. Flying from destroyers and carriers since 2006, it carries dipping sonar, sonobuoys, torpedoes and Hellfire missiles, and it is the most numerous combat helicopter in the fleet."
+        },
+        {
+          "id": "uh1y",
+          "name": "UH-1Y VENOM",
+          "short": "UH-1Y",
+          "role": "UTILITY / ASSAULT SUPPORT",
+          "year": "2008",
+          "view": "three-quarter front view, in flight",
+          "desc": "modern Huey utility helicopter, four-blade main rotor, skid landing gear, grey Marine Corps paint, door guns, sleek nose",
+          "specs": [
+            [
+              "CREW",
+              "2 + 8 TROOPS"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE T700-GE-401C"
+            ],
+            [
+              "CRUISE SPEED",
+              "170 KT"
+            ],
+            [
+              "ARMAMENT",
+              "2× .50 CAL DOOR GUNS"
+            ],
+            [
+              "COMMONALITY",
+              "85% WITH AH-1Z"
+            ]
+          ],
+          "inventory": "≈120 AIRFRAMES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "FULLY DELIVERED 2018",
+          "script": "UH-1Y Venom. The Marines' do-everything helicopter carries small teams, evacuates wounded, and backs up assaults with machine guns and rockets. It shares most of its parts with the gunship that follows, which keeps both types flying from the same decks."
+        },
+        {
+          "id": "ah1z",
+          "name": "AH-1Z VIPER",
+          "short": "AH-1Z",
+          "role": "ATTACK HELICOPTER",
+          "year": "2010",
+          "view": "three-quarter front, nose cannon visible",
+          "desc": "sleek attack helicopter gunship, narrow tandem cockpit, four-blade rotor, chin-mounted rotary cannon, stub wings with rocket pods, grey Marine paint",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× GE T700-GE-401C"
+            ],
+            [
+              "CRUISE SPEED",
+              "160 KT"
+            ],
+            [
+              "ARMAMENT",
+              "20MM + 16 HELLFIRE"
+            ],
+            [
+              "DELIVERED",
+              "189 AIRFRAMES"
+            ]
+          ],
+          "inventory": "≈180 AIRFRAMES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "LAST DELIVERED NOV 2022",
+          "script": "AH-1Z Viper. Here is that partner, and the only purpose-built gunship in Navy and Marine Corps aviation. Cannon, rockets, Hellfires and air-to-air missiles give it a bite few helicopters can match, and the last of one hundred and eighty-nine arrived in November 2022."
+        }
+      ],
+      "rail": "SEA & ASSAULT"
+    },
+    {
+      "numeral": "IV",
+      "index": 4,
+      "title": "SPECIAL MISSION",
+      "kicker": "THE EYES AND THE VOICE",
+      "lead": "Next, the aircraft that listen, hunt, and carry the nation's most sensitive orders.",
+      "aircraft": [
+        {
+          "id": "e6b",
+          "name": "E-6B MERCURY",
+          "short": "E-6B",
+          "role": "AIRBORNE COMMAND POST",
+          "year": "1989",
+          "view": "three-quarter front view, gear down",
+          "desc": "Boeing 707 airliner converted to military use, white upper fuselage with grey belly, four engines, trailing wire antenna reel pods, no airline livery",
+          "specs": [
+            [
+              "CREW",
+              "22"
+            ],
+            [
+              "POWERPLANT",
+              "4× CFM56-2A-2"
+            ],
+            [
+              "ENDURANCE",
+              "15+ HOURS"
+            ],
+            [
+              "MISSION",
+              "TACAMO / LOOKING GLASS"
+            ],
+            [
+              "ANTENNA",
+              "5-MILE TRAILING WIRE"
+            ]
+          ],
+          "inventory": "16 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "SERVES INTO 2030s",
+          "script": "E-6B Mercury. Of everything in the Navy and Marine Corps, this may have the gravest job. Built on a Boeing airliner frame, it trails a wire antenna miles behind the tail to relay launch orders to ballistic missile submarines, and stays airborne as an alternate command post."
+        },
+        {
+          "id": "p8a",
+          "name": "P-8A POSEIDON",
+          "short": "P-8A",
+          "role": "MARITIME PATROL",
+          "year": "2013",
+          "view": "three-quarter front view, gear down",
+          "desc": "Boeing 737-based maritime patrol aircraft, grey Navy paint, two engines, raked wingtips, internal weapons bay, no refuelling boom",
+          "specs": [
+            [
+              "CREW",
+              "9"
+            ],
+            [
+              "POWERPLANT",
+              "2× CFM56-7B"
+            ],
+            [
+              "MAX SPEED",
+              "440 KT"
+            ],
+            [
+              "SONOBUOYS",
+              "120+"
+            ],
+            [
+              "ARMAMENT",
+              "MK-54 / HARM / HARPOON"
+            ]
+          ],
+          "inventory": "≈130 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "REPLACED THE P-3",
+          "script": "P-8A Poseidon. When the Navy needs to find a submarine from the air, this is what it sends. Built on a Boeing airliner, it carries more than a hundred sonobuoys plus torpedoes and anti-ship missiles, and it replaced the Cold War's propeller-driven patrol planes."
+        },
+        {
+          "id": "e2d",
+          "name": "E-2D ADVANCED HAWKEYE",
+          "short": "E-2D",
+          "role": "AIRBORNE EARLY WARNING",
+          "year": "2014",
+          "view": "three-quarter front view, in flight, radome visible",
+          "desc": "carrier early warning aircraft, twin turboprop, huge rotating rotodome on struts above the fuselage, four vertical fins on the tail, grey Navy paint",
+          "specs": [
+            [
+              "CREW",
+              "5"
+            ],
+            [
+              "POWERPLANT",
+              "2× T56-A-427A"
+            ],
+            [
+              "RADAR",
+              "AN/APY-9 UHF AESA"
+            ],
+            [
+              "DETECTION",
+              "550+ KM"
+            ],
+            [
+              "MISSION",
+              "AEW&C / BATTLE MGMT"
+            ]
+          ],
+          "inventory": "≈75 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "FEWER THAN PLANNED",
+          "script": "E-2D Advanced Hawkeye. The carrier air wing's eyes and traffic controller. Its big rotating radar dome spots aircraft and missiles far beyond what a ship's radar can see, and its crews vector fighters onto targets in the middle of a fight."
+        }
+      ],
+      "rail": "SPECIAL MISSION"
+    },
+    {
+      "numeral": "V",
+      "index": 5,
+      "title": "AIRLIFT & LOGISTICS",
+      "kicker": "MOVING THE FLEET",
+      "lead": "Transports and logistics: how the fleet gets fed, fuelled and moved.",
+      "aircraft": [
+        {
+          "id": "c130t",
+          "name": "C-130T HERCULES",
+          "short": "C-130T",
+          "role": "TACTICAL AIRLIFT",
+          "year": "1976",
+          "view": "three-quarter front view, gear down",
+          "desc": "four-engine turboprop Hercules transport, grey Navy paint, high wing, boxy fuselage, bulbous nose, open ramp rear",
+          "specs": [
+            [
+              "CREW",
+              "4"
+            ],
+            [
+              "POWERPLANT",
+              "4× T56-A-16"
+            ],
+            [
+              "CARGO",
+              "20,000 KG"
+            ],
+            [
+              "RANGE",
+              "2,300 NMI"
+            ],
+            [
+              "OPERATOR",
+              "NAVY RESERVE"
+            ]
+          ],
+          "inventory": "≈20 AIRFRAMES",
+          "operator": "USN",
+          "status": "TRANSITION",
+          "status_note": "REPLACEMENT BEHIND SCHEDULE",
+          "script": "C-130T Hercules. This four-engine turboprop flies with the Navy, rushing priority cargo and people to the fleet. The fleet is small now, roughly twenty aircraft, and its replacement has run behind schedule, so the Hercules keeps answering the call."
+        },
+        {
+          "id": "kc130j",
+          "name": "KC-130J SUPER HERCULES",
+          "short": "KC-130J",
+          "role": "AERIAL REFUELLING / TRANSPORT",
+          "year": "2006",
+          "view": "three-quarter front view, gear down, refuelling pods",
+          "desc": "Marine Corps aerial tanker Hercules, grey paint, high wing, four engines, hose-and-drogue pods under the wings, no radar nose",
+          "specs": [
+            [
+              "CREW",
+              "4"
+            ],
+            [
+              "POWERPLANT",
+              "4× AE2100D3"
+            ],
+            [
+              "MISSION",
+              "AIR-TO-AIR REFUELLING"
+            ],
+            [
+              "OFFLOAD",
+              "24,000 KG FUEL"
+            ],
+            [
+              "CARGO",
+              "19,000 KG"
+            ]
+          ],
+          "inventory": "≈50 AIRFRAMES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "DOUBLE-DUTY AIRFRAME",
+          "script": "KC-130J Super Hercules. Few aircraft pull double duty like this Marine Hercules. It refuels jets and helicopters in flight from pods under its wings, then lands and becomes a cargo plane, moving troops and equipment into rough strips."
+        },
+        {
+          "id": "c40a",
+          "name": "C-40A CLIPPER",
+          "short": "C-40A",
+          "role": "LOGISTICS TRANSPORT",
+          "year": "2001",
+          "view": "three-quarter front view, gear down",
+          "desc": "Boeing 737 airliner in Navy service, grey white paint scheme, two engines, blended winglets, no airline markings",
+          "specs": [
+            [
+              "CREW",
+              "5"
+            ],
+            [
+              "POWERPLANT",
+              "2× CFM56-7B"
+            ],
+            [
+              "PASSENGERS",
+              "121"
+            ],
+            [
+              "CARGO",
+              "18,000 KG"
+            ],
+            [
+              "OPERATOR",
+              "NAVY RESERVE"
+            ]
+          ],
+          "inventory": "≈17 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "SINCE 2001",
+          "script": "C-40A Clipper. A Boeing airliner that converts between passengers and cargo, this is the Navy's main logistics jet, flown by reserve squadrons since 2001 to move sailors and freight across the world on scheduled runs."
+        },
+        {
+          "id": "c37b",
+          "name": "C-37B GULFSTREAM G550",
+          "short": "C-37B",
+          "role": "EXECUTIVE TRANSPORT",
+          "year": "2005",
+          "view": "three-quarter front view, gear down",
+          "desc": "long-range business jet, white fuselage with blue stripe Navy livery, two rear-fuselage engines, T-tail, swept wings",
+          "specs": [
+            [
+              "CREW",
+              "4"
+            ],
+            [
+              "POWERPLANT",
+              "2× BR710"
+            ],
+            [
+              "PASSENGERS",
+              "12"
+            ],
+            [
+              "RANGE",
+              "6,750 NMI"
+            ],
+            [
+              "MISSION",
+              "VIP / COMMAND"
+            ]
+          ],
+          "inventory": "SMALL FLEET",
+          "operator": "USN / USMC",
+          "status": "IN SERVICE",
+          "status_note": "OCEAN-CROSSING RANGE",
+          "script": "C-37B Gulfstream G550. The Navy's executive jet is a Gulfstream G550, fast and long-legged enough to carry admirals and officials across oceans without a refuelling stop. A handful serve both services on command transport duty."
+        },
+        {
+          "id": "c20g",
+          "name": "C-20G GULFSTREAM IV",
+          "short": "C-20G",
+          "role": "OPERATIONAL SUPPORT",
+          "year": "1985",
+          "view": "three-quarter front view, gear down",
+          "desc": "Gulfstream IV business jet in grey Navy paint, two rear-mounted engines, T-tail, plain fuselage, cargo door",
+          "specs": [
+            [
+              "CREW",
+              "4"
+            ],
+            [
+              "POWERPLANT",
+              "2× TAY 611-8"
+            ],
+            [
+              "PASSENGERS",
+              "8 OR CARGO"
+            ],
+            [
+              "RANGE",
+              "4,000 NMI"
+            ],
+            [
+              "STATUS",
+              "NEARLY GONE"
+            ]
+          ],
+          "inventory": "≈4 AIRFRAMES",
+          "operator": "USN",
+          "status": "SUNSET",
+          "status_note": "MOSTLY REPLACED BY 2020",
+          "script": "C-20G Gulfstream IV. Mostly gone from the Navy and Marine Corps, replaced by Boeing jets by 2020, the Gulfstream IV survives in small numbers, flying passengers or freight on the last few operational support runs."
+        }
+      ],
+      "rail": "AIRLIFT"
+    },
+    {
+      "numeral": "VI",
+      "index": 6,
+      "title": "LIGHT TRANSPORT & LIAISON",
+      "kicker": "SMALL AIRFRAMES, CONSTANT WORK",
+      "lead": "Lighter transports and liaison aircraft, where the numbers get small but the missions never stop.",
+      "aircraft": [
+        {
+          "id": "c12",
+          "name": "C-12 HURON",
+          "short": "C-12",
+          "role": "UTILITY TRANSPORT",
+          "year": "1974",
+          "view": "three-quarter front view, gear down",
+          "desc": "military Beechcraft King Air twin turboprop, white and grey Navy paint, two engines, T-tail, small cabin windows",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× PT6A-42"
+            ],
+            [
+              "PASSENGERS",
+              "8"
+            ],
+            [
+              "RANGE",
+              "1,500 NMI"
+            ],
+            [
+              "MISSION",
+              "BASE SHUTTLE"
+            ]
+          ],
+          "inventory": "≈90 AIRFRAMES",
+          "operator": "USN / USMC",
+          "status": "IN SERVICE",
+          "status_note": "WORKHORSE OF THE RAMP",
+          "script": "C-12 Huron. These are military Beechcraft King Airs, the utility hoppers of naval aviation, shuttling people and light cargo between bases. Nothing glamorous, but a hundred of these flights a week keep the fleet connected."
+        },
+        {
+          "id": "c26",
+          "name": "C-26 METROLINER",
+          "short": "C-26",
+          "role": "LIGHT TRANSPORT",
+          "year": "1985",
+          "view": "three-quarter front view, gear down",
+          "desc": "small twin turboprop Metroliner, white fuselage with grey wings, two engines, T-tail, narrow cabin, simple landing gear",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× TPE331"
+            ],
+            [
+              "PASSENGERS",
+              "19"
+            ],
+            [
+              "RANGE",
+              "1,000 NMI"
+            ],
+            [
+              "MISSION",
+              "ODD JOBS / RANGE SUPPORT"
+            ]
+          ],
+          "inventory": "≈8 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "PACIFIC RANGE SUPPORT",
+          "script": "C-26 Metroliner. A small twin turboprop fleet with odd jobs. Some move passengers between naval air stations, while others support the Pacific missile range facility in Hawaii, hauling technicians and equipment out to remote sites."
+        },
+        {
+          "id": "uc35",
+          "name": "UC-35 CITATION ENCORE",
+          "short": "UC-35",
+          "role": "OPERATIONAL SUPPORT AIRLIFT",
+          "year": "1997",
+          "view": "three-quarter front view, gear down",
+          "desc": "small Citation business jet, white fuselage with dark stripe, rear-mounted engines, T-tail, four cabin windows",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× PW535B"
+            ],
+            [
+              "PASSENGERS",
+              "8"
+            ],
+            [
+              "RANGE",
+              "1,700 NMI"
+            ],
+            [
+              "MISSION",
+              "URGENT LIFT"
+            ]
+          ],
+          "inventory": "≈10 ENCORES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "MARINE BUSINESS JETS",
+          "script": "UC-35 Citation. The Marines' small business jets fly operational support airlift, moving people and urgent cargo quickly. Ten newer Citation Encores now do the job older airframes once covered."
+        },
+        {
+          "id": "v22",
+          "name": "MV-22B OSPREY",
+          "short": "V-22",
+          "role": "TILTROTOR ASSAULT",
+          "year": "2007",
+          "view": "three-quarter front view, rotors tilted up",
+          "desc": "tiltrotor aircraft with two large proprotors on wingtip nacelles, grey Marine paint, boxy fuselage, rear ramp, no external stores",
+          "specs": [
+            [
+              "CREW",
+              "4"
+            ],
+            [
+              "POWERPLANT",
+              "2× T406-AD-400"
+            ],
+            [
+              "TROOPS",
+              "24"
+            ],
+            [
+              "CRUISE SPEED",
+              "280 KT"
+            ],
+            [
+              "RANGE",
+              "879 NMI"
+            ]
+          ],
+          "inventory": "≈250 AIRFRAMES",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "RESHAPED MARINE MOVEMENT",
+          "script": "MV-22B Osprey. Taking off like a helicopter and cruising like a plane, the tiltrotor reshaped how Marines move. Their assault version carries troops far inland from ships at speeds no helicopter can match, with a range that reaches deep into a country."
+        }
+      ],
+      "rail": "LIGHT TRANSPORT"
+    },
+    {
+      "numeral": "VII",
+      "index": 7,
+      "title": "UNMANNED SYSTEMS",
+      "kicker": "NO CREW ON BOARD",
+      "lead": "Unmanned aircraft. Two types, and two very different jobs.",
+      "aircraft": [
+        {
+          "id": "mq9",
+          "name": "MQ-9A REAPER",
+          "short": "MQ-9A",
+          "role": "LONG-RANGE ISR / STRIKE",
+          "year": "2007",
+          "view": "three-quarter front view, gear down",
+          "desc": "large remotely piloted aircraft, slender fuselage, long straight wings, V-tail with ventral fin, turboprop pusher engine, grey paint, sensor ball under nose",
+          "specs": [
+            [
+              "CREW",
+              "0 (REMOTE)"
+            ],
+            [
+              "POWERPLANT",
+              "1× TPE331-10"
+            ],
+            [
+              "ENDURANCE",
+              "24+ HOURS"
+            ],
+            [
+              "CEILING",
+              "50,000 FT"
+            ],
+            [
+              "PAYLOAD",
+              "1,700 KG"
+            ]
+          ],
+          "inventory": "SMALL MARINE DETACHMENT",
+          "operator": "USMC",
+          "status": "IN SERVICE",
+          "status_note": "EXTENDED-RANGE VARIANT",
+          "script": "MQ-9A Reaper. The Marines turned to this proven Air Force drone for long-range eyes over sea and shore, flying from austere strips with a crew in a container. It stays up for more than a day at a time, watching and, when needed, striking."
+        },
+        {
+          "id": "mq4c",
+          "name": "MQ-4C TRITON",
+          "short": "MQ-4C",
+          "role": "BROAD AREA MARITIME SURVEILLANCE",
+          "year": "2023",
+          "view": "three-quarter front view, gear down, very long wings",
+          "desc": "high-altitude maritime surveillance drone, extremely long straight wings, single turbofan, bulbous sensor nose, white grey paint, V-tail",
+          "specs": [
+            [
+              "CREW",
+              "0 (REMOTE)"
+            ],
+            [
+              "POWERPLANT",
+              "1× AE3007H"
+            ],
+            [
+              "ENDURANCE",
+              "24+ HOURS"
+            ],
+            [
+              "CEILING",
+              "56,000 FT"
+            ],
+            [
+              "WINGSPAN",
+              "39.9 M"
+            ]
+          ],
+          "inventory": "≈5 OPERATIONAL",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "WESTERN PACIFIC WATCH",
+          "script": "MQ-4C Triton. Among Navy and Marine Corps drones, this is the big one. Unarmed, it cruises high above the weather for hour after hour, watching vast stretches of ocean for the fleet and passing what it sees to ships below."
+        }
+      ],
+      "rail": "UNMANNED"
+    },
+    {
+      "numeral": "VIII",
+      "index": 8,
+      "title": "ADVERSARY AIR",
+      "kicker": "PAID TO PLAY THE ENEMY",
+      "lead": "Stick around for the jets paid to play the enemy.",
+      "aircraft": [
+        {
+          "id": "f5n",
+          "name": "F-5N TIGER II",
+          "short": "F-5N",
+          "role": "ADVERSARY / AGGRESSOR",
+          "year": "1972",
+          "view": "three-quarter front view, in flight",
+          "desc": "small lightweight Cold War fighter, twin engines, thin fuselage, small nose, painted in a dark adversary camouflage scheme, no missiles",
+          "specs": [
+            [
+              "CREW",
+              "1"
+            ],
+            [
+              "POWERPLANT",
+              "2× J85-GE-21B"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 1.6"
+            ],
+            [
+              "ARMAMENT",
+              "20MM + SIDEWINDER"
+            ],
+            [
+              "SOURCE",
+              "EX-SWISS AIR FORCE"
+            ]
+          ],
+          "inventory": "≈30 AIRFRAMES",
+          "operator": "USN / USMC",
+          "status": "IN SERVICE",
+          "status_note": "VFC-111 / VFC-204",
+          "script": "F-5N Tiger II. Small, nimble and cheap to fly, these Cold War fighters now spend their days pretending to be the enemy. Many were bought from Switzerland, and their small radar signature makes them a useful stand-in for a real opponent."
+        },
+        {
+          "id": "f16n",
+          "name": "F-16A/B FIGHTING FALCON",
+          "short": "F-16",
+          "role": "ADVERSARY / AGGRESSOR",
+          "year": "2022",
+          "view": "three-quarter front view, in flight",
+          "desc": "single-engine fighter, bubble canopy, single vertical tail, ventral intake, adversary paint scheme with dark blue and grey splinter camouflage",
+          "specs": [
+            [
+              "CREW",
+              "1"
+            ],
+            [
+              "POWERPLANT",
+              "1× F100-PW-220"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 2.0"
+            ],
+            [
+              "ARMAMENT",
+              "20MM + AIM-9"
+            ],
+            [
+              "SOURCE",
+              "EX-PAKISTAN / USAF"
+            ]
+          ],
+          "inventory": "≈40 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "JOINED THE ROLE IN 2022",
+          "script": "F-16 Fighting Falcon. The Navy never bought this fighter for combat, yet it now flies about forty as adversaries. Some were built for Pakistan but caught by an embargo, and the rest came from the Air Force in 2022 to give the fleet a faster sparring partner."
+        }
+      ],
+      "rail": "ADVERSARY"
+    },
+    {
+      "numeral": "IX",
+      "index": 9,
+      "title": "PRIMARY TRAINERS",
+      "kicker": "WHERE EVERY AVIATOR STARTS",
+      "lead": "Trainers. Nearly every naval aviator's career begins here.",
+      "aircraft": [
+        {
+          "id": "t6",
+          "name": "T-6A/B TEXAN II",
+          "short": "T-6",
+          "role": "PRIMARY FLIGHT TRAINING",
+          "year": "2001",
+          "view": "three-quarter front view, gear down",
+          "desc": "turboprop primary trainer, white fuselage with orange high-visibility panels, low wing, tandem canopy, single propeller",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "1× PT6A-68"
+            ],
+            [
+              "MAX SPEED",
+              "320 KT"
+            ],
+            [
+              "MISSION",
+              "PRIMARY / NFO TRAINING"
+            ],
+            [
+              "BUILT",
+              "850+ FOR ALL SERVICES"
+            ]
+          ],
+          "inventory": "≈280 AIRFRAMES",
+          "operator": "USN / USMC",
+          "status": "IN SERVICE",
+          "status_note": "THE FIRST 60 HOURS",
+          "script": "T-6 Texan II. Nearly every naval aviator's career starts in this turboprop. Student pilots learn the basics in the T-6B, while older A models train naval flight officers, and instructors say the aircraft is honest enough to show a student's mistakes clearly."
+        },
+        {
+          "id": "t45",
+          "name": "T-45C GOSHAWK",
+          "short": "T-45C",
+          "role": "JET / CARRIER TRAINING",
+          "year": "1991",
+          "view": "three-quarter front view, gear down",
+          "desc": "carrier-capable jet trainer, white and orange high-visibility paint, single engine, side intakes, tandem cockpit, tailhook, small size",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "1× ADOUR MK871"
+            ],
+            [
+              "MAX SPEED",
+              "MACH 0.85"
+            ],
+            [
+              "MISSION",
+              "CARRIER QUALIFICATION"
+            ],
+            [
+              "DERIVED FROM",
+              "BAE HAWK"
+            ]
+          ],
+          "inventory": "≈190 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "STAYS TO 2030s",
+          "script": "T-45C Goshawk. Student pilots make their first carrier landings in this jet. Derived from Britain's Hawk, it is toughened for the brutal business of trapping on a moving deck, and it also trains the future weapons officers who ride in the back seat."
+        },
+        {
+          "id": "th73",
+          "name": "TH-73A THRASHER",
+          "short": "TH-73A",
+          "role": "ROTARY PRIMARY TRAINING",
+          "year": "2021",
+          "view": "three-quarter front view, in hover low over ground",
+          "desc": "small single-engine training helicopter, white with orange high-visibility panels, skid gear, three-blade rotor, glass cockpit",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "1× PT6B-37A"
+            ],
+            [
+              "CRUISE SPEED",
+              "130 KT"
+            ],
+            [
+              "MISSION",
+              "HELICOPTER PRIMARY"
+            ],
+            [
+              "REPLACED",
+              "TH-57 SEA RANGER"
+            ]
+          ],
+          "inventory": "≈60 DELIVERED",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "SELECTED 2020",
+          "script": "TH-73A Thrasher. Navy and Marine Corps helicopter students learn to hover in this nimble machine. Picked in 2020 to replace the old Sea Ranger, it brings a glass cockpit to a syllabus that still starts with the hardest skill in aviation."
+        }
+      ],
+      "rail": "PRIMARY TRAINERS"
+    },
+    {
+      "numeral": "X",
+      "index": 10,
+      "title": "ADVANCED TRAINERS",
+      "kicker": "MULTI-ENGINE AND TRANSITION",
+      "lead": "Advanced and multi-engine trainers, where pilots learn to fly something bigger than themselves.",
+      "aircraft": [
+        {
+          "id": "t44",
+          "name": "T-44C PEGASUS",
+          "short": "T-44C",
+          "role": "MULTI-ENGINE TRAINING",
+          "year": "1977",
+          "view": "three-quarter front view, gear down",
+          "desc": "twin turboprop King Air trainer, white fuselage with orange and blue training stripes, two engines, T-tail, small cabin windows",
+          "specs": [
+            [
+              "CREW",
+              "2 + 2 STUDENTS"
+            ],
+            [
+              "POWERPLANT",
+              "2× PT6A-34B"
+            ],
+            [
+              "MAX SPEED",
+              "245 KT"
+            ],
+            [
+              "MISSION",
+              "MULTI-ENGINE SYLLABUS"
+            ],
+            [
+              "BASE",
+              "NAS CORPUS CHRISTI"
+            ]
+          ],
+          "inventory": "≈50 AIRFRAMES",
+          "operator": "USN / USMC",
+          "status": "SUNSET",
+          "status_note": "BOWING OUT FROM 2025",
+          "script": "T-44C Pegasus. For nearly half a century, this twin turboprop has taught Navy and Marine Corps pilots multi-engine flying at Corpus Christi. Since 2025 it has been bowing out as its replacement arrives, closing one of the longest training runs in naval aviation."
+        },
+        {
+          "id": "t54",
+          "name": "T-54A MARLIN II",
+          "short": "T-54A",
+          "role": "MULTI-ENGINE TRAINING",
+          "year": "2025",
+          "view": "three-quarter front view, gear down",
+          "desc": "modern King Air 260-based trainer, white fuselage with blue and orange training stripes, two engines, T-tail, glass cockpit",
+          "specs": [
+            [
+              "CREW",
+              "2 + 2 STUDENTS"
+            ],
+            [
+              "POWERPLANT",
+              "2× PT6A-52"
+            ],
+            [
+              "MAX SPEED",
+              "310 KT"
+            ],
+            [
+              "COCKPIT",
+              "GLASS, PROLINE FUSION"
+            ],
+            [
+              "IOC",
+              "MAY 2025"
+            ]
+          ],
+          "inventory": "≈64 PLANNED",
+          "operator": "USN / USMC",
+          "status": "IN SERVICE",
+          "status_note": "REACHED IOC MAY 2025",
+          "script": "T-54A Marlin II. Built on the Beechcraft King Air, this twin-turboprop trainer is a modern addition to the fleet. It reached initial operational capability in May 2025, and the plan calls for sixty-four aircraft to take over the multi-engine syllabus."
+        }
+      ],
+      "rail": "ADVANCED"
+    },
+    {
+      "numeral": "XI",
+      "index": 11,
+      "title": "TEST PILOT SCHOOL",
+      "kicker": "PATUXENT RIVER",
+      "lead": "Last up, the fleet's strangest corner: the test pilot school at Patuxent River.",
+      "aircraft": [
+        {
+          "id": "u6",
+          "name": "U-6A BEAVER",
+          "short": "U-6A",
+          "role": "TEST PILOT TRAINING",
+          "year": "1950",
+          "view": "three-quarter front view, on the ground",
+          "desc": "vintage Canadian bush plane, radial engine, high wing with struts, tailwheel landing gear, fabric-covered fuselage, olive drab paint",
+          "specs": [
+            [
+              "CREW",
+              "1 + 3"
+            ],
+            [
+              "POWERPLANT",
+              "1× R-985 WASP JR"
+            ],
+            [
+              "CRUISE SPEED",
+              "110 KT"
+            ],
+            [
+              "MISSION",
+              "LOW-SPEED HANDLING"
+            ],
+            [
+              "UNIT",
+              "USNTPS"
+            ]
+          ],
+          "inventory": "1 AIRFRAME",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "FLOWN SINCE THE 1950s",
+          "script": "U-6A Beaver. These rugged, decades-old Canadian bush planes still earn their keep at the Navy's test pilot school. Students use them to explore how an aircraft handles at very low speed, right at the edge of a stall, where a big jet would be a dangerous teaching tool."
+        },
+        {
+          "id": "nu1b",
+          "name": "NU-1B OTTER",
+          "short": "NU-1B",
+          "role": "TEST PILOT TRAINING",
+          "year": "1955",
+          "view": "three-quarter front view, on the ground",
+          "desc": "vintage single-engine bush plane airframe, radial engine, high wing, tailwheel, bare metal and blue Navy paint, no modern fairings",
+          "specs": [
+            [
+              "CREW",
+              "1 + 6"
+            ],
+            [
+              "POWERPLANT",
+              "1× R-1340 WASP"
+            ],
+            [
+              "CRUISE SPEED",
+              "110 KT"
+            ],
+            [
+              "MISSION",
+              "HANDLING QUALITIES"
+            ],
+            [
+              "UNIT",
+              "USNTPS"
+            ]
+          ],
+          "inventory": "1 AIRFRAME",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "OLDEST AIRCRAFT THE NAVY FLIES",
+          "script": "NU-1B Otter. In the whole Navy and Marine Corps lineup, this is a genuine relic, often called the oldest aircraft the Navy flies. It still turns up at Patuxent River, teaching test pilots what an aeroplane feels like when nothing is helping them."
+        },
+        {
+          "id": "x26",
+          "name": "X-26A FRIGATE",
+          "short": "X-26A",
+          "role": "TEST PILOT TRAINING",
+          "year": "1967",
+          "view": "three-quarter view, on the ground",
+          "desc": "engineless sailplane, very long slender wings, teardrop fuselage, single wheel landing gear, white and blue US Navy scheme, thin tail boom",
+          "specs": [
+            [
+              "CREW",
+              "1"
+            ],
+            [
+              "POWERPLANT",
+              "NONE, SAILPLANE"
+            ],
+            [
+              "GLIDE RATIO",
+              "34:1"
+            ],
+            [
+              "LAUNCH",
+              "TOWED ALOFT"
+            ],
+            [
+              "UNIT",
+              "USNTPS"
+            ]
+          ],
+          "inventory": "1 AIRFRAME",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "QUIETEST AIRFRAME IN THE FLEET",
+          "script": "X-26A Frigate. Few Navy aircraft are this quiet. It is a military Schweizer sailplane with no engine at all, towed aloft by a bush plane, and then flown in near-total silence to teach pilots about stability and control."
+        }
+      ],
+      "rail": "TEST PILOT"
+    },
+    {
+      "numeral": "XII",
+      "index": 12,
+      "title": "ROTARY TEST & EVALUATION",
+      "kicker": "HINGELESS ROTORS, GLASS COCKPITS",
+      "lead": "Two helicopters that exist purely to be measured, questioned, and flown badly on purpose.",
+      "aircraft": [
+        {
+          "id": "th67",
+          "name": "TH-67 CREEK",
+          "short": "TH-67",
+          "role": "ROTARY TEST TRAINING",
+          "year": "1993",
+          "view": "three-quarter front view, on the ground",
+          "desc": "small training helicopter, single main rotor with two blades, skid gear, white and blue Navy paint, bubble canopy",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "1× Allison 250-C20J"
+            ],
+            [
+              "CRUISE SPEED",
+              "110 KT"
+            ],
+            [
+              "MISSION",
+              "ROTORCRAFT QUALITIES"
+            ],
+            [
+              "UNIT",
+              "USNTPS"
+            ]
+          ],
+          "inventory": "FEW AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "ARMY TRAINER, NAVY SCHOOL",
+          "script": "TH-67 Creek. Army flight students stopped training in these small helicopters in 2021, but a few live on at the Naval Test Pilot School, teaching rotary-wing flying qualities and test procedures to the engineers who will evaluate the next generation."
+        },
+        {
+          "id": "uh72",
+          "name": "UH-72A LAKOTA",
+          "short": "UH-72A",
+          "role": "TEST PILOT TRAINING",
+          "year": "2009",
+          "view": "three-quarter front view, on the ground",
+          "desc": "twin-engine light utility helicopter, white and blue Navy paint, four-blade hingeless rotor, skid gear, glass cockpit, large cabin",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× T1E1 ARRIEL"
+            ],
+            [
+              "CRUISE SPEED",
+              "130 KT"
+            ],
+            [
+              "ROTOR",
+              "HINGELESS BEARINGLESS"
+            ],
+            [
+              "UNIT",
+              "USNTPS"
+            ]
+          ],
+          "inventory": "SMALL FLEET",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "FIRST GLASS COCKPIT AT NTPS",
+          "script": "UH-72A Lakota. Arriving at the Naval Test Pilot School around 2009, this twin-engine helicopter replaced the old Kiowa and gave the school its first glass cockpit and hingeless rotor, two features students now meet on almost every modern type."
+        }
+      ],
+      "rail": "ROTARY TEST"
+    },
+    {
+      "numeral": "XIII",
+      "index": 13,
+      "title": "RESEARCH & RANGE SUPPORT",
+      "kicker": "FLOWN BY ENGINEERS",
+      "lead": "Research and range support: aircraft flown by engineers, for engineers.",
+      "aircraft": [
+        {
+          "id": "np3c",
+          "name": "NP-3C ORION",
+          "short": "P-3",
+          "role": "RESEARCH / RANGE SUPPORT",
+          "year": "1969",
+          "view": "three-quarter front view, gear down",
+          "desc": "four-engine turboprop patrol aircraft, long fuselage, MAD boom tail sting, white and grey Navy research paint, no weapons",
+          "specs": [
+            [
+              "CREW",
+              "MISSION DEPENDENT"
+            ],
+            [
+              "POWERPLANT",
+              "4× T56-A-14"
+            ],
+            [
+              "ENDURANCE",
+              "12 HOURS"
+            ],
+            [
+              "MISSION",
+              "SCIENTIFIC RESEARCH"
+            ],
+            [
+              "UNIT",
+              "VX-30 / NRL"
+            ]
+          ],
+          "inventory": "LAST AIRFRAMES",
+          "operator": "USN",
+          "status": "SUNSET",
+          "status_note": "NRL NP-3C RETIRED SEP 2026",
+          "script": "P-3 Orion. The Cold War's great submarine hunter is almost gone. With the Naval Research Laboratory's NP-3C retired in September 2026, the Navy's last examples serve with a test squadron at Point Mugu, California, tracking missiles and aircraft over the Pacific."
+        },
+        {
+          "id": "uv18",
+          "name": "UV-18B TWIN OTTER",
+          "short": "UV-18B",
+          "role": "AIRBORNE SCIENCE LAB",
+          "year": "2019",
+          "view": "three-quarter front view, on the ground",
+          "desc": "twin turboprop utility aircraft, white fuselage with blue stripe, high wing with struts, fixed tricycle gear, boxy cabin, sensor racks",
+          "specs": [
+            [
+              "CREW",
+              "2 + RESEARCHERS"
+            ],
+            [
+              "POWERPLANT",
+              "2× PT6A-27"
+            ],
+            [
+              "CRUISE SPEED",
+              "140 KT"
+            ],
+            [
+              "MISSION",
+              "AIRBORNE LABORATORY"
+            ],
+            [
+              "UNIT",
+              "NRL SINCE 2019"
+            ]
+          ],
+          "inventory": "1 AIRFRAME",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "CHEAP, SLOW, EFFECTIVE",
+          "script": "UV-18B Twin Otter. Few aircraft in the Navy and Marine Corps fly purely for science. Since 2019, a Naval Research Laboratory squadron has flown this lone example as a cheap, slow airborne laboratory, carrying sensors that would cost a fortune to lift any other way."
+        },
+        {
+          "id": "c38",
+          "name": "C-38A COURIER",
+          "short": "C-38A",
+          "role": "CHASE / RADAR TARGET",
+          "year": "2015",
+          "view": "three-quarter front view, gear down",
+          "desc": "small business jet in white Navy paint with blue stripe, rear-mounted engines, T-tail, sleek fuselage, chase markings",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "2× TFE731"
+            ],
+            [
+              "MAX SPEED",
+              "470 KT"
+            ],
+            [
+              "MISSION",
+              "CHASE / TARGET"
+            ],
+            [
+              "FLEET",
+              "2 AIRFRAMES"
+            ]
+          ],
+          "inventory": "2 AIRFRAMES",
+          "operator": "USN",
+          "status": "IN SERVICE",
+          "status_note": "SUPPORTS P-8 / E-2D / MQ-4C",
+          "script": "C-38A Courier. A business jet earns its place in testing. Since 2015, two have flown as chase planes and radar targets for Poseidon, Hawkeye and Triton trials, giving engineers a fast, stable platform to watch a test article from close range."
+        },
+        {
+          "id": "t34c",
+          "name": "T-34C TURBO MENTOR",
+          "short": "T-34C",
+          "role": "TEST SUPPORT TRAINER",
+          "year": "1977",
+          "view": "three-quarter front view, gear down",
+          "desc": "small single-engine turboprop trainer, white fuselage with orange high-visibility tail and wings, tandem cockpit, propeller",
+          "specs": [
+            [
+              "CREW",
+              "2"
+            ],
+            [
+              "POWERPLANT",
+              "1× PT6A-25"
+            ],
+            [
+              "MAX SPEED",
+              "280 KT"
+            ],
+            [
+              "MISSION",
+              "TEST SUPPORT"
+            ],
+            [
+              "UNIT",
+              "PATUXENT RIVER"
+            ]
+          ],
+          "inventory": "SMALL FLEET",
+          "operator": "USN",
+          "status": "TRANSITION",
+          "status_note": "FEWER EVERY YEAR",
+          "script": "T-34C Turbo Mentor. For decades, Navy student pilots learned the basics in this turboprop. A newer trainer has taken that job, but a small fleet hangs on at Patuxent River and the strike fighter schools, flying chase and proficiency sorties."
+        }
+      ],
+      "rail": "RESEARCH"
+    }
+  ]
+}
