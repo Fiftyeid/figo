@@ -137,7 +137,19 @@ python3 template/build.py recipes/template.json              # full film
 Output lands in `deliverables/EPISODE_xx.mp4`. `--crf` (default 19) and `--preset`
 (default `medium`) pass through to ffmpeg; `--out` overrides the filename.
 
-## 4. Re-branding
+## 4. The original film, rebuilt
+
+`recipes/from_fleet.py` converts `data/fleet.json` (13 sections, 44 airframes, their
+stats and narration scripts) into `recipes/fleet_2026.json`. The full 2026 film is
+therefore produced by this template — there is no episode-specific edit script:
+
+```bash
+python3 recipes/from_fleet.py
+python3 template/build.py recipes/fleet_2026.json --check
+python3 template/build.py recipes/fleet_2026.json
+```
+
+## 5. Re-branding
 
 - **Colours / type / grain** — the top of `template/design.py` (`PAPER`, `INK`, `RED`,
   `FONTS`, `reference_plate`).
@@ -146,7 +158,7 @@ Output lands in `deliverables/EPISODE_xx.mp4`. `--crf` (default 19) and `--prese
 
 Nothing else needs touching for a normal episode.
 
-## 5. What it costs
+## 6. What it costs
 
 A 9-item, 2-section demo renders in ~3.5 minutes at 1080p. A 44-item, 13-section film
 is ~17 minutes of footage — render it scene by scene if your machine is modest:
@@ -169,7 +181,7 @@ ffmpeg -f concat -safe 0 -i build/chunks.txt -c copy deliverables/EPISODE_01.mp4
 Chunks keep their absolute scene start times, so the on-screen timecode and the
 section progress rail stay continuous across the join without any post-fix.
 
-## 6. Dependencies
+## 7. Dependencies
 
 ```
 pip install pillow numpy imageio-ffmpeg
