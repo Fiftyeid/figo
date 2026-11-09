@@ -1,0 +1,243 @@
+{
+  "_comment": "DEMO — a different topic on the same template. Copy this, not template.json.",
+  "meta": {
+    "brand": "STATEWIDE USA",
+    "catalogue": "FIELD CATALOGUE · 2026",
+    "channel": "STATEWIDE USA",
+    "subject": "items",
+    "title_1": "THE",
+    "title_2": "BATTLE TANKS",
+    "subtitle": "OF THE MODERN WORLD",
+    "footer": "FIELD CATALOGUE · 2026",
+    "outro_title": "THAT IS THE\nWHOLE LINE-UP",
+    "outro_stats": [
+      [
+        "SUBJECTS",
+        9
+      ],
+      [
+        "CATEGORIES",
+        2
+      ],
+      [
+        "ACTIVE TYPES TO",
+        2040
+      ]
+    ],
+    "sources": "SOURCES: OPEN-SOURCE DEFENCE REGISTERS · 2026",
+    "credit": "CATALOGUE PRODUCED BY STATEWIDE USA",
+    "intro_dur": 12.0,
+    "outro_dur": 20.0,
+    "vo_dir": "build/vo",
+    "music": {
+      "file": "assets/music/hitslab_tension.mp3",
+      "gain": 0.55
+    },
+    "output": "EPISODE_02"
+  },
+  "categories": [
+    {
+      "title": "Main Battle Tanks",
+      "kicker": "Armoured Corps",
+      "lead": "We start with the heavy armour. Four tanks that between them make up most of the western heavy fleet.",
+      "items": [
+        {
+          "id": "fa18c",
+          "name": "F/A-18C HORNET",
+          "short": "F/A-18C",
+          "year": 1983,
+          "art": "artwork/fa18c.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Marine Corps"
+            },
+            {
+              "label": "In service",
+              "value": "≈125"
+            },
+            {
+              "label": "Max speed",
+              "value": "Mach 1.8"
+            }
+          ]
+        },
+        {
+          "id": "fa18ef",
+          "name": "F/A-18E/F SUPER HORNET",
+          "short": "F/A-18E/F",
+          "year": 1999,
+          "art": "artwork/fa18ef.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Navy / Marines"
+            },
+            {
+              "label": "In service",
+              "value": "≈550"
+            },
+            {
+              "label": "Max speed",
+              "value": "Mach 1.6"
+            }
+          ]
+        },
+        {
+          "id": "ea18g",
+          "name": "EA-18G GROWLER",
+          "short": "EA-18G",
+          "year": 2009,
+          "art": "artwork/ea18g.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Navy"
+            },
+            {
+              "label": "In service",
+              "value": "≈160"
+            },
+            {
+              "label": "Max speed",
+              "value": "Mach 1.6"
+            }
+          ]
+        },
+        {
+          "id": "f35",
+          "name": "F-35B / F-35C LIGHTNING II",
+          "short": "F-35",
+          "year": 2015,
+          "art": "artwork/f35.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Navy / Marines"
+            },
+            {
+              "label": "In service",
+              "value": "≈180"
+            },
+            {
+              "label": "Max speed",
+              "value": "Mach 1.6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Light & Specialist",
+      "kicker": "Cavalry",
+      "lead": "Next, the lighter end of the corps — the machines that get there first.",
+      "items": [
+        {
+          "id": "vh3d",
+          "name": "VH-3D SEA KING",
+          "short": "VH-3D",
+          "year": 1974,
+          "art": "artwork/vh3d.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Marine Corps"
+            },
+            {
+              "label": "In service",
+              "value": "11"
+            },
+            {
+              "label": "Max speed",
+              "value": "120 kt"
+            }
+          ]
+        },
+        {
+          "id": "vh60n",
+          "name": "VH-60N WHITE HAWK",
+          "short": "VH-60N",
+          "year": 1989,
+          "art": "artwork/vh60n.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Marine Corps"
+            },
+            {
+              "label": "In service",
+              "value": "8"
+            },
+            {
+              "label": "Max speed",
+              "value": "150 kt"
+            }
+          ]
+        },
+        {
+          "id": "vh92",
+          "name": "VH-92A PATRIOT",
+          "short": "VH-92A",
+          "year": 2020,
+          "art": "artwork/vh92.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Marine Corps"
+            },
+            {
+              "label": "In service",
+              "value": "23"
+            },
+            {
+              "label": "Max speed",
+              "value": "165 kt"
+            }
+          ]
+        },
+        {
+          "id": "ch53e",
+          "name": "CH-53E SUPER STALLION",
+          "short": "CH-53E",
+          "year": 1981,
+          "art": "artwork/ch53e.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Marine Corps"
+            },
+            {
+              "label": "In service",
+              "value": "≈127"
+            },
+            {
+              "label": "Max speed",
+              "value": "170 kt"
+            }
+          ]
+        },
+        {
+          "id": "ch53k",
+          "name": "CH-53K KING STALLION",
+          "short": "CH-53K",
+          "year": 2022,
+          "art": "artwork/ch53k.png",
+          "stats": [
+            {
+              "label": "Flown by",
+              "value": "Marine Corps"
+            },
+            {
+              "label": "In service",
+              "value": "25"
+            },
+            {
+              "label": "Max speed",
+              "value": "170 kt"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

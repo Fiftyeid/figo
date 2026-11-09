@@ -1,6 +1,10 @@
+# scratch renders, downloaded copies and one-off outputs
 build/*
 !build/vo/
 build/vo/*.wav
+google_drive/
+deliverables/*.mp4
+dist/*.zip
 image-search/
 assets/test/
 *.pyc
