@@ -62,6 +62,20 @@ def draw_aircraft(img, cfg, ac, cat, fig, t, timecode, progress):
         text(img, val, (x, 72), "cond-semi", 34, D.INK, 1.0)
         x += w + gap
 
+    # optional head-to-head: the rival's value for the same three rows, under a hairline
+    versus = ac.get("versus") or []
+    if versus:
+        vy = 148
+        hairline(img, (x - total_w, vy - 16), total_w, D.RULE, 1)
+        text(img, str(ac.get("versus_label", "VERSUS")).upper(), (x - total_w, vy - 4),
+             "mono", 11, D.RED, 5.0)
+        for i, (lab, val, w) in enumerate(cols):
+            if i >= len(versus):
+                break
+            rival = versus[i]
+            cx = x - total_w + sum(c[2] + gap for c in cols[:i])
+            text(img, str(rival).upper(), (cx, vy + 20), "cond-semi", 26, D.INK_45, 0.5)
+
     # the airframe
     sprite = ac.get("_sprite")
     if sprite is not None:

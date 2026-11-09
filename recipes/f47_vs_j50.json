@@ -1,0 +1,433 @@
+{
+  "_comment": "EPISODE — F-47 vs J-50 (2026). Sixth-generation comparison built on the catalogue template. Artwork is illustrative concept art, not official imagery.",
+  "meta": {
+    "brand": "SIXTH GENERATION · 2026",
+    "catalogue": "AIR POWER COMPARISON",
+    "channel": "STATEWIDE USA",
+    "subject": "aircraft",
+    "title_1": "WHICH",
+    "title_2": "SIXTH-GEN",
+    "subtitle": "F-47 VS J-50 — WHO IS REALLY AHEAD?",
+    "footer": "SIXTH GENERATION · 2026",
+    "outro_title": "THE ANSWER\nIS NOT THE JET",
+    "outro_stats": [
+      [
+        "PROTOTYPES FLYING",
+        3
+      ],
+      [
+        "JETS IN SERVICE",
+        0
+      ],
+      [
+        "YEARS TO A SQUADRON",
+        5
+      ]
+    ],
+    "sources": "SOURCES: USAF PUBLIC RELEASES · OPEN-SOURCE ANALYSIS · 2026",
+    "credit": "ILLUSTRATIVE CONCEPT ART · CATALOGUE PRODUCED BY STATEWIDE USA",
+    "intro_dur": 12.0,
+    "outro_dur": 22.0,
+    "vo_dir": "build/vo",
+    "music": {
+      "file": "assets/music/hitslab_tension.mp3",
+      "gain": 0.55
+    },
+    "output": "F47_VS_J50"
+  },
+  "categories": [
+    {
+      "title": "The Contenders",
+      "kicker": "What we are comparing",
+      "lead": "Two aircraft, two philosophies, zero operational jets. Everything below is a prototype, a programme or a promise.",
+      "items": [
+        {
+          "id": "f47",
+          "name": "BOEING F-47",
+          "short": "F-47",
+          "year": "2028",
+          "art": "artwork/f47.png",
+          "stats": [
+            {
+              "label": "Operator",
+              "value": "US Air Force"
+            },
+            {
+              "label": "First flight",
+              "value": "2028 target"
+            },
+            {
+              "label": "Role",
+              "value": "Air dominance"
+            }
+          ],
+          "versus_label": "VERSUS J-50",
+          "versus": [
+            "PLA Air Force",
+            "FLYING NOW",
+            "AIR SUPERIORITY"
+          ]
+        },
+        {
+          "id": "j50",
+          "name": "SHENYANG J-50",
+          "short": "J-50",
+          "year": "2024",
+          "art": "artwork/j50.png",
+          "stats": [
+            {
+              "label": "Operator",
+              "value": "PLA Air Force"
+            },
+            {
+              "label": "First flight",
+              "value": "Dec 2024"
+            },
+            {
+              "label": "Role",
+              "value": "Air superiority"
+            }
+          ],
+          "versus_label": "VERSUS F-47",
+          "versus": [
+            "US AIR FORCE",
+            "2028 TARGET",
+            "AIR DOMINANCE"
+          ]
+        },
+        {
+          "id": "j36",
+          "name": "CHENGDU J-36",
+          "short": "J-36",
+          "year": "2024",
+          "art": "artwork/j36.png",
+          "stats": [
+            {
+              "label": "Operator",
+              "value": "PLA Air Force"
+            },
+            {
+              "label": "First flight",
+              "value": "Dec 2024"
+            },
+            {
+              "label": "Role",
+              "value": "Long-range strike"
+            }
+          ],
+          "versus_label": "VERSUS F-47 / J-50",
+          "versus": [
+            "—",
+            "—",
+            "—"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Airframe & Stealth",
+      "kicker": "The shaping argument",
+      "lead": "Both are tailless. Both give up the vertical tail for broadband stealth — and both pay for it in control authority.",
+      "items": [
+        {
+          "id": "f47_airframe_ste1",
+          "name": "F-47 · SHAPE",
+          "short": "F-47 shape",
+          "year": "2028",
+          "art": "artwork/f47.png",
+          "stats": [
+            {
+              "label": "Layout",
+              "value": "Tailless, canards"
+            },
+            {
+              "label": "Wings",
+              "value": "Lambda"
+            },
+            {
+              "label": "Stealth",
+              "value": "Broadband"
+            }
+          ],
+          "versus_label": "VERSUS J-50 SHAPE",
+          "versus": [
+            "Tailless, wingtips",
+            "Lambda",
+            "Broadband"
+          ]
+        },
+        {
+          "id": "j50_airframe_ste1",
+          "name": "J-50 · SHAPE",
+          "short": "J-50 shape",
+          "year": "2024",
+          "art": "artwork/j50.png",
+          "stats": [
+            {
+              "label": "Layout",
+              "value": "Tailless, wingtips"
+            },
+            {
+              "label": "Wings",
+              "value": "Lambda"
+            },
+            {
+              "label": "Stealth",
+              "value": "Broadband"
+            }
+          ],
+          "versus_label": "VERSUS F-47 SHAPE",
+          "versus": [
+            "Tailless, canards",
+            "Lambda",
+            "Broadband"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Propulsion",
+      "kicker": "Where the gap shows",
+      "lead": "This is the one category where the American side has a documented, flying advantage — and it is not close.",
+      "items": [
+        {
+          "id": "f47_propulsion2",
+          "name": "F-47 · ENGINES",
+          "short": "F-47 power",
+          "year": "2028",
+          "art": "artwork/f47.png",
+          "stats": [
+            {
+              "label": "Engine",
+              "value": "XA102 / XA103"
+            },
+            {
+              "label": "Thrust class",
+              "value": "3-stream"
+            },
+            {
+              "label": "Status",
+              "value": "Tested"
+            }
+          ],
+          "versus_label": "VERSUS J-50 POWER",
+          "versus": [
+            "WS-15 class",
+            "Twin, TVC",
+            "Flying"
+          ]
+        },
+        {
+          "id": "j50_propulsion2",
+          "name": "J-50 · ENGINES",
+          "short": "J-50 power",
+          "year": "2024",
+          "art": "artwork/j50.png",
+          "stats": [
+            {
+              "label": "Engine",
+              "value": "WS-15 class"
+            },
+            {
+              "label": "Thrust class",
+              "value": "Twin, TVC"
+            },
+            {
+              "label": "Status",
+              "value": "Flying"
+            }
+          ],
+          "versus_label": "VERSUS F-47 POWER",
+          "versus": [
+            "XA102 / XA103",
+            "3-stream",
+            "Tested"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Sensors & Autonomy",
+      "kicker": "The software war",
+      "lead": "The jet is the airframe. The advantage is the network behind it — and here both sides are guessing.",
+      "items": [
+        {
+          "id": "f47_sensors_auto3",
+          "name": "F-47 · BRAIN",
+          "short": "F-47 brain",
+          "year": "2028",
+          "art": "artwork/f47.png",
+          "stats": [
+            {
+              "label": "Concept",
+              "value": "Manned + CCA"
+            },
+            {
+              "label": "Data link",
+              "value": "Open, allied"
+            },
+            {
+              "label": "Autonomy",
+              "value": "Team lead"
+            }
+          ],
+          "versus_label": "VERSUS J-50 BRAIN",
+          "versus": [
+            "Manned + UCAV",
+            "Closed, national",
+            "Unclear"
+          ]
+        },
+        {
+          "id": "j50_sensors_auto3",
+          "name": "J-50 · BRAIN",
+          "short": "J-50 brain",
+          "year": "2024",
+          "art": "artwork/j50.png",
+          "stats": [
+            {
+              "label": "Concept",
+              "value": "Manned + UCAV"
+            },
+            {
+              "label": "Data link",
+              "value": "Closed, national"
+            },
+            {
+              "label": "Autonomy",
+              "value": "Unclear"
+            }
+          ],
+          "versus_label": "VERSUS F-47 BRAIN",
+          "versus": [
+            "Manned + CCA",
+            "Open, allied",
+            "Team lead"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Programme",
+      "kicker": "Money moves faster than metal",
+      "lead": "One side has a signed contract and a factory. The other has two flying prototypes and no published budget line.",
+      "items": [
+        {
+          "id": "f47_the_programm4",
+          "name": "F-47 · PROGRAMME",
+          "short": "F-47 prog.",
+          "year": "2028",
+          "art": "artwork/f47.png",
+          "stats": [
+            {
+              "label": "Contract",
+              "value": "Awarded 2025"
+            },
+            {
+              "label": "Production",
+              "value": "Under way"
+            },
+            {
+              "label": "Export",
+              "value": "Not cleared"
+            }
+          ],
+          "versus_label": "VERSUS J-50 PROG.",
+          "versus": [
+            "Not public",
+            "Prototype only",
+            "Unlikely"
+          ]
+        },
+        {
+          "id": "j50_the_programm4",
+          "name": "J-50 · PROGRAMME",
+          "short": "J-50 prog.",
+          "year": "2024",
+          "art": "artwork/j50.png",
+          "stats": [
+            {
+              "label": "Contract",
+              "value": "Not public"
+            },
+            {
+              "label": "Production",
+              "value": "Prototype only"
+            },
+            {
+              "label": "Export",
+              "value": "Unlikely"
+            }
+          ],
+          "versus_label": "VERSUS F-47 PROG.",
+          "versus": [
+            "Awarded 2025",
+            "Under way",
+            "Not cleared"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Verdict",
+      "kicker": "So who is ahead?",
+      "lead": "Not the aircraft. The one that wins is whichever side first turns a prototype into a squadron — and that race is still open.",
+      "items": [
+        {
+          "id": "f47_the_verdict5",
+          "name": "F-47 · THE CASE FOR",
+          "short": "F-47 verdict",
+          "year": "2028",
+          "art": "artwork/f47.png",
+          "stats": [
+            {
+              "label": "Strongest suit",
+              "value": "Engines"
+            },
+            {
+              "label": "Second edge",
+              "value": "Programme"
+            },
+            {
+              "label": "Main risk",
+              "value": "Cost, schedule"
+            }
+          ],
+          "versus_label": "VERSUS J-50 VERDICT",
+          "versus": [
+            "Flying now",
+            "Iteration speed",
+            "Engines, opacity"
+          ]
+        },
+        {
+          "id": "j50_the_verdict5",
+          "name": "J-50 · THE CASE FOR",
+          "short": "J-50 verdict",
+          "year": "2024",
+          "art": "artwork/j50.png",
+          "stats": [
+            {
+              "label": "Strongest suit",
+              "value": "Flying now"
+            },
+            {
+              "label": "Second edge",
+              "value": "Iteration speed"
+            },
+            {
+              "label": "Main risk",
+              "value": "Engines, opacity"
+            }
+          ],
+          "versus_label": "VERSUS F-47 VERDICT",
+          "versus": [
+            "Engines",
+            "Programme",
+            "Cost, schedule"
+          ]
+        }
+      ]
+    }
+  ]
+}
