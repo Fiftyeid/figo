@@ -6,6 +6,7 @@ into a reusable engine. A new video on any subject is a **new recipe file plus n
 artwork** — no layout work, no re-timing by hand.
 
 ```
+recipes/from_fleet.py   regenerates the 44-airframe recipe from data/fleet.json
 template/
   design.py     palette, type, paper grain, chrome bars, text helpers
   scenes.py     the four page types: intro · section card · item page · outro
@@ -13,8 +14,11 @@ template/
   cutout.py     turns white-background artwork into a sprite that sits on the paper
   audio.py      narration decode / trim / normalise + music loop fit
 recipes/
-  template.json the episode recipe (this is the only file you edit per video)
+  template.json         the episode recipe (the only file you edit per video)
+  fleet_2026.json       the full 13-section / 44-item film, generated
+  example_battle_tanks.json  a second topic, same template
 artwork/        one PNG per item, shot on white, any size
+assets/fleet/   the 44 airframe plates of the original film
 assets/fonts/   Archivo Black, Barlow, Barlow Condensed, IBM Plex Mono
 ```
 
@@ -102,14 +106,19 @@ Rules the loader enforces: every item needs a unique `id` and a `name`; artwork 
 exist; `stats` is optional but **three** fills the page best; `outro_stats` falls back
 to item/category counts if omitted.
 
-**Step 3 — narration.** Drop `<scene>.mp3` files in `build/vo/`:
+**Step 3 — narration.** Drop mp3 files in `build/vo/` (any name the recipe
+points at, these are the defaults):
 
 | file | covers |
 |---|---|
 | `vo_intro.mp3` | the intro |
-| `vo_sec_01.mp3`, `vo_sec_02.mp3`, … | each section card |
+| `vo_sec_01.mp3` (alias `vo_lead_01.mp3`) | each section card |
 | `vo_<item id>.mp3` | each item page |
 | `vo_outro.mp3` | the outro |
+
+The build tells you what it is still missing: `narration missing for N scene(s)`.
+Scenes without a clip keep their minimum length, so a half-narrated episode still
+renders and still cuts to the beat.
 
 Every scene's length is derived from its clip (`+1.8 s` on items, `+2.2 s` on sections,
 minimum 7 s / 6 s), so the film breathes at the pace of the voice — the 17-minute

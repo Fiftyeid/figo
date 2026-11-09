@@ -140,14 +140,29 @@ def prepare(cfg: dict) -> None:
 
 
 # ----------------------------------------------------------------- timeline
+def vo_path(cfg: dict, name: str) -> Path:
+    """Narration file for a scene, with a couple of accepted aliases."""
+    vo_dir = ROOT / cfg["meta"].get("vo_dir", "build/vo")
+    for cand in (name, name.replace("vo_sec_", "vo_lead_"),
+                 name.replace("vo_sec_", "vo_section_")):
+        p = vo_dir / f"{cand}.mp3"
+        if p.exists():
+            return p
+    return vo_dir / f"{name}.mp3"
+
+
 def build_timeline(cfg: dict) -> list[dict]:
     """Place every scene. Durations come from the narration when it exists."""
+    cfg.setdefault("_report", {"silent": []})
     vo_dir = ROOT / cfg["meta"].get("vo_dir", "build/vo")
     intro = cfg["meta"].get("intro_dur", 12.0)
     outro = cfg["meta"].get("outro_dur", 20.0)
 
+    def _vo_path(name: str) -> Path:
+        return vo_path(cfg, name)
+
     def vo_len(name: str) -> float:
-        p = vo_dir / f"{name}.mp3"
+        p = _vo_path(name)
         if not p.exists():
             return 0.0
         import imageio_ffmpeg
@@ -166,7 +181,10 @@ def build_timeline(cfg: dict) -> list[dict]:
         scenes.append({"kind": "section", "cat": cat, "dur": lead,
                        "vo": f"vo_sec_{cat['index']:02d}"})
         for ac in cat["items"]:
-            d = max(7.0, vo_len(f"vo_{ac['id']}") + 1.8)
+            have = vo_len(f"vo_{ac['id']}")
+            if have <= 0:
+                cfg["_report"]["silent"].append(ac["id"])
+            d = max(7.0, have + 1.8)
             ac["_dur"] = d
             scenes.append({"kind": "item", "cat": cat, "ac": ac, "dur": d,
                            "vo": f"vo_{ac['id']}"})
@@ -234,7 +252,7 @@ def render(cfg: dict, scenes: list[dict], out: Path, preset: str = "medium",
 def mix_audio(cfg: dict, scenes: list[dict], out_wav: Path) -> bool:
     """Lay the narration clips on the timeline over the music bed, if present."""
     vo_dir = ROOT / cfg["meta"].get("vo_dir", "build/vo")
-    clips = [(s, vo_dir / f"{s['vo']}.mp3") for s in scenes]
+    clips = [(s, vo_path(cfg, s["vo"])) for s in scenes]
     clips = [(s, p) for s, p in clips if p.exists()]
     if not clips:
         log("no narration clips found — rendering a silent picture")
@@ -306,6 +324,11 @@ def main(argv=None) -> int:
         scenes = build_timeline(cfg)
         total = cfg["_total"]
         log(f"timeline: {len(scenes)} scenes, {timecode(total)} ({total:.1f}s)")
+        silent = cfg.get("_report", {}).get("silent", [])
+        if silent:
+            log(f"narration missing for {len(silent)} scene(s) — they hold the "
+                f"minimum length: {', '.join(silent[:8])}"
+                + (" …" if len(silent) > 8 else ""))
         if args.check:
             log("recipe valid")
             return 0
