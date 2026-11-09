@@ -3,21 +3,9 @@
 Voice: `voice-03` (masculine, narration, en-US). All narration lines live here so the
 clips can be regenerated at any time — the renderer only needs the mp3 in `build/vo/`.
 
-Status: **15 of 21 scenes voiced.** These still need recording:
-
-| file to create | scene |
-|---|---|
-| `vo_sec_02.mp3` | Airframe & Stealth section card |
-| `vo_sec_03.mp3` | Propulsion section card |
-| `vo_sec_04.mp3` | Sensors & Autonomy section card |
-| `vo_sec_05.mp3` | The Programme section card |
-| `vo_sec_06.mp3` | The Verdict section card |
-| `vo_f47.mp3` | Boeing F-47 item |
-| `vo_j50.mp3` | Shenyang J-50 item |
-| `vo_j36.mp3` | Chengdu J-36 item |
-| `vo_f47_airframe_ste1.mp3` | F-47 shape |
-| `vo_j50_airframe_ste1.mp3` | J-50 shape |
-| `vo_f47_propulsion2.mp3` | F-47 engines |
+Status: **complete — 21 of 21 scenes voiced.** Final cut 5:17. The clips are tracked
+in git (`build/vo/`), so a workspace reset cannot lose them; regenerate from the
+lines below if the voice ever needs to change.
 
 ## Script
 
