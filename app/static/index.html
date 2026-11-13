@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>مِداد — استوديو كتب التلوين KDP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/static/styles.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B4562F'/%3E%3Cpath d='M20 44V22c0-2 2-4 4-4h12c4 0 6 3 6 7s-2 7-6 7h-8' stroke='%23FFF6EC' stroke-width='4.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+<div id="toasts" class="toasts"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="22" height="22"><path d="M9 25V9.5c0-1.4 1.2-2.5 2.6-2.5h6.6c2.6 0 4.3 1.8 4.3 4.3 0 2.5-1.7 4.2-4.3 4.2h-4.4" fill="none" stroke="#FFF6EC" stroke-width="2.6" stroke-linecap="round"/></svg>
+    </div>
+    <div class="brand-text">
+      <strong>مِداد</strong>
+      <span>استوديو كتب التلوين · KDP</span>
+    </div>
+  </div>
+
+  <div class="project-switch">
+    <select id="projectSelect" aria-label="اختيار المشروع"></select>
+    <button class="icon-btn" id="newProjectBtn" title="مشروع جديد">＋</button>
+  </div>
+
+  <div class="top-actions">
+    <div class="score-pill" id="scorePill" title="درجة مطابقة KDP">
+      <span class="dot"></span><span id="scoreText">—</span>
+    </div>
+    <button class="btn ghost" id="settingsBtn">مفاتيح الذكاء الاصطناعي</button>
+    <button class="btn primary" id="buildBtn">تصدير ملفات KDP</button>
+  </div>
+</header>
+
+<div class="shell">
+  <!-- ===================== لوحة الإعدادات ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-head">
+      <h2>إعدادات الكتاب</h2>
+      <span class="save-state" id="saveState">محفوظ</span>
+    </div>
+
+    <section class="card collapsible open" data-section="book">
+      <header class="card-head"><h3>بيانات النشر</h3><span class="chev">▾</span></header>
+      <div class="card-body">
+        <label class="field"><span>عنوان الكتاب</span>
+          <input data-field="title" type="text" placeholder="مثال: حديقة الديناصورات" />
+        </label>
+        <label class="field"><span>العنوان الفرعي</span>
+          <input data-field="subtitle" type="text" placeholder="كتاب تلوين للأطفال" />
+        </label>
+        <label class="field"><span>اسم المؤلف</span>
+          <input data-field="author" type="text" placeholder="اسمك أو اسم الاستوديو" />
+        </label>
+        <label class="field"><span>لغة الكتاب</span>
+          <select data-field="language"><option value="ar">العربية</option><option value="en">English</option></select>
+        </label>
+        <label class="field"><span>وصف الكتاب (يُستخدم في صفحة البيع)</span>
+          <textarea data-field="description" rows="5" placeholder="اكتب وصفًا جاذبًا… 600–1500 حرف"></textarea>
+        </label>
+        <div class="field-row">
+          <label class="field"><span>السعر ($)</span><input data-field="price" data-type="number" type="number" step="0.01" /></label>
+          <label class="field"><span>تكلفة الطباعة ($)</span><input data-field="printing_cost" data-type="number" type="number" step="0.01" /></label>
+        </div>
+        <div class="hint" id="royaltyHint">—</div>
+        <label class="field"><span>الكلمات المفتاحية (حتى 7، مفصولة بفواصل)</span>
+          <input data-field="keywords" data-type="list" type="text" placeholder="كتاب تلوين، حيوانات، أطفال" />
+        </label>
+      </div>
+    </section>
+
+    <section class="card collapsible open" data-section="specs">
+      <header class="card-head"><h3>المقاس والطباعة</h3><span class="chev">▾</span></header>
+      <div class="card-body">
+        <label class="field"><span>مقاس القطع</span>
+          <select data-field="trim" data-type="select" id="trimSelect"></select>
+        </label>
+        <label class="field"><span>نوع الورق</span>
+          <select data-field="paper" data-type="select" id="paperSelect"></select>
+        </label>
+        <div class="switch-grid">
+          <label class="switch"><input type="checkbox" data-field="bleed" data-type="bool" /><span>نزف 0.125"</span></label>
+          <label class="switch"><input type="checkbox" data-field="single_sided" data-type="bool" /><span>صفحة فارغة بعد كل رسمة</span></label>
+          <label class="switch"><input type="checkbox" data-field="captions" data-type="bool" /><span>تعليق أسفل الرسمة</span></label>
+          <label class="switch"><input type="checkbox" data-field="ai_generated" data-type="bool" /><span>محتوى بالذكاء الاصطناعي</span></label>
+        </div>
+        <div class="field"><span>صفحات التمهيد</span>
+          <div class="switch-grid two">
+            <label class="switch small"><input type="checkbox" data-field="front_matter.title_page" data-type="bool" data-nested /><span>صفحة العنوان</span></label>
+            <label class="switch small"><input type="checkbox" data-field="front_matter.copyright_page" data-type="bool" data-nested /><span>صفحة الحقوق</span></label>
+            <label class="switch small"><input type="checkbox" data-field="front_matter.belongs_page" data-type="bool" data-nested /><span>«هذا الكتاب ملك»</span></label>
+            <label class="switch small"><input type="checkbox" data-field="front_matter.blank_after_front" data-type="bool" data-nested /><span>صفحة فارغة</span></label>
+          </div>
+        </div>
+        <div class="spec-grid" id="specGrid"></div>
+        <p class="hint">الهوامش محسوبة تلقائيًا من جدول KDP حسب عدد الصفحات، ولا يمكن أن تقل عن الحد الأدنى.</p>
+      </div>
+    </section>
+
+    <section class="card collapsible" data-section="cover">
+      <header class="card-head"><h3>الغلاف</h3><span class="chev">▾</span></header>
+      <div class="card-body">
+        <div class="field-row">
+          <label class="field"><span>لون الخلفية</span><input data-field="cover.background" data-type="color" type="color" /></label>
+          <label class="field"><span>لون التمييز</span><input data-field="cover.accent" data-type="color" type="color" /></label>
+        </div>
+        <label class="field"><span>رسمة الغلاف</span><select id="coverPageSelect"></select></label>
+        <label class="field"><span>نص الغلاف الخلفي (اختياري)</span>
+          <textarea data-field="cover.blurb" rows="4" placeholder="يُترك فارغًا ليكتب التطبيق وصفًا تلقائيًا"></textarea>
+        </label>
+        <div class="spec-grid" id="coverSpecs"></div>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ===================== مساحة العمل ===================== -->
+  <main class="work">
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="studio">الرسمات <em id="artCount">0</em></button>
+      <button class="tab" data-tab="preview">الغلاف والمعاينة</button>
+      <button class="tab" data-tab="check">فحص KDP <em id="checkCount" class="warn-em">0</em></button>
+      <div class="tabs-spacer"></div>
+      <button class="btn ghost small" id="importBtn">استيراد صور</button>
+      <input type="file" id="importInput" accept="image/png,image/jpeg,image/webp" multiple hidden />
+    </nav>
+
+    <!-- تبويب الاستوديو -->
+    <section class="tab-panel active" id="tab-studio">
+      <div class="generator">
+        <div class="gen-head">
+          <div>
+            <h2>ولّد صفحات التلوين</h2>
+            <p>اختر الموضوع ثم اضغط توليد — كل صفحة تُنتَج بدقة 300 DPI وبخطوط نقية بالأبيض والأسود.</p>
+          </div>
+          <div class="gen-count">
+            <label>عدد الصفحات</label>
+            <input type="number" id="genCount" min="1" max="40" value="6" />
+          </div>
+        </div>
+
+        <div class="chips" id="themeChips"></div>
+
+        <div class="gen-controls">
+          <label class="field"><span>محرّك التوليد</span><select id="providerSelect"></select></label>
+          <label class="field"><span>مستوى التفصيل</span><select id="styleSelect"></select></label>
+          <label class="field"><span>الجمهور</span><select id="audienceSelect"></select></label>
+          <label class="field grow"><span>وصف إضافي (اختياري)</span>
+            <input id="subjectInput" type="text" placeholder="مثال: ديناصور يركب دراجة، خلفية زهور" />
+          </label>
+        </div>
+
+        <div class="gen-actions">
+          <label class="switch small"><input type="checkbox" id="genCaptions" /><span>تعليق تلقائي لكل رسمة</span></label>
+          <div class="grow"></div>
+          <button class="btn primary" id="generateBtn">✦ توليد الصفحات</button>
+        </div>
+
+        <div class="job" id="jobBox" hidden>
+          <div class="job-top">
+            <span id="jobMessage">جارٍ التوليد…</span>
+            <span id="jobCounter">0 / 0</span>
+          </div>
+          <div class="progress"><div class="bar" id="jobBar"></div></div>
+          <div class="job-note" id="jobNote"></div>
+          <div><button class="btn ghost small" id="cancelJobBtn">إلغاء المهمة</button></div>
+        </div>
+        <div class="provider-note" id="providerNote"></div>
+      </div>
+
+      <div class="gallery-head">
+        <h3>صفحات الكتاب <span id="galleryCount" class="muted"></span></h3>
+        <div class="page-count-tag" id="pageCountTag"></div>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <div class="empty" id="galleryEmpty" hidden>
+        <div class="empty-icon">✎</div>
+        <h3>لا توجد رسمات بعد</h3>
+        <p>اختر موضوعًا من الأعلى واضغط «توليد الصفحات» لتبدأ.</p>
+      </div>
+    </section>
+
+    <!-- تبويب المعاينة -->
+    <section class="tab-panel" id="tab-preview">
+      <div class="preview-grid">
+        <div class="card preview-card">
+          <header class="card-head"><h3>الغلاف الكامل</h3><span class="muted" id="coverDims"></span></header>
+          <div class="cover-stage" id="coverStage">
+            <div class="placeholder">لم يُبنَ الغلاف بعد — اضغط «تصدير ملفات KDP».</div>
+          </div>
+          <div class="preview-actions">
+            <a class="btn ghost small" id="coverOpen" target="_blank" hidden>فتح PDF الغلاف</a>
+            <a class="btn ghost small" id="proofOpen" target="_blank" hidden>غلاف الإثبات (بالخطوط)</a>
+          </div>
+        </div>
+        <div class="card preview-card">
+          <header class="card-head"><h3>صفحات من الداخل</h3><span class="muted" id="interiorDims"></span></header>
+          <div class="pages-strip" id="pagesStrip">
+            <div class="placeholder">تُعرض المعاينة بعد التصدير.</div>
+          </div>
+          <div class="preview-actions">
+            <a class="btn ghost small" id="interiorOpen" target="_blank" hidden>فتح PDF الداخل</a>
+            <a class="btn ghost small" id="metaOpen" target="_blank" hidden>بيانات النشر</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- تبويب الفحص -->
+    <section class="tab-panel" id="tab-check">
+      <div class="check-top">
+        <div class="score-card">
+          <div class="score-ring" id="scoreRing"><span id="scoreNumber">—</span></div>
+          <div>
+            <h3 id="scoreTitle">لم يُفحص بعد</h3>
+            <p id="scoreSub">اضغط «إعادة الفحص» لفحص الملف مقابل قواعد KDP.</p>
+          </div>
+          <div class="grow"></div>
+          <button class="btn primary small" id="recheckBtn">إعادة الفحص</button>
+        </div>
+      </div>
+      <div class="check-list" id="checkList"></div>
+      <div class="card kdp-facts">
+        <header class="card-head"><h3>مرجع سريع لقواعد KDP</h3></header>
+        <div class="facts" id="kdpFacts"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===================== نافذة الصفحة ===================== -->
+<div class="modal" id="pageModal" hidden>
+  <div class="modal-card wide">
+    <header class="modal-head">
+      <h3 id="modalTitle">صفحة</h3>
+      <button class="icon-btn" data-close>✕</button>
+    </header>
+    <div class="modal-body page-editor">
+      <div class="page-editor-img"><img id="modalImage" alt="معاينة الصفحة" /></div>
+      <div class="page-editor-side">
+        <label class="field"><span>تعليق الصفحة</span>
+          <input id="modalCaption" type="text" placeholder="اختياري" /></label>
+        <label class="field"><span>سماكة الخطوط <b id="thickVal">2</b></span>
+          <input id="modalThickness" type="range" min="0" max="5" step="1" /></label>
+        <label class="field"><span>عتبة الأبيض/الأسود <b id="threshVal">150</b></span>
+          <input id="modalThreshold" type="range" min="80" max="220" step="5" /></label>
+        <label class="field"><span>طريقة التحويل</span>
+          <select id="modalMode">
+            <option value="auto">تلقائي</option>
+            <option value="clean">رسم خطي جاهز</option>
+            <option value="trace">تتبّع الخطوط (صورة ملوّنة)</option>
+          </select></label>
+        <div class="modal-actions">
+          <button class="btn primary" id="modalApply">تطبيق المعالجة</button>
+          <button class="btn ghost" id="modalRegen">إعادة التوليد</button>
+        </div>
+        <button class="btn danger-ghost" id="modalDelete">حذف الصفحة</button>
+        <button class="btn ghost" id="modalCover">تعيين كغلاف</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== نافذة المفاتيح ===================== -->
+<div class="modal" id="keysModal" hidden>
+  <div class="modal-card">
+    <header class="modal-head">
+      <h3>مفاتيح الذكاء الاصطناعي</h3>
+      <button class="icon-btn" data-close>✕</button>
+    </header>
+    <div class="modal-body">
+      <p class="hint">تُحفظ المفاتيح على جهازك فقط في <code>data/settings.json</code> ولا تُرسل لأي جهة سوى مزوّد الخدمة. اتركه فارغًا لاستخدام المحرّك المحلي بدون إنترنت.</p>
+      <label class="field"><span>OpenAI API Key <em>(gpt-image-1)</em></span><input type="password" data-key="openai" placeholder="sk-…" /></label>
+      <label class="field"><span>Stability AI Key</span><input type="password" data-key="stability" placeholder="sk-…" /></label>
+      <label class="field"><span>Replicate Token</span><input type="password" data-key="replicate" placeholder="r8_…" /></label>
+      <label class="field"><span>عنوان Stable Diffusion المحلي (A1111)</span><input type="text" id="localSdUrl" placeholder="http://127.0.0.1:7860" /></label>
+      <div class="modal-actions">
+        <button class="btn primary" id="saveKeys">حفظ المفاتيح</button>
+        <button class="btn ghost" data-close>إغلاق</button>
+      </div>
+      <p class="hint small">بدون مفاتيح سيعمل التطبيق بالمحرّك المحلي (ماندالا/زهور/هندسي) بكامل الميزات.
+        للحصول على مفاتيح: platform.openai.com · platform.stability.ai · replicate.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== شاشة البناء ===================== -->
+<div class="modal" id="buildModal" hidden>
+  <div class="modal-card small">
+    <div class="build-body">
+      <div class="spinner"></div>
+      <h3 id="buildTitle">جارٍ تجهيز الملفات…</h3>
+      <ol class="build-steps" id="buildSteps">
+        <li>ترتيب الصفحات وحساب الهوامش</li>
+        <li>بناء ملف الداخل بدقة 300 DPI</li>
+        <li>حساب الكعب وبناء الغلاف</li>
+        <li>فحص المطابقة وإنشاء الحزمة</li>
+      </ol>
+      <div class="build-result" id="buildResult" hidden></div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

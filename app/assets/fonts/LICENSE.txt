@@ -1,0 +1,11 @@
+DejaVu Fonts — Public License (Bitstream Vera / DejaVu)
+
+الخطوط المضمّنة (DejaVuSans.ttf, DejaVuSans-Bold.ttf, DejaVuSerif.ttf,
+DejaVuSerif-Bold.ttf) مأخوذة من مشروع DejaVu وتخضع لرخصة Bitstream Vera
+ورخصة DejaVu الحرة. يُسمح بإعادة التوزيع والاستخدام التجاري مع الإبقاء
+على هذا الإشعار.
+
+Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved.
+Bitstream Vera is a trademark of Bitstream, Inc.
+DejaVu changes are in public domain.
+Full license: https://dejavu-fonts.github.io/License.html

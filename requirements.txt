@@ -1,0 +1,11 @@
+# مِداد — Midad KDP Coloring Studio
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pillow>=10.0
+numpy>=1.24
+reportlab>=4.0
+python-multipart>=0.0.9
+arabic-reshaper>=3.0
+python-bidi>=0.4.2
+httpx>=0.27
+pypdfium2>=4.20
