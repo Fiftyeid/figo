@@ -368,6 +368,30 @@ def build(pid: str):
     return result
 
 
+@app.get("/api/downloads")
+def downloads():
+    """حزم التوزيع الجاهزة (ZIP) الموجودة في مجلد dist/."""
+    if not C.DIST_DIR.exists():
+        return {"items": []}
+    items = []
+    for path in sorted(C.DIST_DIR.glob("*.zip")):
+        items.append({
+            "name": path.name,
+            "size": path.stat().st_size,
+            "url": f"/download/{path.name}",
+        })
+    return {"items": items}
+
+
+@app.get("/download/{name}")
+def download(name: str):
+    dist = C.DIST_DIR.resolve()
+    path = (dist / name).resolve()
+    if dist not in path.parents or path.suffix != ".zip" or not path.exists():
+        raise HTTPException(404, "الحزمة غير موجودة")
+    return FileResponse(path, media_type="application/zip", filename=path.name)
+
+
 @app.get("/api/projects/{pid}/file/{name}")
 def project_file(pid: str, name: str, download: int = 0):
     out_dir = (store.project_dir(pid) / "out").resolve()

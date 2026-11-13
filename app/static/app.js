@@ -93,12 +93,30 @@ async function boot() {
   renderFacts();
   bindUI();
 
+  renderDownloads();
   const projects = await API.get("/api/projects");
   renderProjectSelect(projects);
   const preferred = S.meta.settings.last_project;
   const pid = (projects.find((p) => p.id === preferred) || projects[0])?.id;
   if (pid) await loadProject(pid);
   else await createProject({});
+}
+
+async function renderDownloads() {
+  try {
+    const data = await API.get("/api/downloads");
+    if (!data.items.length) return;
+    const isWin = /Windows/i.test(navigator.userAgent);
+    const offline = data.items.find((i) => i.name.includes("win64"));
+    const universal = data.items.find((i) => !i.name.includes("win64"));
+    const pick = (isWin && offline) || universal || data.items[0];
+    const link = $("#downloadApp");
+    link.href = pick.url;
+    link.setAttribute("download", pick.name);
+    link.textContent = `⬇ تحميل البرنامج (${(pick.size / 1048576).toFixed(1)} MB)`;
+    link.title = `حزمة جاهزة: ${pick.name}`;
+    link.hidden = false;
+  } catch (_) {}
 }
 
 function fillSelects() {
@@ -156,6 +174,7 @@ async function loadProject(pid) {
 
 async function createProject(extra = {}) {
   const project = await API.post("/api/projects", extra);
+  renderDownloads();
   const projects = await API.get("/api/projects");
   renderProjectSelect(projects);
   await loadProject(project.id);

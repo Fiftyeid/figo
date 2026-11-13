@@ -67,6 +67,30 @@
 ./run.sh
 ```
 
+### حزمة جاهزة للتحميل (بدون Git)
+
+تُبنى الحزم بـ `python tools/make_release.py` وتُحفظ في مجلد `releases/`:
+
+| الملف | الحجم | لمن؟ |
+| --- | --- | --- |
+| `midad-kdp-studio-v1.0.zip` | 1.2 MB | كل الأنظمة — التثبيت يحتاج إنترنت مرة واحدة |
+| `midad-kdp-studio-v1.0-win64-offline.zip` | 30 MB | ويندوز + Python 3.11 — تثبيت **بدون إنترنت** (يحتوي مجلد `wheels/`) |
+
+يمكنك تنزيلها أيضًا من داخل التطبيق عبر زر **«⬇ تحميل البرنامج»** في الشريط العلوي
+(يختار النسخة المناسبة لنظامك تلقائيًا).
+
+لإعادة بناء الحزم:
+
+```bash
+python tools/make_release.py                                  # حزمة عالمية
+pip download -d wheels --only-binary=:all: --platform win_amd64 \
+    --python-version 3.11 --implementation cp -r requirements.txt
+python tools/make_release.py --wheels wheels --suffix win64-offline
+```
+
+محتوى الحزمة: الكود + ملفات التشغيل (`run.bat` / `run.command` / `run.sh` / `midad.py`)
++ `requirements.txt` + الخطوط العربية + `QUICK-START.txt` + `README.md` + `LICENSE.md`.
+
 ### يدويًا (أي نظام)
 
 ```bash

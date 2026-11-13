@@ -17,3 +17,8 @@ desktop.ini
 # مخرجات مؤقتة
 *.log
 tmp/
+
+# حزم التوزيع المبنية (كبيرة الحجم، تُنشأ بـ tools/make_release.py)
+dist/
+releases/
+

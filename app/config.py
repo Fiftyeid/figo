@@ -20,6 +20,7 @@ PROJECTS_DIR = DATA_DIR / "projects"
 FONTS_DIR = BASE_DIR / "assets" / "fonts"
 STATIC_DIR = BASE_DIR / "static"
 SETTINGS_FILE = DATA_DIR / "settings.json"
+DIST_DIR = ROOT_DIR / "releases"
 
 for _p in (DATA_DIR, PROJECTS_DIR):
     _p.mkdir(parents=True, exist_ok=True)
