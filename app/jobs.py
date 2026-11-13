@@ -51,7 +51,10 @@ def recent(project_id: str) -> list[dict]:
 
 def start_generation(project_id: str, options: dict) -> dict:
     project = store.load_project(project_id)
-    count = max(1, min(60, int(options.get("count", 10))))
+    preset = options.get("pages") or []
+    count = max(1, min(60, int(options.get("count", len(preset) or 10))))
+    if preset:
+        count = min(count, len(preset))
     job_id = uuid.uuid4().hex[:10]
     job = {
         "id": job_id,
@@ -99,6 +102,7 @@ def _run(job_id: str, options: dict) -> None:
     provider = options.get("provider", "procedural")
     subject = options.get("subject", "")
     count = job["total"]
+    preset_pages = options.get("pages") or []
 
     try:
         for i in range(count):
@@ -106,18 +110,28 @@ def _run(job_id: str, options: dict) -> None:
                 job["message"] = "تم الإلغاء"
                 break
             project = store.load_project(project_id)
-            prompt = providers.build_prompt(
-                theme=theme,
-                custom_subject=subject,
-                style=style,
-                audience=audience,
-                variant=providers.VARIANTS[i % len(providers.VARIANTS)] if provider != "procedural" else "",
-            )
+            preset = preset_pages[i] if i < len(preset_pages) else None
+            if preset and preset.get("prompt"):
+                prompt = preset["prompt"]
+            else:
+                prompt = providers.build_prompt(
+                    theme=theme,
+                    custom_subject=subject,
+                    style=style,
+                    audience=audience,
+                    variant=providers.VARIANTS[i % len(providers.VARIANTS)] if provider != "procedural" else "",
+                )
+            if not options.get("with_captions"):
+                caption = ""
+            elif preset:
+                caption = preset.get("caption") or _caption_for(theme, i, options)
+            else:
+                caption = _caption_for(theme, i, options)
             page = store.create_page(
                 project_id,
                 prompt=prompt,
                 theme=theme,
-                caption=_caption_for(theme, i, options),
+                caption=caption,
                 provider=provider,
                 procedural_style=providers.THEMES.get(theme, {}).get("procedural", "mandala"),
                 settings={"mode": options.get("mode", "auto"),

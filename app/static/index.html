@@ -133,6 +133,15 @@
 
     <!-- تبويب الاستوديو -->
     <section class="tab-panel active" id="tab-studio">
+      <div class="wizard-cta">
+        <div class="wcta-icon">✦</div>
+        <div class="wcta-text">
+          <h2>أنشئ كتابًا كاملًا بالذكاء الاصطناعي</h2>
+          <p>أدخل العنوان وفكرة الكتاب، اختر المقاس وعدد الصفحات — وسيكتب مِداد الخطة، ويرسم الصفحات، ويقترح الأغلفة.</p>
+        </div>
+        <button class="btn primary" id="openWizard">✨ ابدأ المعالج</button>
+      </div>
+
       <div class="generator">
         <div class="gen-head">
           <div>
@@ -303,6 +312,134 @@
         <li>فحص المطابقة وإنشاء الحزمة</li>
       </ol>
       <div class="build-result" id="buildResult" hidden></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== معالج إنشاء كتاب بالذكاء الاصطناعي ===================== -->
+<div class="modal wizard" id="wizardModal" hidden>
+  <div class="modal-card wizard-card">
+    <header class="wizard-head">
+      <div class="wiz-brand"><span class="wiz-spark">✦</span> معالج إنشاء الكتاب</div>
+      <ol class="wiz-steps" id="wizSteps">
+        <li class="active" data-step="1"><b>1</b><span>الفكرة</span></li>
+        <li data-step="2"><b>2</b><span>المقاس</span></li>
+        <li data-step="3"><b>3</b><span>الخطة</span></li>
+        <li data-step="4"><b>4</b><span>الغلاف</span></li>
+      </ol>
+      <button class="icon-btn" data-close>✕</button>
+    </header>
+
+    <div class="wiz-body" id="wizBody">
+      <!-- الخطوة 1 -->
+      <section class="wiz-pane active" data-pane="1">
+        <div class="wiz-title">
+          <h2>ما فكرة كتابك؟</h2>
+          <p>سطران يكفيان — سيبني الذكاء الاصطناعي منها العنوان والوصف والكلمات المفتاحية وأوامر كل رسمة.</p>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>عنوان الكتاب</span>
+            <input id="wzTitle" type="text" placeholder="مثال: عالم الديناصورات الصغيرة" /></label>
+          <label class="field"><span>اسم المؤلف</span>
+            <input id="wzAuthor" type="text" placeholder="اسمك أو اسم الاستوديو" /></label>
+        </div>
+        <label class="field"><span>فكرة الكتاب</span>
+          <textarea id="wzIdea" rows="4" placeholder="مثال: كتاب تلوين للأطفال من 4 إلى 8 سنوات عن ديناصورات لطيفة في مواقف مضحكة، بخطوط سميكة وسهلة التلوين"></textarea>
+        </label>
+        <div class="idea-row" id="wzIdeas"></div>
+        <div class="field-row triple">
+          <label class="field"><span>الجمهور</span><select id="wzAudience"></select></label>
+          <label class="field"><span>مستوى التفصيل</span><select id="wzStyle"></select></label>
+          <label class="field"><span>لغة الكتاب</span>
+            <select id="wzLanguage"><option value="ar">العربية</option><option value="en">English</option></select></label>
+        </div>
+      </section>
+
+      <!-- الخطوة 2 -->
+      <section class="wiz-pane" data-pane="2">
+        <div class="wiz-title">
+          <h2>المقاس وعدد الصفحات</h2>
+          <p>كل المقاسات أدناه مدعومة في KDP. الهوامش والكعب يُحسبان تلقائيًا بعدد الصفحات.</p>
+        </div>
+        <div class="trim-grid" id="wzTrimGrid"></div>
+        <div class="field-row">
+          <label class="field"><span>نوع الورق</span><select id="wzPaper"></select></label>
+          <label class="field"><span>عدد صفحات التلوين: <b id="wzPagesVal">12</b></span>
+            <input type="range" id="wzPages" min="6" max="40" value="12" /></label>
+        </div>
+        <div class="wiz-stats" id="wzStats"></div>
+        <div class="switch-grid two">
+          <label class="switch small"><input type="checkbox" id="wzSingle" checked /><span>صفحة فارغة بعد كل رسمة</span></label>
+          <label class="switch small"><input type="checkbox" id="wzCaptions" /><span>تعليق أسفل كل رسمة</span></label>
+        </div>
+      </section>
+
+      <!-- الخطوة 3 -->
+      <section class="wiz-pane" data-pane="3">
+        <div class="wiz-title">
+          <h2>خطة الكتاب</h2>
+          <p id="wzPlannerNote">سيكتب الذكاء الاصطناعي العنوان الفرعي والوصف والكلمات المفتاحية وقائمة الرسومات.</p>
+        </div>
+        <div class="plan-loading" id="wzPlanLoading">
+          <div class="spinner"></div>
+          <div><b>جارٍ تخطيط الكتاب…</b><br /><small class="muted">قد يستغرق ذلك بضع ثوانٍ</small></div>
+        </div>
+        <div class="plan-body" id="wzPlanBody" hidden>
+          <div class="plan-head">
+            <div class="grow">
+              <span class="eyebrow">العنوان المقترح</span>
+              <h3 id="wzPlanTitle">—</h3>
+              <p id="wzPlanSubtitle" class="muted"></p>
+            </div>
+            <span class="planner-badge" id="wzPlannerBadge">—</span>
+            <button class="btn ghost small" id="wzReplan">↻ إعادة التخطيط</button>
+          </div>
+          <label class="field"><span>وصف الكتاب (قابل للتعديل)</span>
+            <textarea id="wzPlanDesc" rows="5"></textarea></label>
+          <label class="field"><span>الكلمات المفتاحية (مفصولة بفواصل — 7 كحد أقصى)</span>
+            <input id="wzPlanKeywords" type="text" /></label>
+          <div class="field"><span>صفحات التلوين المخططة <em id="wzPlanPagesCount"></em></span>
+            <div class="plan-pages" id="wzPlanPages"></div></div>
+        </div>
+      </section>
+
+      <!-- الخطوة 4 -->
+      <section class="wiz-pane" data-pane="4">
+        <div class="wiz-title">
+          <h2>الغلاف والألوان</h2>
+          <p>اختر لوحة ألوان الغلاف — سيُبنى الغلاف الكامل (ظهر + كعب + أمامي) مع النزف ومنطقة الباركود تلقائيًا.</p>
+        </div>
+        <div class="palette-grid" id="wzPalettes"></div>
+        <label class="field"><span>نص الغلاف الخلفي</span>
+          <textarea id="wzBlurb" rows="3" placeholder="يُملأ تلقائيًا من الخطة"></textarea></label>
+        <label class="switch"><input type="checkbox" id="wzCoverOptions" checked />
+          <span>اقترح لي 3 أغلفة بديلة بعد التوليد لأختار بينها</span></label>
+        <div class="wiz-summary" id="wzSummary"></div>
+      </section>
+    </div>
+
+    <div class="wiz-notice" id="wzEngineNote" hidden></div>
+    <footer class="wizard-foot">
+      <button class="btn ghost" id="wizBack">السابق</button>
+      <button class="btn ghost small" id="wizBlank" title="إنشاء مشروع بدون توليد تلقائي">مشروع فارغ</button>
+      <span class="wiz-error" id="wizError"></span>
+      <div class="grow"></div>
+      <button class="btn primary" id="wizNext">التالي</button>
+    </footer>
+  </div>
+</div>
+
+<!-- ===================== نافذة الأغلفة المقترحة ===================== -->
+<div class="modal" id="coverOptionsModal" hidden>
+  <div class="modal-card wide">
+    <header class="modal-head">
+      <h3>اختر غلاف الكتاب</h3>
+      <button class="icon-btn" data-close>✕</button>
+    </header>
+    <div class="modal-body">
+      <p class="hint">ثلاثة أغلفة كاملة بنفس الرسمة ولوحات ألوان مختلفة — اختر واحدًا ليطبّقه التطبيق على الملف النهائي.</p>
+      <div class="cover-options" id="coverOptionsGrid"></div>
     </div>
   </div>
 </div>

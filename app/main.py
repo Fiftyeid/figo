@@ -12,7 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import config as C, export, jobs, kdp, pipeline, providers, store, textkit
+from . import config as C, cover as cover_builder, export, jobs, kdp, pipeline, planner, providers, store, textkit
 from . import book, lineart
 
 app = FastAPI(title=f"{C.APP_NAME} — {C.APP_NAME_LATIN} Studio", version=C.APP_VERSION)
@@ -57,6 +57,7 @@ class ProjectIn(BaseModel):
 
 
 class GenerateIn(BaseModel):
+    pages: list[dict] | None = None
     count: int = 10
     theme: str = "animals"
     subject: str = ""
@@ -77,6 +78,31 @@ class PagePatch(BaseModel):
 
 class OrderIn(BaseModel):
     order: list[str]
+
+
+class WizardIn(BaseModel):
+    title: str = ""
+    idea: str = ""
+    author: str = ""
+    language: str = "ar"
+    audience: str = "kids_mid"
+    style: str = "medium"
+    trim: str = "8.5x11"
+    paper: str = "white"
+    art_pages: int = 12
+    single_sided: bool = True
+    captions: bool = False
+    provider: str = "procedural"
+    use_ai_planner: bool = True
+    plan: dict | None = None
+    palette: dict | None = None
+    generate_cover_options: bool = True
+
+
+class CoverApplyIn(BaseModel):
+    background: str
+    accent: str
+    blurb: str | None = None
 
 
 class SettingsIn(BaseModel):
@@ -339,6 +365,127 @@ async def import_pages(pid: str, files: list[UploadFile] = File(...)):
         except Exception as exc:  # noqa: BLE001
             store.update_page(pid, page["id"], {"status": "error", "error": str(exc)})
     return {"created": created, "project": enrich(store.load_project(pid))}
+
+
+# ---------------------------------------------------------------------------
+# معالج إنشاء الكتاب بالذكاء الاصطناعي
+# ---------------------------------------------------------------------------
+@app.post("/api/wizard/plan")
+def wizard_plan(payload: WizardIn):
+    keys = (store.load_settings().get("api_keys") or {})
+    plan = planner.plan_book(
+        payload.title,
+        payload.idea,
+        {
+            "language": payload.language,
+            "audience": payload.audience,
+            "style": payload.style,
+            "art_pages": payload.art_pages,
+            "use_ai_planner": payload.use_ai_planner,
+        },
+        keys,
+    )
+    plan["has_ai_key"] = bool(keys.get("openai"))
+    return {"plan": plan}
+
+
+@app.post("/api/wizard/create")
+def wizard_create(payload: WizardIn):
+    plan = payload.plan or planner.plan_book(
+        payload.title, payload.idea,
+        {"language": payload.language, "audience": payload.audience,
+         "style": payload.style, "art_pages": payload.art_pages,
+         "use_ai_planner": payload.use_ai_planner},
+        (store.load_settings().get("api_keys") or {}),
+    )
+    palette = payload.palette or (plan.get("palettes") or [{}])[0]
+    project = store.new_project({
+        "title": (plan.get("title") or payload.title or "كتاب تلوين").strip(),
+        "subtitle": plan.get("subtitle", ""),
+        "author": payload.author or "استوديو مِداد",
+        "language": payload.language,
+        "trim": payload.trim,
+        "paper": payload.paper,
+        "single_sided": payload.single_sided,
+        "captions": payload.captions,
+        "style": payload.style,
+        "audience": payload.audience,
+        "theme": plan.get("theme", "animals"),
+        "provider": payload.provider,
+        "description": plan.get("description", ""),
+        "keywords": plan.get("keywords", []),
+        "categories": plan.get("categories", ["Children's Books > Coloring Books"]),
+        "ai_generated": True,
+        "cover": {
+            "background": palette.get("background", "#F6F1E7"),
+            "accent": palette.get("accent", "#B4562F"),
+            "blurb": (plan.get("cover") or {}).get("blurb", ""),
+            "cover_page_id": None,
+        },
+    })
+    pages = plan.get("pages") or []
+    job = jobs.start_generation(project["id"], {
+        "pages": pages,
+        "count": len(pages) or payload.art_pages,
+        "theme": plan.get("theme", "animals"),
+        "style": payload.style,
+        "audience": payload.audience,
+        "provider": payload.provider,
+        "with_captions": payload.captions,
+        "thickness": 2,
+        "mode": "auto",
+    })
+    return {"project": enrich(store.load_project(project["id"])), "job": job,
+            "generate_cover_options": payload.generate_cover_options}
+
+
+@app.post("/api/projects/{pid}/cover-options")
+def cover_options(pid: str):
+    """ينشئ 3 أغلفة مقترحة (ألوان مختلفة) مع صور معاينة."""
+    project = _project_or_404(pid)
+    if not kdp.art_pages(project):
+        raise HTTPException(400, "أضف رسمة واحدة على الأقل أولًا")
+    out_dir = store.project_dir(pid) / "out"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    palette_items = planner.PALETTES[:3]
+    items = []
+    for i, pal in enumerate(palette_items):
+        variant = {**project, "cover": {**(project.get("cover") or {}),
+                                        "background": pal["background"], "accent": pal["accent"]}}
+        pdf_path = out_dir / f"cover-option-{i}.pdf"
+        cover_builder.build_cover(variant, pdf_path, proof=False)
+        png = out_dir / f"cover-option-{i}.png"
+        try:
+            import pypdfium2 as pdfium
+            doc = pdfium.PdfDocument(str(pdf_path))
+            img = doc[0].render(scale=1.15).to_pil()
+            img.thumbnail((1100, 1100))
+            img.save(png)
+        except Exception:
+            continue
+        items.append({
+            "name": pal["name"],
+            "background": pal["background"],
+            "accent": pal["accent"],
+            "png": f"/api/projects/{pid}/file/cover-option-{i}.png",
+        })
+    return {"items": items}
+
+
+@app.post("/api/projects/{pid}/cover-apply")
+def cover_apply(pid: str, payload: CoverApplyIn):
+    patch = {"cover": {"background": payload.background, "accent": payload.accent}}
+    if payload.blurb is not None:
+        patch["cover"]["blurb"] = payload.blurb
+    project = store.update_project(pid, patch)
+    out_dir = store.project_dir(pid) / "out"
+    try:
+        cover_builder.build_cover(project, out_dir / "cover.pdf", proof=False)
+        cover_builder.build_cover(project, out_dir / "cover-proof.pdf", proof=True)
+        export.render_previews(pid, out_dir, {})
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(500, f"تعذّر بناء الغلاف: {exc}") from exc
+    return {"ok": True, "project": enrich(store.load_project(pid))}
 
 
 # ---------------------------------------------------------------------------

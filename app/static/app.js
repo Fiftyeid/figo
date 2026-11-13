@@ -169,7 +169,16 @@ async function loadProject(pid) {
   fillProjectFields();
   renderAll();
   refreshValidation();
+  refreshProjectList();
   if (S.project.pages.some((p) => ["queued", "generating"].includes(p.status))) startAutoRefresh();
+}
+
+async function refreshProjectList() {
+  try {
+    const projects = await API.get("/api/projects");
+    renderProjectSelect(projects);
+    if (S.project) $("#projectSelect").value = S.project.id;
+  } catch (_) {}
 }
 
 async function createProject(extra = {}) {
@@ -462,6 +471,10 @@ function pollJob(jobId) {
       clearInterval(S.poll);
       await loadProject(S.project.id);
       refreshValidation();
+      if (S.wantCoverOptions && job.status === "done") {
+        S.wantCoverOptions = false;
+        setTimeout(() => openCoverOptions(S.project.id), 600);
+      }
       if (job.status === "error") toast(job.message, "err");
       else toast("تم توليد الصفحات بنجاح", "ok");
       setTimeout(() => ($("#jobBox").hidden = true), 4000);
@@ -719,6 +732,371 @@ function renderPreview(force = false) {
   setLink("#metaOpen", S.built.files.metadata, true);
 }
 
+
+
+/* ======================== معالج إنشاء الكتاب ========================= */
+const WIZ = { step: 1, plan: null, palette: null, planning: false, busy: false };
+
+const WIZ_IDEAS = [
+  { title: "عالم الديناصورات الصغيرة", idea: "كتاب تلوين للأطفال من 4 إلى 8 سنوات عن ديناصورات لطيفة في مواقف مضحكة، بخطوط سميكة وسهلة التلوين" },
+  { title: "حديقة الحيوانات المرحة", idea: "حيوانات لطيفة (أسد، فيل، باندا، أرنب) في مشاهد بسيطة جدًا للأطفال من 3 إلى 6 سنوات" },
+  { title: "أعماق البحر", idea: "كائنات البحر والسلاحف والأسماك والشعاب المرجانية للأطفال من 6 إلى 10 سنوات" },
+  { title: "رحلة إلى الفضاء", idea: "رواد فضاء وصواريخ وكواكب وكائنات فضائية لطيفة، مع نجوم وتفاصيل ممتعة للأطفال" },
+  { title: "ماندالا الورد", idea: "ماندالا زهور وأشكال هندسية دقيقة للبالغين، للاسترخاء وتخفيف التوتر" },
+  { title: "شاحنات ومركبات", idea: "شاحنات وسيارات وطائرات وقوارب للأطفال الصغار بخطوط سميكة ومساحات واسعة" },
+];
+
+function fillWizardSelects() {
+  const m = S.meta;
+  $("#wzAudience").innerHTML = Object.entries(m.audiences)
+    .map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+  $("#wzStyle").innerHTML = Object.entries(m.styles)
+    .map(([k, v]) => `<option value="${k}">${v.label}</option>`).join("");
+  $("#wzPaper").innerHTML = Object.entries(m.papers)
+    .map(([k, v]) => `<option value="${k}">${v.label}</option>`).join("");
+  $("#wzIdeas").innerHTML = `<span class="muted">أفكار جاهزة:</span>` +
+    WIZ_IDEAS.map((i, n) => `<button class="chip" data-idea="${n}">${i.title}</button>`).join("");
+}
+
+function resetWizard() {
+  WIZ.step = 1; WIZ.plan = null; WIZ.palette = null; WIZ.planning = false; WIZ.busy = false;
+  $("#wzTitle").value = "";
+  $("#wzAuthor").value = S.project?.author && S.project.author !== "اسم المؤلف" ? S.project.author : "";
+  $("#wzIdea").value = "";
+  $("#wzLanguage").value = S.project?.language || "ar";
+  $("#wzAudience").value = S.project?.audience || "kids_mid";
+  $("#wzStyle").value = S.project?.style || "medium";
+  $("#wzPaper").value = S.project?.paper || "white";
+  $("#wzPages").value = 12;
+  $("#wzPagesVal").textContent = "12";
+  $("#wzSingle").checked = true;
+  $("#wzCaptions").checked = false;
+  $("#wzCoverOptions").checked = true;
+  $("#wzPlanBody").hidden = true;
+  $("#wzPlanLoading").hidden = false;
+  $("#wzBlurb").value = "";
+  $("#wizError").textContent = "";
+  S.wizTrim = S.project?.trim || "8.5x11";
+  $("#wizSteps").querySelectorAll("li").forEach((li) => li.classList.remove("done"));
+  renderTrimGrid();
+  updateWizStats();
+  setWizardStep(1);
+}
+
+function openWizard() {
+  fillWizardSelects();
+  resetWizard();
+  $("#wizardModal").hidden = false;
+}
+
+function setWizardStep(step) {
+  WIZ.step = step;
+  $$(".wiz-pane").forEach((p) => p.classList.toggle("active", Number(p.dataset.pane) === step));
+  $$("#wizSteps li").forEach((li) => {
+    const n = Number(li.dataset.step);
+    li.classList.toggle("active", n === step);
+    li.classList.toggle("done", n < step);
+  });
+  $("#wizBack").style.visibility = step === 1 ? "hidden" : "visible";
+  const labels = { 1: "التالي", 2: "تخطيط بالذكاء الاصطناعي ✦", 3: "التالي", 4: "ابدأ توليد الكتاب ✦" };
+  $("#wizNext").textContent = labels[step] || "التالي";
+  $("#wizNext").disabled = WIZ.busy;
+  $("#wizError").textContent = "";
+  updateEngineNote();
+  if (step === 3 && !WIZ.plan && !WIZ.planning) fetchWizardPlan();
+  if (step === 4) renderPalettes();
+}
+
+function renderTrimGrid() {
+  const grid = $("#wzTrimGrid");
+  const trims = Object.entries(S.meta.trims);
+  grid.innerHTML = trims.map(([key, t]) => {
+    const ratio = t.w / t.h;
+    const width = Math.round(Math.max(24, Math.min(52, 52 * ratio)));
+    const height = t.w >= t.h ? width : 64;
+    const w2 = t.w >= t.h ? width : width;
+    return `<button class="trim-card ${key === S.wizTrim ? "active" : ""}" data-trim="${key}">
+      <div class="shape"><i style="width:${w2}px;height:${height}px"></i></div>
+      <strong>${t.label}</strong><span>${t.note}</span></button>`;
+  }).join("");
+}
+
+function wizPaperThickness() {
+  const paper = $("#wzPaper").value;
+  return S.meta.papers[paper]?.thickness || 0.002252;
+}
+
+function wizNumbers() {
+  const art = Number($("#wzPages").value) || 12;
+  const single = $("#wzSingle").checked;
+  const trim = S.meta.trims[S.wizTrim] || S.meta.trims["8.5x11"];
+  let pages = 4 + art * (single ? 2 : 1);
+  if (pages % 2) pages += 1;
+  pages = Math.max(24, pages);
+  const spine = pages * wizPaperThickness();
+  return {
+    art, pages, spine, single,
+    coverW: 0.25 + trim.w * 2 + spine,
+    coverH: trim.h + 0.25,
+    valid: pages >= 24,
+  };
+}
+
+function updateWizStats() {
+  const n = wizNumbers();
+  const trim = S.meta.trims[S.wizTrim] || S.meta.trims["8.5x11"];
+  $("#wzPagesVal").textContent = n.art;
+  $("#wzStats").innerHTML = `
+    <div class="wiz-stat"><span>صفحات الكتاب</span><strong>${n.pages}</strong></div>
+    <div class="wiz-stat"><span>عرض الكعب</span><strong>${fmt(n.spine, 3)}"</strong></div>
+    <div class="wiz-stat"><span>مقاس الغلاف</span><strong>${fmt(n.coverW, 2)}" × ${fmt(n.coverH, 2)}"</strong></div>
+    <div class="wiz-stat ${n.valid ? "ok" : "warn"}"><span>مطابقة KDP</span><strong>${n.valid ? "✓ مطابق" : "أقل من 24"}</strong></div>`;
+  $("#wzSummary").innerHTML = `
+    <div class="wiz-stat"><span>المقاس</span><strong>${trim.label}</strong></div>
+    <div class="wiz-stat"><span>صفحات التلوين</span><strong>${n.art}</strong></div>
+    <div class="wiz-stat"><span>إجمالي الصفحات</span><strong>${n.pages}</strong></div>
+    <div class="wiz-stat"><span>المحرّك</span><strong>${S.meta.providers[$("#providerSelect")?.value || "procedural"]?.label?.split("—")[0] || "محلي"}</strong></div>`;
+}
+
+function wizardPayload(extra = {}) {
+  return {
+    title: $("#wzTitle").value.trim(),
+    author: $("#wzAuthor").value.trim(),
+    idea: $("#wzIdea").value.trim(),
+    language: $("#wzLanguage").value,
+    audience: $("#wzAudience").value,
+    style: $("#wzStyle").value,
+    trim: S.wizTrim,
+    paper: $("#wzPaper").value,
+    art_pages: Number($("#wzPages").value),
+    single_sided: $("#wzSingle").checked,
+    captions: $("#wzCaptions").checked,
+    provider: $("#providerSelect")?.value || "procedural",
+    use_ai_planner: true,
+    ...extra,
+  };
+}
+
+async function fetchWizardPlan() {
+  WIZ.planning = true;
+  $("#wzPlanLoading").hidden = false;
+  $("#wzPlanBody").hidden = true;
+  $("#wizError").textContent = "";
+  $("#wizNext").disabled = true;
+  try {
+    const res = await API.post("/api/wizard/plan", wizardPayload());
+    WIZ.plan = res.plan;
+    WIZ.palette = (res.plan.palettes || [])[0] || { background: "#F6F1E7", accent: "#B4562F", name: "دافئ كلاسيكي" };
+    renderPlan();
+  } catch (e) {
+    $("#wizError").textContent = e.message;
+    $("#wzPlanLoading").hidden = true;
+  } finally {
+    WIZ.planning = false;
+    $("#wizNext").disabled = false;
+  }
+}
+
+function renderPlan() {
+  const p = WIZ.plan;
+  if (!p) return;
+  $("#wzPlanLoading").hidden = true;
+  $("#wzPlanBody").hidden = false;
+  $("#wzPlanTitle").textContent = p.title;
+  $("#wzPlanSubtitle").textContent = p.subtitle || "";
+  $("#wzPlanDesc").value = p.description || "";
+  $("#wzPlanKeywords").value = (p.keywords || []).join("، ");
+  $("#wzPlanPagesCount").textContent = `· ${(p.pages || []).length} صفحة`;
+  $("#wzPlanPages").innerHTML = (p.pages || [])
+    .map((pg, i) => `<span>${i + 1}. ${escapeHtml(pg.caption || "رسمة")}</span>`).join("");
+  const badge = $("#wzPlannerBadge");
+  const isAi = p.planner === "openai";
+  badge.textContent = isAi ? "مُخطط بالذكاء الاصطناعي" : "مُخطط محلي";
+  badge.className = `planner-badge ${isAi ? "" : "local"}`;
+  $("#wzPlannerNote").textContent = p.notes || "";
+  if (!$("#wzTitle").value.trim()) $("#wzTitle").value = p.title;
+  if (!$("#wzBlurb").value.trim()) $("#wzBlurb").value = (p.cover && p.cover.blurb) || "";
+}
+
+function updateEngineNote() {
+  const box = $("#wzEngineNote");
+  const provider = $("#providerSelect")?.value || "procedural";
+  const hasOpenAi = S.meta?.settings?.has_keys?.openai;
+  if (provider === "procedural") {
+    box.className = "wiz-notice";
+    box.innerHTML = "⚠︎ <b>المحرّك المحلي</b> يرسم أنماطًا زخرفية فقط (ماندالا / زهور / هندسي) — لن تظهر حيوانات "
+      + "أو ديناصورات أو مركبات. للحصول على رسومات مطابقة لفكرتك أضف مفتاح ذكاء اصطناعي من زر "
+      + "«مفاتيح الذكاء الاصطناعي» ثم أعد المحاولة.";
+    box.hidden = false;
+  } else if (provider === "local_sd") {
+    box.className = "wiz-notice info";
+    box.textContent = "سيُستخدم Stable Diffusion المحلي على جهازك لتوليد الرسومات — تأكد من تشغيل A1111 مع الخيار --api.";
+    box.hidden = false;
+  } else {
+    box.className = "wiz-notice info";
+    box.textContent = (hasOpenAi ? "تم العثور على مفتاح OpenAI — " : "")
+      + `سيُستخدم ${S.meta?.providers?.[provider]?.label || provider} لتوليد الرسومات وتخطيط الكتاب.`;
+    box.hidden = false;
+  }
+}
+
+function renderPalettes() {
+  const palettes = (WIZ.plan && WIZ.plan.palettes) || [
+    { name: "دافئ كلاسيكي", background: "#F6F1E7", accent: "#B4562F" },
+    { name: "طبيعي هادئ", background: "#EAF0E6", accent: "#3F6B4A" },
+    { name: "حديث نظيف", background: "#F5F5F2", accent: "#2A2A2E" },
+    { name: "ليلي فخم", background: "#212A36", accent: "#D9A441" },
+  ];
+  const current = WIZ.palette || palettes[0];
+  $("#wzPalettes").innerHTML = palettes.map((pal, i) => {
+    const active = pal.background === current.background && pal.accent === current.accent;
+    return `<button class="palette-card ${active ? "active" : ""}" data-pal="${i}">
+      <div class="palette-preview" style="background:${pal.background}">
+        <div class="bar title" style="background:${pal.accent}"></div>
+        <div class="bar sub" style="background:${pal.accent};opacity:.45"></div>
+        <div class="art"></div>
+        <div class="bar" style="background:${pal.accent};opacity:.25;width:70%"></div>
+      </div>
+      <div class="palette-meta"><strong>${pal.name}</strong><span class="dot" style="background:${pal.accent}"></span></div>
+    </button>`;
+  }).join("");
+  WIZ.palettes = palettes;
+}
+
+async function createBookFromWizard() {
+  if (!WIZ.plan) { fetchWizardPlan(); return; }
+  WIZ.busy = true;
+  $("#wizNext").disabled = true;
+  $("#wizNext").textContent = "جارٍ تجهيز الكتاب…";
+  $("#wizError").textContent = "";
+  const payload = wizardPayload({
+    plan: {
+      ...WIZ.plan,
+      description: $("#wzPlanDesc").value,
+      keywords: $("#wzPlanKeywords").value.split(/[,،]/).map((s) => s.trim()).filter(Boolean).slice(0, 7),
+      cover: { blurb: $("#wzBlurb").value },
+    },
+    palette: WIZ.palette || (WIZ.plan.palettes || [])[0],
+    generate_cover_options: $("#wzCoverOptions").checked,
+  });
+  try {
+    const res = await API.post("/api/wizard/create", payload);
+    S.wantCoverOptions = payload.generate_cover_options;
+    $("#wizardModal").hidden = true;
+    S.tab = "studio";
+    $$(".tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === "studio"));
+    $$(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "tab-studio"));
+    await loadProject(res.project.id);
+    await refreshProjectList();
+    S.job = res.job;
+    $("#jobBox").hidden = false;
+    pollJob(res.job.id);
+    toast(`بدأ توليد الكتاب «${res.project.title}»`, "ok");
+  } catch (e) {
+    $("#wizError").textContent = e.message;
+  } finally {
+    WIZ.busy = false;
+    $("#wizNext").disabled = false;
+    $("#wizNext").textContent = "ابدأ توليد الكتاب ✦";
+  }
+}
+
+async function openCoverOptions(pid) {
+  try {
+    const res = await API.post(`/api/projects/${pid}/cover-options`);
+    if (!res.items.length) return;
+    $("#coverOptionsGrid").innerHTML = res.items.map((o, i) => `
+      <div class="cover-option">
+        <img src="${o.png}?t=${Date.now()}" alt="${o.name}" />
+        <div class="co-meta"><strong>${o.name}</strong>
+          <button class="btn primary small" data-cover-apply="${i}">اختيار</button></div>
+      </div>`).join("");
+    $("#coverOptionsGrid").dataset.items = JSON.stringify(res.items);
+    $("#coverOptionsModal").hidden = false;
+  } catch (e) {
+    /* لا نعطّل التجربة إن فشلت الأغلفة البديلة */
+  }
+}
+
+async function applyCoverOption(index) {
+  const items = JSON.parse($("#coverOptionsGrid").dataset.items || "[]");
+  const item = items[index];
+  if (!item) return;
+  try {
+    const res = await API.post(`/api/projects/${S.project.id}/cover-apply`, {
+      background: item.background, accent: item.accent,
+    });
+    S.project = res.project;
+    S.built = { files: S.project._meta.outputs || (S.built && S.built.files), validation: S.built && S.built.validation };
+    S.builtAt = Date.now();
+    $("#coverOptionsModal").hidden = true;
+    toast(`تم تطبيق غلاف «${item.name}»`, "ok");
+    refreshValidation();
+    renderPreview(true);
+  } catch (e) {
+    toast(e.message, "err");
+  }
+}
+
+function bindWizard() {
+  $("#openWizard").addEventListener("click", openWizard);
+  $("#wizBack").addEventListener("click", () => setWizardStep(Math.max(1, WIZ.step - 1)));
+  $("#wizNext").addEventListener("click", async () => {
+    $("#wizError").textContent = "";
+    if (WIZ.step === 1) {
+      if (!$("#wzTitle").value.trim() && !$("#wzIdea").value.trim()) {
+        $("#wizError").textContent = "اكتب عنوانًا أو فكرة للكتاب أولًا.";
+        return;
+      }
+      setWizardStep(2);
+    } else if (WIZ.step === 2) {
+      setWizardStep(3);
+    } else if (WIZ.step === 3) {
+      if (!WIZ.plan) { fetchWizardPlan(); return; }
+      setWizardStep(4);
+    } else {
+      createBookFromWizard();
+    }
+  });
+  $("#wzTrimGrid").addEventListener("click", (e) => {
+    const card = e.target.closest("[data-trim]");
+    if (!card) return;
+    S.wizTrim = card.dataset.trim;
+    renderTrimGrid();
+    updateWizStats();
+  });
+  $("#wzPages").addEventListener("input", updateWizStats);
+  $("#wzPaper").addEventListener("change", updateWizStats);
+  $("#wzSingle").addEventListener("change", updateWizStats);
+  $("#wzIdeas").addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-idea]");
+    if (!chip) return;
+    const idea = WIZ_IDEAS[Number(chip.dataset.idea)];
+    $("#wzTitle").value = idea.title;
+    $("#wzIdea").value = idea.idea;
+  });
+  $("#wzReplan").addEventListener("click", fetchWizardPlan);
+  $("#wzPalettes").addEventListener("click", (e) => {
+    const card = e.target.closest("[data-pal]");
+    if (!card) return;
+    WIZ.palette = (WIZ.palettes || [])[Number(card.dataset.pal)];
+    renderPalettes();
+  });
+  $("#coverOptionsGrid").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-cover-apply]");
+    if (btn) applyCoverOption(Number(btn.dataset.coverApply));
+  });
+  $("#newProjectBtn").addEventListener("click", openWizard);
+  $("#wizBlank").addEventListener("click", async () => {
+    const title = $("#wzTitle").value.trim() || "كتاب تلوين جديد";
+    $("#wizardModal").hidden = true;
+    await createProject({ title, author: $("#wzAuthor").value.trim() || "اسم المؤلف",
+                          trim: S.wizTrim || "8.5x11", paper: $("#wzPaper").value,
+                          language: $("#wzLanguage").value });
+    await refreshProjectList();
+  });
+}
+
 /* ------------------------------- bind UI -------------------------------- */
 function bindUI() {
   // التبويبات
@@ -901,6 +1279,7 @@ function bindUI() {
 
   $("#providerSelect").addEventListener("change", providerNote);
   providerNote();
+  bindWizard();
 }
 
 boot();
