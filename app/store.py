@@ -56,6 +56,14 @@ def _now() -> float:
     return time.time()
 
 
+def _atomic_write(path: Path, text: str) -> None:
+    """كتابة آمنة: ملف مؤقت ثم استبدال ذرّي، حتى لا يقرأ أحد ملفًا نصف مكتوب."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + f".{os.getpid()}.{threading.get_ident()}.tmp")
+    tmp.write_text(text, "utf-8")
+    os.replace(tmp, path)
+
+
 # ---------------------------------------------------------------------------
 # إعدادات التطبيق (المفاتيح تُحفظ محليًا فقط)
 # ---------------------------------------------------------------------------
@@ -72,8 +80,29 @@ def save_settings(data: dict) -> dict:
     with _lock:
         current = load_settings()
         current.update(data or {})
-        C.SETTINGS_FILE.parent.mkdir(parents=True, exist_ok=True)
-        C.SETTINGS_FILE.write_text(json.dumps(current, ensure_ascii=False, indent=2), "utf-8")
+        _atomic_write(C.SETTINGS_FILE, json.dumps(current, ensure_ascii=False, indent=2))
+        return current
+
+
+def update_settings(patch: dict | None = None, keys: dict | None = None,
+                    clear_keys: bool = False) -> dict:
+    """تعديل ذرّي للإعدادات: قراءة وكتابة داخل قفل واحد حتى لا يضيع مفتاح محفوظ."""
+    with _lock:
+        current = load_settings()
+        if clear_keys:
+            current["api_keys"] = {}
+        else:
+            merged = dict(current.get("api_keys") or {})
+            for k, v in (keys or {}).items():
+                if v:
+                    merged[k] = v
+                elif isinstance(v, str) and v == "":
+                    # حقل فارغ = «لا تغيير» (الحذف عبر clear_keys فقط)
+                    continue
+            current["api_keys"] = merged
+        for k, v in (patch or {}).items():
+            current[k] = v
+        _atomic_write(C.SETTINGS_FILE, json.dumps(current, ensure_ascii=False, indent=2))
         return current
 
 
@@ -153,7 +182,15 @@ def load_project(pid: str) -> dict:
     f = project_dir(pid) / "project.json"
     if not f.exists():
         raise FileNotFoundError("المشروع غير موجود")
-    return json.loads(f.read_text("utf-8"))
+    last_err: Exception | None = None
+    for attempt in range(6):
+        try:
+            return json.loads(f.read_text("utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            # قد يكون الملف قيد الكتابة من مهمة توليد تعمل في الخلفية
+            last_err = exc
+            time.sleep(0.04 * (attempt + 1))
+    raise RuntimeError(f"تعذّر قراءة ملف المشروع (قد يكون قيد الحفظ) — أعد المحاولة. {last_err}")
 
 
 def save_project(project: dict) -> dict:
@@ -161,9 +198,7 @@ def save_project(project: dict) -> dict:
         project["updated"] = _now()
         d = project_dir(_sanitize_name(project["id"]))
         d.mkdir(parents=True, exist_ok=True)
-        (d / "project.json").write_text(
-            json.dumps(project, ensure_ascii=False, indent=2), "utf-8"
-        )
+        _atomic_write(d / "project.json", json.dumps(project, ensure_ascii=False, indent=2))
         return project
 
 

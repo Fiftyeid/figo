@@ -23,6 +23,7 @@ class ProviderError(RuntimeError):
 THEMES = {
     "animals": {
         "label": "حيوانات لطيفة",
+        "label_en": "Cute Animals",
         "subject": "cute baby animals (lion cub, elephant, giraffe, panda, fox, bunny)",
         "procedural": "floral",
     },

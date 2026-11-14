@@ -12,10 +12,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "releases"
-VERSION = "1.0"
+VERSION = "1.1"
 
 INCLUDE = [
-    "midad.py", "requirements.txt", "README.md", "QUICK-START.txt", "LICENSE.md",
+    "midad.py", "requirements.txt", "README.md", "QUICK-START.txt", "LICENSE.md", "CHANGELOG.md",
     "run.bat", "run.sh", "run.command",
 ]
 INCLUDE_DIRS = ["app"]

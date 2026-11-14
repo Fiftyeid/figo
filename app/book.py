@@ -26,7 +26,7 @@ COPY = {
                   "أو استخدامها تجاريًا دون إذن كتابي من المؤلف.",
         "printed": "طُبع عند الطلب بواسطة Amazon KDP.",
         "by": "بقلم",
-        "pages_of_fun": "صفحة من المرح والتلوين",
+        "pages_of_fun": "من المرح والتلوين",
     },
     "en": {
         "label": "COLORING BOOK",
@@ -156,12 +156,16 @@ def _copyright_page(c, project: dict, geo: dict) -> None:
     txt = _copy(project)
     box = geo["box"]
     x, y, w = box["x"] * inch, box["y"] * inch, box["w"] * inch
+    h = box["h"] * inch
+    T.frame(c, x, y, w, h, inset=0.28 * inch, width=0.8)
     author = project.get("author") or ""
     year = project.get("year") or ""
     title = project.get("title") or ""
 
-    T.rule(c, x + w / 2 - 0.30 * inch, y + 2.95 * inch, x + w / 2 + 0.30 * inch, 1.0)
-    cy = y + 2.55 * inch
+    # الكتلة في منتصف الصفحة تقريبًا (كانت منخفضة جدًا)
+    anchor = y + h * 0.60
+    T.rule(c, x + w / 2 - 0.30 * inch, anchor + 0.34 * inch, x + w / 2 + 0.30 * inch, 1.0)
+    cy = anchor
     for line in T.wrap(f"© {year} {author}. {txt['rights']}", T.FONT_REGULAR, 10, w - 1.4 * inch):
         T.draw_line(c, x + w / 2, cy, line, T.FONT_REGULAR, 10, INK, "center")
         cy -= 16
@@ -172,6 +176,22 @@ def _copyright_page(c, project: dict, geo: dict) -> None:
                           _font_for(txt["notice"]), 8.5, 13, MUTED, "center")
     cy -= 10
     T.draw_line(c, x + w / 2, cy, txt["printed"], _font_for(txt["printed"]), 8.5, MUTED, "center")
+
+
+def _count_phrase(n: int, project: dict, txt: dict) -> str:
+    """صياغة عدد الصفحات بشكل سليم لغويًا (عربي/إنجليزي)."""
+    ar = (project.get("language") or "ar").startswith("ar")
+    if ar:
+        if n == 1:
+            head = "صفحة واحدة"
+        elif n == 2:
+            head = "صفحتان"
+        elif 3 <= n <= 10:
+            head = f"{n} صفحات"
+        else:
+            head = f"{n} صفحة"
+        return f"{head} {txt['pages_of_fun']}"
+    return f"{n} {'page' if n == 1 else 'pages'} {txt['pages_of_fun']}"
 
 
 def _belongs_page(c, project: dict, geo: dict) -> None:
@@ -186,7 +206,7 @@ def _belongs_page(c, project: dict, geo: dict) -> None:
     c.setLineWidth(1.0)
     c.line(x + 0.9 * inch, y + h * 0.50, x + w - 0.9 * inch, y + h * 0.50)
     c.line(x + 0.9 * inch, y + h * 0.40, x + w - 0.9 * inch, y + h * 0.40)
-    fun = f"{len(kdp.art_pages(project))} {txt['pages_of_fun']}"
+    fun = _count_phrase(len(kdp.art_pages(project)), project, txt)
     T.draw_line(c, x + w / 2, y + h * 0.24, fun, _font_for(fun), 11, MUTED, "center")
 
 

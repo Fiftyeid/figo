@@ -837,8 +837,11 @@ function wizNumbers() {
   if (pages % 2) pages += 1;
   pages = Math.max(24, pages);
   const spine = pages * wizPaperThickness();
+  const base = 4 + art * (single ? 2 : 1);
   return {
-    art, pages, spine, single,
+    art, pages, spine, single, base,
+    blanks: Math.max(0, pages - base),
+    recommended: Math.ceil(20 / (single ? 2 : 1)),
     coverW: 0.25 + trim.w * 2 + spine,
     coverH: trim.h + 0.25,
     valid: pages >= 24,
@@ -847,6 +850,21 @@ function wizNumbers() {
 
 function updateWizStats() {
   const n = wizNumbers();
+  const blankNote = $("#wzBlankNote");
+  if (blankNote) {
+    if (n.blanks >= 1) {
+      blankNote.className = "wiz-notice";
+      blankNote.innerHTML = `⚠︎ سيُضاف <b>${n.blanks}</b> صفحة فارغة في نهاية الكتاب للوصول إلى الحد الأدنى (24 صفحة). `
+        + `لنتيجة أفضل اجعل صفحات التلوين <b>${n.recommended}</b> = 24 صفحة كاملة. `
+        + `<button class="btn ghost small" id="wzUseRec" type="button">اضبط على ${n.recommended}</button>`;
+      blankNote.hidden = false;
+      const btn = $("#wzUseRec");
+      if (btn) btn.onclick = () => { $("#wzPages").value = n.recommended; updateWizStats(); };
+    } else {
+      blankNote.hidden = true;
+      blankNote.innerHTML = "";
+    }
+  }
   const trim = S.meta.trims[S.wizTrim] || S.meta.trims["8.5x11"];
   $("#wzPagesVal").textContent = n.art;
   $("#wzStats").innerHTML = `
@@ -941,8 +959,26 @@ function updateEngineNote() {
     box.className = "wiz-notice";
     box.innerHTML = "⚠︎ <b>المحرّك المحلي</b> يرسم أنماطًا زخرفية فقط (ماندالا / زهور / هندسي) — لن تظهر حيوانات "
       + "أو ديناصورات أو مركبات. للحصول على رسومات مطابقة لفكرتك أضف مفتاح ذكاء اصطناعي من زر "
-      + "«مفاتيح الذكاء الاصطناعي» ثم أعد المحاولة.";
+      + "«مفاتيح الذكاء الاصطناعي» ثم أعد المحاولة."
+      + (hasFree ? ' <button class="btn ghost small" id="wzUseFree" type="button">استخدم FreeLLMAPI المجاني</button>'
+        : hasOpenAi ? ' <button class="btn ghost small" id="wzUseOpenAi" type="button">استخدم OpenAI</button>' : "");
     box.hidden = false;
+    const useFree = $("#wzUseFree");
+    if (useFree) useFree.onclick = () => {
+      $("#providerSelect").value = "freellmapi";
+      $("#providerSelect").dispatchEvent(new Event("change"));
+      providerNote();
+      updateEngineNote();
+      updateWizStats();
+    };
+    const useOpenAi = $("#wzUseOpenAi");
+    if (useOpenAi) useOpenAi.onclick = () => {
+      $("#providerSelect").value = "openai";
+      $("#providerSelect").dispatchEvent(new Event("change"));
+      providerNote();
+      updateEngineNote();
+      updateWizStats();
+    };
   } else if (provider === "local_sd") {
     box.className = "wiz-notice info";
     box.textContent = "سيُستخدم Stable Diffusion المحلي على جهازك لتوليد الرسومات — تأكد من تشغيل A1111 مع الخيار --api.";
@@ -1188,11 +1224,6 @@ function bindUI() {
   });
 
   $("#projectSelect").addEventListener("change", (e) => loadProject(e.target.value));
-  $("#newProjectBtn").addEventListener("click", () => {
-    const title = prompt("عنوان الكتاب الجديد:", "كتاب تلوين جديد");
-    if (title === null) return;
-    createProject({ title: title || "كتاب تلوين جديد" });
-  });
 
   // الاستيراد
   $("#importBtn").addEventListener("click", () => $("#importInput").click());

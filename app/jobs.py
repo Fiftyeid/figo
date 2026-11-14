@@ -77,29 +77,37 @@ def start_generation(project_id: str, options: dict) -> dict:
 
 
 PROC_LABELS = {"mandala": "ماندالا", "floral": "زهور", "geometric": "زخرفة هندسية"}
+PROC_LABELS_EN = {"mandala": "Mandala", "floral": "Flowers", "geometric": "Geometric pattern"}
 
 
-def _caption_for(theme: str, index: int, options: dict) -> str:
+def _caption_for(theme: str, index: int, options: dict, language: str = "ar") -> str:
     custom = (options.get("caption_prefix") or "").strip()
     if not options.get("with_captions"):
         return ""
     if custom:
         return f"{custom} {index + 1}"
+    ar = (language or "ar").startswith("ar")
+    proc = providers.THEMES.get(theme, {}).get("procedural", "")
     if options.get("provider") == "procedural":
-        label = PROC_LABELS.get(providers.THEMES.get(theme, {}).get("procedural", ""), "رسمة")
+        label = PROC_LABELS.get(proc, "رسمة") if ar else PROC_LABELS_EN.get(proc, "Coloring page")
     else:
-        label = providers.THEMES.get(theme, {}).get("label", "رسمة")
-    return f"{label} {index + 1}"
+        label = (providers.THEMES.get(theme, {}).get("label", "رسمة") if ar
+                 else providers.THEMES.get(theme, {}).get("label_en", "Coloring page"))
+    return f"{label} {index + 1}" if ar else f"{label} {index + 1}"
 
 
 def _run(job_id: str, options: dict) -> None:
     with _lock:
         job = _jobs[job_id]
     project_id = job["project_id"]
-    theme = options.get("theme", "animals")
-    style = options.get("style", "medium")
-    audience = options.get("audience", "kids_mid")
-    provider = options.get("provider", "procedural")
+    base_project = store.load_project(project_id)
+    theme = options.get("theme") or base_project.get("theme") or "animals"
+    style = options.get("style") or base_project.get("style") or "medium"
+    audience = options.get("audience") or base_project.get("audience") or "kids_mid"
+    provider = (options.get("provider") or base_project.get("provider")
+                or "procedural")
+    if options.get("with_captions") is None:
+        options["with_captions"] = bool(base_project.get("captions"))
     subject = options.get("subject", "")
     count = job["total"]
     preset_pages = options.get("pages") or []
@@ -124,9 +132,9 @@ def _run(job_id: str, options: dict) -> None:
             if not options.get("with_captions"):
                 caption = ""
             elif preset:
-                caption = preset.get("caption") or _caption_for(theme, i, options)
+                caption = preset.get("caption") or _caption_for(theme, i, options, base_project.get("language", "ar"))
             else:
-                caption = _caption_for(theme, i, options)
+                caption = _caption_for(theme, i, options, base_project.get("language", "ar"))
             page = store.create_page(
                 project_id,
                 prompt=prompt,

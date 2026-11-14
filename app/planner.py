@@ -156,6 +156,18 @@ AR_THEME_LABEL = {
     "festive": "أعياد ومناسبات",
 }
 
+EN_THEME_LABEL = {
+    "animals": "Cute Animals",
+    "dinosaurs": "Dinosaurs",
+    "unicorns": "Unicorns & Magic",
+    "ocean": "Ocean World",
+    "space": "Space Adventure",
+    "flowers": "Flowers & Plants",
+    "geometric": "Mandala & Geometric Patterns",
+    "vehicles": "Cars & Vehicles",
+    "festive": "Holidays & Celebrations",
+}
+
 PALETTES = [
     {"key": "warm", "name": "دافئ كلاسيكي", "background": "#F6F1E7", "accent": "#B4562F"},
     {"key": "garden", "name": "طبيعي هادئ", "background": "#EAF0E6", "accent": "#3F6B4A"},
@@ -186,7 +198,7 @@ AR_STOP = {
 }
 
 
-def ar_count(n: int, singular: str = "رسمة", dual: str = "رسمتان", few: str = "رسمات", many: str = "رسمة") -> str:
+def ar_count(n: int, singular: str = "رسمة", dual: str = "رسمتان", few: str = "رسومات", many: str = "رسمة") -> str:
     """صياغة عربية سليمة لعدد الرسومات."""
     if n == 1:
         return f"{singular} واحدة"
@@ -197,30 +209,74 @@ def ar_count(n: int, singular: str = "رسمة", dual: str = "رسمتان", few
     return f"{n} {many}"
 
 
-def _keywords_from(idea: str, theme: str, title: str, language: str) -> list[str]:
-    base = [AR_THEME_LABEL.get(theme, "تلوين"), "كتاب تلوين", title.strip()]
-    words = [w for w in re.findall(r"[\u0600-\u06FFa-zA-Z]{3,}", idea or "")
-             if w not in AR_STOP and w.strip() not in AR_STOP]
+AUDIENCE_AR = {
+    "kids_early": "الأطفال الصغار (3–6 سنوات)",
+    "kids_mid": "الأطفال (6–10 سنوات)",
+    "teens": "المراهقين",
+    "adults": "الكبار",
+}
+AUDIENCE_EN = {
+    "kids_early": "toddlers and preschoolers",
+    "kids_mid": "kids ages 6-10",
+    "teens": "teens",
+    "adults": "adults",
+}
+
+
+def _keywords_from(idea: str, theme: str, title: str, language: str, audience: str = "kids_mid") -> list[str]:
+    """كلمات بحث حقيقية على أمازون (عبارات لا كلمات مفردة)، بلغة الكتاب."""
+    label = AR_THEME_LABEL.get(theme, "تلوين")
+    label_en = EN_THEME_LABEL.get(theme, "Coloring")
+    if language.startswith("ar"):
+        base = [
+            f"كتاب تلوين {label}",
+            f"{label} للتلوين",
+            "كتاب تلوين للأطفال" if audience != "adults" else "كتاب تلوين للكبار",
+            "كتب تلوين عربية",
+            "هدية للأطفال" if audience != "adults" else "هدية للمبدعين",
+            "تلوين للاسترخاء" if audience in ("adults", "teens") else "أنشطة فنية للأطفال",
+            "رسم وتلوين للمبتدئين",
+        ]
+    else:
+        base = [
+            f"{label_en} coloring book",
+            f"{label_en} coloring pages for {AUDIENCE_EN.get(audience, 'kids')}",
+            "coloring book for kids" if audience != "adults" else "coloring book for adults",
+            "bold line coloring book",
+            "coloring book gift",
+            "relaxing coloring pages" if audience in ("adults", "teens") else "fun activity book",
+            "beginner coloring book",
+        ]
     seen, out = set(), []
-    for w in base + words:
-        w = w.strip()
-        if not w or w in seen:
+    for w in base:
+        w = (w or "").strip()
+        if not w or w.lower() in seen:
             continue
-        seen.add(w)
+        seen.add(w.lower())
         out.append(w)
         if len(out) == 7:
             break
-    defaults = ["تلوين للأطفال", "رسم وتلوين", "هدية", "أنشطة فنية", "استرخاء"]
-    for d in defaults:
-        if len(out) >= 7:
-            break
-        if d not in seen:
-            seen.add(d)
-            out.append(d)
     return out[:7]
 
 
-def _page_list(theme: str, count: int, idea: str, seed: int, audience: str) -> list[dict]:
+def _en_caption(subject: str) -> str:
+    """تعليق إنجليزي قصير من وصف المشهد."""
+    drop = {"cute", "friendly", "simple", "happy", "little", "smiling", "cartoon", "baby"}
+    words = [w.strip(",().") for w in subject.replace("(", " ").replace(")", " ").split()]
+    words = [w for w in words if w and w.lower() not in drop]
+    stop = {"in", "on", "with", "and", "the", "a", "an", "of", "for", "to", "at", "under"}
+    picked = []
+    for w in words:
+        picked.append(w)
+        if len(picked) >= 4:
+            break
+    while picked and picked[-1].lower() in stop:
+        picked.pop()
+    return " ".join(picked).strip().capitalize() or "Coloring Page"
+
+
+def _page_list(theme: str, count: int, idea: str, seed: int, audience: str,
+               language: str = "ar") -> list[dict]:
     rng = random.Random(seed)
     scenes = SCENES.get(theme, SCENES["animals"])
     count = max(1, count)
@@ -240,7 +296,8 @@ def _page_list(theme: str, count: int, idea: str, seed: int, audience: str) -> l
             style="medium",
             audience=audience,
         )
-        pages.append({"prompt": prompt, "caption": caption, "subject": subject})
+        book_caption = caption if (language or "ar").startswith("ar") else _en_caption(subject)
+        pages.append({"prompt": prompt, "caption": book_caption, "subject": subject})
     return pages
 
 
@@ -255,38 +312,42 @@ def local_plan(
     theme: str | None = None,
 ) -> dict:
     theme = theme or detect_theme(f"{idea} {title}", "animals")
-    label = AR_THEME_LABEL.get(theme, "تلوين")
-    title = (title or "").strip() or f"كتاب تلوين {label}"
+    is_ar = (language or "ar").startswith("ar")
+    label = AR_THEME_LABEL.get(theme, "تلوين") if is_ar else EN_THEME_LABEL.get(theme, "Coloring")
+    title = (title or "").strip() or (f"كتاب تلوين {label}" if is_ar else f"{label} Coloring Book")
     count = max(1, min(40, int(art_pages)))
     subtitle = (f"{label} · {ar_count(count)} للتلوين" if language.startswith("ar")
                 else f"{label} · {count} coloring pages")
     description = (
-        f"{title} — كتاب تلوين يضم {ar_count(count)} من {label} مرسومة بخطوط واضحة وسميكة، "
-        "في صفحة مستقلة لكل رسمة مع صفحة فارغة بعدها لمنع تسرّب الألوان. "
-        "مقاس كبير مريح للتلوين بأقلام الخشب أو الماركر، ومناسب للأطفال والمبتدئين "
-        "ولكل من يحب الاسترخاء بالفن. " + (idea.strip() + ". " if idea.strip() else "")
+        f"{title} — كتاب تلوين يضم {ar_count(count)} من {label} بخطوط واضحة وسميكة، "
+        "كل رسمة في صفحة مستقلة مع صفحة فارغة بعدها لمنع تسرّب الألوان إلى الرسمة التالية. "
+        "مقاس كبير (8.5 × 11 بوصة) مريح للتلوين بأقلام الخشب أو الماركر. "
+        f"الجمهور المستهدف: {AUDIENCE_AR.get(audience, 'الأطفال')}. "
+        "مثالي كهدية، وللاسترخاء، ولتنمية التركيز والمهارات الحركية الدقيقة."
     ) if language.startswith("ar") else (
-        f"{title} — {count} bold, clean coloring pages of {theme}. One drawing per page "
-        "with a blank back page to prevent bleed-through. Large trim size, perfect for "
-        "crayons and markers, and great for relaxing creativity."
+        f"{title} — {count} bold, clean coloring pages of {label.lower()}. One drawing per page "
+        "with a blank back page to prevent bleed-through, in a large 8.5 x 11 inch trim "
+        f"size that is comfortable for crayons and markers. Perfect for "
+        f"{AUDIENCE_EN.get(audience, 'kids')}, as a gift, and for relaxing screen-free time."
     )
     return {
         "title": title,
         "subtitle": subtitle,
         "description": description.strip(),
-        "keywords": _keywords_from(idea, theme, title, language),
+        "keywords": _keywords_from(idea, theme, title, language, audience),
         "categories": [f"Children's Books > Coloring Books"],
         "theme": theme,
         "language": language,
         "audience": audience,
         "style": style,
-        "pages": _page_list(theme, count, idea, seed=random.randint(0, 10**6), audience=audience),
+        "pages": _page_list(theme, count, idea, seed=random.randint(0, 10**6),
+                            audience=audience, language=language),
         "cover": {
             "blurb": (
                 f"{ar_count(count)} من {label} بخطوط سميكة وواضحة، صفحة لكل رسمة مع ظهر فارغ، "
                 "ومقاس كبير يمنح مساحة مريحة للتلوين. هدية مثالية لصغار الفنانين."
                 if language.startswith("ar") else
-                f"{count} bold {theme} coloring pages, one per sheet with blank backs. "
+                f"{count} bold {label.lower()} coloring pages, one per sheet with blank backs. "
                 "A perfect gift for young artists."
             )
         },

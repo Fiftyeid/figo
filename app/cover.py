@@ -228,8 +228,17 @@ def build_cover(project: dict, out_path: str | Path, proof: bool = False) -> dic
                             width=dw, height=dh, preserveAspectRatio=False)
 
     # مزايا الكتاب
+    n_art = len(pages)
+    if n_art == 1:
+        art_head = "صفحة تلوين واحدة"
+    elif n_art == 2:
+        art_head = "صفحتان تلوين"
+    elif 3 <= n_art <= 10:
+        art_head = f"{n_art} صفحات تلوين"
+    else:
+        art_head = f"{n_art} صفحة تلوين"
     bullets = (
-        [f"{len(pages)} صفحة تلوين منفردة الوجه", "خطوط سميكة مناسبة للأطفال",
+        [f"{art_head} منفردة الوجه", "خطوط سميكة مناسبة للأطفال",
          "مناسب للأقلام الملونة والخشبية"]
         if lang_ar else
         [f"{len(pages)} single-sided coloring pages", "Extra-thick outlines for kids",

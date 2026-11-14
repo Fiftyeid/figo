@@ -57,17 +57,18 @@ class ProjectIn(BaseModel):
 
 
 class GenerateIn(BaseModel):
+    """كل الحقول اختيارية: ما لم يُرسل يُؤخذ من إعدادات المشروع."""
     pages: list[dict] | None = None
-    count: int = 10
-    theme: str = "animals"
+    count: int | None = None
+    theme: str | None = None
     subject: str = ""
-    style: str = "medium"
-    audience: str = "kids_mid"
-    provider: str = "procedural"
-    with_captions: bool = False
+    style: str | None = None
+    audience: str | None = None
+    provider: str | None = None
+    with_captions: bool | None = None
     caption_prefix: str = ""
-    thickness: int = 2
-    mode: str = "auto"
+    thickness: int | None = None
+    mode: str | None = None
 
 
 class PagePatch(BaseModel):
@@ -204,12 +205,7 @@ def get_settings():
 @app.post("/api/settings")
 def set_settings(payload: SettingsIn):
     current = store.load_settings()
-    keys = {} if payload.clear_keys else dict(current.get("api_keys", {}))
-    for k, v in (payload.api_keys or {}).items():
-        # حقل فارغ = «لا تغيير» حتى لا يُمحى المفتاح المحفوظ بالخطأ
-        if v:
-            keys[k] = v
-    data = {"api_keys": keys}
+    patch = {}
     for field, default in (
         ("local_sd_url", "http://127.0.0.1:7860"),
         ("freellmapi_url", C.FREELLMAPI_URL),
@@ -218,8 +214,11 @@ def set_settings(payload: SettingsIn):
         ("text_provider", "auto"),
     ):
         val = getattr(payload, field)
-        data[field] = (val or "").strip() or current.get(field) or default
-    store.save_settings(data)
+        if val is None:      # غير مُرسل أصلًا = لا تغيير
+            continue
+        patch[field] = str(val).strip() or default
+    store.update_settings(patch=patch, keys=payload.api_keys or {},
+                          clear_keys=bool(payload.clear_keys))
     return store.public_settings()
 
 
@@ -272,7 +271,7 @@ def project_delete(pid: str):
 @app.post("/api/projects/{pid}/generate")
 def generate(pid: str, payload: GenerateIn):
     _project_or_404(pid)
-    job = jobs.start_generation(pid, payload.dict())
+    job = jobs.start_generation(pid, payload.dict(exclude_none=True))
     return job
 
 
