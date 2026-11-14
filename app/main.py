@@ -107,7 +107,12 @@ class CoverApplyIn(BaseModel):
 
 class SettingsIn(BaseModel):
     api_keys: dict | None = None
+    clear_keys: bool = False
     local_sd_url: str | None = None
+    freellmapi_url: str | None = None
+    freellmapi_model: str | None = None
+    freellmapi_image_model: str | None = None
+    text_provider: str | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -199,14 +204,38 @@ def get_settings():
 @app.post("/api/settings")
 def set_settings(payload: SettingsIn):
     current = store.load_settings()
-    keys = dict(current.get("api_keys", {}))
+    keys = {} if payload.clear_keys else dict(current.get("api_keys", {}))
     for k, v in (payload.api_keys or {}).items():
+        # حقل فارغ = «لا تغيير» حتى لا يُمحى المفتاح المحفوظ بالخطأ
         if v:
             keys[k] = v
-        else:
-            keys.pop(k, None)
-    store.save_settings({"api_keys": keys, "local_sd_url": payload.local_sd_url or current.get("local_sd_url")})
+    data = {"api_keys": keys}
+    for field, default in (
+        ("local_sd_url", "http://127.0.0.1:7860"),
+        ("freellmapi_url", C.FREELLMAPI_URL),
+        ("freellmapi_model", C.FREELLMAPI_TEXT_MODEL),
+        ("freellmapi_image_model", C.FREELLMAPI_IMAGE_MODEL),
+        ("text_provider", "auto"),
+    ):
+        val = getattr(payload, field)
+        data[field] = (val or "").strip() or current.get(field) or default
+    store.save_settings(data)
     return store.public_settings()
+
+
+@app.get("/api/freellmapi/test")
+def freellmapi_test(url: str = "", key: str = ""):
+    """اختبار اتصال بخدمة FreeLLMAPI وإرجاع النماذج المتاحة."""
+    settings = store.load_settings()
+    key = key or (settings.get("api_keys", {}) or {}).get("freellmapi", "")
+    url = url or settings.get("freellmapi_url", C.FREELLMAPI_URL)
+    try:
+        info = providers.freellmapi_models(url, key)
+    except providers.ProviderError as exc:
+        return {"ok": False, "error": str(exc)}
+    except Exception as exc:  # noqa: BLE001
+        return {"ok": False, "error": f"خطأ غير متوقع: {exc}"}
+    return {"ok": True, **info}
 
 
 @app.get("/api/projects")
@@ -372,7 +401,8 @@ async def import_pages(pid: str, files: list[UploadFile] = File(...)):
 # ---------------------------------------------------------------------------
 @app.post("/api/wizard/plan")
 def wizard_plan(payload: WizardIn):
-    keys = (store.load_settings().get("api_keys") or {})
+    settings = store.load_settings()
+    keys = (settings.get("api_keys") or {})
     plan = planner.plan_book(
         payload.title,
         payload.idea,
@@ -384,19 +414,23 @@ def wizard_plan(payload: WizardIn):
             "use_ai_planner": payload.use_ai_planner,
         },
         keys,
+        settings,
     )
-    plan["has_ai_key"] = bool(keys.get("openai"))
+    plan["has_ai_key"] = bool(keys.get("openai") or keys.get("freellmapi"))
+    plan["has_freellmapi_key"] = bool(keys.get("freellmapi"))
     return {"plan": plan}
 
 
 @app.post("/api/wizard/create")
 def wizard_create(payload: WizardIn):
+    settings = store.load_settings()
     plan = payload.plan or planner.plan_book(
         payload.title, payload.idea,
         {"language": payload.language, "audience": payload.audience,
          "style": payload.style, "art_pages": payload.art_pages,
          "use_ai_planner": payload.use_ai_planner},
-        (store.load_settings().get("api_keys") or {}),
+        (settings.get("api_keys") or {}),
+        settings,
     )
     palette = payload.palette or (plan.get("palettes") or [{}])[0]
     project = store.new_project({

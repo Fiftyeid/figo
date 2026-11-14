@@ -317,6 +317,122 @@ Rules:
 Return JSON only, no markdown fences."""
 
 
+SYSTEM_PROMPT_EXTRA = (
+    "\n\nReturn one JSON object only, with keys: title, subtitle, description, "
+    "keywords (7 strings), theme, pages (array of {prompt, caption}), "
+    "cover ({blurb}). No markdown, no commentary."
+)
+
+
+def _chat_json(base: str, api_key: str, model: str, system: str, user: str,
+               timeout: float, task_type: str = "") -> dict:
+    """نداء OpenAI-compatible يطلب JSON، مع إعادة المحاولة بدون response_format."""
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    if task_type:
+        headers["X-FreeLLM-Task-Type"] = task_type
+    payload = {
+        "model": model,
+        "temperature": 0.85,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+    }
+    url = base.rstrip("/") + "/chat/completions"
+    with httpx.Client(timeout=timeout) as client:
+        r = client.post(url, headers=headers, json=payload)
+        if r.status_code in (400, 422):
+            payload.pop("response_format", None)
+            r = client.post(url, headers=headers, json=payload)
+        r.raise_for_status()
+        data = r.json()
+        routed = r.headers.get("x-routed-via", "")
+    content = (data.get("choices") or [{}])[0].get("message", {}).get("content") or ""
+    return {"content": content, "routed_via": routed}
+
+
+def _parse_json_obj(text: str) -> dict:
+    text = (text or "").strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```[a-zA-Z]*\s*", "", text)
+        text = re.sub(r"```\s*$", "", text).strip()
+    try:
+        obj = json.loads(text)
+    except Exception:  # noqa: BLE001
+        lo, hi = text.find("{"), text.rfind("}")
+        if lo < 0 or hi <= lo:
+            raise providers.ProviderError("لم يُرجع النموذج بيانات JSON صالحة للتخطيط.")
+        obj = json.loads(text[lo:hi + 1])
+    if not isinstance(obj, dict):
+        raise providers.ProviderError("صيغة خطة الكتاب غير مفهومة.")
+    return obj
+
+
+def _user_prompt(title: str, idea: str, language: str, audience: str, style: str, count: int) -> str:
+    return (
+        f"Book title: {title or '(none yet — propose one)'}\n"
+        f"Book idea: {idea}\n"
+        f"Book language for title/subtitle/captions: {language}\n"
+        f"Target audience: {audience}\n"
+        f"Detail level: {style}\n"
+        f"Number of coloring pages: {count}\n"
+        f"Trim size: {C.TRIM_SIZES.get('8.5x11', {}).get('label', '8.5x11')}"
+    )
+
+
+def _merge_ai_plan(plan: dict, title: str, idea: str, *,
+                   language: str, audience: str, style: str, count: int,
+                   planner: str, notes: str) -> dict:
+    fallback = local_plan(
+        title, idea, language=language, audience=audience, style=style, art_pages=count,
+        theme=plan.get("theme"),
+    )
+    pages_in = plan.get("pages") or []
+    pages = []
+    for i, p in enumerate(pages_in[:count]):
+        if isinstance(p, str):
+            p = {"prompt": p, "caption": ""}
+        if not isinstance(p, dict):
+            continue
+        prompt = (p.get("prompt") or "").strip()
+        caption = (p.get("caption") or "").strip()
+        if not prompt:
+            continue
+        if "outline" not in prompt.lower():
+            prompt = (
+                prompt.rstrip(".")
+                + ". Black and white coloring book page, thick clean black outlines, "
+                "pure white background, no shading, no gray, no color, no text, centered."
+            )
+        pages.append({
+            "prompt": prompt,
+            "caption": caption or fallback["pages"][i % len(fallback["pages"])]["caption"],
+            "subject": prompt[:120],
+        })
+    if len(pages) < count:
+        pages += fallback["pages"][len(pages):count]
+
+    kws = [str(k).strip() for k in (plan.get("keywords") or []) if str(k).strip()][:7]
+    return {
+        "title": (plan.get("title") or fallback["title"]).strip(),
+        "subtitle": (plan.get("subtitle") or fallback["subtitle"]).strip(),
+        "description": (plan.get("description") or fallback["description"]).strip(),
+        "keywords": kws or fallback["keywords"],
+        "categories": fallback["categories"],
+        "theme": plan.get("theme") if plan.get("theme") in SCENES else fallback["theme"],
+        "language": language,
+        "audience": audience,
+        "style": style,
+        "pages": pages[:count],
+        "cover": {"blurb": (plan.get("cover") or {}).get("blurb") or fallback["cover"]["blurb"]},
+        "palettes": PALETTES,
+        "planner": planner,
+        "notes": notes,
+        "suggested_local_theme": fallback["theme"],
+    }
+
+
 def openai_plan(
     title: str,
     idea: str,
@@ -332,97 +448,118 @@ def openai_plan(
     if not api_key:
         raise providers.ProviderError("لا يوجد مفتاح OpenAI للتخطيط.")
     count = max(1, min(40, int(art_pages)))
-    user = (
-        f"Book title: {title or '(none yet — propose one)'}\n"
-        f"Book idea: {idea}\n"
-        f"Book language for title/subtitle/captions: {language}\n"
-        f"Target audience: {audience}\n"
-        f"Detail level: {style}\n"
-        f"Number of coloring pages: {count}\n"
-        f"Trim size: {C.TRIM_SIZES.get('8.5x11', {}).get('label', '8.5x11')}"
-    )
-    payload = {
-        "model": model,
-        "temperature": 0.85,
-        "response_format": {"type": "json_object"},
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user},
-        ],
-    }
     try:
-        with httpx.Client(timeout=timeout) as client:
-            r = client.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-                json=payload,
-            )
-            r.raise_for_status()
-            data = r.json()
-        content = data["choices"][0]["message"]["content"]
-        plan = json.loads(content)
+        out = _chat_json(
+            "https://api.openai.com/v1", api_key, model,
+            SYSTEM_PROMPT + SYSTEM_PROMPT_EXTRA,
+            _user_prompt(title, idea, language, audience, style, count), timeout,
+        )
+        plan = _parse_json_obj(out["content"])
+    except providers.ProviderError:
+        raise
     except Exception as exc:  # noqa: BLE001
         raise providers.ProviderError(f"تعذّر التخطيط بالذكاء الاصطناعي: {exc}") from exc
-
-    fallback = local_plan(
-        title, idea, language=language, audience=audience, style=style, art_pages=count,
-        theme=plan.get("theme"),
+    return _merge_ai_plan(
+        plan, title, idea, language=language, audience=audience, style=style, count=count,
+        planner="openai",
+        notes="تم التخطيط بنموذج لغوي (OpenAI). يمكنك تعديل الوصف والكلمات قبل التوليد.",
     )
-    pages_in = plan.get("pages") or []
-    pages = []
-    for i, p in enumerate(pages_in[:count]):
-        if isinstance(p, str):
-            p = {"prompt": p, "caption": ""}
-        prompt = (p.get("prompt") or "").strip()
-        caption = (p.get("caption") or "").strip()
-        if not prompt:
-            continue
-        if "outline" not in prompt.lower():
-            prompt = (
-                prompt.rstrip(".")
-                + ". Black and white coloring book page, thick clean black outlines, "
-                "pure white background, no shading, no gray, no color, no text, centered."
-            )
-        pages.append({"prompt": prompt, "caption": caption or fallback["pages"][i % len(fallback["pages"])]["caption"],
-                      "subject": prompt[:120]})
-    if len(pages) < count:
-        pages += fallback["pages"][len(pages):count]
-
-    kws = [str(k).strip() for k in (plan.get("keywords") or []) if str(k).strip()][:7]
-    merged = {
-        "title": (plan.get("title") or fallback["title"]).strip(),
-        "subtitle": (plan.get("subtitle") or fallback["subtitle"]).strip(),
-        "description": (plan.get("description") or fallback["description"]).strip(),
-        "keywords": kws or fallback["keywords"],
-        "categories": fallback["categories"],
-        "theme": plan.get("theme") if plan.get("theme") in SCENES else fallback["theme"],
-        "language": language,
-        "audience": audience,
-        "style": style,
-        "pages": pages[:count],
-        "cover": {"blurb": (plan.get("cover") or {}).get("blurb") or fallback["cover"]["blurb"]},
-        "palettes": PALETTES,
-        "planner": "openai",
-        "notes": "تم التخطيط بنموذج لغوي (OpenAI). يمكنك تعديل الوصف والكلمات قبل التوليد.",
-    }
-    return merged
 
 
-def plan_book(title: str, idea: str, options: dict, api_keys: dict) -> dict:
-    """يخطّط الكتاب مستخدمًا OpenAI إن توفّر مفتاح، وإلا المخطِّط المحلي."""
-    key = (api_keys or {}).get("openai", "")
+def freellmapi_plan(
+    title: str,
+    idea: str,
+    api_key: str,
+    *,
+    base_url: str = "",
+    model: str = "",
+    language: str = "ar",
+    audience: str = "kids_mid",
+    style: str = "medium",
+    art_pages: int = 12,
+    timeout: float = 120.0,
+) -> dict:
+    """تخطيط الكتاب عبر FreeLLMAPI (بوابة مجانية بواجهة OpenAI)."""
+    if not api_key:
+        raise providers.ProviderError(
+            "أدخل المفتاح الموحّد لـ FreeLLMAPI في الإعدادات أولًا."
+        )
+    base = providers._base_url(base_url, C.FREELLMAPI_URL)
+    count = max(1, min(40, int(art_pages)))
+    plan_model = (model or C.FREELLMAPI_TEXT_MODEL).strip() or "auto"
+    try:
+        out = _chat_json(
+            base, api_key, plan_model,
+            SYSTEM_PROMPT + SYSTEM_PROMPT_EXTRA,
+            _user_prompt(title, idea, language, audience, style, count),
+            timeout, task_type="chat",
+        )
+        plan = _parse_json_obj(out["content"])
+    except providers.ProviderError:
+        raise
+    except httpx.ConnectError as exc:
+        raise providers.ProviderError(
+            f"تعذّر الوصول إلى FreeLLMAPI على {base}. شغّل الخدمة أولًا "
+            "(تطبيق سطح المكتب أو docker أو npx freellmapi) وتأكد من العنوان."
+        ) from exc
+    except httpx.HTTPStatusError as exc:
+        code = exc.response.status_code
+        if code in (401, 403):
+            msg = "المفتاح الموحّد لـ FreeLLMAPI غير صحيح — انسخه من لوحة التحكم على المنفذ 3001."
+        elif code == 429:
+            msg = "تجاوزت حدود FreeLLMAPI المجانية للحظة — أعد المحاولة بعد قليل."
+        else:
+            msg = f"FreeLLMAPI أعاد الخطأ {code}: {exc.response.text[:160]}"
+        raise providers.ProviderError(msg) from exc
+    except Exception as exc:  # noqa: BLE001
+        raise providers.ProviderError(
+            f"تعذّر التخطيط عبر FreeLLMAPI ({base}): {exc}"
+        ) from exc
+    routed = out.get("routed_via") or plan_model
+    return _merge_ai_plan(
+        plan, title, idea, language=language, audience=audience, style=style, count=count,
+        planner="freellmapi",
+        notes=f"تم التخطيط عبر FreeLLMAPI — وُجّه الطلب إلى: {routed}.",
+    )
+
+
+def plan_book(title: str, idea: str, options: dict, api_keys: dict | None = None,
+              settings: dict | None = None) -> dict:
+    """يخطّط الكتاب بأفضل محرّك متاح: OpenAI ← FreeLLMAPI ← المخطِّط المحلي."""
+    settings = settings or {}
+    keys = api_keys if api_keys is not None else (settings.get("api_keys") or {})
     opts = {
         "language": options.get("language", "ar"),
         "audience": options.get("audience", "kids_mid"),
         "style": options.get("style", "medium"),
         "art_pages": int(options.get("art_pages", 12)),
     }
-    use_ai = bool(key) and options.get("use_ai_planner", True)
-    if use_ai:
+    pref = (options.get("text_provider") or settings.get("text_provider") or "auto").lower()
+    use_ai = options.get("use_ai_planner", True)
+    errors = []
+
+    if use_ai and pref in ("auto", "openai") and (keys or {}).get("openai"):
         try:
-            return openai_plan(title, idea, key, **opts)
+            return openai_plan(title, idea, keys["openai"], **opts)
         except Exception as exc:  # noqa: BLE001
-            local = local_plan(title, idea, **opts)
-            local["notes"] = f"تعذّر استخدام النموذج اللغوي ({exc}) — تم استخدام المخطِّط المحلي."
-            return local
-    return local_plan(title, idea, **opts)
+            errors.append(f"OpenAI: {exc}")
+
+    if use_ai and pref in ("auto", "freellmapi") and (keys or {}).get("freellmapi"):
+        try:
+            return freellmapi_plan(
+                title, idea, keys["freellmapi"],
+                base_url=settings.get("freellmapi_url", ""),
+                model=settings.get("freellmapi_model", ""),
+                **opts,
+            )
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"FreeLLMAPI: {exc}")
+
+    local = local_plan(title, idea, **opts)
+    local["suggested_local_theme"] = local["theme"]
+    if errors:
+        local["notes"] = "تعذّر استخدام المحرّك الذكي — " + " | ".join(errors) + " تم استخدام المخطِّط المحلي."
+        local["planner_error"] = " | ".join(errors)
+    elif use_ai and pref == "freellmapi" and not (keys or {}).get("freellmapi"):
+        local["notes"] = "لم يُضَف مفتاح FreeLLMAPI بعد — تم استخدام المخطِّط المحلي. أضف المفتاح من الإعدادات."
+    return local

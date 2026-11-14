@@ -84,6 +84,10 @@ def public_settings() -> dict:
     return {
         "has_keys": {k: bool(v) for k, v in keys.items()},
         "local_sd_url": s.get("local_sd_url", "http://127.0.0.1:7860"),
+        "freellmapi_url": s.get("freellmapi_url", C.FREELLMAPI_URL),
+        "freellmapi_model": s.get("freellmapi_model", C.FREELLMAPI_TEXT_MODEL),
+        "freellmapi_image_model": s.get("freellmapi_image_model", C.FREELLMAPI_IMAGE_MODEL),
+        "text_provider": s.get("text_provider", "auto"),
         "model": s.get("model", ""),
         "last_project": s.get("last_project", ""),
     }

@@ -133,6 +133,143 @@ VARIANTS = [
 # ---------------------------------------------------------------------------
 # المحرّكات
 # ---------------------------------------------------------------------------
+def _base_url(url: str, default: str) -> str:
+    base = (url or default).strip().rstrip("/")
+    if not base.startswith("http"):
+        base = "http://" + base
+    if not base.endswith("/v1"):
+        base += "/v1"
+    return base
+
+
+def freellmapi_models(url: str, key: str, timeout: float = 20.0) -> dict:
+    """يقرأ كتالوج النماذج من FreeLLMAPI للتحقق من الاتصال ومعرفة النماذج المتاحة."""
+    base = _base_url(url, C.FREELLMAPI_URL)
+    if not key:
+        raise ProviderError("أدخل المفتاح الموحّد من لوحة FreeLLMAPI (يبدأ بـ freellmapi-).")
+    try:
+        with httpx.Client(timeout=timeout) as client:
+            r = client.get(f"{base}/models", headers={"Authorization": f"Bearer {key}"})
+            if r.status_code in (401, 403):
+                raise ProviderError(
+                    "المفتاح الموحّد غير صحيح. انسخه من لوحة FreeLLMAPI على "
+                    "http://localhost:3001 (صفحة Keys) — يبدأ بـ freellmapi-."
+                )
+            r.raise_for_status()
+            data = r.json()
+    except ProviderError:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        raise ProviderError(
+            f"تعذّر الوصول إلى FreeLLMAPI على {base}. شغّل الخدمة أولًا "
+            "(desktop app أو docker أو npx freellmapi) وتأكد من المفتاح. "
+            f"({exc.__class__.__name__})"
+        ) from exc
+    items = data.get("data") if isinstance(data, dict) else None
+    ids = []
+    for item in items or []:
+        if isinstance(item, dict):
+            ids.extend(str(item.get(k)) for k in ("id", "model", "name") if item.get(k))
+        elif isinstance(item, str):
+            ids.append(item)
+    ids = sorted(set(ids))
+    image_kw = ("flux", "image", "imagen", "dalle", "dall-e", "sdxl", "stable-diffusion",
+                "kolors", "pollinations", "photo", "vision-image")
+    image_models = [i for i in ids if any(k in i.lower() for k in image_kw)]
+    return {
+        "base_url": base,
+        "count": len(ids),
+        "models": ids[:60],
+        "image_models": image_models[:30],
+        "routed_via": r.headers.get("x-routed-via", ""),
+    }
+
+
+def _extract_image(resp: httpx.Response, timeout: float) -> bytes:
+    """يستخرج بايتات الصورة من ردّ OpenAI-compatible (b64 / url / binary)."""
+    ctype = (resp.headers.get("content-type") or "").lower()
+    if ctype.startswith("image/"):
+        return resp.content
+    try:
+        data = resp.json()
+    except Exception:  # noqa: BLE001
+        if resp.content[:4] in (b"\x89PNG", b"\xff\xd8\xff\xe0", b"\xff\xd8\xff\xe1"):
+            return resp.content
+        raise ProviderError("ردّ غير مفهوم من خدمة الصور.")
+    if isinstance(data, dict):
+        items = data.get("data") or data.get("images") or data.get("output")
+        if isinstance(items, str):
+            items = [items]
+        if isinstance(items, dict):
+            items = [items]
+        for item in items or []:
+            if isinstance(item, str):
+                if item.startswith("http"):
+                    with httpx.Client(timeout=timeout) as client:
+                        img = client.get(item)
+                        img.raise_for_status()
+                        return img.content
+                if item.startswith("data:") or len(item) > 500:
+                    return base64.b64decode(item.split(",", 1)[-1])
+            elif isinstance(item, dict):
+                if item.get("b64_json"):
+                    return base64.b64decode(item["b64_json"])
+                url = item.get("url") or item.get("image") or item.get("image_url")
+                if url:
+                    if str(url).startswith("data:"):
+                        return base64.b64decode(str(url).split(",", 1)[-1])
+                    with httpx.Client(timeout=timeout) as client:
+                        img = client.get(url)
+                        img.raise_for_status()
+                        return img.content
+    raise ProviderError("لم تُرجع الخدمة أي صورة. جرّب موديل صور آخر أو أعد المحاولة.")
+
+
+def _freellmapi(
+    prompt: str,
+    api_key: str,
+    base_url: str,
+    model: str,
+    size: tuple[int, int],
+    timeout: float,
+) -> tuple[bytes, str]:
+    base = _base_url(base_url, C.FREELLMAPI_URL)
+    if not api_key:
+        raise ProviderError(
+            "أدخل المفتاح الموحّد لـ FreeLLMAPI أولًا (من لوحة التحكم على "
+            "http://localhost:3001 → صفحة Keys)."
+        )
+    payload = {
+        "model": (model or C.FREELLMAPI_IMAGE_MODEL).strip() or "auto",
+        "prompt": prompt,
+        "n": 1,
+        "size": f"{size[0]}x{size[1]}",
+        "response_format": "b64_json",
+    }
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        "Accept": "image/png, application/json",
+    }
+    try:
+        with httpx.Client(timeout=timeout) as client:
+            r = client.post(f"{base}/images/generations", headers=headers, json=payload)
+            if r.status_code in (400, 422):
+                # بعض المزوّدين لا يقبلون response_format أو size
+                for drop in (["response_format"], ["size"], ["response_format", "size"]):
+                    retry = {k: v for k, v in payload.items() if k not in drop}
+                    r = client.post(f"{base}/images/generations", headers=headers, json=retry)
+                    if r.status_code < 400:
+                        break
+            r.raise_for_status()
+        used = r.headers.get("x-routed-via") or payload["model"]
+        return _extract_image(r, timeout), f"FreeLLMAPI · {used}"
+    except ProviderError:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        raise _friendly_http_error(exc, "FreeLLMAPI") from exc
+
+
 def generate(
     provider: str,
     prompt: str,
@@ -140,7 +277,9 @@ def generate(
     local_url: str = "http://127.0.0.1:7860",
     size: tuple[int, int] = (2048, 2560),
     seed: int | None = None,
-    timeout: float = 120.0,
+    timeout: float = 180.0,
+    base_url: str = "",
+    model: str = "",
 ) -> tuple[bytes, str]:
     """يعيد (بيانات الصورة، وصف المحرّك) أو يرفع ProviderError برسالة عربية."""
     provider = provider or "procedural"
@@ -152,6 +291,8 @@ def generate(
         return _replicate(prompt, api_key, timeout, seed)
     if provider == "local_sd":
         return _local_sd(prompt, local_url, size, timeout, seed)
+    if provider == "freellmapi":
+        return _freellmapi(prompt, api_key, base_url, model, size, timeout)
     raise ProviderError("محرّك غير معروف.")
 
 

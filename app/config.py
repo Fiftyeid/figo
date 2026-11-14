@@ -85,7 +85,14 @@ PROVIDERS = {
     "stability": {"label": "Stability AI — Stable Image", "needs_key": True},
     "replicate": {"label": "Replicate — FLUX", "needs_key": True},
     "local_sd": {"label": "Stable Diffusion محلي (A1111 API)", "needs_key": False},
+    "freellmapi": {"label": "FreeLLMAPI — بوابة مجانية (OpenAI-compatible)", "needs_key": True},
 }
+
+# FreeLLMAPI: بوابة مفتوحة المصدر تجمع مزوّدي نماذج مجانيين خلف واجهة OpenAI واحدة.
+# التشغيل المحلي: http://localhost:3001/v1 والمفتاح الموحّد freellmapi-…
+FREELLMAPI_URL = "http://127.0.0.1:3001/v1"
+FREELLMAPI_TEXT_MODEL = "auto"
+FREELLMAPI_IMAGE_MODEL = "auto"
 
 # أنماط الرسم (تتحكم في تعقيد الخطوط)
 STYLES = {

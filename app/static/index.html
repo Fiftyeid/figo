@@ -284,17 +284,48 @@
       <button class="icon-btn" data-close>✕</button>
     </header>
     <div class="modal-body">
-      <p class="hint">تُحفظ المفاتيح على جهازك فقط في <code>data/settings.json</code> ولا تُرسل لأي جهة سوى مزوّد الخدمة. اتركه فارغًا لاستخدام المحرّك المحلي بدون إنترنت.</p>
+      <p class="hint">تُحفظ المفاتيح على جهازك فقط في <code>data/settings.json</code> ولا تُرسل لأي جهة سوى مزوّد الخدمة. اتركه فارغًا لاستخدام المحرّك المحلي بدون إنترنت.
+        المفتاح المحفوظ يبقى كما هو إن تركت خانته فارغة.</p>
       <label class="field"><span>OpenAI API Key <em>(gpt-image-1)</em></span><input type="password" data-key="openai" placeholder="sk-…" /></label>
       <label class="field"><span>Stability AI Key</span><input type="password" data-key="stability" placeholder="sk-…" /></label>
       <label class="field"><span>Replicate Token</span><input type="password" data-key="replicate" placeholder="r8_…" /></label>
       <label class="field"><span>عنوان Stable Diffusion المحلي (A1111)</span><input type="text" id="localSdUrl" placeholder="http://127.0.0.1:7860" /></label>
+
+      <div class="keys-group">
+        <div class="keys-group-head">
+          <h4>FreeLLMAPI <span class="tag-free">مجاني</span></h4>
+          <a href="https://github.com/tashfeenahmed/freellmapi" target="_blank" rel="noopener">طريقة التشغيل ↗</a>
+        </div>
+        <p class="hint small">بوابة مفتوحة تجمع عشرات مزوّدي النماذج المجانية خلف واجهة OpenAI واحدة.
+          شغّلها على جهازك (تطبيق سطح المكتب أو <code>npx freellmapi</code> أو Docker) ثم انسخ المفتاح الموحّد من صفحة Keys.</p>
+        <label class="field"><span>عنوان الخدمة (Base URL)</span><input type="text" id="freellmUrl" placeholder="http://127.0.0.1:3001/v1" /></label>
+        <label class="field"><span>المفتاح الموحّد</span><input type="password" data-key="freellmapi" placeholder="freellmapi-…" /></label>
+        <div class="field-row">
+          <label class="field"><span>موديل التخطيط النصي</span><input type="text" id="freellmModel" placeholder="auto" /></label>
+          <label class="field"><span>موديل توليد الصور</span><input type="text" id="freellmImageModel" placeholder="auto" /></label>
+        </div>
+        <label class="field"><span>محرّك التخطيط المفضّل</span>
+          <select id="textProvider">
+            <option value="auto">تلقائي (الأفضل المتاح)</option>
+            <option value="freellmapi">FreeLLMAPI فقط</option>
+            <option value="openai">OpenAI فقط</option>
+            <option value="local">المخطِّط المحلي فقط</option>
+          </select>
+        </label>
+        <div class="keys-test-row">
+          <button class="btn ghost small" id="freellmTest" type="button">اختبار الاتصال</button>
+          <span class="hint small" id="freellmStatus"></span>
+        </div>
+      </div>
+
       <div class="modal-actions">
         <button class="btn primary" id="saveKeys">حفظ المفاتيح</button>
+        <button class="btn ghost" id="clearKeys" type="button">حذف المفاتيح المحفوظة</button>
         <button class="btn ghost" data-close>إغلاق</button>
       </div>
       <p class="hint small">بدون مفاتيح سيعمل التطبيق بالمحرّك المحلي (ماندالا/زهور/هندسي) بكامل الميزات.
-        للحصول على مفاتيح: platform.openai.com · platform.stability.ai · replicate.com</p>
+        للحصول على مفاتيح: platform.openai.com · platform.stability.ai · replicate.com
+        — وللنماذج المجانية: github.com/tashfeenahmed/freellmapi</p>
     </div>
   </div>
 </div>

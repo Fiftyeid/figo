@@ -79,8 +79,10 @@ def generate_page(project: dict, page: dict, options: dict | None = None) -> dic
             page.get("prompt") or providers.build_prompt(theme=page.get("theme", "animals")),
             api_key=api_key,
             local_url=settings.get("local_sd_url", "http://127.0.0.1:7860"),
-            size=(1024, 1536) if provider == "openai" else (wpx, hpx),
+            size=(1024, 1536) if provider in ("openai", "freellmapi") else (wpx, hpx),
             seed=seed,
+            base_url=settings.get("freellmapi_url", C.FREELLMAPI_URL),
+            model=settings.get("freellmapi_image_model", C.FREELLMAPI_IMAGE_MODEL),
         )
 
     paths["source"].write_bytes(data)

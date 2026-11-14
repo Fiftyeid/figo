@@ -417,6 +417,9 @@ function providerNote() {
     stability: has.stability ? "سيُستخدم مفتاح Stability AI المحفوظ." : "أضف مفتاح Stability AI أولًا من زر المفاتيح.",
     replicate: has.replicate ? "سيُستخدم مفتاح Replicate (FLUX) المحفوظ." : "أضف مفتاح Replicate أولًا من زر المفاتيح.",
     local_sd: "يتصل بخادم Stable Diffusion المحلي على http://127.0.0.1:7860 (شغّل A1111 مع --api). كل شيء يبقى على جهازك.",
+    freellmapi: has.freellmapi
+      ? "سيُستخدم FreeLLMAPI بمفتاحك الموحّد — يوجّه الطلب تلقائيًا إلى أفضل مزوّد مجاني متاح، ويصلح أيضًا لتخطيط الكتاب ونصوصه."
+      : "شغّل FreeLLMAPI على جهازك (http://localhost:3001) وأضف المفتاح الموحّد من زر «مفاتيح الذكاء الاصطناعي» — مجاني ويجمع عشرات المزوّدين.",
   };
   $("#providerNote").innerHTML = notes[provider] || "";
 }
@@ -910,9 +913,14 @@ function renderPlan() {
   $("#wzPlanPages").innerHTML = (p.pages || [])
     .map((pg, i) => `<span>${i + 1}. ${escapeHtml(pg.caption || "رسمة")}</span>`).join("");
   const badge = $("#wzPlannerBadge");
-  const isAi = p.planner === "openai";
-  badge.textContent = isAi ? "مُخطط بالذكاء الاصطناعي" : "مُخطط محلي";
-  badge.className = `planner-badge ${isAi ? "" : "local"}`;
+  const isAi = p.planner === "openai" || p.planner === "freellmapi";
+  if (p.planner === "freellmapi") {
+    badge.textContent = "مُخطط عبر FreeLLMAPI (مجاني)";
+    badge.className = "planner-badge free";
+  } else {
+    badge.textContent = isAi ? "مُخطط بالذكاء الاصطناعي" : "مُخطط محلي";
+    badge.className = `planner-badge ${isAi ? "" : "local"}`;
+  }
   $("#wzPlannerNote").textContent = p.notes || "";
   if (!$("#wzTitle").value.trim()) $("#wzTitle").value = p.title;
   if (!$("#wzBlurb").value.trim()) $("#wzBlurb").value = (p.cover && p.cover.blurb) || "";
@@ -922,7 +930,14 @@ function updateEngineNote() {
   const box = $("#wzEngineNote");
   const provider = $("#providerSelect")?.value || "procedural";
   const hasOpenAi = S.meta?.settings?.has_keys?.openai;
-  if (provider === "procedural") {
+  const hasFree = S.meta?.settings?.has_keys?.freellmapi;
+  if (provider === "freellmapi" && !hasFree) {
+    box.className = "wiz-notice";
+    box.innerHTML = "⚠︎ <b>FreeLLMAPI</b> مجاني لكنه يحتاج تشغيل الخدمة على جهازك "
+      + "(<code>http://localhost:3001</code>) والمفتاح الموحّد من صفحة Keys. "
+      + "أضِفه من زر «مفاتيح الذكاء الاصطناعي» ثم اضغط «اختبار الاتصال».";
+    box.hidden = false;
+  } else if (provider === "procedural") {
     box.className = "wiz-notice";
     box.innerHTML = "⚠︎ <b>المحرّك المحلي</b> يرسم أنماطًا زخرفية فقط (ماندالا / زهور / هندسي) — لن تظهر حيوانات "
       + "أو ديناصورات أو مركبات. للحصول على رسومات مطابقة لفكرتك أضف مفتاح ذكاء اصطناعي من زر "
@@ -1261,13 +1276,66 @@ function bindUI() {
   $("#settingsBtn").addEventListener("click", async () => {
     const settings = await API.get("/api/settings");
     $("#localSdUrl").value = settings.local_sd_url || "http://127.0.0.1:7860";
+    $("#freellmUrl").value = settings.freellmapi_url || "http://127.0.0.1:3001/v1";
+    $("#freellmModel").value = settings.freellmapi_model || "auto";
+    $("#freellmImageModel").value = settings.freellmapi_image_model || "auto";
+    $("#textProvider").value = settings.text_provider || "auto";
+    $("#freellmStatus").textContent = "";
+    $("#freellmStatus").className = "hint small";
     $("#keysModal").hidden = false;
+  });
+
+  const freellmPayload = () => ({
+    freellmapi_url: $("#freellmUrl").value.trim(),
+    freellmapi_model: $("#freellmModel").value.trim(),
+    freellmapi_image_model: $("#freellmImageModel").value.trim(),
+    text_provider: $("#textProvider").value,
+  });
+
+  $("#clearKeys").addEventListener("click", async () => {
+    if (!window.confirm("حذف كل المفاتيح المحفوظة من هذا الجهاز؟")) return;
+    try {
+      await API.post("/api/settings", { clear_keys: true, api_keys: {} });
+      $$("[data-key]").forEach((i) => (i.value = ""));
+      S.meta = await API.get("/api/meta");
+      providerNote();
+      toast("تم حذف المفاتيح المحفوظة", "ok");
+    } catch (e) {
+      toast(e.message, "err");
+    }
+  });
+
+  $("#freellmTest").addEventListener("click", async () => {
+    const status = $("#freellmStatus");
+    status.className = "hint small";
+    status.textContent = "جارٍ الاتصال…";
+    const key = $('[data-key="freellmapi"]')?.value || "";
+    const cfg = freellmPayload();
+    try {
+      const q = new URLSearchParams({ url: cfg.freellmapi_url, key });
+      const res = await API.get(`/api/freellmapi/test?${q.toString()}`);
+      if (!res.ok) {
+        status.className = "hint small err";
+        status.textContent = res.error || "فشل الاتصال";
+        return;
+      }
+      status.className = "hint small ok";
+      const imgs = (res.image_models || []).length;
+      status.textContent = `✓ متصل — ${res.count} موديل متاح${imgs ? ` (${imgs} لتوليد الصور)` : ""}${res.routed_via ? ` · ${res.routed_via}` : ""}`;
+    } catch (e) {
+      status.className = "hint small err";
+      status.textContent = e.message;
+    }
   });
   $("#saveKeys").addEventListener("click", async () => {
     const keys = {};
     $$("[data-key]").forEach((i) => (keys[i.dataset.key] = i.value));
     try {
-      await API.post("/api/settings", { api_keys: keys, local_sd_url: $("#localSdUrl").value });
+      await API.post("/api/settings", {
+        api_keys: keys,
+        local_sd_url: $("#localSdUrl").value,
+        ...freellmPayload(),
+      });
       S.meta = await API.get("/api/meta");
       providerNote();
       toast("تم حفظ المفاتيح على جهازك", "ok");

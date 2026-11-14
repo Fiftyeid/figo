@@ -670,3 +670,41 @@ code { background: var(--paper-2); padding: 1px 5px; border-radius: 5px; font-si
   .wiz-steps { order: 3; width: 100%; overflow-x: auto; }
   .wiz-brand { font-size: 13px; }
 }
+
+
+/* --------------------------- إعدادات FreeLLMAPI --------------------------- */
+.keys-group {
+  margin-top: 4px;
+  padding: 14px;
+  border: 1px dashed var(--line, #d9d2c5);
+  border-radius: 12px;
+  background: rgba(63, 107, 74, 0.04);
+}
+.keys-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.keys-group-head h4 { margin: 0; font-size: 15px; }
+.keys-group-head a { font-size: 12px; color: #3f6b4a; text-decoration: none; }
+.keys-group-head a:hover { text-decoration: underline; }
+.tag-free {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: #3f6b4a;
+  color: #fff;
+  vertical-align: middle;
+}
+.keys-test-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+#freellmStatus.ok { color: #2f7a4c; }
+#freellmStatus.err { color: #b23b2e; }
+.planner-badge.free { background: #3f6b4a; color: #fff; }
