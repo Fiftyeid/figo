@@ -28,8 +28,10 @@ Bold uniform 5pt black outlines, round stroke caps, all lines same weight.
 Simple clean vector-like line art. 
 Beginner-friendly large regions to color. 
 Four-poster canopy bed with draped curtains, pillows, bedside lamp, window with curtains, potted plant, oval rug. 
+Wide white margin of 1 inch on all four sides — the illustration does NOT fill the full page, it sits centered inside the white border area. 
+A thin elegant decorative rectangular border frame around the illustration, made of simple black line art — like a classic coloring book page border. 
 Square 1:1 ratio. 
-No text. No watermark. No frame border."
+No text. No watermark."
 
 Save this as my style reference. I will use it for all 49 remaining pages.
 ```
@@ -57,8 +59,10 @@ CRITICAL STYLE RULES (apply to every single scene — never deviate):
 - Large simple regions between lines — beginner-friendly coloring spaces
 - Simple 2D illustration — slight 3/4 isometric view or straight frontal view
 - Cozy cottagecore hygge mood
-- Square 1:1 ratio, centered composition, full page
-- Absolutely NO text, NO watermark, NO title, NO frame, NO border
+- Square 1:1 ratio
+- PAGE LAYOUT: wide white margin of 1 inch on all four sides — illustration sits centered and does NOT fill the full page edge-to-edge
+- BORDER: a thin elegant decorative rectangular frame border drawn in black line art surrounds the illustration, inside the white margin
+- Absolutely NO text, NO watermark, NO title
 - NO photography style, NO realistic rendering, NO painterly texture
 
 Use asset "Page 1 — Canopy Bedroom" as references for ALL 50 scenes to lock the visual style.
