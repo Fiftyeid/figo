@@ -28,7 +28,7 @@ Bold uniform 5pt black outlines, round stroke caps, all lines same weight.
 Simple clean vector-like line art. 
 Beginner-friendly large regions to color. 
 Four-poster canopy bed with draped curtains, pillows, bedside lamp, window with curtains, potted plant, oval rug. 
-Portrait 3:4 ratio. 
+Square 1:1 ratio. 
 No text. No watermark. No frame border."
 
 Save this as my style reference. I will use it for all 49 remaining pages.
@@ -57,7 +57,7 @@ CRITICAL STYLE RULES (apply to every single scene — never deviate):
 - Large simple regions between lines — beginner-friendly coloring spaces
 - Simple 2D illustration — slight 3/4 isometric view or straight frontal view
 - Cozy cottagecore hygge mood
-- Portrait 3:4 ratio, centered composition, full page
+- Square 1:1 ratio, centered composition, full page
 - Absolutely NO text, NO watermark, NO title, NO frame, NO border
 - NO photography style, NO realistic rendering, NO painterly texture
 
@@ -185,8 +185,8 @@ flow_download collection "Cozy Coloring Book Vol.1" as ZIP
 ```
 
 **Print specs for KDP:**
-- Size: 8.5 × 11 inches
+- Size: 8.5 × 8.5 inches (square — most common in this niche)
 - Resolution: 300 DPI
-- Bleed: 0.125 inch
+- Bleed: 0.125 inch on all sides
 - Color mode: Grayscale (not CMYK, not RGB)
 - Format: PDF/X-1a
